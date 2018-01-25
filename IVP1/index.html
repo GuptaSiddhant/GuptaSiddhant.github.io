@@ -50,7 +50,7 @@
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                d3.tsv("https://guptasiddhant.github.io/IVP1/student.tsv", function(error, data){
+                d3.tsv("http://git.guptasiddhant.com/IVP1/student.tsv", function(error, data){
 
                     // filter year
                     var data = data.filter(function(d){return d.YEAR == '2018';});
