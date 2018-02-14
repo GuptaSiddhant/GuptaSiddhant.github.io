@@ -1,0 +1,47 @@
+.thumbnail > * {
+    display: block;
+    width: 140px;
+}
+
+.thumbnail > label {
+    margin: 0px;
+}
+
+.thumbnail.header {
+    align-items: left;
+    text-align: left;
+}
+
+.thumbnail.header > h1 {
+    margin: 0;
+}
+
+.thumbnail .currency {
+    color: darkred;
+}
+
+.dish-thumbnail-list {
+    list-style-type: none;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    margin: 0 -10px;
+    padding: 0;
+}
+
+.dish-thumbnail-list > li {
+    text-align: center;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    /*justify-items: center;*/
+    align-items: center;
+}
+
+.dish-thumbnail-list > li > img {
+    align-self: baseline;
+}
