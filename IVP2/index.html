@@ -32,7 +32,7 @@
         <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)</div>
         <footer>
             <br>
-            <a href ="#textual" onclick="hideshow('textual');return false;">Click to read Analytic Trails + Result</a>
+            <a href ="#textual" onclick="hideshow('textual');return false;"><strong>> Click to read Analytic Trails + Result</strong></a>
             <br><br>
             A d3.js visualisation using data from www.worldvaluessurvey.org regarding mentioned
             important qualities in a child.
@@ -93,9 +93,12 @@
 
 <div id="textual" style="display: none">
 
-    <a href="#parallel" onclick="hideshow('parallel'); return false;"> < Go Back</a>
-    <div id="title">DH2321 VT18-1 Information Visualisation - Project 2<br></div>
-    <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)</div>
+    <div id="closeButton" style="float: right; position: fixed; top: 20px; right: 60px;">
+        <button onclick="hideshow('parallel');">X Close</button>
+    </div>
+
+    <div id="title" >DH2321 VT18-1 Information Visualisation - Project 2<br></div>
+    <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)<br><hr></div>
     <main class="row noglow" >
         <div class="column">
             <br>
@@ -108,14 +111,13 @@
             <br><br>
         </div>
     </main>
+
 </div>
 
 
 
 
 <script type="text/javascript" src="include/js/bigdata.parallelcoordinates.js"></script>
-
-
 </body>
 </html>
 

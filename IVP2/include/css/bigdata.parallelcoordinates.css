@@ -137,7 +137,7 @@ button:hover {
 }
 #label5 {
     position: absolute;
-    top: 610px;
+    top: 615px;
     left: 195px;
 }
 
@@ -147,8 +147,8 @@ button:hover {
 
 .column {
     float: left;
-    width: 40%;
-    padding: 20px;
+    width: 45%;
+    padding: 2%;
 }
 
 /* Clear floats after the columns */
