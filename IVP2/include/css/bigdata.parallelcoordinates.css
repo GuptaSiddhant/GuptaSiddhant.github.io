@@ -157,6 +157,9 @@ button:hover {
     display: table;
     clear: both;
 }
+.noglow:hover {
+    text-shadow: none !important;
+}
 
 /* data table styles */
 #grid { height: 300px; color:white; clear: both; position:relative; top: 50px; left: 20px }

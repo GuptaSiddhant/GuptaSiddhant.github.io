@@ -32,7 +32,7 @@
             <entry file="file://$PROJECT_DIR$/text.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="195">
-                  <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+                  <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -45,8 +45,8 @@
           <file leaf-file-name="bigdata.parallelcoordinates.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/include/css/bigdata.parallelcoordinates.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="689">
-                  <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="158" selection-end-column="1" />
+                <state relative-caret-position="796">
+                  <caret line="167" column="52" lean-forward="true" selection-start-line="167" selection-start-column="52" selection-end-line="167" selection-end-column="52" />
                   <folding />
                 </state>
               </provider>
@@ -91,6 +91,8 @@
       <find>axis</find>
       <find>_in</find>
       <find>inc</find>
+      <find>main</find>
+      <find>colu</find>
     </findStrings>
     <replaceStrings>
       <replace>const</replace>
@@ -131,8 +133,8 @@
         <option value="$PROJECT_DIR$/_include/css/bigdata.parallelcoordinates.css" />
         <option value="$PROJECT_DIR$/include/js/bigdata.parallelcoordinates.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/include/css/bigdata.parallelcoordinates.css" />
         <option value="$PROJECT_DIR$/text.html" />
+        <option value="$PROJECT_DIR$/include/css/bigdata.parallelcoordinates.css" />
       </list>
     </option>
   </component>
@@ -236,12 +238,12 @@
       <option name="presentableId" value="Default" />
       <updated>1518884083330</updated>
       <workItem from="1518884085162" duration="3221000" />
-      <workItem from="1518889025947" duration="24739000" />
+      <workItem from="1518889025947" duration="25167000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27960000" />
+    <option name="totallyTimeSpent" value="28388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -590,18 +592,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/css/bigdata.parallelcoordinates.css">
+    <entry file="file://$PROJECT_DIR$/text.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="158" selection-end-column="1" />
+        <state relative-caret-position="195">
+          <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/text.html">
+    <entry file="file://$PROJECT_DIR$/include/css/bigdata.parallelcoordinates.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        <state relative-caret-position="796">
+          <caret line="167" column="52" lean-forward="true" selection-start-line="167" selection-start-column="52" selection-end-line="167" selection-end-column="52" />
           <folding />
         </state>
       </provider>
