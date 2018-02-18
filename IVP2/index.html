@@ -15,7 +15,6 @@
     <link href="include/css/d3.parcoords.css" rel="stylesheet">
     <link href="include/css/bigdata.parallelcoordinates.css" rel="stylesheet">
     <script src="include/js/lib/hideshow.js"></script>
-    <script src="include/js/lib/worldmap.js"></script>
     <script src="http://d3plus.org/js/topojson.js"></script>
     <script src="http://d3plus.org/js/d3plus.js"></script>
     <script src="include/js/data.js"></script>
@@ -26,7 +25,6 @@
     <button onclick="hideshow('worldmap');">World Map</button></div>
 <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 60px;">
     <button onclick="hideshow('parallel');">Parallel Coordinates</button></div>
-
 
 <div id="parallel" style="display: block">
 
@@ -183,12 +181,69 @@
         </footer>
     </div>
 
-<div id="viz" style="margin: 40px"></div>
-    <div id="viz1993" style="width: 800px; height: 600px"></div>
+<div id="viz" style="margin-top: 100px"></div>
+    <div id="viz1993" style="width: 800px; height: 600px; display: none; margin-left: 30px"></div>
+    <div id="viz1998" style="width: 800px; height: 600px; display: none; margin-left: 30px"></div>
+    <div id="viz2004" style="width: 800px; height: 600px; display: none; margin-left: 30px"></div>
+    <div id="viz2009" style="width: 800px; height: 600px; display: none; margin-left: 30px"></div>
+    <div id="viz2014" style="width: 800px; height: 600px; display: block; margin-left: 30px"></div>
+    <div id="buttons">
+        <button onclick="showmap('v1993');">1989-1993</button>
+        <button onclick="showmap('v1998');">1994-1998</button>
+        <button onclick="showmap('v2004');">1999-2004</button>
+        <button onclick="showmap('v2009');">2005-2009</button>
+        <button onclick="showmap('v2014');">2010-2014</button>
+    </div>
 </div>
+
+
 <script>
 
-    var visualization = d3plus.viz()
+    var visualization2014 = d3plus.viz()
+        .container("#viz2014")        // container DIV to hold the visualization
+        .data(data2014)        // data to use with the visualization
+        .coords("http://d3plus.org/topojson/countries.json") // pass topojson coordinates
+        .type("geo_map")          // visualization type
+        .id("cc")            // key for which our data is unique on
+        .text("Countries")             // key to use for display text
+        .color("Year")           // key for coloring countries
+        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])
+        .draw()                   // finally, draw the visualization!
+
+    var visualization2009 = d3plus.viz()
+        .container("#viz2009")        // container DIV to hold the visualization
+        .data(data2009)        // data to use with the visualization
+        .coords("http://d3plus.org/topojson/countries.json") // pass topojson coordinates
+        .type("geo_map")          // visualization type
+        .id("cc")            // key for which our data is unique on
+        .text("Countries")             // key to use for display text
+        .color("Year")           // key for coloring countries
+        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])
+        .draw()                   // finally, draw the visualization!
+
+    var visualization2004 = d3plus.viz()
+        .container("#viz2004")        // container DIV to hold the visualization
+        .data(data2004)        // data to use with the visualization
+        .coords("http://d3plus.org/topojson/countries.json") // pass topojson coordinates
+        .type("geo_map")          // visualization type
+        .id("cc")            // key for which our data is unique on
+        .text("Countries")             // key to use for display text
+        .color("Year")           // key for coloring countries
+        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])
+        .draw()                   // finally, draw the visualization!
+
+    var visualization1998 = d3plus.viz()
+        .container("#viz1998")        // container DIV to hold the visualization
+        .data(data1998)        // data to use with the visualization
+        .coords("http://d3plus.org/topojson/countries.json") // pass topojson coordinates
+        .type("geo_map")          // visualization type
+        .id("cc")            // key for which our data is unique on
+        .text("Countries")             // key to use for display text
+        .color("Year")           // key for coloring countries
+        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])
+        .draw()                   // finally, draw the visualization!
+
+    var visualization1993 = d3plus.viz()
         .container("#viz1993")        // container DIV to hold the visualization
         .data(data1993)        // data to use with the visualization
         .coords("http://d3plus.org/topojson/countries.json") // pass topojson coordinates
@@ -196,7 +251,7 @@
         .id("cc")            // key for which our data is unique on
         .text("Country")             // key to use for display text
         .color("Year")           // key for coloring countries
-        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])         // keys to place in tooltip
+        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])
         .draw()                   // finally, draw the visualization!
 </script>
 
