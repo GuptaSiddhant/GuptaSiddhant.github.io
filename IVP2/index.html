@@ -7,12 +7,12 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
-    <script src="_include/js/lib/d3.parcoords.js"></script>
-    <script src="_include/js/lib/d3.underscore.math.js"></script>
-    <script src="_include/js/lib/d3.divgrid.js"></script>
+    <script src="include/js/lib/d3.parcoords.js"></script>
+    <script src="include/js/lib/d3.underscore.math.js"></script>
+    <script src="include/js/lib/d3.divgrid.js"></script>
     <link rel="stylesheet" href="_include/css/fonts/droid.css" type="text/css" charset="utf-8" />
-    <link href="_include/css/d3.parcoords.css" rel="stylesheet">
-    <link href="_include/css/bigdata.parallelcoordinates.css" rel="stylesheet">
+    <link href="include/css/d3.parcoords.css" rel="stylesheet">
+    <link href="include/css/bigdata.parallelcoordinates.css" rel="stylesheet">
 
 </head>
 <body>
@@ -28,13 +28,53 @@
 
 <div id="wrapper" class="parcoords" style="width:100%;height:550px">
     <div id="desc">
+        <div id="title">DH2321 VT18-1 <br>Information Visualisation <br>Project 2</div>
         <div id="title"><span class="large">Important Child Qualities</span></div>
+        <div id="subtitle">Siddhant Gupta (sidgup@kth.se)</div>
 
 
         <footer><br>
-            a d3.js visualisation by Chris Evans using car data from the 70's and 80's
-            <br><br>Drag around axis to begin brush<br>
-            Click axis to clear brush<br>Click a label to color data by z-scores
+            A d3.js visualisation using data from www.worldvaluessurvey.org regarding mentioned
+            important qualities in a child.
+            <br><br>
+            Time: <span class="answers">1993 (Wave 2) to 2014 (Wave 6)</span><br>
+            Variables: <span class="answers">Independence, Thrift saving money and things, Unselfishness,	Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work, Obedience
+            </span><br>
+            Countries: <span class="answers">
+                Argentina,
+                Australia,
+                Armenia,
+                Brazil,
+                China,
+                Colombia,
+                Cyprus,
+                Egypt,
+                Estonia,
+                Germany,
+                Ghana,
+                India,
+                Japan,
+                Jordan,
+                Mexico,
+                Morocco,
+                Netherlands,
+                New Zealand,
+                Nigeria,
+                Peru,
+                Poland,
+                Russia,
+                South Africa,
+                South Korea,
+                Spain,
+                Sweden,
+                Turkey,
+                Ukraine,
+                United States,
+                Zimbabwe
+            </span>
+                <br><br>Drag around axis to begin brush<br>
+            Click axis to clear brush<br>
+            The table grid on left provides top 10 results.
 
         </footer>
 
@@ -57,7 +97,7 @@
 
 
 
-<script type="text/javascript" src="_include/js/bigdata.parallelcoordinates.js"></script>
+<script type="text/javascript" src="include/js/bigdata.parallelcoordinates.js"></script>
 
 
 </body>
