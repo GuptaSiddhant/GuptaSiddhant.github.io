@@ -78,6 +78,36 @@ button:hover {
     border: 1px solid;
 }
 
+#labels {
+    color: aliceblue;
+    font-weight: bold;
+}
+#label1 {
+    position: absolute;
+    top: 100px;
+    left: 195px;
+}
+#label2 {
+    position: absolute;
+    top: 220px;
+    left: 195px;
+}
+#label3 {
+    position: absolute;
+    top: 345px;
+    left: 195px;
+}
+#label4 {
+    position: absolute;
+    top: 490px;
+    left: 195px;
+}
+#label5 {
+    position: absolute;
+    top: 610px;
+    left: 195px;
+}
+
 /* data table styles */
 #grid { height: 300px; color:white; clear: both; position:relative; top: 50px; left: 20px }
 .row, .header { clear: left; font-size: 14px; line-height: 18px; height: 20px; margin: 5px; width:100% }
