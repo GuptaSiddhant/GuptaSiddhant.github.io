@@ -48,8 +48,21 @@ text {
     color: aliceblue;
 }
 
+a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
 footer {
-    color: #666;
+    color: #888;
+}
+
+main {
+    color: #ddd;
 }
 
 .answers {
@@ -61,6 +74,7 @@ footer {
     float:right;
     z-index:-999;
     left: 420px;
+    top: -10px;
     width: 350px;
 }
 
@@ -83,6 +97,10 @@ button {
 button:hover {
     background: none repeat scroll 0 0 #DE5E60;
     color: #FFFFFF;
+}
+
+#buttons {
+    margin-left: 20px;
 }
 
 #divider {
@@ -121,6 +139,23 @@ button:hover {
     position: absolute;
     top: 610px;
     left: 195px;
+}
+
+#textual{
+    margin: 40px;
+}
+
+.column {
+    float: left;
+    width: 40%;
+    padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 /* data table styles */
