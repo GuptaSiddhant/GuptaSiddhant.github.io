@@ -78,6 +78,13 @@ main {
     width: 350px;
 }
 
+#desc2 {
+    position: absolute;
+    float:right;
+    right: 50px;
+    top: 95px;
+    width: 350px;
+}
 
 
 button {
@@ -100,6 +107,7 @@ button:hover {
     background: none repeat scroll 0 0 #DE5E60;
     color: #FFFFFF;
 }
+
 
 #buttons {
     margin-left: 20px;

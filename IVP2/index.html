@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="//d3plus.org/js/d3.js"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="include/js/lib/d3.parcoords.js"></script>
     <script src="include/js/lib/d3.underscore.math.js"></script>
@@ -14,16 +15,24 @@
     <link href="include/css/d3.parcoords.css" rel="stylesheet">
     <link href="include/css/bigdata.parallelcoordinates.css" rel="stylesheet">
     <script src="include/js/lib/hideshow.js"></script>
-
+    <script src="include/js/lib/worldmap.js"></script>
+    <script src="http://d3plus.org/js/topojson.js"></script>
+    <script src="http://d3plus.org/js/d3plus.js"></script>
+    <script src="include/js/data.js"></script>
 </head>
 <body>
 
+<div id="closeButton" style="float: right; position: fixed; top: 10px; right: 270px;">
+    <button onclick="hideshow('worldmap');">World Map</button></div>
+<div id="closeButton" style="float: right; position: fixed; top: 10px; right: 60px;">
+    <button onclick="hideshow('parallel');">Parallel Coordinates</button></div>
+
+
 <div id="parallel" style="display: block">
 
-    <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 60px;">
-        <button onclick="hideshow('textual');">Click to read Analytic Trails + Result </button>
+    <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
+        <button onclick="hideshow('textual');">Analytic Trails + Result </button>
     </div>
-
 <div id="buttons">
 <button id="keep-data">Keep</button>
 <button id="exclude-data">Exclude</button>
@@ -36,7 +45,8 @@
         <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)</div>
         <footer>
             <br>
-            <a href ="#textual" onclick="hideshow('textual');return false;"><strong>> Click to read Analytic Trails + Result</strong></a>
+            <a href ="#textual" onclick="hideshow('textual');return false;"><strong>> Click to read Analytic Trails + Result</strong></a><br>
+            <a href ="#textual" onclick="hideshow('worldmap');return false;"><strong>> Click to view World Map</strong></a>
             <br><br>
             A d3.js visualisation using data from www.worldvaluessurvey.org regarding mentioned
             important qualities in a child.
@@ -97,7 +107,7 @@
 
 <div id="textual" style="display: none">
 
-    <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 60px;">
+    <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
         <button onclick="hideshow('parallel');">Close [X]</button>
     </div>
 
@@ -118,8 +128,77 @@
 
 </div>
 
+<div id="worldmap" style="display: none">
+    <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
+        <button onclick="hideshow('textual');">Analytic Trails + Result </button>
+    </div>
+    <div id="desc2">
+        <div id="title">DH2321 VT18-1 <br>Information Visualisation <br>Project 2<br>
+            <span class="large">Important Child Qualities</span></div>
+        <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)</div>
+        <footer>
+            <br>
+            <a href ="#textual" onclick="hideshow('textual');return false;"><strong>> Click to read Analytic Trails + Result</strong></a><br>
+            <a href ="#textual" onclick="hideshow('parallel');return false;"><strong>> Click to view Parallel Coordinates</strong></a>
+            <br><br>
+            A d3.js visualisation using data from www.worldvaluessurvey.org regarding mentioned
+            important qualities in a child.
+            <br><br>
+            Time: <span class="answers">1993 (Wave 2) to 2014 (Wave 6)</span><br>
+            Variables: <span class="answers">Independence, Thrift saving money and things, Unselfishness,	Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work, Obedience
+            </span><br>
+            Countries: <span class="answers">
+                Argentina,
+                Australia,
+                Armenia,
+                Brazil,
+                China,
+                Colombia,
+                Cyprus,
+                Egypt,
+                Estonia,
+                Germany,
+                Ghana,
+                India,
+                Japan,
+                Jordan,
+                Mexico,
+                Morocco,
+                Netherlands,
+                New Zealand,
+                Nigeria,
+                Peru,
+                Poland,
+                Russia,
+                South Africa,
+                South Korea,
+                Spain,
+                Sweden,
+                Turkey,
+                Ukraine,
+                United States,
+                Zimbabwe
+            </span>
 
+        </footer>
+    </div>
 
+<div id="viz" style="margin: 40px"></div>
+    <div id="viz1993" style="width: 800px; height: 600px"></div>
+</div>
+<script>
+
+    var visualization = d3plus.viz()
+        .container("#viz1993")        // container DIV to hold the visualization
+        .data(data1993)        // data to use with the visualization
+        .coords("http://d3plus.org/topojson/countries.json") // pass topojson coordinates
+        .type("geo_map")          // visualization type
+        .id("cc")            // key for which our data is unique on
+        .text("Country")             // key to use for display text
+        .color("Year")           // key for coloring countries
+        .tooltip(["Year","Independence","Saving","Unselfishness","Religious", "Imagination","Respect","Determination","HardWork","Obedience"])         // keys to place in tooltip
+        .draw()                   // finally, draw the visualization!
+</script>
 
 <script type="text/javascript" src="include/js/bigdata.parallelcoordinates.js"></script>
 </body>
