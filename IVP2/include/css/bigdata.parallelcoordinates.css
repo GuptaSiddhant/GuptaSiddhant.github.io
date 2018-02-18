@@ -74,9 +74,11 @@ main {
     float:right;
     z-index:-999;
     left: 420px;
-    top: -10px;
+    top: 10px;
     width: 350px;
 }
+
+
 
 button {
     background: none repeat scroll 0 0 #3C3F45;
