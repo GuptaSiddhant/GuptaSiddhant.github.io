@@ -13,19 +13,18 @@
     <link rel="stylesheet" href="include/css/fonts/droid.css" type="text/css" charset="utf-8" />
     <link href="include/css/d3.parcoords.css" rel="stylesheet">
     <link href="include/css/bigdata.parallelcoordinates.css" rel="stylesheet">
+    <script src="include/js/lib/hideshow.js"></script>
 
 </head>
 <body>
 
+<div id="parallel" style="display: block">
 
 <div id="buttons">
 <button id="keep-data">Keep</button>
 <button id="exclude-data">Exclude</button>
 <button id="reset-data">Reset</button>
 </div>
-
-
-
 <div id="wrapper" class="parcoords" style="width:100%;height:550px">
     <div id="desc">
         <div id="title">DH2321 VT18-1 <br>Information Visualisation <br>Project 2<br>
@@ -33,7 +32,7 @@
         <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)</div>
         <footer>
             <br>
-            <a href ="text.html">Click to read Analytic Trails + Result</a>
+            <a href ="#textual" onclick="hideshow('textual');return false;">Click to read Analytic Trails + Result</a>
             <br><br>
             A d3.js visualisation using data from www.worldvaluessurvey.org regarding mentioned
             important qualities in a child.
@@ -78,8 +77,6 @@
             The table grid on left provides top 10 results.
 
         </footer>
-
-
     </div>
 </div>
 <div id="labels">
@@ -92,8 +89,26 @@
     <hr id="divider">
 <div id="grid" style="width: 100%"></div>
 
+</div>
 
+<div id="textual" style="display: none">
 
+    <a href="#parallel" onclick="hideshow('parallel'); return false;"> < Go Back</a>
+    <div id="title">DH2321 VT18-1 Information Visualisation - Project 2<br></div>
+    <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)</div>
+    <main class="row noglow" >
+        <div class="column">
+            <br>
+            Text here
+            <br><br>
+        </div>
+        <div class="column">
+            <br>
+            Text here
+            <br><br>
+        </div>
+    </main>
+</div>
 
 
 
