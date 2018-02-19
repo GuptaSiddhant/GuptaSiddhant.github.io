@@ -26,7 +26,7 @@
 <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 60px;">
     <button onclick="hideshow('parallel');">Parallel Coordinates</button></div>
 
-<div id="parallel" style="display: none">
+<div id="parallel" style="display: block">
 
     <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
         <button onclick="hideshow('textual');">Analytic Trails + Result </button>
@@ -103,18 +103,18 @@
 
 </div>
 
-<div id="textual" style="display: block">
+<div id="textual" style="display: none">
 
     <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
         <button onclick="hideshow('parallel');">Close [X]</button>
     </div>
 
     <div id="title" >DH2321 VT18-1 Information Visualisation - Project 2<br></div>
-    <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="#at1">Analytical Trail 1</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="#at2">Analytical Trail 2</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="#learn">Result + Learning</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="include/ivp2.pdf" target="_blank">Download PDF</a>
+    <div id="subtitle">
+        Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>) • <a href="include/ivp2.pdf" target="_blank"><strong>Download PDF</strong></a>
+        <!--• <a href="#at1">Analytical Trail 1</a>
+        • <a href="#at2">Analytical Trail 2</a>
+        • <a href="#learn">Result + Learning</a>-->
     </div><hr>
 
     <main class="row noglow" >
@@ -139,53 +139,42 @@
             <br><br>
             Buttons at bottom allows user to switch between different time-waves and see the data geographically. One can also compare values between two countries in same time-wave by clicking on one country and hovering over the other.
             <br><br>
+            <a href="include/img/map3.jpg" target="_blank"><img src="include/img/map3.jpg" height="200px" style="margin: 0px"></a>
         </div>
     </main>
     <div class="row"><hr></div>
     <main class="row noglow" >
         <div class="column" style="text-align: justify; text-justify: inter-word;">
             <strong><a name="at2" href="#at2">Analytical Trail 2</a></strong><br><br>
-            Started at www.worldvaluessurvey.org, searched for countries appearing over all time-periods (wave). I particularly liked the sub-group about children qualities. People are surveyed in multiple countries to determine which qualities are most desired/seen in children during that time-period.
-
-            <br><br><a href="include/img/wvs1.jpg" target="_blank"><img src="include/img/wvs1.jpg" height="190px" style="margin: 0px"></a>
-            <a href="include/img/wvs2.jpg" target="_blank"><img src="include/img/wvs2.jpg" height="200px" style="margin: 0px"></a>
-            <a href="include/img/wvs3.jpg" target="_blank"><img src="include/img/wvs3.jpg" height="200px" style="margin: 0px"></a><br><br>
-
-            Once all the data was aggregated in tables. Column headers corresponds to Variables like Country Code (cc), Country Name, Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
-
-            <br><br><a href="include/img/table.jpg" target="_blank"><img src="include/img/table.jpg" height="200px" style="margin: 0px"></a><br><br>
+            After creating world-maps, the expression of data felt limited by the fact that the world-map is not a good choice to display multiple variables at the same time. A solution was to create multiple combinations of maps (40, crossing 5 time-waves with 8 variables).
+            <br><br>
+            A better solution is to create <strong>parallel coordinates</strong>. This representation allows for easier and more expressive date visualisation among multiple variables.<br>
+            Taking inspiration from a <a href="http://www.columbia.edu/~cme2126/datavisuals/bigdata_parallelcoordinates.html" target="_blank">Columbia University</a> project, I created a multivariate parallel coordinates chart marking countries, years, and other eight variables.
+            <br>Along with data-table connected to the chart, the user has good amount of options for filtering and comparing.
+            <br><br><a href="include/img/parallel1.jpg" target="_blank"><img src="include/img/parallel1.jpg" height="190px" style="margin: 0px"></a>
+            <a href="include/img/parallel2.jpg" target="_blank"><img src="include/img/parallel2.jpg" height="190px" style="margin: 0px"></a>
+            <br><br>
         </div>
         <div class="column" style="text-align: justify; text-justify: inter-word;">
             <br><br>
-            The data was exported from excel in CSV format and then converted to JSON using online tools. The JSON data is used to generate geomaps in d3.
-            <br><br><a href="include/img/map1.jpg" target="_blank"><img src="include/img/map1.jpg" height="200px" style="margin: 0px"></a><br><br>
-            <br>
-            <br>
-            Once all the data was aggregated in tables. Column headers corresponds to Variables like Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
+            To filter data, one must drag cursor over any axis. This creates a selection and it filters the data. The filtered data is visible in Data-Table below. Though the data-table is limited to 10 entries, it suffices once filtration begins.
+            <br><br><a href="include/img/parallel3.jpg" target="_blank"><img src="include/img/parallel3.jpg" height="200px" style="margin: 0px"></a>
             <br><br>
+            Hovering over a data-row in Data-table will highlight the plot-line in the chart. Buttons like “Keep”, “Exclude” and “Reset” allows to hold filtered settings for prolonged comparison.
+            <br><br>
+            This visualisation provides a great overview and in-depth knowledge about each value-point.
         </div>
     </main>
     <div class="row"><hr></div>
     <main class="row noglow" >
         <div class="column" style="text-align: justify; text-justify: inter-word;">
-            <strong><a name="learn" href="#learn">Result + Learning</a></strong><br><br>
-            Started at www.worldvaluessurvey.org, searched for countries appearing over all time-periods (wave). I particularly liked the sub-group about children qualities. People are surveyed in multiple countries to determine which qualities are most desired/seen in children during that time-period.
-
-            <br><br><a href="include/img/wvs1.jpg" target="_blank"><img src="include/img/wvs1.jpg" height="190px" style="margin: 0px"></a>
-            <a href="include/img/wvs2.jpg" target="_blank"><img src="include/img/wvs2.jpg" height="200px" style="margin: 0px"></a>
-            <a href="include/img/wvs3.jpg" target="_blank"><img src="include/img/wvs3.jpg" height="200px" style="margin: 0px"></a><br><br>
-
-            Once all the data was aggregated in tables. Column headers corresponds to Variables like Country Code (cc), Country Name, Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
-
-            <br><br><a href="include/img/table.jpg" target="_blank"><img src="include/img/table.jpg" height="200px" style="margin: 0px"></a><br><br>
+            <strong><a name="result" href="#result">Result</a></strong><br><br>
+            The result is a website which presents survey-data about Important Qualities in Children  among different countries across span of 25 years. The visualisation is a hybrid of geo-maps and multivariate parallel coordinates chart. The website allows user to switch between them and compare or filter selected variables.
+            <br><br>
         </div>
         <div class="column" style="text-align: justify; text-justify: inter-word;">
-            <br><br>
-            The data was exported from excel in CSV format and then converted to JSON using online tools. The JSON data is used to generate geomaps in d3.
-            <br><br><a href="include/img/map1.jpg" target="_blank"><img src="include/img/map1.jpg" height="200px" style="margin: 0px"></a><br><br>
-            <br>
-            <br>
-            Once all the data was aggregated in tables. Column headers corresponds to Variables like Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
+            <strong><a name="learn" href="#learn">Learning</a></strong><br><br>
+            It was clear that map-based visualisation is more attractive feature but the permutations of variables across time made that difficult to achieve. Parallel coordinates solves the problem albeit isn’t as easy to understand. I learnt quite-a-lot while developing this project and in future, maybe I’ll create better visualisations.
             <br><br>
         </div>
     </main>
