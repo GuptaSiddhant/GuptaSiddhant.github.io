@@ -26,15 +26,15 @@
 <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 60px;">
     <button onclick="hideshow('parallel');">Parallel Coordinates</button></div>
 
-<div id="parallel" style="display: block">
+<div id="parallel" style="display: none">
 
     <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
         <button onclick="hideshow('textual');">Analytic Trails + Result </button>
     </div>
 <div id="buttons">
-<button id="keep-data">Keep</button>
-<button id="exclude-data">Exclude</button>
-<button id="reset-data">Reset</button>
+<button id="keep-data">Keep Selection</button>
+<button id="exclude-data">Exclude Selection</button>
+<button id="reset-data">Reset Selection</button>
 </div>
 <div id="wrapper" class="parcoords" style="width:100%;height:550px">
     <div id="desc">
@@ -103,27 +103,93 @@
 
 </div>
 
-<div id="textual" style="display: none">
+<div id="textual" style="display: block">
 
     <div id="closeButton" style="float: right; position: fixed; top: 10px; right: 450px;">
         <button onclick="hideshow('parallel');">Close [X]</button>
     </div>
 
     <div id="title" >DH2321 VT18-1 Information Visualisation - Project 2<br></div>
-    <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)<br><hr></div>
+    <div id="subtitle">Siddhant Gupta (<a href="mailto:sidgup@kth.se">sidgup@kth.se</a>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="#at1">Analytical Trail 1</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="#at2">Analytical Trail 2</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="#learn">Result + Learning</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;• <a href="include/ivp2.pdf" target="_blank">Download PDF</a>
+    </div><hr>
+
     <main class="row noglow" >
-        <div class="column">
-            <br>
-            Text here
-            <br><br>
+        <div class="column" style="text-align: justify; text-justify: inter-word;">
+            <strong><a name="at1" href="#at1">Analytical Trail 1</a></strong><br><br>
+            Started at www.worldvaluessurvey.org, searched for countries appearing over all time-periods (wave). I particularly liked the sub-group about children qualities. People are surveyed in multiple countries to determine which qualities are most desired/seen in children during that time-period.
+
+            <br><br><a href="include/img/wvs1.jpg" target="_blank"><img src="include/img/wvs1.jpg" height="190px" style="margin: 0px"></a>
+            <a href="include/img/wvs2.jpg" target="_blank"><img src="include/img/wvs2.jpg" height="200px" style="margin: 0px"></a>
+            <a href="include/img/wvs3.jpg" target="_blank"><img src="include/img/wvs3.jpg" height="200px" style="margin: 0px"></a><br><br>
+
+            Once all the data was aggregated in tables. Column headers corresponds to Variables like Country Code (cc), Country Name, Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries not arranged in order.
+
+            <br><br><a href="include/img/table.jpg" target="_blank"><img src="include/img/table.jpg" height="200px" style="margin: 0px"></a><br><br>
         </div>
-        <div class="column">
-            <br>
-            Text here
+        <div class="column" style="text-align: justify; text-justify: inter-word;">
+            <br><br>
+            The data was exported from excel in CSV format and then converted to JSON using online tools. The JSON data is used to generate geomaps in d3.<br>
+            In addition to d3js, d3Plus.js (d3plus.org) is used to simplify map rendering. Five maps are created ranging from 1989 to 2014, each with 5 year wave. Selected countries are plotted and variable data is shown in tooltips.
+            <br><br><a href="include/img/map1.jpg" target="_blank"><img src="include/img/map1.jpg" height="200px" style="margin: 0px"></a>
+            <a href="include/img/map2.jpg" target="_blank"><img src="include/img/map2.jpg" height="200px" style="margin: 0px"></a>
+            <br><br>
+            Buttons at bottom allows user to switch between different time-waves and see the data geographically. One can also compare values between two countries in same time-wave by clicking on one country and hovering over the other.
             <br><br>
         </div>
     </main>
+    <div class="row"><hr></div>
+    <main class="row noglow" >
+        <div class="column" style="text-align: justify; text-justify: inter-word;">
+            <strong><a name="at2" href="#at2">Analytical Trail 2</a></strong><br><br>
+            Started at www.worldvaluessurvey.org, searched for countries appearing over all time-periods (wave). I particularly liked the sub-group about children qualities. People are surveyed in multiple countries to determine which qualities are most desired/seen in children during that time-period.
 
+            <br><br><a href="include/img/wvs1.jpg" target="_blank"><img src="include/img/wvs1.jpg" height="190px" style="margin: 0px"></a>
+            <a href="include/img/wvs2.jpg" target="_blank"><img src="include/img/wvs2.jpg" height="200px" style="margin: 0px"></a>
+            <a href="include/img/wvs3.jpg" target="_blank"><img src="include/img/wvs3.jpg" height="200px" style="margin: 0px"></a><br><br>
+
+            Once all the data was aggregated in tables. Column headers corresponds to Variables like Country Code (cc), Country Name, Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
+
+            <br><br><a href="include/img/table.jpg" target="_blank"><img src="include/img/table.jpg" height="200px" style="margin: 0px"></a><br><br>
+        </div>
+        <div class="column" style="text-align: justify; text-justify: inter-word;">
+            <br><br>
+            The data was exported from excel in CSV format and then converted to JSON using online tools. The JSON data is used to generate geomaps in d3.
+            <br><br><a href="include/img/map1.jpg" target="_blank"><img src="include/img/map1.jpg" height="200px" style="margin: 0px"></a><br><br>
+            <br>
+            <br>
+            Once all the data was aggregated in tables. Column headers corresponds to Variables like Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
+            <br><br>
+        </div>
+    </main>
+    <div class="row"><hr></div>
+    <main class="row noglow" >
+        <div class="column" style="text-align: justify; text-justify: inter-word;">
+            <strong><a name="learn" href="#learn">Result + Learning</a></strong><br><br>
+            Started at www.worldvaluessurvey.org, searched for countries appearing over all time-periods (wave). I particularly liked the sub-group about children qualities. People are surveyed in multiple countries to determine which qualities are most desired/seen in children during that time-period.
+
+            <br><br><a href="include/img/wvs1.jpg" target="_blank"><img src="include/img/wvs1.jpg" height="190px" style="margin: 0px"></a>
+            <a href="include/img/wvs2.jpg" target="_blank"><img src="include/img/wvs2.jpg" height="200px" style="margin: 0px"></a>
+            <a href="include/img/wvs3.jpg" target="_blank"><img src="include/img/wvs3.jpg" height="200px" style="margin: 0px"></a><br><br>
+
+            Once all the data was aggregated in tables. Column headers corresponds to Variables like Country Code (cc), Country Name, Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
+
+            <br><br><a href="include/img/table.jpg" target="_blank"><img src="include/img/table.jpg" height="200px" style="margin: 0px"></a><br><br>
+        </div>
+        <div class="column" style="text-align: justify; text-justify: inter-word;">
+            <br><br>
+            The data was exported from excel in CSV format and then converted to JSON using online tools. The JSON data is used to generate geomaps in d3.
+            <br><br><a href="include/img/map1.jpg" target="_blank"><img src="include/img/map1.jpg" height="200px" style="margin: 0px"></a><br><br>
+            <br>
+            <br>
+            Once all the data was aggregated in tables. Column headers corresponds to Variables like Independence, Thrift saving money and things, Unselfishness, Religious, Imagination, Tolerance and respect for other people, Determination, Hard Work and Obedience. The Row headers corresponds to 30 selected countries.
+            <br><br>
+        </div>
+    </main>
+    <div class="row"><hr></div>
 </div>
 
 <div id="worldmap" style="display: none">
@@ -194,10 +260,10 @@
         <button onclick="showmap('v2009');">2005-2009</button>
         <button onclick="showmap('v2014');">2010-2014</button><br><br>
         <footer>
+            Hint: Click on country's name to zoom in. Click anywhere other than name inside the country to zoom out.<br>
             Hint: Click a country and hover over a different country to compare.</footer>
     </div>
 </div>
-
 
 <script>
 
@@ -258,6 +324,6 @@
 </script>
 
 <script type="text/javascript" src="include/js/bigdata.parallelcoordinates.js"></script>
+
 </body>
 </html>
-
