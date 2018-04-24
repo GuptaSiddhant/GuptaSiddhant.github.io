@@ -8,10 +8,10 @@ module.exports = {
             "icon": "github-circled",
             "url": "https://github.com/GuptaSiddhant/"
         },
-        {
-            "icon": "dribbble",
-            "url": ""
-        },
+        // {
+        //     "icon": "dribbble",
+        //     "url": ""
+        // },
         {
             "icon": "skype",
             "url": "skype:gupta_siddhant"
@@ -103,6 +103,6 @@ module.exports = {
         }
     ],
     "email": "me@guptasiddhant.com",
-    "description": "I'm a college junior currently taking up Computer Science in University X. I'm a freelance developer with 4 years of experience, having worked with clients such as X, Y, Z. I enjoy building everything from small business sites to rich interactive web apps.",
+    "description": "I'm a masters student pursuing Human Computer Interaction & Design (dual degree) at KTH Royal Institute of Technology, Sweden and Aalto University, Finland." + "<br >" + "I'm an UI Designer and Front-end developer with 2 years of experience, having worked with  multiple clients. I enjoy building everything from small business sites to rich interactive apps.",
     "footerTitle": "UI/UX Designer"
 }
