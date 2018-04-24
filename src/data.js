@@ -41,6 +41,16 @@ module.exports = {
                 "Increased rate of tickets/tasks done by the team up to 300% within first few weeks!",
                 "Added Abstractions on Server API to Minimize Duplicate Code"
             ]
+        },
+        {
+            "__key": "4f2ef46c-52c8-4860-9aea-4750ef820c49",
+            "title": "Fullstack Software Engineer at Company B",
+            "timeline": "Feb 2015 - Dec 2015",
+            "responsibilities": [
+                "Worked with a global team of developers and artists for the implementation of new features in Existing Codebase of a Free-to-play MMO",
+                "Increased rate of tickets/tasks done by the team up to 300% within first few weeks!",
+                "Added Abstractions on Server API to Minimize Duplicate Code"
+            ]
         }
     ],
     "name": "Siddhant Gupta",
