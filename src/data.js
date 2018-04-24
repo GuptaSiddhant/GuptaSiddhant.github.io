@@ -72,7 +72,7 @@ module.exports = {
             "name": "Person Name"
         }
     ],
-    "title": "UI/UX Designer",
+    "title": "Gupta Siddhant",
     "projects": [
         {
             "__key": "855c5755-df84-469b-b870-c1f7a0101e6d",
