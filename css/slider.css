@@ -1,0 +1,31 @@
+#pSlider {
+    /*background-color: #888888;*/
+    color: black;
+    position: absolute;
+    top: 120px;
+    bottom: 70px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+}
+
+.pCard {
+    width: 600px;
+    height: 600px;
+    text-align: center;
+    background-color: #888;
+    color: white;
+}
+
+
+.slick-active .pCard {
+    width: 600px;
+    height: 600px;
+    background-color: #000 !important;
+}
+
+.slick-center .pCard {
+    width: 600px;
+    height: 600px;
+    background-color: #FFFFFF !important;
+}
