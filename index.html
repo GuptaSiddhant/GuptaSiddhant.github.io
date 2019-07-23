@@ -7,12 +7,14 @@
     <title>Siddhant Gupta</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link href="css/glide.core.css" rel="stylesheet">
+    <link href="css/glide.theme.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <link href="css/slider.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="particles-js">
+<div id="body">
 
     <header>
         <span class="h1">Siddhant Gupta</span><br>
@@ -37,14 +39,75 @@
             Contact
         </a>
     </footer>
-    <section id="pSlider">
 
+    <section class="glide">
+
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+
+                <li class="glide__slide" style="background-image: url('images/BE.jpg');">
+                    <div>
+                    <div class="slide_info left">
+                        <h1>Business Espoo</h1>
+                        Business Espoo supports the vitality of businesses by offering the best,
+                        continuously developing services in one place.
+                        <dl>
+                            <dt>Role</dt>
+                            <dd>Designed the Brand Identity and Style Guidelines</dd>
+                            <dt>Tech</dt>
+                            <dd>Sketch, InDesign</dd>
+                        </dl>
+                        </div>
+                    </div>
+                </li>
+                <li class="glide__slide" style="background-image: url('images/BE.jpg');">
+                    <div>
+                    <div class="slide_info right">
+                        <h1>Business Espoo</h1>
+                        Business Espoo supports the vitality of businesses by offering the best,
+                        continuously developing services in one place.
+                        <dl>
+                            <dt>Role</dt>
+                            <dd>Designed the Brand Identity and Style Guidelines</dd>
+                            <dt>Tech</dt>
+                            <dd>Sketch, InDesign</dd>
+                        </dl>
+                        </div>
+                    </div>
+                </li>
+                <!--<li class="glide__slide">-->
+                    <!--<div>-->
+                        <!--<div class="slide_info right">-->
+                            <!--1-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+
+                <!--<li class="glide__slide">-->
+                    <!--<div>-->
+                        <!--<div class="slide_info">-->
+                            <!--2-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <div class="glide__bullets" data-glide-el="controls[nav]">
+            <button class="glide__bullet" data-glide-dir="=0"></button>
+            <button class="glide__bullet" data-glide-dir="=1"></button>
+            <button class="glide__bullet" data-glide-dir="=2"></button>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+        </div>
     </section>
+
 
 </div>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="js/glide.min.js"></script>
 <script src="js/particles.min.js"></script>
 <script src="js/index.js"></script>
 </body>

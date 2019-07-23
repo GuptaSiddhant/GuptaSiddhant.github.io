@@ -26,13 +26,13 @@ header {
 
 footer {
     position: fixed;
-    bottom: 35px;
+    top: 40px;
     right: 40px;
     color: #bfbfbf;
     text-align: right;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
     header {
         left: 20px;
         right: 20px;
@@ -40,6 +40,8 @@ footer {
     }
 
     footer {
+        top: auto;
+        bottom: 30px;
         left: 20px;
         right: 20px;
         text-align: center;

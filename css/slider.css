@@ -1,31 +1,108 @@
-#pSlider {
-    /*background-color: #888888;*/
+.glide {
     color: black;
     position: absolute;
-    top: 120px;
-    bottom: 70px;
+    top: 100px;
+    bottom: 5px;
     left: 20px;
     right: 20px;
     width: calc(100% - 40px);
 }
 
-.pCard {
-    width: 600px;
-    height: 600px;
-    text-align: center;
-    background-color: #888;
-    color: white;
+.glide__slide {
+    background-color: #FFFFFF;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.glide__slide > div {
+    opacity: 0.75;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 50%);
+    height: calc(100vh - 180px);
+    position: relative;
+}
+
+.slide_info {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    color: #FFFFFF;
+    width: 50%;
+}
+
+.slide_info.left {
+    left: 0;
+    /*background: radial-gradient(circle at bottom left, rgba(0,0,0,0.9), rgba(0,0,0,0));*/
+}
+
+.slide_info.right {
+    right: 0;
+    text-align: right;
+    /*background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));*/
+}
+
+.slide_info h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+}
+
+.slide_info dl {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%; /* set the container width*/
+    overflow: visible;
+}
+.slide_info.right dl {
+    flex-direction: row-reverse;
+}
+
+.slide_info dt {
+    flex: 0 0 50px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    text-align: right;
+}
+.slide_info.right dt {
+    /*text-align: right;*/
+}
+
+.slide_info dd {
+    margin-left: auto;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 0 0 calc(100% - 60px);
+    color: rgba(255,255,255,0.75);
+}
+.slide_info.right dd {
+    text-align: right;
 }
 
 
-.slick-active .pCard {
-    width: 600px;
-    height: 600px;
-    background-color: #000 !important;
+.glide__slide--active > div {
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
-.slick-center .pCard {
-    width: 600px;
-    height: 600px;
-    background-color: #FFFFFF !important;
+@media screen and (max-width: 500px) {
+    .glide {
+        bottom: 50px;
+    }
+
+    .glide__arrow {
+        top: auto !important;
+    }
+
+    .glide__slide > div {
+        height: calc(100vh - 220px);
+    }
+
 }
+

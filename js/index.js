@@ -1,25 +1,26 @@
 $(document).ready(function () {
 
-    $("#center").slick({
-        centerMode: true,
-        arrows: true,
-        centerPadding: '120px',
-        slidesToShow: 1,
-        responsive: [
-            {
-                breakpoint: 480,
-                settings: {
-                    arrows: true,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                }
+    new Glide('.glide', {
+
+        type: 'carousel',
+        startAt: 0,
+        perView: 1,
+        focusAt: 'center',
+        gap: 10,
+        peek: 120,
+        autoplay: false,
+        breakpoints: {
+            800: {
+                peek: 60
+            },
+            500: {
+                peek: 10
             }
-        ]
-    });
+        }
+    }).mount();
+
+
     loadParticles();
-
-
 });
 
 function loadParticles() {
