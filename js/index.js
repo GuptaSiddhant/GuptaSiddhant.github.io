@@ -1,27 +1,8 @@
 $(document).ready(function () {
-
-    new Glide('.glide', {
-
-        type: 'carousel',
-        startAt: 0,
-        perView: 1,
-        focusAt: 'center',
-        gap: 10,
-        peek: 120,
-        autoplay: false,
-        breakpoints: {
-            800: {
-                peek: 60
-            },
-            500: {
-                peek: 10
-            }
-        }
-    }).mount();
-
-
+    loadSlider();
     loadParticles();
 });
+
 
 function loadParticles() {
     particlesJS("particles-js", {
@@ -73,21 +54,21 @@ function loadParticles() {
         },
         "retina_detect": true
     });
-    let count_particles, stats, update;
-    stats = new Stats;
-    stats.setMode(0);
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-    document.body.appendChild(stats.domElement);
-    count_particles = document.querySelector('.js-count-particles');
-    update = function () {
-        stats.begin();
-        stats.end();
-        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-        }
-        requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
+    // let count_particles, stats, update;
+    // stats = new Stats;
+    // stats.setMode(0);
+    // stats.domElement.style.position = 'absolute';
+    // stats.domElement.style.left = '0px';
+    // stats.domElement.style.top = '0px';
+    // document.body.appendChild(stats.domElement);
+    // count_particles = document.querySelector('.js-count-particles');
+    // update = function () {
+    //     stats.begin();
+    //     stats.end();
+    //     if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+    //         count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    //     }
+    //     requestAnimationFrame(update);
+    // };
+    // requestAnimationFrame(update);
 }

@@ -32,7 +32,7 @@ footer {
     text-align: right;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
     header {
         left: 20px;
         right: 20px;
@@ -65,12 +65,6 @@ footer a:hover , header a:hover {
     line-height: 1rem;
     margin-bottom: 10px;
 }
-
-canvas {
-    display: block;
-    vertical-align: bottom;
-}
-
 
 .dot_separator::after{
     content: '•';

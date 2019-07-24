@@ -1,6 +1,6 @@
 .glide {
     color: black;
-    position: absolute;
+    position: fixed;
     top: 100px;
     bottom: 5px;
     left: 20px;
@@ -13,13 +13,21 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 20px;
 }
 
 .glide__slide > div {
     opacity: 0.75;
+    border-radius: 20px;
     background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 50%);
     height: calc(100vh - 180px);
     position: relative;
+}
+
+.glide__slide--active > div {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    box-shadow: 0 0 100px 0 rgba(128, 128, 128, 0.5);
 }
 
 .slide_info {
@@ -55,6 +63,7 @@
     flex-wrap: wrap;
     width: 100%; /* set the container width*/
     overflow: visible;
+    margin: 0;
 }
 .slide_info.right dl {
     flex-direction: row-reverse;
@@ -67,10 +76,10 @@
     font-weight: 600;
     color: rgba(255,255,255,0.5);
     text-transform: uppercase;
-    text-align: right;
+    text-align: left;
 }
 .slide_info.right dt {
-    /*text-align: right;*/
+    text-align: right;
 }
 
 .slide_info dd {
@@ -85,24 +94,33 @@
     text-align: right;
 }
 
+@media screen and (max-width: 550px) {
+    .glide {
+        bottom: 60px;
+    }
 
-.glide__slide--active > div {
-    opacity: 1;
-    transition: opacity 0.5s ease;
+
+    .glide__slide > div {
+        height: calc(100vh - 230px);
+    }
+
 }
 
-@media screen and (max-width: 500px) {
-    .glide {
-        bottom: 50px;
-    }
+@media screen and (max-width: 800px) {
 
     .glide__arrow {
         top: auto !important;
     }
 
-    .glide__slide > div {
-        height: calc(100vh - 220px);
-    }
 
+    .slide_details {
+        display: none;
+    }
 }
 
+@media screen and (max-width: 1200px) {
+
+    .slide_info {
+        width: 100%;
+    }
+}
