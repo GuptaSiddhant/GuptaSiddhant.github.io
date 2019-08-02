@@ -1,7 +1,6 @@
 /* GS Portfolio 2019 */
 
 body {
-    /*overflow: hidden;*/
     height: 100vh;
     width: calc(100vw - 2 * var(--margin-desktop));
     margin: 0;
@@ -22,17 +21,12 @@ header {
     left: 0;
     right: 0;
     background-color: var(--color-inverse-translucent);
-    height: 50px;
+    height: 80px;
     width: calc(100vw - 2 * var(--margin-desktop));
     z-index: 100;
-    padding: 10px var(--margin-desktop);
+    padding: 10px calc(var(--margin-desktop) + 10px);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-}
-
-
-header .mobile-nav {
-    display: none;
 }
 
 header .mobile-nav i {
@@ -46,25 +40,30 @@ header .mobile-nav i {
     transform: translateY(-50%);
 }
 
-/* FILTER NAV*/
-
 nav {
-    padding: 10px;
+    margin-top: 0.5rem;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+nav .filter-clip {
+    display: inline-block;
 }
 
 
 /* LIFLINE */
 
 main {
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding-top: 120px;
+    padding-bottom: 20px;
     margin-left: 10px;
-    border-left: 1px solid var(--color-accent);
-
+    border-left: 1px solid var(--color-secondary);
+    position: relative;
 }
 
 article {
-    max-width: 650px;
+    max-width: 600px;
     margin-bottom: 40px;
     margin-left: 30px;
     position: relative;
@@ -90,7 +89,6 @@ article {
 .article-date {
     grid-area: Adate;
     margin-top: 0.5rem;
-
 }
 
 .article-title {
@@ -113,9 +111,9 @@ article {
     grid-area: Adesc;
     margin-top: 0.25rem;
 }
-
 .article-actions, .article-attachments {
     margin-top: 0.25rem;
+    text-transform: capitalize;
 }
 
 .image-card {
@@ -143,12 +141,6 @@ article {
     z-index: 50;
 }
 
-/* PREVIEW */
-
-aside {
-    padding: 10px;
-}
-
 /* MOBILE */
 @media only screen and (max-width: 800px) {
     body {
@@ -162,20 +154,6 @@ aside {
     }
 }
 
-@media only screen and (max-width: 550px) {
-    header nav {
-        display: none;
-    }
-
-    header .mobile-nav {
-        display: block;
-    }
-
-    aside {
-        display: none;
-    }
-}
-
 @media only screen and (max-width: 350px) {
     header div {
         width: calc(100vw - 2 * var(--margin-mobile));
@@ -184,17 +162,5 @@ aside {
 
     header .mobile-nav {
         display: none;
-    }
-}
-
-@media only screen and (min-width: 1500px) {
-    body {
-        padding: 10px var(--margin-desktop-wide);
-        width: calc(100vw - 2 * var(--margin-desktop-wide));
-    }
-
-    header {
-        width: calc(100vw - 2 * var(--margin-desktop-wide));
-        padding: 10px var(--margin-desktop-wide);
     }
 }

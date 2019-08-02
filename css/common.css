@@ -1,14 +1,13 @@
 /* Variables */
 :root {
     /* Layout */
-    --margin-mobile: 10px;
-    --margin-desktop: 100px;
-    --margin-desktop-wide: 200px;
+    --margin-mobile: 15px;
+    --margin-desktop: calc((100vw - 700px)/2);
 
     /* Colors */
     --color-accent: #27CA03;
     --color-primary: #1a1a1a;
-    --color-secondary: #666666;
+    --color-secondary: #4d4d4d;
     --color-inverse: #ffffff;
     --color-inverse-translucent: rgba(255, 255, 255, 0.9);
     --color-link: #0a3302;
@@ -49,6 +48,7 @@ h3 {
 h4 {
     font-weight: 500;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: var(--color-secondary);
 }
 
@@ -84,7 +84,7 @@ a:hover {
 }
 
 .button-secondary i{
-    margin-right: 0.25rem;
+    margin-right: 0.5rem;
 }
 
 .button-secondary {
@@ -92,6 +92,7 @@ a:hover {
     background-color: transparent;
     border-radius: 0.25rem;
     margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
     padding: 5px 10px;
     cursor: pointer;
 

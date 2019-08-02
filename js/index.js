@@ -1,47 +1,45 @@
 $(document).ready(function () {
 
     let filters = [];
-    let allTags = [];
+    let allTags = ['about', 'project', 'experience', 'education', 'blog'];
 
     buildArticles(filters);
 
     let filterArea = document.getElementById('filter-area');
     filterArea.innerHTML = '';
 
-    articles.forEach((data) => {
-        data.tags.forEach((tag) => {
-            let found = false;
-            allTags.forEach((aTag) => {
-                if (aTag.name === tag) {
-                    aTag.count += 1;
-                    found = true;
-                }
-            });
-            if (!found) {
-                let tagsCounter = {name: tag, count: 1};
-                allTags.push(tagsCounter)
-            }
-        });
-    });
+    // articles.forEach((data) => {
+    //     data.tags.forEach((tag) => {
+    //         let found = false;
+    //         allTags.forEach((aTag) => {
+    //             if (aTag.name === tag) {
+    //                 aTag.count += 1;
+    //                 found = true;
+    //             }
+    //         });
+    //         if (!found) {
+    //             let tagsCounter = {name: tag, count: 1};
+    //             allTags.push(tagsCounter)
+    //         }
+    //     });
+    // });
 
     allTags.forEach((tag) => {
+        let name = tag.charAt(0).toUpperCase() + tag.slice(1);
         let button = document.createElement('a');
         filterArea.appendChild(button);
-        button.className = "button-secondary";
+        button.className = "button-secondary filter-clip";
         let buttonText = document.createElement('span');
         button.appendChild(buttonText);
-        buttonText.innerText = tag.name;
-        buttonText.style.textTransform = "Capitalize";
+        buttonText.innerText = name;
         button.style.marginBottom = "0.5rem";
         button.addEventListener('click', function (e) {
             if (button.classList.contains('active')) {
                 button.classList.remove('active');
-                buttonText.innerText = tag.name;
-                filters = arrayRemove(filters, tag.name);
+                filters = arrayRemove(filters, tag);
             } else {
                 button.classList.add('active');
-                buttonText.innerText = tag.name + ' (' + tag.count.toString() + ')';
-                filters.push(tag.name);
+                filters.push(tag);
             }
             console.log(filters);
             buildArticles(filters);
@@ -75,48 +73,75 @@ function buildArticles(filters) {
             let articleIcon = document.createElement('div');
             article.appendChild(articleIcon);
             articleIcon.className = "article-icon";
-            if (data.color !== '') {
+            if (data.color && data.color !== '') {
                 articleIcon.style.backgroundColor = data.color;
             }
             let iconTag = document.createElement('i');
             articleIcon.appendChild(iconTag);
-            iconTag.className = data.icon;
+            iconTag.className = "fas fa-history";
+            if (data.icon && data.icon !== '') {
+                iconTag.className = data.icon;
+            }
 
             let articleTitle = document.createElement('h2');
             article.appendChild(articleTitle);
             articleTitle.className = "article-title";
             articleTitle.innerText = data.title;
 
+            if (data.subtitle && data.subtitle !== '') {
+                let articleSubTitle = document.createElement('h4');
+                article.appendChild(articleSubTitle);
+                articleSubTitle.className = "article-subtitle";
+                articleSubTitle.innerText = data.subtitle;
+            }
+
             if (!data.static) {
-                if (data.subtitle !== '') {
-                    let articleSubTitle = document.createElement('h4');
-                    article.appendChild(articleSubTitle);
-                    articleSubTitle.className = "article-subtitle";
-                    articleSubTitle.innerText = data.subtitle;
-                }
                 let articleTags = document.createElement('h5');
                 article.appendChild(articleTags);
                 articleTags.className = "article-tags";
-                if (data.date !== '') {
+                if (data.date && data.date !== '') {
                     articleTags.innerHTML = data.date;
                     articleTags.appendChild(dot);
                 }
-                data.tags.forEach((tag, index) => {
-                    articleTags.innerHTML += tag;
-                    if (index + 1 !== data.tags.length) {
-                        articleTags.innerHTML += ", ";
-                    }
-                });
+                if (data.tags && data.tags.length !== 0) {
+                    data.tags.forEach((tag, index) => {
+                        articleTags.innerHTML += tag;
+                        if (index + 1 !== data.tags.length) {
+                            articleTags.innerHTML += ", ";
+                        }
+                    });
+                }
             }
 
-            if (data.description !== '') {
+            if (data.description && data.description !== '') {
                 let articleDesc = document.createElement('p');
                 article.appendChild(articleDesc);
                 articleDesc.className = "article-description";
                 articleDesc.innerText = data.description;
             }
 
-            if (data.attachments !== []) {
+            if (data.role && data.role !== '') {
+                let articleRole = document.createElement('div');
+                article.appendChild(articleRole);
+                // articleRole.className = "article-desc2";
+                articleRole.innerHTML = `<b>Role</b>: ` + data.role;
+            }
+
+            if (data.tech && data.tech !== '') {
+                let articleTech = document.createElement('div');
+                article.appendChild(articleTech);
+                // articleTech.className = "article-desc2";
+                articleTech.innerHTML = `<b>Tech</b>: `;
+                data.tech.forEach((tag, index) => {
+                    articleTech.innerHTML += tag;
+                    if (index + 1 !== data.tags.length) {
+                        articleTech.innerHTML += ", ";
+                    }
+                });
+            }
+
+
+            if (data.attachments && data.attachments.length !== 0) {
                 let articleAttachments = document.createElement('div');
                 article.appendChild(articleAttachments);
                 articleAttachments.className = "article-attachments flex wrap";
@@ -146,7 +171,7 @@ function buildArticles(filters) {
                 });
             }
 
-            if (data.actions !== []) {
+            if (data.actions && data.actions.length !== 0) {
                 let articleActions = document.createElement('div');
                 article.appendChild(articleActions);
                 articleActions.className = "article-actions flex wrap";
