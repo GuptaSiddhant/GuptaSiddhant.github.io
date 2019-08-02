@@ -5,6 +5,36 @@ $(document).ready(function () {
 
     buildArticles(filters);
 
+    let socialActionsButtons = document.getElementById('social-actions');
+    socialActionsButtons.className = "article-actions flex wrap";
+    socialActions.forEach((action) => {
+        let button = document.createElement('a');
+        socialActionsButtons.appendChild(button);
+        button.className = "button-secondary";
+        button.href = action.link;
+        button.target = action.target ? action.target : "_blank";
+        button.onmouseover = function () {
+            button.style.backgroundColor = matchColor('');
+            button.style.border = "1px solid " + matchColor('');
+            button.style.color = "#ffffff";
+        };
+        button.onmouseout = function () {
+            button.style.border = "1px solid #000000";
+            button.style.backgroundColor = "transparent";
+            button.style.color = "#000000";
+        };
+        let buttonIcon = document.createElement('i');
+        button.appendChild(buttonIcon);
+        buttonIcon.className = "fas fa-external-link-alt";
+        if(action.icon && action.icon !== '') {
+            buttonIcon.className = action.icon;
+        }
+        let buttonText = document.createElement('span');
+        button.appendChild(buttonText);
+        buttonText.innerText = action.name;
+    });
+
+
     let filterArea = document.getElementById('filter-area');
     filterArea.innerHTML = '';
 
@@ -27,7 +57,7 @@ $(document).ready(function () {
 
     allTags.forEach((tag) => {
         let name = tag.charAt(0).toUpperCase() + tag.slice(1);
-        let button = document.createElement('a');
+        let button = document.createElement('div');
         filterArea.appendChild(button);
         button.className = "button-secondary filter-clip";
         let buttonText = document.createElement('span');

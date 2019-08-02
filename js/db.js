@@ -8,6 +8,24 @@ let typeColors = {
     fallback: "#222222"
 };
 
+let socialActions = [{
+    name: "LinkedIn",
+    icon: "fab fa-linkedin",
+    link: "https://www.linkedin.com/in/guptasiddhant9/",
+}, {
+    name: "GitHub",
+    icon: "fab fa-github",
+    link: "https://www.github.com/guptasiddhant/",
+}, {
+    name: "Mail",
+    icon: "fas fa-envelope",
+    link: "mailto:me@guptasiddhant.com",
+}, {
+    name: "Resume (PDF)",
+    icon: "fas fa-file-download",
+    link: "assets/Siddhant_Gupta_Resume.pdf",
+}];
+
 let articles = [
     {
         title: "UX Designer • Full Stack Developer",
@@ -20,22 +38,20 @@ let articles = [
             name: "Siddhant Gupta",
             image: "images/siddhantgupta.jpg",
         }],
+        // actions: []
+    },
+    {
+        title: "UX Designer at FA Solutions Oy",
+        icon: "fas fa-briefcase",
+        subtitle: "Helsinki, Finland",
+        date: "January 2019 - Present",
+        tags: ["experience"],
+        description: "Designing the product features.\n" +
+            "Supporting UI/UX development of core product and projects team \n" +
+            "Generating graphic design for marketing team",
         actions: [{
-            name: "LinkedIn",
-            icon: "fab fa-linkedin",
-            link: "https://www.linkedin.com/in/guptasiddhant9/",
-        }, {
-            name: "GitHub",
-            icon: "fab fa-github",
-            link: "https://www.github.com/guptasiddhant/",
-        }, {
-            name: "Mail",
-            icon: "fas fa-envelope",
-            link: "mailto:me@guptasiddhant.com",
-        }, {
-            name: "Resume (PDF)",
-            icon: "fas fa-file-download",
-            link: "assets/Siddhant_Gupta_Resume.pdf",
+            name: "FA Solutions",
+            link: "https://fasolutions.com",
         }]
     },
     {
@@ -75,20 +91,6 @@ let articles = [
         }]
     },
     {
-        title: "UX Designer at FA Solutions Oy",
-        icon: "fas fa-briefcase",
-        subtitle: "Helsinki, Finland",
-        date: "January 2019 - Present",
-        tags: ["experience"],
-        description: "Designing the product features.\n" +
-            "Supporting UI/UX development of core product and projects team \n" +
-            "Generating graphic design for marketing team",
-        actions: [{
-            name: "FA Solutions",
-            link: "https://fasolutions.com",
-        }]
-    },
-    {
         title: "The Passport - Concept",
         icon: "far fa-lightbulb",
         date: "February 2017",
@@ -97,10 +99,10 @@ let articles = [
         attachments: [{
             name: "Passport Concept",
             image: "images/passport1.jpg",
-        },{
+        }, {
             name: "Passport Concept",
             image: "images/passport2.jpg",
-        },{
+        }, {
             name: "Passport Concept",
             image: "images/passport3.jpg",
         }
@@ -141,22 +143,22 @@ let articles = [
         date: "September 1994",
         tags: ["about"],
         description: "This is the end of the line. Maybe you should drop me a mail.",
-        actions: [{
-            name: "LinkedIn",
-            icon: "fab fa-linkedin",
-            link: "https://www.linkedin.com/in/guptasiddhant9/",
-        }, {
-            name: "GitHub",
-            icon: "fab fa-github",
-            link: "https://www.github.com/guptasiddhant/",
-        }, {
-            name: "Mail",
-            icon: "fas fa-envelope",
-            link: "mailto:me@guptasiddhant.com",
-        }, {
-            name: "Resume (PDF)",
-            icon: "fas fa-file-download",
-            link: "assets/Siddhant_Gupta_Resume.pdf",
-        }]
+        // actions: [{
+        //     name: "LinkedIn",
+        //     icon: "fab fa-linkedin",
+        //     link: "https://www.linkedin.com/in/guptasiddhant9/",
+        // }, {
+        //     name: "GitHub",
+        //     icon: "fab fa-github",
+        //     link: "https://www.github.com/guptasiddhant/",
+        // }, {
+        //     name: "Mail",
+        //     icon: "fas fa-envelope",
+        //     link: "mailto:me@guptasiddhant.com",
+        // }, {
+        //     name: "Resume (PDF)",
+        //     icon: "fas fa-file-download",
+        //     link: "assets/Siddhant_Gupta_Resume.pdf",
+        // }]
     }
 ];

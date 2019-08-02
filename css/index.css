@@ -41,15 +41,19 @@ header .mobile-nav i {
 }
 
 nav {
+    position: fixed;
+    top:100px;
     margin-top: 0.5rem;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    white-space: nowrap;
+    margin-left: -150px;
+    /*overflow-y: hidden;*/
+    /*overflow-x: scroll;*/
+    /*white-space: nowrap;*/
+    text-align: right;
 }
 
-nav .filter-clip {
-    display: inline-block;
-}
+/*nav .filter-clip {*/
+    /*display: inline-block;*/
+/*}*/
 
 
 /* LIFLINE */
