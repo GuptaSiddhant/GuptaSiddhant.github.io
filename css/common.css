@@ -9,7 +9,7 @@
     --color-primary: #1a1a1a;
     --color-secondary: #4d4d4d;
     --color-inverse: #ffffff;
-    --color-inverse-translucent: rgba(255, 255, 255, 0.9);
+    --color-inverse-translucent: rgba(255, 255, 255, 0.95);
     --color-link: #0a3302;
 }
 
@@ -100,8 +100,8 @@ a:hover {
 }
 
 .button-secondary:hover, .button-secondary.active {
-    border: 1px solid var(--color-accent);
-    background-color: var(--color-accent);
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
     border-radius: 0.25rem;
     padding: 5px 10px;
     color: var(--color-inverse);

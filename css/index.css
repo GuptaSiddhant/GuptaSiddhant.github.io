@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0 var(--margin-desktop);
     background-color: var(--color-inverse);
-    background: radial-gradient(rgba(0, 0, 0, 0.1), var(--color-inverse));
+    background: radial-gradient(rgba(0, 0, 0, 0.05), var(--color-inverse));
 
     font-family: 'Poppins', "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
@@ -93,8 +93,8 @@ article {
 
 .article-title {
     grid-area: Atitle;
-    height: 40px;
-    line-height: 40px;
+    padding-top: 5px;
+    line-height: 30px;
 }
 
 .article-subtitle {
@@ -111,9 +111,13 @@ article {
     grid-area: Adesc;
     margin-top: 0.25rem;
 }
-.article-actions, .article-attachments {
+.article-actions{
     margin-top: 0.25rem;
     text-transform: capitalize;
+}
+
+.article-attachments {
+    margin-top: 0.25rem;
 }
 
 .image-card {
@@ -138,7 +142,8 @@ article {
     border-radius: 0.5rem;
     box-shadow: 0 0 20px 0 var(--color-secondary);
     object-fit: cover;
-    z-index: 50;
+    background-color: var(--color-inverse);
+    z-index: 80;
 }
 
 /* MOBILE */

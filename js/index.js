@@ -8,6 +8,7 @@ $(document).ready(function () {
     let filterArea = document.getElementById('filter-area');
     filterArea.innerHTML = '';
 
+    // Get All Tags
     // articles.forEach((data) => {
     //     data.tags.forEach((tag) => {
     //         let found = false;
@@ -45,14 +46,26 @@ $(document).ready(function () {
             buildArticles(filters);
         });
     });
-
-
 });
 
 function arrayRemove(arr, value) {
     return arr.filter(function (ele) {
         return ele !== value;
     });
+}
+
+function matchColor(tags) {
+    if (tags.includes('about')) {
+        return typeColors.about;
+    } else if (tags.includes('project')) {
+        return typeColors.project;
+    } else if (tags.includes('experience')) {
+        return typeColors.experience;
+    } else if (tags.includes('education')) {
+        return typeColors.education;
+    } else if (tags.includes('blog')) {
+        return typeColors.blog;
+    } else return typeColors.fallback;
 }
 
 let dot = document.createElement('span');
@@ -73,9 +86,7 @@ function buildArticles(filters) {
             let articleIcon = document.createElement('div');
             article.appendChild(articleIcon);
             articleIcon.className = "article-icon";
-            if (data.color && data.color !== '') {
-                articleIcon.style.backgroundColor = data.color;
-            }
+            articleIcon.style.backgroundColor = matchColor(data.tags);
             let iconTag = document.createElement('i');
             articleIcon.appendChild(iconTag);
             iconTag.className = "fas fa-history";
@@ -140,7 +151,6 @@ function buildArticles(filters) {
                 });
             }
 
-
             if (data.attachments && data.attachments.length !== 0) {
                 let articleAttachments = document.createElement('div');
                 article.appendChild(articleAttachments);
@@ -149,7 +159,9 @@ function buildArticles(filters) {
                     let imageCard = document.createElement('a');
                     articleAttachments.appendChild(imageCard);
                     imageCard.className = "image-card";
-                    if (attachment.link !== '') {
+                    imageCard.href = attachment.image;
+                    imageCard.target = '_blank';
+                    if (attachment.link && attachment.link !== '') {
                         imageCard.href = attachment.link;
                     }
                     let image1 = document.createElement('img');
@@ -181,9 +193,20 @@ function buildArticles(filters) {
                     button.className = "button-secondary";
                     button.href = action.link;
                     button.target = action.target ? action.target : "_blank";
+                    button.onmouseover = function () {
+                        button.style.backgroundColor = matchColor(data.tags);
+                        button.style.border = "1px solid " + matchColor(data.tags);
+                    };
+                    button.onmouseout = function () {
+                        button.style.border = "1px solid #000000";
+                        button.style.backgroundColor = "transparent";
+                    };
                     let buttonIcon = document.createElement('i');
                     button.appendChild(buttonIcon);
-                    buttonIcon.className = action.icon;
+                    buttonIcon.className = "fas fa-external-link-alt";
+                    if(action.icon && action.icon !== '') {
+                        buttonIcon.className = action.icon;
+                    }
                     let buttonText = document.createElement('span');
                     button.appendChild(buttonText);
                     buttonText.innerText = action.name;
