@@ -1,0 +1,130 @@
+/* Variables */
+:root {
+    /* Layout */
+    --margin-mobile: 10px;
+    --margin-desktop: 100px;
+    --margin-desktop-wide: 200px;
+
+    /* Colors */
+    --color-accent: #27CA03;
+    --color-primary: #1a1a1a;
+    --color-secondary: #666666;
+    --color-inverse: #ffffff;
+    --color-inverse-translucent: rgba(255, 255, 255, 0.9);
+    --color-link: #0a3302;
+}
+
+h1, h2 {
+    margin: 0;
+    font-family: "Kameron", serif;
+    font-weight: bold;
+    color: var(--color-primary);;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 2rem;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: var(--color-link);
+}
+
+h3, h4, h5, h6, p {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+h3 {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+h4 {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+}
+
+h5 {
+    font-weight: 400;
+    text-transform: capitalize;
+    color: var(--color-primary);
+}
+
+h6 {
+    font-weight: 400;
+    text-transform: capitalize;
+    color: var(--color-secondary);
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    color: var(--color-secondary);
+
+}
+
+a {
+    color: var(--color-link);
+    text-decoration: none;
+
+    transition: color 0.25s ease;
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+.button-secondary i{
+    margin-right: 0.25rem;
+}
+
+.button-secondary {
+    border: 1px solid var(--color-link);
+    background-color: transparent;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.button-secondary:hover, .button-secondary.active {
+    border: 1px solid var(--color-accent);
+    background-color: var(--color-accent);
+    border-radius: 0.25rem;
+    padding: 5px 10px;
+    color: var(--color-inverse);
+}
+
+
+
+.dot::after {
+    content: ' • ';
+    color: var(--color-accent);
+}
+
+.hidden {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
