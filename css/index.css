@@ -266,7 +266,7 @@ article {
     margin-right: 0.5rem;
 }
 
-.image-card > :nth-child(2) {
+.image-card > :nth-child(2){
     position: absolute;
     display: none;
     left: 105px;
@@ -278,6 +278,15 @@ article {
     object-fit: cover;
     background-color: var(--color-inverse);
     z-index: 80;
+}
+.image-card > :nth-child(3) {
+    position: absolute;
+    display: none ;
+    padding: 10px;
+    left: -99999px;
+    top: -150px;
+    z-index: 81;
+    width: 400px;
 }
 
 /* MOBILE */
@@ -322,6 +331,22 @@ article {
         object-fit: cover;
         background-color: var(--color-inverse);
         z-index: 80;
+    }
+
+    .image-card > :nth-child(3) {
+        position: fixed;
+        display: none;
+        padding: 10px;
+        left: 55px;
+        top: calc(var(--mouse-y) + 50px);
+        z-index: 81;
+        width: 200px;
+        font-size: 1.5rem;
+        text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
     }
 }
 

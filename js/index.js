@@ -316,10 +316,17 @@ function buildArticles() {
                     image2.title = attachment.name;
                     image1.onmouseover = function () {
                         image2.style.display = "block";
+                        warningText.style.display = "block";
                     };
-                    image1.onmouseout = function () {
+                    image1.onmouseout = hideImage;
+                    function hideImage () {
                         image2.style.display = "none";
-                    };
+                        warningText.style.display = "none";
+                    }
+                    let warningText = document.createElement('i');
+                    imageCard.appendChild(warningText);
+                    warningText.className = "far fa-times-circle";
+                    warningText.style.display = 'none';
                 });
             }
 
