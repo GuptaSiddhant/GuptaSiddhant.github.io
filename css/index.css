@@ -272,7 +272,7 @@ article {
 }
 
 /* MOBILE */
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 850px) {
     body {
         padding: 10px var(--margin-mobile);
         width: calc(100vw - 2 * var(--margin-mobile));
