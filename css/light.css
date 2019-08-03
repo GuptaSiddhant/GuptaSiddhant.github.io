@@ -1,8 +1,5 @@
 /* Variables */
 :root {
-    /* Layout */
-    --margin-mobile: 15px;
-    --margin-desktop: calc((100vw - 650px) / 2);
     /* Colors */
     --color-primary: #1a1a1a;
     --color-primary-translucent: rgba(0, 0, 0, 0.05);

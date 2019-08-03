@@ -1,4 +1,13 @@
 /* GS Portfolio 2019 */
+:root {
+    /* Layout */
+    --margin-mobile: 15px;
+    --margin-desktop: calc((100vw - 650px) / 2);
+    --mouse-x: 0;
+    --mouse-y: 0;
+    --mouse-xp: 0;
+    --mouse-yp: 0;
+}
 
 body {
     height: 100vh;
@@ -135,7 +144,6 @@ a:hover {
 }
 
 
-
 /* HEADER */
 
 header {
@@ -236,7 +244,8 @@ article {
     grid-area: Adesc;
     margin-top: 0.25rem;
 }
-.article-actions{
+
+.article-actions {
     margin-top: 0.25rem;
     text-transform: capitalize;
 }
@@ -280,15 +289,17 @@ article {
 
     header {
         width: calc(100vw - 2 * var(--margin-mobile));
-        padding: 10px calc(var(--margin-mobile) );
+        padding: 10px calc(var(--margin-mobile));
         height: 80px;
         display: block;
     }
+
     header div, header h1 {
         width: 100%;
         text-align: center;
         justify-content: center;
     }
+
     header a {
         margin: 0 4px;
     }
@@ -296,7 +307,24 @@ article {
     main {
         padding-top: 120px;
     }
+
+    .image-card > :nth-child(2) {
+        position: fixed;
+        display: none;
+        left: 55px;
+        top: calc(var(--mouse-y) + 50px);
+        width: 80vw;
+        height: 80vw;
+        max-width: 400px;
+        max-height: 400px;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 20px 0 var(--color-secondary);
+        object-fit: cover;
+        background-color: var(--color-inverse);
+        z-index: 80;
+    }
 }
+
 
 @media only screen and (max-width: 350px) {
 
@@ -304,6 +332,7 @@ article {
         padding: 10px 0;
         width: calc(100vw)
     }
+
     header div {
         /*width: calc(100vw);*/
         text-align: center;
@@ -323,49 +352,81 @@ article {
     margin-left: -150px;
     z-index: 101;
 }
+
 .onoffswitch {
-    position: relative; width: 80px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    position: relative;
+    width: 80px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
+
 .onoffswitch-checkbox {
     display: none;
 }
+
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #E3E3E3; border-radius: 36px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #E3E3E3;
+    border-radius: 36px;
 }
+
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block;
+    width: 200%;
+    margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
+
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 25px; padding: 0; line-height: 25px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    display: block;
+    float: left;
+    width: 50%;
+    height: 25px;
+    padding: 0;
+    line-height: 25px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
     box-sizing: border-box;
 }
+
 .onoffswitch-inner:before {
     content: "Dark";
     padding-left: 10px;
-    background-color: #2C3652; color: #FFFFFF;
+    background-color: #2C3652;
+    color: #FFFFFF;
 }
+
 .onoffswitch-inner:after {
     content: "Light";
     padding-right: 10px;
-    background-color: #EDFEFF; color: #000000;
+    background-color: #EDFEFF;
+    color: #000000;
     text-align: right;
 }
+
 .onoffswitch-switch {
-    display: block; width: 25px; margin: 0px;
+    display: block;
+    width: 25px;
+    margin: 0px;
     background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     right: 51px;
-    border: 2px solid #E3E3E3; border-radius: 36px;
+    border: 2px solid #E3E3E3;
+    border-radius: 36px;
     transition: all 0.3s ease-in 0s;
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0;
 }

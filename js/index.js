@@ -6,6 +6,20 @@ document.addEventListener("DOMContentLoaded", initiate);
 
 function initiate() {
 
+    const root = document.documentElement;
+
+    document.addEventListener('mousemove', evt => {
+        let x = evt.clientX;
+        let y = evt.clientY;
+
+        root.style.setProperty('--mouse-x', x + 'px');
+        root.style.setProperty('--mouse-y', y + 'px');
+        root.style.setProperty('--mouse-xp', x / innerWidth);
+        root.style.setProperty('--mouse-yp', y / innerHeight);
+
+        console.log(root.style.getPropertyValue('--mouse-x') + '-' + root.style.getPropertyValue('--mouse-y'));
+    });
+
     window.addEventListener('popstate', initiate);
     let hash = window.location.hash;
     hash = decodeURIComponent(hash);
