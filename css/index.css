@@ -21,28 +21,26 @@ header {
     left: 0;
     right: 0;
     background-color: var(--color-inverse-translucent);
-    height: 80px;
+    height: 36px;
     width: calc(100vw - 2 * var(--margin-desktop));
     z-index: 100;
-    padding: 10px calc(var(--margin-desktop) + 10px);
+    padding: 15px calc(var(--margin-desktop) + 40px);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
 
-header .mobile-nav i {
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-    cursor: pointer;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+header #social-actions {
+    margin: 0;
+}
+
+header #social-actions a {
+    margin-bottom: 0;
 }
 
 nav {
     position: fixed;
-    top:100px;
+    top: calc(50vh);
+    transform: translateY(-50%);
     margin-top: 0.5rem;
     margin-left: -150px;
     /*overflow-y: hidden;*/
@@ -51,19 +49,23 @@ nav {
     text-align: right;
 }
 
-/*nav .filter-clip {*/
-    /*display: inline-block;*/
-/*}*/
+nav h3 {
+    margin-bottom: 0.5rem;
+}
 
+.filter-clip {
+    margin-right: 0;
+}
 
-/* LIFLINE */
+/* TIMELINE */
 
 main {
-    padding-top: 120px;
+    padding-top: calc(50vh - 150px);
     padding-bottom: 20px;
     margin-left: 10px;
     border-left: 1px solid var(--color-secondary);
     position: relative;
+    height: auto;
 }
 
 article {
@@ -159,14 +161,27 @@ article {
 
     header {
         width: calc(100vw - 2 * var(--margin-mobile));
-        padding: 10px var(--margin-mobile);
+        padding: 10px calc(var(--margin-mobile) );
+        height: 80px;
+        display: block;
+    }
+    header div {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
     }
 }
 
 @media only screen and (max-width: 350px) {
+
+    header {
+        padding: 10px 0;
+        width: calc(100vw)
+    }
     header div {
-        width: calc(100vw - 2 * var(--margin-mobile));
+        /*width: calc(100vw);*/
         text-align: center;
+        justify-content: center;
     }
 
     header .mobile-nav {

@@ -1,42 +1,19 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function() {
 
     let filters = [];
     let allTags = ['about', 'project', 'experience', 'education', 'blog'];
 
     buildArticles(filters);
+    buildFilterArea(allTags, filters);
+    buildSocialActions();
+});
 
-    let socialActionsButtons = document.getElementById('social-actions');
-    socialActionsButtons.className = "article-actions flex wrap";
-    socialActions.forEach((action) => {
-        let button = document.createElement('a');
-        socialActionsButtons.appendChild(button);
-        button.className = "button-secondary";
-        button.href = action.link;
-        button.target = action.target ? action.target : "_blank";
-        button.onmouseover = function () {
-            button.style.backgroundColor = matchColor('');
-            button.style.border = "1px solid " + matchColor('');
-            button.style.color = "#ffffff";
-        };
-        button.onmouseout = function () {
-            button.style.border = "1px solid #000000";
-            button.style.backgroundColor = "transparent";
-            button.style.color = "#000000";
-        };
-        let buttonIcon = document.createElement('i');
-        button.appendChild(buttonIcon);
-        buttonIcon.className = "fas fa-external-link-alt";
-        if(action.icon && action.icon !== '') {
-            buttonIcon.className = action.icon;
-        }
-        let buttonText = document.createElement('span');
-        button.appendChild(buttonText);
-        buttonText.innerText = action.name;
-    });
-
+function buildFilterArea(allTags, filters) {
 
     let filterArea = document.getElementById('filter-area');
-    filterArea.innerHTML = '';
+    filterArea.innerHTML = `<h3>FILTERS</h3>`;
+
+    let tagButtons = [];
 
     // Get All Tags
     // articles.forEach((data) => {
@@ -60,6 +37,7 @@ $(document).ready(function () {
         let button = document.createElement('div');
         filterArea.appendChild(button);
         button.className = "button-secondary filter-clip";
+        tagButtons.push(button);
         let buttonText = document.createElement('span');
         button.appendChild(buttonText);
         buttonText.innerText = name;
@@ -71,35 +49,28 @@ $(document).ready(function () {
             } else {
                 button.classList.add('active');
                 filters.push(tag);
+                clearButton.classList.remove('hidden');
             }
             console.log(filters);
             buildArticles(filters);
         });
     });
-});
 
-function arrayRemove(arr, value) {
-    return arr.filter(function (ele) {
-        return ele !== value;
+    let clearButton = document.createElement('div');
+    filterArea.appendChild(clearButton);
+    clearButton.classList.add('hidden');
+    clearButton.style.opacity = '0.7';
+    clearButton.style.cursor = 'pointer';
+    clearButton.innerText = 'Clear all';
+    clearButton.addEventListener('click', function (e) {
+        tagButtons.forEach((button) => {
+            button.classList.remove('active');
+        });
+        filters = [];
+        clearButton.classList.add('hidden');
+        buildArticles(filters);
     });
 }
-
-function matchColor(tags) {
-    if (tags.includes('about')) {
-        return typeColors.about;
-    } else if (tags.includes('project')) {
-        return typeColors.project;
-    } else if (tags.includes('experience')) {
-        return typeColors.experience;
-    } else if (tags.includes('education')) {
-        return typeColors.education;
-    } else if (tags.includes('blog')) {
-        return typeColors.blog;
-    } else return typeColors.fallback;
-}
-
-let dot = document.createElement('span');
-dot.className = "dot";
 
 function buildArticles(filters) {
     let lifeline = document.getElementById('lifeline');
@@ -143,6 +114,7 @@ function buildArticles(filters) {
                 if (data.date && data.date !== '') {
                     articleTags.innerHTML = data.date;
                     articleTags.appendChild(dot);
+
                 }
                 if (data.tags && data.tags.length !== 0) {
                     data.tags.forEach((tag, index) => {
@@ -172,10 +144,10 @@ function buildArticles(filters) {
                 let articleTech = document.createElement('div');
                 article.appendChild(articleTech);
                 // articleTech.className = "article-desc2";
-                articleTech.innerHTML = `<b>Tech</b>: `;
+                articleTech.innerHTML = `<b>Tools</b>: `;
                 data.tech.forEach((tag, index) => {
                     articleTech.innerHTML += tag;
-                    if (index + 1 !== data.tags.length) {
+                    if (index + 1 !== data.tech.length) {
                         articleTech.innerHTML += ", ";
                     }
                 });
@@ -245,3 +217,61 @@ function buildArticles(filters) {
         }
     });
 }
+
+
+function buildSocialActions() {
+    let socialActionsButtons = document.getElementById('social-actions');
+    socialActionsButtons.className = "article-actions flex wrap";
+    socialActions.forEach((action) => {
+        let button = document.createElement('a');
+        socialActionsButtons.appendChild(button);
+        button.className = "button-secondary";
+        button.href = action.link;
+        button.target = action.target ? action.target : "_blank";
+        button.onmouseover = function () {
+            button.style.backgroundColor = matchColor('');
+            button.style.border = "1px solid " + matchColor('');
+            button.style.color = "#ffffff";
+        };
+        button.onmouseout = function () {
+            button.style.border = "1px solid #000000";
+            button.style.backgroundColor = "transparent";
+            button.style.color = "#000000";
+        };
+        let buttonIcon = document.createElement('i');
+        button.appendChild(buttonIcon);
+        buttonIcon.className = "fas fa-external-link-alt";
+        if(action.icon && action.icon !== '') {
+            buttonIcon.className = action.icon;
+        }
+        let buttonText = document.createElement('span');
+        button.appendChild(buttonText);
+        buttonText.innerText = action.name;
+    });
+}
+
+// Supporting funtions
+
+
+function arrayRemove(arr, value) {
+    return arr.filter(function (ele) {
+        return ele !== value;
+    });
+}
+
+function matchColor(tags) {
+    if (tags.includes('about')) {
+        return typeColors.about;
+    } else if (tags.includes('project')) {
+        return typeColors.project;
+    } else if (tags.includes('experience')) {
+        return typeColors.experience;
+    } else if (tags.includes('education')) {
+        return typeColors.education;
+    } else if (tags.includes('blog')) {
+        return typeColors.blog;
+    } else return typeColors.fallback;
+}
+
+let dot = document.createElement('span');
+dot.className = "dot";

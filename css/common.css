@@ -10,7 +10,7 @@
     --color-secondary: #4d4d4d;
     --color-inverse: #ffffff;
     --color-inverse-translucent: rgba(255, 255, 255, 0.95);
-    --color-link: #0a3302;
+    --color-link: #1a1a1a;
 }
 
 h1, h2 {
@@ -22,21 +22,22 @@ h1, h2 {
 
 h1 {
     font-size: 2rem;
-    line-height: 2rem;
+    line-height: 40px;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 h2 {
     font-size: 1.5rem;
     line-height: 1.5rem;
-    color: var(--color-link);
+    color: var(--color-primary);
 }
 
 h3, h4, h5, h6, p {
     margin: 0;
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
-    line-height: 1rem;
+    line-height: 1.2rem;
 }
 
 h3 {
@@ -99,11 +100,15 @@ a:hover {
     transition: color 0.25s ease, background-color 0.25s ease;
 }
 
-.button-secondary:hover, .button-secondary.active {
+.button-secondary:hover {
+    border: 1px solid var(--color-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-inverse);
+}
+
+.button-secondary.active {
     border: 1px solid var(--color-primary);
     background-color: var(--color-primary);
-    border-radius: 0.25rem;
-    padding: 5px 10px;
     color: var(--color-inverse);
 }
 
@@ -111,7 +116,7 @@ a:hover {
 
 .dot::after {
     content: ' • ';
-    color: var(--color-accent);
+    color: var(--color-secondary);
 }
 
 .hidden {

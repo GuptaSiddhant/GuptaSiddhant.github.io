@@ -8,7 +8,8 @@ let typeColors = {
     fallback: "#222222"
 };
 
-let socialActions = [{
+let socialActions = [
+    {
     name: "LinkedIn",
     icon: "fab fa-linkedin",
     link: "https://www.linkedin.com/in/guptasiddhant9/",
@@ -20,26 +21,45 @@ let socialActions = [{
     name: "Mail",
     icon: "fas fa-envelope",
     link: "mailto:me@guptasiddhant.com",
-}, {
-    name: "Resume (PDF)",
-    icon: "fas fa-file-download",
-    link: "assets/Siddhant_Gupta_Resume.pdf",
-}];
+}
+];
 
 let articles = [
     {
-        title: "UX Designer • Full Stack Developer",
+        title: "Hi, I'm Siddhant Gupta",
         static: true,
         icon: "fas fa-info",
-        subtitle: "About Me",
+        subtitle: "UX Designer • Full-Stack Developer • Entrepreneur",
         tags: ["about"],
         description: "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small thing can make the biggest impact. If I had to describe myself in one word, that’d be stalwart.",
         attachments: [{
             name: "Siddhant Gupta",
             image: "images/siddhantgupta.jpg",
         }],
-        // actions: []
+        actions: [
+            {
+            name: "Resume (PDF)",
+            icon: "fas fa-file-download",
+            link: "assets/Siddhant_Gupta_Resume.pdf",
+        }]
     },
+    // {
+    //     title: "UX Designer • Full Stack Developer",
+    //     static: true,
+    //     icon: "fas fa-info",
+    //     subtitle: "About Me",
+    //     tags: ["about"],
+    //     description: "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small thing can make the biggest impact. If I had to describe myself in one word, that’d be stalwart.",
+    //     attachments: [{
+    //         name: "Siddhant Gupta",
+    //         image: "images/siddhantgupta.jpg",
+    //     }],
+    //     actions: [ {
+    //         name: "Resume (PDF)",
+    //         icon: "fas fa-file-download",
+    //         link: "assets/Siddhant_Gupta_Resume.pdf",
+    //     }]
+    // },
     {
         title: "UX Designer at FA Solutions Oy",
         icon: "fas fa-briefcase",
@@ -79,7 +99,7 @@ let articles = [
         date: "April 2019",
         tags: ["project", "branding", "styling"],
         description: "Business Espoo supports the vitality of businesses by offering the best, continuously developing services in one place.",
-        role: "Designed the Brand Identity and Style Guidelines",
+        role: "Solely designed the Brand Identity and Style Guidelines",
         tech: ["Sketch", "InDesign"],
         attachments: [{
             name: "BE Logo",
@@ -91,11 +111,34 @@ let articles = [
         }]
     },
     {
+        title: "Arcadia - Web Game Store",
+        icon: "fas fa-globe",
+        subtitle: "Aalto University",
+        date: "April 2019",
+        tags: ["project", "back-end", "front-end", 'UI'],
+        description: "Arcadia is an online game store for JavaScript games. Developed as a project for the Web Software Development course CS-C3170 2018-2019 at Aalto University, Finland.",
+        role: "Solely designed the UI and developed the majority the front-end and considerable back-end.",
+        tech: ['Python','Django','JavaScript',"Sketch"],
+        attachments: [{
+            name: "Arcadia Website",
+            image: "images/arcadia.jpg",
+        }],
+        actions: [{
+            name: "Visit Demo",
+            link: "https://arcadiagames.herokuapp.com/",
+        },{
+            name: "GitHub",
+            icon: 'fab fa-github',
+            link: "https://github.com/GuptaSiddhant/arcadia",
+        }]
+    },
+    {
         title: "The Passport - Concept",
         icon: "far fa-lightbulb",
         date: "February 2017",
         tags: ["project", "concept"],
         description: "The elegant All-In-One Identity solution for every Citizen.",
+        tech: ['Sketch'],
         attachments: [{
             name: "Passport Concept",
             image: "images/passport1.jpg",
@@ -130,7 +173,7 @@ let articles = [
         icon: "fas fa-graduation-cap",
         subtitle: "K. R. Mangalam World School, Vikaspuri",
         date: "April 2008 - May 2012",
-        tags: ["education", "school", 'computers, C++'],
+        tags: ["education", "school", 'computers', 'C++'],
         description: "House Captain in the Senior Year. Scholar and Class In-charge throughout.",
         actions: [{
             name: "K. R. Mangalam",
@@ -138,27 +181,30 @@ let articles = [
         }]
     },
     {
-        title: "A baby is born",
+        title: "SyburyOS in C++",
+        icon: "fas fa-code",
+        subtitle: "High School Project",
+        date: "April 2008 - May 2012",
+        tags: ["project", "school", 'C++'],
+        description: "DOS-based Operating System UI bundled with a desktop, text-editor, game and voting software.",
+        tech: ['C++'],
+        actions: [{
+            name: "GitHub",
+            icon: 'fab fa-github',
+            link: "https://github.com/GuptaSiddhant/SyburyOS",
+        }]
+    },
+    {
+        title: "When it all began",
         icon: "fas fa-baby",
         date: "September 1994",
         tags: ["about"],
-        description: "This is the end of the line. Maybe you should drop me a mail.",
-        // actions: [{
-        //     name: "LinkedIn",
-        //     icon: "fab fa-linkedin",
-        //     link: "https://www.linkedin.com/in/guptasiddhant9/",
-        // }, {
-        //     name: "GitHub",
-        //     icon: "fab fa-github",
-        //     link: "https://www.github.com/guptasiddhant/",
-        // }, {
-        //     name: "Mail",
-        //     icon: "fas fa-envelope",
-        //     link: "mailto:me@guptasiddhant.com",
-        // }, {
-        //     name: "Resume (PDF)",
-        //     icon: "fas fa-file-download",
-        //     link: "assets/Siddhant_Gupta_Resume.pdf",
-        // }]
+        description: "This is the end of the line. Maybe we should continue it over mail.",
+        actions: [{
+            name: "Back to Top",
+            icon: 'fas fa-chevron-up',
+            link: "#lifeline",
+            target: "_self"
+        }]
     }
 ];
