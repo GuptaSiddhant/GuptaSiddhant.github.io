@@ -1,14 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
+let darkMode = matchMedia('(prefers-color-scheme: dark)').matches;
+let allTags = ['about', 'project', 'experience', 'education', 'blog'];
+let filters = [];
 
-    let filters = [];
-    let allTags = ['about', 'project', 'experience', 'education', 'blog'];
+document.addEventListener("DOMContentLoaded", initiate);
+
+function initiate() {
+
+    window.addEventListener('popstate', initiate);
+    let hash = window.location.hash;
+    hash = decodeURIComponent(hash);
+    // Router
+    if (hash.includes('#project')) {
+        // let projectID = parseInt(hash.split('/')[1]);
+        filters.push('project');
+    }
+    if (hash.includes('#about')) {
+        filters.push('about');
+    }
+    if (hash.includes('#experience')) {
+        filters.push('experience');
+    }
+    if (hash.includes('#education')) {
+        filters.push('education');
+    }
+    if (hash.includes('#blog')) {
+        filters.push('blog');
+    }
+
+    let query = parseQuery(window.location.search);
+    if (query && query.color) {
+        if (query.color === 'dark') {
+            darkMode = true;
+        } else if (query.color === 'light') {
+            darkMode = false;
+        }
+    }
 
     buildDOMhead();
-    buildDOMbody(filters);
-    buildArticles(filters);
-    buildFilterArea(allTags, filters);
+    buildDOMbody();
     buildSocialActions();
-});
+    buildFilterArea();
+    buildArticles();
+}
+
 
 function buildDOMhead() {
     let title = document.getElementsByTagName('title')[0];
@@ -22,7 +56,7 @@ function buildDOMhead() {
     }
 }
 
-function buildDOMbody(filters) {
+function buildDOMbody() {
     let DOM = document.getElementById('app');
     DOM.innerHTML = '';
 
@@ -50,7 +84,7 @@ function buildDOMbody(filters) {
     lifeline.id = "lifeline";
 }
 
-function buildFilterArea(allTags, filters) {
+function buildFilterArea() {
 
     let filterArea = document.getElementById('filter-area');
     filterArea.innerHTML = '';
@@ -77,6 +111,9 @@ function buildFilterArea(allTags, filters) {
         let button = document.createElement('div');
         filterArea.appendChild(button);
         button.className = "button-secondary filter-clip";
+        if (filters.includes(tag)) {
+            button.classList.add('active');
+        }
         tagButtons.push(button);
         let buttonText = document.createElement('span');
         button.appendChild(buttonText);
@@ -94,6 +131,7 @@ function buildFilterArea(allTags, filters) {
                 filters.push(tag);
                 clearButton.classList.remove('hidden');
             }
+            setURL();
             buildArticles(filters);
         });
     });
@@ -110,11 +148,12 @@ function buildFilterArea(allTags, filters) {
         });
         filters = [];
         clearButton.classList.add('hidden');
+        setURL();
         buildArticles(filters);
     });
 }
 
-function buildColorToggle(filters) {
+function buildColorToggle() {
     let colorCSS = document.getElementById('color-css');
 
     let modeSwitch = document.createElement('div');
@@ -145,17 +184,19 @@ function buildColorToggle(filters) {
         if (modeInput.checked) {
             darkMode = true;
             colorCSS.href = "css/dark.css";
-            buildArticles(filters);
+            buildArticles();
+            setUrlParameter('color', 'dark');
         } else {
             darkMode = false;
             colorCSS.href = "css/light.css";
-            buildArticles(filters);
+            buildArticles();
+            setUrlParameter('color', 'light');
         }
     });
     return modeSwitch;
 }
 
-function buildArticles(filters) {
+function buildArticles() {
     let lifeline = document.getElementById('lifeline');
     lifeline.innerHTML = '';
 
@@ -287,7 +328,7 @@ function buildArticles(filters) {
                     button.onmouseout = function () {
                         button.classList.remove('hover');
                         button.style.backgroundColor = 'transparent';
-                        button.style.border =  darkMode ? "1px solid " + details.semanticColorsDark.buttonText : "1px solid " + details.semanticColorsLight.buttonText;
+                        button.style.border = darkMode ? "1px solid " + details.semanticColorsDark.buttonText : "1px solid " + details.semanticColorsLight.buttonText;
                         button.style.color = darkMode ? details.semanticColorsDark.buttonText : details.semanticColorsLight.buttonText;
                     };
                     let buttonIcon = document.createElement('i');
@@ -304,7 +345,6 @@ function buildArticles(filters) {
         }
     });
 }
-
 
 function buildSocialActions() {
     let socialActionsButtons = document.getElementById('social-actions');
@@ -357,3 +397,39 @@ function matchColor(tags) {
 
 let dot = document.createElement('span');
 dot.className = "dot";
+
+
+function parseQuery(queryString) {
+    let query = {};
+    let pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+    for (let i = 0; i < pairs.length; i++) {
+        let pair = pairs[i].split('=');
+        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+    }
+    return query;
+}
+
+function setURL(queryURL = '') {
+
+    let hashURL = '';
+    if (filters.length > 0) {
+        filters.forEach((filter) => {
+            hashURL += '#' + filter;
+        });
+    }
+    if (hashURL === '') {
+        hashURL = '#';
+    }
+    history.pushState({}, 'Siddhant Gupta', queryURL + hashURL);
+}
+
+function setUrlParameter(key, value) {
+    let params = new URLSearchParams(location.search);
+    if (params.has(key)) {
+        params.set(key, value);
+    } else {
+        params.append(key, value);
+    }
+    console.log([...params.entries()]);
+    setURL('?' + params.toString());
+}

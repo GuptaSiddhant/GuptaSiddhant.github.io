@@ -1,5 +1,3 @@
-let darkMode = matchMedia('(prefers-color-scheme: dark)').matches;
-
 let details = {
     title: 'Siddhant Gupta',
     typeColors: {
@@ -55,23 +53,6 @@ let articles = [
                 link: "assets/Siddhant_Gupta_Resume.pdf",
             }]
     },
-    // {
-    //     title: "UX Designer • Full Stack Developer",
-    //     static: true,
-    //     icon: "fas fa-info",
-    //     subtitle: "About Me",
-    //     tags: ["about"],
-    //     description: "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small thing can make the biggest impact. If I had to describe myself in one word, that’d be stalwart.",
-    //     attachments: [{
-    //         name: "Siddhant Gupta",
-    //         image: "images/siddhantgupta.jpg",
-    //     }],
-    //     actions: [ {
-    //         name: "Resume (PDF)",
-    //         icon: "fas fa-file-download",
-    //         link: "assets/Siddhant_Gupta_Resume.pdf",
-    //     }]
-    // },
     {
         title: "UX Designer at FA Solutions Oy",
         icon: "fas fa-briefcase",
@@ -162,11 +143,11 @@ let articles = [
             image: "images/passport3.jpg",
         }
         ],
-        actions: [{
-            name: "Read More",
-            icon: "fas fa-align-left",
-            link: "https://guptasiddhant.com/the-passport-concept-289733ba7963",
-        }]
+        // actions: [{
+        //     name: "Read More",
+        //     icon: "fas fa-align-left",
+        //     link: "https://guptasiddhant.com/the-passport-concept-289733ba7963",
+        // }]
     },
     {
         title: "B.Eng. (Honors) Mechanical Engineering",
