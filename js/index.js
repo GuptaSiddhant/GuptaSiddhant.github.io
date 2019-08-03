@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function (query) {
 
     let filters = [];
     let allTags = ['about', 'project', 'experience', 'education', 'blog'];
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function buildFilterArea(allTags, filters) {
 
     let filterArea = document.getElementById('filter-area');
-    filterArea.innerHTML = `<h3>FILTERS</h3>`;
+    filterArea.innerHTML = ``;
 
     let tagButtons = [];
 
@@ -46,6 +46,9 @@ function buildFilterArea(allTags, filters) {
             if (button.classList.contains('active')) {
                 button.classList.remove('active');
                 filters = arrayRemove(filters, tag);
+                if (filters.length === 0) {
+                    clearButton.classList.add('hidden');
+                }
             } else {
                 button.classList.add('active');
                 filters.push(tag);
@@ -61,7 +64,7 @@ function buildFilterArea(allTags, filters) {
     clearButton.classList.add('hidden');
     clearButton.style.opacity = '0.7';
     clearButton.style.cursor = 'pointer';
-    clearButton.innerText = 'Clear all';
+    clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear all';
     clearButton.addEventListener('click', function (e) {
         tagButtons.forEach((button) => {
             button.classList.remove('active');
@@ -198,15 +201,17 @@ function buildArticles(filters) {
                     button.onmouseover = function () {
                         button.style.backgroundColor = matchColor(data.tags);
                         button.style.border = "1px solid " + matchColor(data.tags);
+                        button.style.color = symanticColors.buttonTextHover;
                     };
                     button.onmouseout = function () {
-                        button.style.border = "1px solid #000000";
+                        button.style.border = "1px solid " + symanticColors.border;
                         button.style.backgroundColor = "transparent";
+                        button.style.color = symanticColors.buttonText;
                     };
                     let buttonIcon = document.createElement('i');
                     button.appendChild(buttonIcon);
                     buttonIcon.className = "fas fa-external-link-alt";
-                    if(action.icon && action.icon !== '') {
+                    if (action.icon && action.icon !== '') {
                         buttonIcon.className = action.icon;
                     }
                     let buttonText = document.createElement('span');
@@ -229,19 +234,19 @@ function buildSocialActions() {
         button.href = action.link;
         button.target = action.target ? action.target : "_blank";
         button.onmouseover = function () {
-            button.style.backgroundColor = matchColor('');
+            // button.style.backgroundColor = matchColor('');
             button.style.border = "1px solid " + matchColor('');
-            button.style.color = "#ffffff";
+            button.style.color = symanticColors.buttonTextHover;
         };
         button.onmouseout = function () {
-            button.style.border = "1px solid #000000";
+            button.style.border = "1px solid " + symanticColors.border;
             button.style.backgroundColor = "transparent";
-            button.style.color = "#000000";
+            button.style.color = symanticColors.buttonText;
         };
         let buttonIcon = document.createElement('i');
         button.appendChild(buttonIcon);
         buttonIcon.className = "fas fa-external-link-alt";
-        if(action.icon && action.icon !== '') {
+        if (action.icon && action.icon !== '') {
             buttonIcon.className = action.icon;
         }
         let buttonText = document.createElement('span');
@@ -250,8 +255,7 @@ function buildSocialActions() {
     });
 }
 
-// Supporting funtions
-
+// Supporting functions
 
 function arrayRemove(arr, value) {
     return arr.filter(function (ele) {

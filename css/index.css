@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0 var(--margin-desktop);
     background-color: var(--color-inverse);
-    background: radial-gradient(rgba(0, 0, 0, 0.05), var(--color-inverse));
+    background: radial-gradient(var(--color-inverse-translucent), var(--color-inverse));
 
     font-family: 'Poppins', "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
@@ -39,13 +39,8 @@ header #social-actions a {
 
 nav {
     position: fixed;
-    top: calc(50vh);
-    transform: translateY(-50%);
-    margin-top: 0.5rem;
+    top: 160px;
     margin-left: -150px;
-    /*overflow-y: hidden;*/
-    /*overflow-x: scroll;*/
-    /*white-space: nowrap;*/
     text-align: right;
 }
 
@@ -60,12 +55,12 @@ nav h3 {
 /* TIMELINE */
 
 main {
-    padding-top: calc(50vh - 150px);
-    padding-bottom: 20px;
+    padding-top: 160px;
+    padding-bottom: 40px;
     margin-left: 10px;
     border-left: 1px solid var(--color-secondary);
     position: relative;
-    height: auto;
+    min-height: calc(100vh - 200px);
 }
 
 article {
@@ -84,7 +79,7 @@ article {
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--color-accent);
+    background-color: var(--color-secondary);
 
     color: var(--color-inverse);
     text-align: center;

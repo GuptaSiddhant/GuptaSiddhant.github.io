@@ -5,12 +5,25 @@
     --margin-desktop: calc((100vw - 700px)/2);
 
     /* Colors */
-    --color-accent: #27CA03;
     --color-primary: #1a1a1a;
+    --color-primary-translucent: rgba(0, 0, 0, 0.05);
     --color-secondary: #4d4d4d;
     --color-inverse: #ffffff;
     --color-inverse-translucent: rgba(255, 255, 255, 0.95);
     --color-link: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Colors */
+        --color-primary: #e6e6e6;
+        --color-primary-translucent: rgba(0, 0, 0, 0.05);
+        --color-secondary: #b3b3b3;
+        --color-inverse: #000000;
+        --color-inverse-translucent: rgba(0, 0, 0, 0.95);
+        --color-link: #e6e6e6;
+    }
+
 }
 
 h1, h2 {
@@ -74,14 +87,14 @@ p {
 }
 
 a {
-    color: var(--color-link);
+    color: var(--color-secondary);
     text-decoration: none;
 
     transition: color 0.25s ease;
 }
 
 a:hover {
-    color: var(--color-accent);
+    color: var(--color-primary);
 }
 
 .button-secondary i{
