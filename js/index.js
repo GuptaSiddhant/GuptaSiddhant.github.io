@@ -1,20 +1,60 @@
-document.addEventListener("DOMContentLoaded", function (query) {
+document.addEventListener("DOMContentLoaded", function () {
 
     let filters = [];
     let allTags = ['about', 'project', 'experience', 'education', 'blog'];
 
+    buildDOMhead();
+    buildDOMbody(filters);
     buildArticles(filters);
     buildFilterArea(allTags, filters);
     buildSocialActions();
 });
 
+function buildDOMhead() {
+    let title = document.getElementsByTagName('title')[0];
+    title.innerText = details.title;
+
+    let colorCSS = document.getElementById('color-css');
+    if (darkMode) {
+        colorCSS.href = "css/dark.css";
+    } else {
+        colorCSS.href = "css/light.css";
+    }
+}
+
+function buildDOMbody(filters) {
+    let DOM = document.getElementById('app');
+    DOM.innerHTML = '';
+
+    let header = document.createElement('header');
+    DOM.appendChild(header);
+    header.className = "flex between wrap";
+    let headingTitle = document.createElement('h1');
+    header.appendChild(headingTitle);
+    headingTitle.innerText = details.title;
+    let socialActions = document.createElement('div');
+    header.appendChild(socialActions);
+    socialActions.id = 'social-actions';
+
+    let switcher = document.createElement('div');
+    DOM.appendChild(switcher);
+    switcher.id = 'switch-area';
+    switcher.appendChild(buildColorToggle(filters));
+
+    let nav = document.createElement('nav');
+    DOM.appendChild(nav);
+    nav.id = "filter-area";
+
+    let lifeline = document.createElement('main');
+    DOM.appendChild(lifeline);
+    lifeline.id = "lifeline";
+}
+
 function buildFilterArea(allTags, filters) {
 
     let filterArea = document.getElementById('filter-area');
-    filterArea.innerHTML = ``;
-
+    filterArea.innerHTML = '';
     let tagButtons = [];
-
     // Get All Tags
     // articles.forEach((data) => {
     //     data.tags.forEach((tag) => {
@@ -42,7 +82,7 @@ function buildFilterArea(allTags, filters) {
         button.appendChild(buttonText);
         buttonText.innerText = name;
         button.style.marginBottom = "0.5rem";
-        button.addEventListener('click', function (e) {
+        button.addEventListener('click', function () {
             if (button.classList.contains('active')) {
                 button.classList.remove('active');
                 filters = arrayRemove(filters, tag);
@@ -54,7 +94,6 @@ function buildFilterArea(allTags, filters) {
                 filters.push(tag);
                 clearButton.classList.remove('hidden');
             }
-            console.log(filters);
             buildArticles(filters);
         });
     });
@@ -65,7 +104,7 @@ function buildFilterArea(allTags, filters) {
     clearButton.style.opacity = '0.7';
     clearButton.style.cursor = 'pointer';
     clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear all';
-    clearButton.addEventListener('click', function (e) {
+    clearButton.addEventListener('click', function () {
         tagButtons.forEach((button) => {
             button.classList.remove('active');
         });
@@ -73,6 +112,47 @@ function buildFilterArea(allTags, filters) {
         clearButton.classList.add('hidden');
         buildArticles(filters);
     });
+}
+
+function buildColorToggle(filters) {
+    let colorCSS = document.getElementById('color-css');
+
+    let modeSwitch = document.createElement('div');
+    modeSwitch.className = 'onoffswitch';
+
+    let modeInput = document.createElement('input');
+    modeSwitch.appendChild(modeInput);
+    modeInput.className = 'onoffswitch-checkbox';
+    modeInput.type = 'checkbox';
+    modeInput.name = 'onoffswitch';
+    modeInput.id = 'myonoffswitch';
+    modeInput.checked = darkMode;
+
+    let modeLabel = document.createElement('label');
+    modeSwitch.appendChild(modeLabel);
+    modeLabel.className = 'onoffswitch-label';
+    modeLabel.for = 'myonoffswitch';
+
+    let innerSpan = document.createElement('span');
+    modeLabel.appendChild(innerSpan);
+    innerSpan.className = 'onoffswitch-inner';
+    let outerSpan = document.createElement('span');
+    modeLabel.appendChild(outerSpan);
+    outerSpan.className = 'onoffswitch-switch';
+
+    modeSwitch.addEventListener('click', function () {
+        modeInput.checked = !modeInput.checked;
+        if (modeInput.checked) {
+            darkMode = true;
+            colorCSS.href = "css/dark.css";
+            buildArticles(filters);
+        } else {
+            darkMode = false;
+            colorCSS.href = "css/light.css";
+            buildArticles(filters);
+        }
+    });
+    return modeSwitch;
 }
 
 function buildArticles(filters) {
@@ -199,14 +279,16 @@ function buildArticles(filters) {
                     button.href = action.link;
                     button.target = action.target ? action.target : "_blank";
                     button.onmouseover = function () {
+                        button.classList.add('hover');
                         button.style.backgroundColor = matchColor(data.tags);
                         button.style.border = "1px solid " + matchColor(data.tags);
-                        button.style.color = symanticColors.buttonTextHover;
+                        button.style.color = darkMode ? details.semanticColorsDark.buttonTextHover : details.semanticColorsLight.buttonTextHover;
                     };
                     button.onmouseout = function () {
-                        button.style.border = "1px solid " + symanticColors.border;
-                        button.style.backgroundColor = "transparent";
-                        button.style.color = symanticColors.buttonText;
+                        button.classList.remove('hover');
+                        button.style.backgroundColor = 'transparent';
+                        button.style.border =  darkMode ? "1px solid " + details.semanticColorsDark.buttonText : "1px solid " + details.semanticColorsLight.buttonText;
+                        button.style.color = darkMode ? details.semanticColorsDark.buttonText : details.semanticColorsLight.buttonText;
                     };
                     let buttonIcon = document.createElement('i');
                     button.appendChild(buttonIcon);
@@ -226,22 +308,18 @@ function buildArticles(filters) {
 
 function buildSocialActions() {
     let socialActionsButtons = document.getElementById('social-actions');
-    socialActionsButtons.className = "article-actions flex wrap";
-    socialActions.forEach((action) => {
+    socialActionsButtons.className = "flex wrap";
+    details.socialActions.forEach((action) => {
         let button = document.createElement('a');
         socialActionsButtons.appendChild(button);
         button.className = "button-secondary";
         button.href = action.link;
         button.target = action.target ? action.target : "_blank";
         button.onmouseover = function () {
-            // button.style.backgroundColor = matchColor('');
-            button.style.border = "1px solid " + matchColor('');
-            button.style.color = symanticColors.buttonTextHover;
+            button.classList.add('hover');
         };
         button.onmouseout = function () {
-            button.style.border = "1px solid " + symanticColors.border;
-            button.style.backgroundColor = "transparent";
-            button.style.color = symanticColors.buttonText;
+            button.classList.remove('hover');
         };
         let buttonIcon = document.createElement('i');
         button.appendChild(buttonIcon);
@@ -265,16 +343,16 @@ function arrayRemove(arr, value) {
 
 function matchColor(tags) {
     if (tags.includes('about')) {
-        return typeColors.about;
+        return details.typeColors.about;
     } else if (tags.includes('project')) {
-        return typeColors.project;
+        return details.typeColors.project;
     } else if (tags.includes('experience')) {
-        return typeColors.experience;
+        return details.typeColors.experience;
     } else if (tags.includes('education')) {
-        return typeColors.education;
+        return details.typeColors.education;
     } else if (tags.includes('blog')) {
-        return typeColors.blog;
-    } else return typeColors.fallback;
+        return details.typeColors.blog;
+    } else return details.typeColors.fallback;
 }
 
 let dot = document.createElement('span');

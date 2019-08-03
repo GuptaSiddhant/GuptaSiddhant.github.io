@@ -1,35 +1,40 @@
 let darkMode = matchMedia('(prefers-color-scheme: dark)').matches;
 
-let typeColors = {
-    about: "#7c26a9",
-    project: "#27b304",
-    education: "#0000dd",
-    experience: "#b30000",
-    blog: "#806a0b",
-    fallback: darkMode ? "#b3b3b3" : "#4d4d4d"
+let details = {
+    title: 'Siddhant Gupta',
+    typeColors: {
+        about: "#7c26a9",
+        project: "#27b304",
+        education: "#0000dd",
+        experience: "#b30000",
+        blog: "#806a0b",
+        fallback: '#808080',
+    },
+    semanticColorsDark: {
+        border: "#ffffff",
+        buttonText: "#b3b3b3",
+        buttonTextHover: "#ffffff",
+    }, semanticColorsLight: {
+        border: "#000000",
+        buttonText: "#1a1a1a",
+        buttonTextHover: "#ffffff",
+    },
+    socialActions: [
+        {
+            name: "LinkedIn",
+            icon: "fab fa-linkedin",
+            link: "https://www.linkedin.com/in/guptasiddhant9/",
+        }, {
+            name: "GitHub",
+            icon: "fab fa-github",
+            link: "https://www.github.com/guptasiddhant/",
+        }, {
+            name: "Mail",
+            icon: "fas fa-envelope",
+            link: "mailto:me@guptasiddhant.com",
+        }
+    ]
 };
-
-let symanticColors = {
-    border: darkMode ? "#ffffff" : "#000000",
-    buttonText: darkMode ? '#b3b3b3' : "#000000",
-    buttonTextHover: "#ffffff",
-};
-
-let socialActions = [
-    {
-        name: "LinkedIn",
-        icon: "fab fa-linkedin",
-        link: "https://www.linkedin.com/in/guptasiddhant9/",
-    }, {
-        name: "GitHub",
-        icon: "fab fa-github",
-        link: "https://www.github.com/guptasiddhant/",
-    }, {
-        name: "Mail",
-        icon: "fas fa-envelope",
-        link: "mailto:me@guptasiddhant.com",
-    }
-];
 
 let articles = [
     {

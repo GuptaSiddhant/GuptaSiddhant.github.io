@@ -5,13 +5,136 @@ body {
     width: calc(100vw - 2 * var(--margin-desktop));
     margin: 0;
     padding: 0 var(--margin-desktop);
-    background-color: var(--color-inverse);
-    background: radial-gradient(var(--color-inverse-translucent), var(--color-inverse));
-
+    background-color: var(--color-inverse-translucent);
     font-family: 'Poppins', "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
     color: var(--color-primary);
 }
+
+
+/* Common */
+h1, h2 {
+    margin: 0;
+    font-family: "Kameron", serif;
+    font-weight: bold;
+    color: var(--color-primary);;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: var(--color-primary);
+}
+
+h3, h4, h5, h6, p {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    line-height: 1.2rem;
+}
+
+h3 {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+h4 {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-secondary);
+}
+
+h5 {
+    font-weight: 400;
+    text-transform: capitalize;
+    color: var(--color-primary);
+}
+
+h6 {
+    font-weight: 400;
+    text-transform: capitalize;
+    color: var(--color-secondary);
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    color: var(--color-secondary);
+
+}
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+
+    transition: color 0.25s ease;
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+.button-secondary i {
+    margin-right: 0.5rem;
+}
+
+.button-secondary {
+    border: 1px solid var(--color-link);
+    background-color: transparent;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.button-secondary:hover, .button-secondary.hover {
+    border: 1px solid var(--color-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-inverse);
+}
+
+.button-secondary.active {
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-inverse);
+}
+
+
+.dot::after {
+    content: ' • ';
+    color: var(--color-secondary);
+}
+
+.hidden {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+
 
 /* HEADER */
 
@@ -20,7 +143,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--color-inverse-translucent);
+    background-color: var(--color-inverse);
     height: 36px;
     width: calc(100vw - 2 * var(--margin-desktop));
     z-index: 100;
@@ -35,6 +158,7 @@ header #social-actions {
 
 header #social-actions a {
     margin-bottom: 0;
+    max-height: 25px;
 }
 
 nav {
@@ -55,7 +179,7 @@ nav h3 {
 /* TIMELINE */
 
 main {
-    padding-top: 160px;
+    padding-top: 150px;
     padding-bottom: 40px;
     margin-left: 10px;
     border-left: 1px solid var(--color-secondary);
@@ -81,7 +205,7 @@ article {
     border-radius: 20px;
     background-color: var(--color-secondary);
 
-    color: var(--color-inverse);
+    color: var(--color-icon);
     text-align: center;
     line-height: 40px;
     font-size: 1.25rem;
@@ -160,10 +284,13 @@ article {
         height: 80px;
         display: block;
     }
-    header div {
+    header div, header h1 {
         width: 100%;
         text-align: center;
         justify-content: center;
+    }
+    header a {
+        margin: 0 4px;
     }
 }
 
@@ -182,4 +309,59 @@ article {
     header .mobile-nav {
         display: none;
     }
+}
+
+/* MODE SWITCH */
+
+#switch-area {
+    position: fixed;
+    top: 18px;
+    margin-left: -150px;
+    z-index: 101;
+}
+.onoffswitch {
+    position: relative; width: 80px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #E3E3E3; border-radius: 36px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 25px; padding: 0; line-height: 25px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Dark";
+    padding-left: 10px;
+    background-color: #2C3652; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Light";
+    padding-right: 10px;
+    background-color: #EDFEFF; color: #000000;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 25px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 51px;
+    border: 2px solid #E3E3E3; border-radius: 36px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0;
 }
