@@ -1,6 +1,7 @@
 let darkMode = matchMedia('(prefers-color-scheme: dark)').matches;
 let allTags = ['about', 'project', 'experience', 'education', 'blog'];
 let filters = [];
+let clearButton;
 
 document.addEventListener("DOMContentLoaded", initiate);
 
@@ -11,34 +12,20 @@ function initiate() {
     document.addEventListener('mousemove', evt => {
         let x = evt.clientX;
         let y = evt.clientY;
-
         root.style.setProperty('--mouse-x', x + 'px');
         root.style.setProperty('--mouse-y', y + 'px');
         root.style.setProperty('--mouse-xp', x / innerWidth);
         root.style.setProperty('--mouse-yp', y / innerHeight);
-
-        console.log(root.style.getPropertyValue('--mouse-x') + '-' + root.style.getPropertyValue('--mouse-y'));
     });
 
     window.addEventListener('popstate', initiate);
     let hash = window.location.hash;
     hash = decodeURIComponent(hash);
     // Router
-    if (hash.includes('#project')) {
-        // let projectID = parseInt(hash.split('/')[1]);
-        filters.push('project');
-    }
-    if (hash.includes('#about')) {
-        filters.push('about');
-    }
-    if (hash.includes('#experience')) {
-        filters.push('experience');
-    }
-    if (hash.includes('#education')) {
-        filters.push('education');
-    }
-    if (hash.includes('#blog')) {
-        filters.push('blog');
+    if (hash && hash !== '') {
+        parseHash(hash).forEach((hashFilter) => {
+            filters.push(hashFilter);
+        });
     }
 
     let query = parseQuery(window.location.search);
@@ -146,13 +133,12 @@ function buildFilterArea() {
                 clearButton.classList.remove('hidden');
             }
             setURL();
-            buildArticles(filters);
+            buildArticles();
         });
     });
 
-    let clearButton = document.createElement('div');
+    clearButton = document.createElement('div');
     filterArea.appendChild(clearButton);
-    clearButton.classList.add('hidden');
     clearButton.style.opacity = '0.7';
     clearButton.style.cursor = 'pointer';
     clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear all';
@@ -163,8 +149,17 @@ function buildFilterArea() {
         filters = [];
         clearButton.classList.add('hidden');
         setURL();
-        buildArticles(filters);
+        initiate();
     });
+    if (filters.length === 0) {
+        clearButton.classList.add('hidden');
+    } else {
+        filters.forEach((filter)=> {
+           if (!allTags.includes(filter)) {
+               console.log(filter)
+           }
+        });
+    }
 }
 
 function buildColorToggle() {
@@ -246,17 +241,30 @@ function buildArticles() {
             }
 
             if (!data.static) {
-                let articleTags = document.createElement('h5');
+                let articleTags = document.createElement('h6');
                 article.appendChild(articleTags);
                 articleTags.className = "article-tags";
                 if (data.date && data.date !== '') {
-                    articleTags.innerHTML = data.date;
-                    articleTags.appendChild(dot);
-
+                    articleTags.innerHTML = `<span class="article-date">${data.date}</span>`;
                 }
+                if (data.date && data.tags) {
+                    articleTags.appendChild(dot);
+                }
+
                 if (data.tags && data.tags.length !== 0) {
                     data.tags.forEach((tag, index) => {
-                        articleTags.innerHTML += tag;
+
+                        let tagButton = document.createElement('a');
+                        tagButton.innerText = tag.toString();
+                        tagButton.addEventListener('click', function () {
+                            if (!filters.includes(tag)) {
+                                filters.push(tag);
+                            }
+                            setURL();
+                            buildArticles();
+                            clearButton.classList.remove('hidden');
+                        });
+                        articleTags.appendChild(tagButton);
                         if (index + 1 !== data.tags.length) {
                             articleTags.innerHTML += ", ";
                         }
@@ -272,16 +280,16 @@ function buildArticles() {
             }
 
             if (data.role && data.role !== '') {
-                let articleRole = document.createElement('div');
+                let articleRole = document.createElement('p');
                 article.appendChild(articleRole);
-                // articleRole.className = "article-desc2";
+                articleRole.className = "article-desc2";
                 articleRole.innerHTML = `<b>Role</b>: ` + data.role;
             }
 
             if (data.tech && data.tech !== '') {
-                let articleTech = document.createElement('div');
+                let articleTech = document.createElement('p');
                 article.appendChild(articleTech);
-                // articleTech.className = "article-desc2";
+                articleTech.className = "article-desc2";
                 articleTech.innerHTML = `<b>Tools</b>: `;
                 data.tech.forEach((tag, index) => {
                     articleTech.innerHTML += tag;
@@ -319,10 +327,12 @@ function buildArticles() {
                         warningText.style.display = "block";
                     };
                     image1.onmouseout = hideImage;
-                    function hideImage () {
+
+                    function hideImage() {
                         image2.style.display = "none";
                         warningText.style.display = "none";
                     }
+
                     let warningText = document.createElement('i');
                     imageCard.appendChild(warningText);
                     warningText.className = "far fa-times-circle";
@@ -419,6 +429,15 @@ function matchColor(tags) {
 let dot = document.createElement('span');
 dot.className = "dot";
 
+
+function parseHash(queryString) {
+    let hashes = [];
+    let hashString = (queryString[0] === '#' ? queryString.substr(1) : queryString).split('#');
+    for (let i = 0; i < hashString.length; i++) {
+        hashes.push(hashString[i]);
+    }
+    return hashes;
+}
 
 function parseQuery(queryString) {
     let query = {};

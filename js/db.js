@@ -54,14 +54,14 @@ let articles = [
             }]
     },
     {
-        title: "UX Designer at FA Solutions Oy",
+        title: "UX Designer",
         icon: "fas fa-briefcase",
-        subtitle: "Helsinki, Finland",
+        subtitle: "FA Solutions Oy, Helsinki, Finland",
         date: "January 2019 - Present",
-        tags: ["experience"],
-        description: "Designing the product features.\n" +
-            "Supporting UI/UX development of core product and projects team \n" +
-            "Generating graphic design for marketing team",
+        tags: ["experience", 'design'],
+        description: "- Designing the product features.\n" +
+            "- Supporting UI/UX development of core product and projects team \n" +
+            "- Generating graphic design for marketing team",
         actions: [{
             name: "FA Solutions",
             link: "https://fasolutions.com",
@@ -148,6 +148,36 @@ let articles = [
         //     icon: "fas fa-align-left",
         //     link: "https://guptasiddhant.com/the-passport-concept-289733ba7963",
         // }]
+    },
+    {
+        title: "Co-Founder & Product Designer",
+        icon: "fas fa-briefcase",
+        subtitle: "QB Middle East FZ-LLC, Dubai, U.A.E.",
+        date: "August 2016 - August 2017",
+        tags: ["experience", 'entrepreneur', 'design', 'management'],
+        description:
+            `- Designing UI for web and mobile app.
+             - Service Design and customer journey design.
+             - Managing team of developers and designer.`,
+        actions: [{
+            name: "QuickBytz",
+            link: "https://quickbytz.com",
+        }]
+    },
+    {
+        title: "Design Executive",
+        icon: "fas fa-briefcase",
+        subtitle: "Sprint Middle East LLC, Dubai, U.A.E.",
+        date: "February 2016 - April 2017",
+        tags: ["experience", 'design', 'marketing'],
+        description:
+            `- Designing UI for web and mobile apps.
+        - Communicating with target audiences, presenting the demo.
+        - Managing customer relationships and Conducting market research`,
+        actions: [{
+            name: "Sprint ME",
+            link: "https://sprintonweb.com",
+        }]
     },
     {
         title: "B.Eng. (Honors) Mechanical Engineering",
