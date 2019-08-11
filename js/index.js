@@ -1,17 +1,16 @@
-let darkMode = matchMedia('(prefers-color-scheme: dark)').matches;
+// On DOM Loaded -> Initialise
+document.addEventListener("DOMContentLoaded", initiate);
+
+// Global Variables
+let darkMode = matchMedia('(prefers-color-scheme: dark)').matches || true;
 let allTags = ['about', 'project', 'experience', 'education', 'blog'];
 let filters = [];
-let clearButton;
-
-document.addEventListener("DOMContentLoaded", initiate);
 
 function initiate() {
     router();
-    buildDOMhead();
-    buildDOMbody();
+    buildDOM();
     buildSocialActions();
-    buildFilterArea();
-    buildArticles();
+    buildNavigation();
 }
 
 function router() {
@@ -20,6 +19,7 @@ function router() {
     //     root.style.setProperty('--mouse-x', evt.clientX + 'px');
     //     root.style.setProperty('--mouse-y', evt.clientY + 'px');
     // });
+
     window.addEventListener('popstate', initiate);
     let hash = window.location.hash;
     hash = decodeURIComponent(hash);
@@ -39,127 +39,269 @@ function router() {
     }
 }
 
-function buildDOMhead() {
+
+function buildDOM() {
+    // HEAD
     let title = document.getElementsByTagName('title')[0];
     title.innerText = details.title;
-
     let colorCSS = document.getElementById('color-css');
     if (darkMode) {
         colorCSS.href = "css/dark.css";
     } else {
         colorCSS.href = "css/light.css";
     }
+
+
+    // BODY
+    let desktopSize = {
+        widthWindow: window.innerWidth,
+        widthBody: 1000,
+        widthMain: 700,
+        spacing: 40
+    };
+
+    let BODY = document.getElementById('app');
+    BODY.style.height = '100vh';
+    BODY.style.width = '100vw';
+    BODY.style.padding = `0`;
+    BODY.style.margin = '0';
+    BODY.style.backgroundColor = '#F2f2f2';
+    BODY.style.fontFamily = 'Poppins, Arial, sans-serif';
+    BODY.style.fontSize = '16px';
+    BODY.style.color = '#1A1A1A';
+
+    BODY.innerHTML = '';
+    BODY.appendChild(buildLifeline(desktopSize));
+    BODY.appendChild(buildSidebar(desktopSize));
 }
 
-function buildDOMbody() {
-    let DOM = document.getElementById('app');
-    DOM.innerHTML = '';
 
-    let header = document.createElement('header');
-    DOM.appendChild(header);
-    header.className = "flex between wrap";
-    let headingTitle = document.createElement('h1');
-    header.appendChild(headingTitle);
+function buildLifeline(size) {
+    let lifeline = document.createElement('main');
+    lifeline.id = "lifeline";
+    lifeline.style.width = size.widthMain + 'px';
+    lifeline.style.paddingTop = size.spacing + 'px';
+    lifeline.style.paddingBottom = size.spacing + 'px';
+    if (size.widthWindow > size.widthBody) {
+        lifeline.style.marginLeft =
+            `calc((100vw + ${size.widthBody}px) / 2 - ${size.widthMain}px)`;
+            // (size.widthWindow + size.widthBody) / 2 - size.widthMain + 'px';
+    }
+
+    articles.forEach((data) => {
+        let matched = data.tags.some(r => filters.includes(r));
+        if (matched || filters.length === 0) {
+            let article = new Article(data);
+            lifeline.appendChild(article.buildArticle());
+        }
+    });
+
+    return lifeline;
+}
+
+
+function buildSidebar(size) {
+
+    let sidebar = document.createElement('side');
+    sidebar.style.width = size.widthBody - size.widthMain - 2 * size.spacing + 'px';
+    sidebar.style.position = 'fixed';
+    sidebar.style.top = size.spacing * 2 + 'px';
+    sidebar.style.left =
+        `calc((100vw - ${size.widthBody}px) / 2 )`;
+        // (size.widthWindow - size.widthBody) / 2 + 'px';
+    sidebar.style.padding = size.spacing + 'px';
+    sidebar.style.textAlign = 'right';
+
+    let headingTitle = document.createElement('div');
+    sidebar.appendChild(headingTitle);
+    headingTitle.style.margin = '0';
+    headingTitle.style.fontFamily = 'Kameron, serif';
+    headingTitle.style.fontWeight = 'bold';
+    headingTitle.style.color = '#1A1A1A';
+    headingTitle.style.fontSize = '2rem';
+    headingTitle.style.lineHeight = '2.5rem';
+    headingTitle.style.letterSpacing = '1px';
+    headingTitle.style.textTransform = 'uppercase';
+    headingTitle.style.marginBottom = '1rem';
+
     headingTitle.innerText = details.title;
-    let socialActions = document.createElement('div');
-    header.appendChild(socialActions);
-    socialActions.id = 'social-actions';
 
-    let switcher = document.createElement('div');
-    DOM.appendChild(switcher);
-    switcher.id = 'switch-area';
-    switcher.appendChild(buildColorToggle(filters));
+    sidebar.appendChild(buildSocialActions());
+    sidebar.appendChild(buildNavigation());
+    sidebar.appendChild(buildColorToggle());
+
+    return sidebar;
+}
+
+function buildSocialActions() {
+    let sButtons = document.createElement('div');
+    sButtons.id = 'social-actions';
+    sButtons.style.display = 'flex';
+    sButtons.style.justifyContent = 'flex-end';
+    sButtons.style.margin = '8px 0';
+    sButtons.style.color = '#1A1A1A';
+    sButtons.style.cursor = 'pointer';
+
+    details.socialActions.forEach((action) => {
+        let button = buildButton(action, true);
+        sButtons.appendChild(button);
+
+        button.onclick = function () {
+            if (action.type === 'top') {
+                window.scrollTo(0, 0);
+            } else {
+                if (action.link.includes('mailto')) {
+                    location.href = action.link;
+                } else {
+                    window.open(action.link, action.target || '_blank');
+                }
+            }
+        };
+    });
+    return sButtons;
+}
+
+function buildButton(action, icon = false) {
+    let button = document.createElement('div');
+    button.id = 'social-actionButton';
+
+    button.style.marginLeft = '8px';
+    button.style.padding = '4px 12px';
+    button.style.borderRadius = '4px';
+    button.style.border = '1px solid #1A1A1A';
+    button.style.transition = 'background-color 0.2s ease';
+    button.style.cursor = 'pointer';
+
+    let buttonIcon = document.createElement('i');
+    if (action.icon && action.icon !== '') {
+        button.appendChild(buttonIcon);
+        buttonIcon.alt = action.name;
+        buttonIcon.title = action.name;
+        buttonIcon.className = action.icon;
+    }
+    if (!icon) {
+        if (action.name && action.name !== '') {
+            buttonIcon.style.marginRight = '0.5rem';
+            let buttonText = document.createElement('span');
+            button.appendChild(buttonText);
+            buttonText.innerText = action.name;
+        }
+    }
+    button.onmouseover = function () {
+        button.classList.add('hover');
+        button.style.backgroundColor = '#1A1A1A';
+        button.style.border = "1px solid " + '#1A1A1A';
+        button.style.color = '#FFFFFF';
+    };
+    button.onmouseleave = function () {
+        button.classList.remove('hover');
+        button.style.backgroundColor = 'transparent';
+        button.style.border = "1px solid " + '#1A1A1A';
+        button.style.color = '#1A1A1A';
+    };
+    return button;
+}
+
+function buildNavigation() {
 
     let nav = document.createElement('nav');
-    DOM.appendChild(nav);
-    nav.id = "filter-area";
+    nav.id = "nav-area";
+    nav.style.display = 'flex';
+    nav.style.flexDirection = 'column';
+    nav.style.justifyContent = 'flex-start';
+    nav.style.margin = '20px 0';
+    nav.style.color = '#1A1A1A';
+    nav.style.position = 'relative';
 
-    let lifeline = document.createElement('main');
-    DOM.appendChild(lifeline);
-    lifeline.id = "lifeline";
-}
+    nav.innerHTML = '';
+    let posTop = 0;
 
-function buildFilterArea() {
+    let clearButton = document.createElement('div');
+    clearButton.id = 'clear-button';
+    clearButton.style.position = 'absolute';
+    clearButton.style.top =  '200px';
+    clearButton.style.right = '0';
+    clearButton.style.width = '115px';
+    clearButton.style.marginBottom = "0.5rem";
+    clearButton.style.opacity = '0.7';
+    clearButton.style.cursor = 'pointer';
+    clearButton.style.display = 'none';
+    clearButton.innerHTML = '<i class="far fa-times-circle"></i> Reset';
 
-    let filterArea = document.getElementById('filter-area');
-    filterArea.innerHTML = '';
-    let tagButtons = [];
-    // Get All Tags
-    // articles.forEach((data) => {
-    //     data.tags.forEach((tag) => {
-    //         let found = false;
-    //         allTags.forEach((aTag) => {
-    //             if (aTag.name === tag) {
-    //                 aTag.count += 1;
-    //                 found = true;
-    //             }
-    //         });
-    //         if (!found) {
-    //             let tagsCounter = {name: tag, count: 1};
-    //             allTags.push(tagsCounter)
-    //         }
-    //     });
-    // });
+    clearButton.onclick = function () {
+        filters = [];
+        clearButton.style.display = 'none';
+        setURL();
+        initiate();
+    };
+    nav.appendChild(clearButton);
 
     allTags.forEach((tag) => {
         let name = tag.charAt(0).toUpperCase() + tag.slice(1);
-        let button = document.createElement('div');
-        filterArea.appendChild(button);
-        button.className = "button-secondary filter-clip";
+
+        let button = buildButton({name: name});
+        nav.appendChild(button);
+        button.style.position = 'absolute';
+        button.style.top = posTop + 'px';
+        button.style.right = '0';
+        button.style.width = '115px';
+        button.style.marginBottom = "0.5rem";
+
+        posTop += 40;
+
         if (filters.includes(tag)) {
             button.classList.add('active');
+            button.style.backgroundColor = '#1A1A1A';
+            button.style.border = "1px solid " + '#1A1A1A';
+            button.style.color = '#FFFFFF';
+            clearButton.style.display = 'block';
+            button.onmouseleave = function () {
+            };
         }
-        tagButtons.push(button);
-        let buttonText = document.createElement('span');
-        button.appendChild(buttonText);
-        buttonText.innerText = name;
-        button.style.marginBottom = "0.5rem";
-        button.addEventListener('click', function () {
+
+        button.onclick = function () {
             if (button.classList.contains('active')) {
                 button.classList.remove('active');
-                filters = arrayRemove(filters, tag);
-                if (filters.length === 0) {
-                    clearButton.classList.add('hidden');
-                }
+                button.style.backgroundColor = 'transparent';
+                button.style.border = "1px solid " + '#1A1A1A';
+                button.style.color = '#1A1A1A';
+                clearButton.style.display = 'none';
+                filters = [];
+                button.onmouseleave = function () {
+                    button.classList.remove('hover');
+                    button.style.backgroundColor = 'transparent';
+                    button.style.border = "1px solid " + '#1A1A1A';
+                    button.style.color = '#1A1A1A';
+                };
             } else {
                 button.classList.add('active');
+                button.style.backgroundColor = '#1A1A1A';
+                button.style.border = "1px solid " + '#1A1A1A';
+                button.style.color = '#FFFFFF';
+                filters = [];
                 filters.push(tag);
-                clearButton.classList.remove('hidden');
+                clearButton.style.display = 'block';
+                button.onmouseleave = function () {
+                };
             }
             setURL();
-            buildArticles();
-        });
+            initiate();
+        };
     });
 
-    clearButton = document.createElement('div');
-    filterArea.appendChild(clearButton);
-    clearButton.style.opacity = '0.7';
-    clearButton.style.cursor = 'pointer';
-    clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear all';
-    clearButton.addEventListener('click', function () {
-        tagButtons.forEach((button) => {
-            button.classList.remove('active');
-        });
-        filters = [];
-        clearButton.classList.add('hidden');
-        setURL();
-        initiate();
-    });
-    if (filters.length === 0) {
-        clearButton.classList.add('hidden');
-    } else {
-        filters.forEach((filter) => {
-            if (!allTags.includes(filter)) {
-                console.log(filter)
-            }
-        });
-    }
+    return nav;
 }
 
 function buildColorToggle() {
-    let colorCSS = document.getElementById('color-css');
+    let switcher = document.createElement('div');
+    switcher.style.position = 'absolute';
+    switcher.style.top = '0px';
+    switcher.style.right = '40px';
+    switcher.style.display = 'flex';
+    switcher.style.justifyContent = 'flex-end';
 
     let modeSwitch = document.createElement('div');
+    switcher.appendChild(modeSwitch);
     modeSwitch.className = 'onoffswitch';
 
     let modeInput = document.createElement('input');
@@ -186,45 +328,17 @@ function buildColorToggle() {
         modeInput.checked = !modeInput.checked;
         if (modeInput.checked) {
             darkMode = true;
-            colorCSS.href = "css/dark.css";
-            buildArticles();
+            // colorCSS.href = "css/dark.css";
             setUrlParameter('color', 'dark');
+            initiate();
         } else {
             darkMode = false;
-            colorCSS.href = "css/light.css";
-            buildArticles();
+            // colorCSS.href = "css/light.css";
             setUrlParameter('color', 'light');
+            initiate();
         }
     });
-    return modeSwitch;
-}
-
-
-function buildSocialActions() {
-    let socialActionsButtons = document.getElementById('social-actions');
-    socialActionsButtons.className = "flex wrap";
-    details.socialActions.forEach((action) => {
-        let button = document.createElement('a');
-        socialActionsButtons.appendChild(button);
-        button.className = "button-secondary";
-        button.href = action.link;
-        button.target = action.target ? action.target : "_blank";
-        button.onmouseover = function () {
-            button.classList.add('hover');
-        };
-        button.onmouseout = function () {
-            button.classList.remove('hover');
-        };
-        let buttonIcon = document.createElement('i');
-        button.appendChild(buttonIcon);
-        buttonIcon.className = "fas fa-external-link-alt";
-        if (action.icon && action.icon !== '') {
-            buttonIcon.className = action.icon;
-        }
-        // let buttonText = document.createElement('span');
-        // button.appendChild(buttonText);
-        // buttonText.innerText = action.name;
-    });
+    return switcher;
 }
 
 // Supporting functions

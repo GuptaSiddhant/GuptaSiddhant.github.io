@@ -40,7 +40,6 @@ let details = {
 let articles = [
     {
         title: "Hi, I'm Siddhant Gupta",
-        static: true,
         icon: "fas fa-info",
         subtitle: "UX Designer • Full-Stack Developer • Entrepreneur",
         tags: ["about"],
@@ -48,6 +47,7 @@ let articles = [
         attachments: [{
             name: "Siddhant Gupta",
             image: "images/siddhantgupta.jpg",
+            full: false,
         }],
         actions: [
             {
@@ -223,12 +223,17 @@ let articles = [
         icon: "fas fa-baby",
         date: "September 1994",
         tags: ["about"],
-        summary: "This is the end of the line. Maybe we should continue it over mail.",
-        actions: [{
+        summary: "This is the end of the line. Maybe we should continue over e-mail.",
+        actions: [
+            {
+                name: "Mail Me",
+                icon: "fas fa-envelope",
+                link: "mailto:me@guptasiddhant.com",
+            },
+            {
             name: "Back to Top",
             icon: 'fas fa-chevron-up',
-            link: "#lifeline",
-            target: "_self"
+            type: 'top',
         }]
     }
 ];

@@ -3,7 +3,6 @@ class Article {
         // title, static, subtitle, icon, date, tags, description, role, tech, attachments, actions
         this.title = article.title;
         this.subtitle = article.subtitle;
-        this.static = article.static;
         this.icon = article.icon;
         this.date = article.date;
         this.tags = article.tags;
@@ -21,9 +20,10 @@ class Article {
         let cardPadding = 40;
 
         let card = document.createElement('article');
+        card.id = 'article-card';
+
         card.style.backgroundColor = '#FFFFFF';
-        card.style.margin = '20px';
-        card.style.marginBottom = 60 + 'px';
+        card.style.margin = cardPadding + 'px';
         card.style.borderRadius = '16px';
         card.style.padding = cardPadding + 'px';
         card.style.boxShadow = '0 0 40px 0 rgba(0,0,0,0.1)';
@@ -47,6 +47,8 @@ class Article {
     buildCardIcon() {
         let iconSize = 20;
         let cardIcon = document.createElement('icon');
+        cardIcon.id = 'article-icon';
+
         cardIcon.style.position = 'absolute';
         cardIcon.style.left = '-20px';
         cardIcon.style.top = '35px';
@@ -61,15 +63,22 @@ class Article {
         cardIcon.style.zIndex = '10';
 
         cardIcon.style.backgroundColor = this.color;
-        cardIcon.className = this.icon;
+        if (this.icon && this.icon !== '') {
+            cardIcon.className = this.icon;
+        } else {
+            cardIcon.className = 'fas fa-history';
+        }
         return cardIcon;
     }
 
     buildHeading() {
         let heading = document.createElement('div');
+        heading.id = 'article-heading';
 
         let title = document.createElement('div');
+        title.id = 'article-title';
         heading.appendChild(title);
+
         title.style.fontFamily = 'Kameron, serif';
         title.style.fontWeight = 'bold';
         title.style.fontSize = '24px';
@@ -80,7 +89,9 @@ class Article {
 
         if (this.subtitle) {
             let subtitle = document.createElement('div');
+            subtitle.id = 'article-subtitle';
             heading.appendChild(subtitle);
+
             subtitle.style.fontWeight = '500';
             subtitle.style.fontSize = '16px';
             subtitle.style.color = this.color;
@@ -91,9 +102,11 @@ class Article {
             subtitle.innerText = this.subtitle;
         }
 
-        if (this.tags) {
+        if (this.tags && this.tags.length > 0) {
             let subtitle2 = document.createElement('div');
+            subtitle2.id = 'article-subtitle2';
             heading.appendChild(subtitle2);
+
             subtitle2.style.fontSize = '16px';
             subtitle2.style.color = '#4D4D4D';
             subtitle2.style.lineHeight = '20px';
@@ -113,17 +126,6 @@ class Article {
                     if (index + 1 !== this.tags.length) {
                         subtitle2.innerHTML += ", ";
                     }
-                    // let tagButton = document.createElement('a');
-                    //             tagButton.innerText = tag.toString();
-                    //             tagButton.addEventListener('click', function () {
-                    //                 if (!filters.includes(tag)) {
-                    //                     filters.push(tag);
-                    //                 }
-                    //                 setURL();
-                    //                 buildArticles();
-                    //                 clearButton.classList.remove('hidden');
-                    //             });
-                    //             articleTags.appendChild(tagButton);
                 });
             }
         }
@@ -132,6 +134,8 @@ class Article {
 
     buildDescription() {
         let description = document.createElement('div');
+        description.id = 'article-description';
+
         description.style.fontSize = '14px';
         description.style.color = '#4D4D4D';
         description.style.lineHeight = '20px';
@@ -139,7 +143,9 @@ class Article {
 
         if (this.summary) {
             let summary = document.createElement('div');
+            summary.id = 'article-summary';
             description.appendChild(summary);
+
             summary.style.textAlign = 'justify';
             summary.style.marginBottom = '8px';
             summary.innerText = this.summary;
@@ -147,6 +153,7 @@ class Article {
 
         if (this.role) {
             let role = document.createElement('div');
+            role.id = 'article-role';
             description.appendChild(role);
             role.style.marginBottom = '4px';
 
@@ -162,6 +169,7 @@ class Article {
 
         if (this.tech) {
             let tech = document.createElement('div');
+            tech.id = 'article-tech';
             description.appendChild(tech);
             tech.style.marginBottom = '4px';
             tech.style.textTransform = 'capitalize';
@@ -182,40 +190,14 @@ class Article {
             });
         }
 
-
         return description;
-        // if (this.description && this.description !== '') {
-        //     let articleDesc = document.createElement('p');
-        //     article.appendChild(articleDesc);
-        //     articleDesc.className = "article-description";
-        //     articleDesc.innerText = this.description;
-        // }
-        //
-        // if (this.role && this.role !== '') {
-        //     let articleRole = document.createElement('p');
-        //     article.appendChild(articleRole);
-        //     articleRole.className = "article-desc2";
-        //     articleRole.innerHTML = `<b>Role</b>: ` + this.role;
-        // }
-        //
-        // if (this.tech && this.tech !== '') {
-        //     let articleTech = document.createElement('p');
-        //     article.appendChild(articleTech);
-        //     articleTech.className = "article-desc2";
-        //     articleTech.innerHTML = `<b>Tools</b>: `;
-        //     this.tech.forEach((tag, index) => {
-        //         articleTech.innerHTML += tag;
-        //         if (index + 1 !== this.tech.length) {
-        //             articleTech.innerHTML += ", ";
-        //         }
-        //     });
-        // }
     }
 
     buildActions() {
         let actionButtons = document.createElement('div');
+        actionButtons.id = 'article-actions';
+
         if (this.actions && this.actions.length !== 0) {
-            actionButtons.style.marginTop = '16px';
             actionButtons.style.display = 'flex';
             actionButtons.style.flexWrap = 'wrap';
             actionButtons.style.color = '#1A1A1A';
@@ -223,19 +205,25 @@ class Article {
 
             this.actions.forEach((action) => {
                 let button = document.createElement('div');
+                button.id = 'article-actionButton';
+
                 actionButtons.appendChild(button);
+                button.style.marginTop = '8px';
                 button.style.marginRight = '8px';
                 button.style.padding = '4px 8px';
                 button.style.borderRadius = '4px';
                 button.style.border = '1px solid #1A1A1A';
+                button.style.transition = 'background-color 0.2s ease';
 
                 let buttonIcon = document.createElement('i');
                 button.appendChild(buttonIcon);
+                buttonIcon.alt = action.name;
+                buttonIcon.title = action.name;
                 buttonIcon.className = "fas fa-external-link-alt";
                 if (action.icon && action.icon !== '') {
                     buttonIcon.className = action.icon;
                 }
-                if (action.name !== '') {
+                if (action.name && action.name !== '') {
                     buttonIcon.style.marginRight = '0.5rem';
                     let buttonText = document.createElement('span');
                     button.appendChild(buttonText);
@@ -257,7 +245,15 @@ class Article {
                 };
 
                 button.onclick = function () {
-                    window.open(action.link, action.target || '_blank');
+                    if (action.type === 'top') {
+                        window.scrollTo(0, 0);
+                    } else {
+                        if (action.link.includes('mailto')) {
+                            location.href = action.link;
+                        } else {
+                            window.open(action.link, action.target || '_blank');
+                        }
+                    }
                 };
             });
         }
@@ -267,6 +263,8 @@ class Article {
     buildAttachments(fullImg) {
         let imageSize = 100;
         let attachImages = document.createElement('div');
+        attachImages.id = 'article-attachments';
+
         if (this.attachments && this.attachments.length > 0) {
             attachImages.style.position = 'absolute';
             attachImages.style.right = '-20px';
@@ -279,6 +277,8 @@ class Article {
 
             this.attachments.forEach((item) => {
                 let thumbnail = document.createElement('img');
+                thumbnail.id = 'article-thumbnail';
+
                 attachImages.appendChild(thumbnail);
                 thumbnail.style.margin = '4px 0';
                 thumbnail.style.width = imageSize + 'px';
@@ -287,59 +287,59 @@ class Article {
                 thumbnail.style.border = 'none';
                 thumbnail.style.objectFit = 'cover';
                 thumbnail.style.boxShadow = '0 0 40px 0 rgba(0,0,0,0.25)';
+                thumbnail.style.transition = 'width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease-in';
                 thumbnail.src = item.image;
                 thumbnail.alt = item.name;
                 thumbnail.title = item.name;
 
-                fullImg.style.backgroundPosition = 'center';
-                fullImg.style.backgroundRepeat = 'no-repeat';
-                fullImg.style.backgroundSize = 'cover';
-                fullImg.style.position = 'absolute';
-                fullImg.style.borderRadius = '8px';
-                fullImg.style.right = '8px';
-                fullImg.style.width = '0';
-                fullImg.style.bottom = '8px';
-                fullImg.style.height = '0';
-
-                thumbnail.onmouseover = function () {
-                    fullImg.style.backgroundImage = `url(${item.image})`;
-                    fullImg.style.zIndex = '5';
-                    fullImg.style.right = '8px';
-                    fullImg.style.top = '8px';
-                    fullImg.style.bottom = '8px';
-                    fullImg.style.left = '8px';
-                    fullImg.style.width = 'calc(100% - 16px)';
-                    fullImg.style.height = 'calc(100% - 16px)';
-                };
-                thumbnail.onmouseleave = function () {
-                    fullImg.style.backgroundImage = `none`;
-                    fullImg.style.zIndex = '1';
+                if (item.full !== false) {
+                    fullImg.id = 'article-fullImg';
+                    fullImg.style.backgroundPosition = 'center';
+                    fullImg.style.backgroundRepeat = 'no-repeat';
+                    fullImg.style.backgroundSize = 'cover';
+                    fullImg.style.position = 'absolute';
+                    fullImg.style.borderRadius = '8px';
                     fullImg.style.right = '8px';
                     fullImg.style.width = '0';
                     fullImg.style.bottom = '8px';
                     fullImg.style.height = '0';
-                };
+                    fullImg.style.opacity = '0';
+                    fullImg.style.transition = 'opacity 0.2s ease';
+
+                    thumbnail.onmouseover = function () {
+                        fullImg.style.backgroundImage = `url(${item.image})`;
+                        fullImg.style.zIndex = '5';
+                        fullImg.style.right = '8px';
+                        fullImg.style.top = '8px';
+                        fullImg.style.bottom = '8px';
+                        fullImg.style.left = '8px';
+                        fullImg.style.width = 'calc(100% - 16px)';
+                        fullImg.style.height = 'calc(100% - 16px)';
+                        fullImg.style.opacity = '1';
+                    };
+                    thumbnail.onmouseleave = function () {
+                        fullImg.style.backgroundImage = `none`;
+                        fullImg.style.zIndex = '1';
+                        fullImg.style.right = '8px';
+                        fullImg.style.width = '0';
+                        fullImg.style.bottom = '8px';
+                        fullImg.style.height = '0';
+                        fullImg.style.opacity = '0';
+                    };
+                } else {
+                    thumbnail.onmouseover = function () {
+                        thumbnail.style.width = '120px';
+                        thumbnail.style.height = '120px';
+                        thumbnail.style.boxShadow = '0 0 40px 0 rgba(0,0,0,0.5)';
+                    };
+                    thumbnail.onmouseleave = function () {
+                        thumbnail.style.width = '100px';
+                        thumbnail.style.height = '100px';
+                        thumbnail.style.boxShadow = '0 0 40px 0 rgba(0,0,0,0.25)';
+                    };
+                }
             });
         }
         return attachImages;
     }
-}
-
-
-function buildArticles() {
-
-
-    let lifeline = document.getElementById('lifeline');
-    lifeline.innerHTML = '';
-
-    articles.forEach((data) => {
-        let matched = data.tags.some(r => filters.includes(r));
-
-        if (matched || filters.length === 0) {
-
-
-            let article = new Article(data);
-            lifeline.appendChild(article.buildArticle());
-        }
-    });
 }
