@@ -2,7 +2,7 @@
 :root {
     /* Layout */
     --margin-mobile: 15px;
-    --margin-desktop: calc((100vw - 650px) / 2);
+    --margin-desktop: calc((100vw - 550px) / 2);
     --mouse-x: 0;
     --mouse-y: 0;
     --mouse-xp: 0;
@@ -91,10 +91,6 @@ a {
 
 a:hover {
     color: var(--color-primary);
-}
-
-.button-secondary i {
-    margin-right: 0.5rem;
 }
 
 .button-secondary {
@@ -197,7 +193,7 @@ main {
 
 article {
     max-width: 600px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     margin-left: 30px;
     position: relative;
 }

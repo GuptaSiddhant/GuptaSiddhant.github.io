@@ -365,6 +365,7 @@ function buildArticles() {
                     let buttonIcon = document.createElement('i');
                     button.appendChild(buttonIcon);
                     buttonIcon.className = "fas fa-external-link-alt";
+                    buttonIcon.style.marginRight = '0.5rem';
                     if (action.icon && action.icon !== '') {
                         buttonIcon.className = action.icon;
                     }
@@ -398,9 +399,9 @@ function buildSocialActions() {
         if (action.icon && action.icon !== '') {
             buttonIcon.className = action.icon;
         }
-        let buttonText = document.createElement('span');
-        button.appendChild(buttonText);
-        buttonText.innerText = action.name;
+        // let buttonText = document.createElement('span');
+        // button.appendChild(buttonText);
+        // buttonText.innerText = action.name;
     });
 }
 
