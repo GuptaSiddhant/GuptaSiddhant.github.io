@@ -288,6 +288,8 @@ class Article {
                 thumbnail.style.objectFit = 'cover';
                 thumbnail.style.boxShadow = '0 0 40px 0 rgba(0,0,0,0.25)';
                 thumbnail.src = item.image;
+                thumbnail.alt = item.name;
+                thumbnail.title = item.name;
 
                 fullImg.style.backgroundPosition = 'center';
                 fullImg.style.backgroundRepeat = 'no-repeat';
