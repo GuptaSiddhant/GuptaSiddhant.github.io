@@ -1,12 +1,12 @@
 let details = {
     title: 'Siddhant Gupta',
     typeColors: {
-        about: "#7c26a9",
-        project: "#27b304",
-        education: "#0000dd",
-        experience: "#b30000",
-        blog: "#806a0b",
-        fallback: '#808080',
+        about: "#A551A9",
+        project: "#62BA46",
+        education: "#017AFF",
+        experience: "#F04D52",
+        blog: "#FCB927",
+        fallback: '#8C8C8C',
     },
     semanticColorsDark: {
         border: "#ffffff",
@@ -34,6 +34,9 @@ let details = {
     ]
 };
 
+
+// title, static, subtitle, icon, date, tags, summary, role, tech, attachments, actions
+
 let articles = [
     {
         title: "Hi, I'm Siddhant Gupta",
@@ -41,7 +44,7 @@ let articles = [
         icon: "fas fa-info",
         subtitle: "UX Designer • Full-Stack Developer • Entrepreneur",
         tags: ["about"],
-        description: "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small thing can make the biggest impact. If I had to describe myself in one word, that’d be stalwart.",
+        summary: "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small thing can make the biggest impact. If I had to describe myself in one word, that’d be stalwart.",
         attachments: [{
             name: "Siddhant Gupta",
             image: "images/siddhantgupta.jpg",
@@ -59,7 +62,7 @@ let articles = [
         subtitle: "FA Solutions Oy, Helsinki, Finland",
         date: "January 2019 - Present",
         tags: ["experience", 'design'],
-        description: "- Designing the product features.\n" +
+        summary: "- Designing the product features.\n" +
             "- Supporting UI/UX development of core product and projects team \n" +
             "- Generating graphic design for marketing team",
         actions: [{
@@ -73,16 +76,16 @@ let articles = [
         subtitle: "Aalto University & KTH Royal Institute of Technology",
         date: "August 2017 - June 2019",
         tags: ["education", "masters"],
-        description: "Dual degree program as a part of EIT Digital Master School.",
+        summary: "Dual degree program as a part of EIT Digital Master School.",
         actions: [{
             name: "Masters thesis",
             link: "https://aaltodoc.aalto.fi/handle/123456789/39028",
         }, {
             name: "Aalto University",
-            link: "https://aalto.fi",
+            link: "https://www.aalto.fi/en/study-options/masters-programme-in-ict-innovation-eit-digital-master-school-human-computer",
         }, {
             name: "KTH",
-            link: "https://kth.se",
+            link: "https://www.kth.se/en/studies/master/ict-innovation/introduction-1.609472",
         }]
     },
     {
@@ -91,7 +94,7 @@ let articles = [
         subtitle: "Stalwart Design",
         date: "April 2019",
         tags: ["project", "branding", "styling"],
-        description: "Business Espoo supports the vitality of businesses by offering the best, continuously developing services in one place.",
+        summary: "Business Espoo supports the vitality of businesses by offering the best, continuously developing services in one place.",
         role: "Solely designed the Brand Identity and Style Guidelines",
         tech: ["Sketch", "InDesign"],
         attachments: [{
@@ -109,7 +112,7 @@ let articles = [
         subtitle: "Aalto University",
         date: "April 2019",
         tags: ["project", "back-end", "front-end", 'UI'],
-        description: "Arcadia is an online game store for JavaScript games. Developed as a project for the Web Software Development course CS-C3170 2018-2019 at Aalto University, Finland.",
+        summary: "Arcadia is an online game store for JavaScript games. Developed as a project for the Web Software Development course CS-C3170 2018-2019 at Aalto University, Finland.",
         role: "Solely designed the UI and developed the majority the front-end and considerable back-end.",
         tech: ['Python', 'Django', 'JavaScript', "Sketch"],
         attachments: [{
@@ -130,7 +133,8 @@ let articles = [
         icon: "far fa-lightbulb",
         date: "February 2017",
         tags: ["project", "concept"],
-        description: "The elegant All-In-One Identity solution for every Citizen.",
+        summary: "The elegant All-In-One Identity solution for every Citizen.",
+        role: 'Conceptualised and designed a mock representation of possible Passport Card.',
         tech: ['Sketch'],
         attachments: [{
             name: "Passport Concept",
@@ -138,16 +142,13 @@ let articles = [
         }, {
             name: "Passport Concept",
             image: "images/passport2.jpg",
-        }, {
-            name: "Passport Concept",
-            image: "images/passport3.jpg",
         }
         ],
-        // actions: [{
-        //     name: "Read More",
-        //     icon: "fas fa-align-left",
-        //     link: "https://guptasiddhant.com/the-passport-concept-289733ba7963",
-        // }]
+        actions: [{
+            name: "Read More",
+            icon: "fas fa-align-left",
+            link: "https://guptasiddhant.com/the-passport-concept-289733ba7963",
+        }]
     },
     {
         title: "Co-Founder & Product Designer",
@@ -155,7 +156,7 @@ let articles = [
         subtitle: "QB Middle East FZ-LLC, Dubai, U.A.E.",
         date: "August 2016 - August 2017",
         tags: ["experience", 'entrepreneur', 'design', 'management'],
-        description:
+        summary:
             `- Designing UI for web and mobile app.
              - Service Design and customer journey design.
              - Managing team of developers and designer.`,
@@ -170,7 +171,7 @@ let articles = [
         subtitle: "Sprint Middle East LLC, Dubai, U.A.E.",
         date: "February 2016 - April 2017",
         tags: ["experience", 'design', 'marketing'],
-        description:
+        summary:
             `- Designing UI for web and mobile apps.
         - Communicating with target audiences, presenting the demo.
         - Managing customer relationships and Conducting market research`,
@@ -185,7 +186,7 @@ let articles = [
         subtitle: "Birla Institute of Technology and Science (BITS), Pilani",
         date: "September 2012 - July 2016",
         tags: ["education", "bachelors", 'engineering'],
-        description: "Graduated in First Division with a focus on 3D modelling",
+        summary: "Graduated in First Division with a focus on 3D modelling",
         actions: [{
             name: "BITS Pilani",
             link: "https://bits-pilani.ac.in",
@@ -197,7 +198,7 @@ let articles = [
         subtitle: "K. R. Mangalam World School, Vikaspuri",
         date: "April 2008 - May 2012",
         tags: ["education", "school", 'computers', 'C++'],
-        description: "House Captain in the Senior Year. Scholar and Class In-charge throughout.",
+        summary: "House Captain in the Senior Year. Scholar and Class In-charge throughout.",
         actions: [{
             name: "K. R. Mangalam",
             link: "https://krmangalam.com",
@@ -209,7 +210,7 @@ let articles = [
         subtitle: "High School Project",
         date: "April 2008 - May 2012",
         tags: ["project", "school", 'C++'],
-        description: "DOS-based Operating System UI bundled with a desktop, text-editor, game and voting software.",
+        summary: "DOS-based Operating System UI bundled with a desktop, text-editor, game and voting software.",
         tech: ['C++'],
         actions: [{
             name: "GitHub",
@@ -222,7 +223,7 @@ let articles = [
         icon: "fas fa-baby",
         date: "September 1994",
         tags: ["about"],
-        description: "This is the end of the line. Maybe we should continue it over mail.",
+        summary: "This is the end of the line. Maybe we should continue it over mail.",
         actions: [{
             name: "Back to Top",
             icon: 'fas fa-chevron-up',

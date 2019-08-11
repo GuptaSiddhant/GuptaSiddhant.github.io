@@ -2,7 +2,7 @@
 :root {
     /* Layout */
     --margin-mobile: 15px;
-    --margin-desktop: calc((100vw - 550px) / 2);
+    --margin-desktop: calc((100vw - 900px) / 2);
     --mouse-x: 0;
     --mouse-y: 0;
     --mouse-xp: 0;
@@ -52,6 +52,7 @@ h3, h4, h5, h6, p {
 h3 {
     font-weight: 500;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: var(--color-primary);
 }
 
@@ -186,7 +187,7 @@ main {
     padding-top: 150px;
     padding-bottom: 40px;
     margin-left: 10px;
-    border-left: 1px solid var(--color-secondary);
+    /*border-left: 1px solid var(--color-secondary);*/
     position: relative;
     min-height: calc(100vh - 200px);
 }
