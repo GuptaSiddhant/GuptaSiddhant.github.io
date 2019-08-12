@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", initiate);
 
 // Global Variables
 let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || true;
-let allTags = ["about", "project", "experience", "education", "blog"];
+let allTags = details.navTags;
 let filters = [];
 
 function initiate() {
@@ -153,6 +153,7 @@ function buildSocialActions(size, color) {
       ? buildButton(size, color, action)
       : buildButton(size, color, action, true);
     sButtons.appendChild(button);
+    button.id = "social-actionButton";
 
     button.onclick = function() {
       if (action.type === "top") {
@@ -169,9 +170,8 @@ function buildSocialActions(size, color) {
   return sButtons;
 }
 
-function buildButton(size, color, action, icon = false) {
+function buildButton(size, color, action, icon = false, accent = false) {
   let button = document.createElement("div");
-  button.id = "social-actionButton";
 
   button.style.marginLeft = size.isMobile ? "0" : size.radius + "px";
   button.style.marginRight = size.isMobile ? size.radius + "px" : "0";
@@ -199,9 +199,11 @@ function buildButton(size, color, action, icon = false) {
   }
   button.onmouseover = function() {
     button.classList.add("hover");
-    button.style.backgroundColor = color.primary;
+    button.style.backgroundColor = accent
+      ? matchColor([action.name])
+      : color.primary;
     button.style.border = "1px solid " + color.primary;
-    button.style.color = color.highlight;
+    button.style.color = accent ? "#FFFFFF" : color.highlight;
   };
   button.onmouseleave = function() {
     button.classList.remove("hover");
@@ -251,7 +253,7 @@ function buildNavigation(size, color) {
   allTags.forEach(tag => {
     let name = tag.charAt(0).toUpperCase() + tag.slice(1);
 
-    let button = buildButton(size, color, { name: name });
+    let button = buildButton(size, color, { name: name }, false, true);
     nav.appendChild(button);
     button.style.position = size.isMobile ? "initial" : "absolute";
     button.style.top = posTop + "px";
@@ -263,9 +265,9 @@ function buildNavigation(size, color) {
 
     if (filters.includes(tag)) {
       button.classList.add("active");
-      button.style.backgroundColor = color.primary;
-      button.style.border = "1px solid " + color.primary;
-      button.style.color = color.highlight;
+      button.style.backgroundColor = matchColor([tag]);
+      button.style.border = "1px solid " + matchColor([tag]);
+      button.style.color = "#FFFFFF"; //color.highlight;
       clearButton.style.display = "block";
       button.onmouseleave = function() {};
     }
@@ -286,9 +288,9 @@ function buildNavigation(size, color) {
         };
       } else {
         button.classList.add("active");
-        button.style.backgroundColor = color.primary;
-        button.style.border = "1px solid " + color.primary;
-        button.style.color = color.highlight;
+        button.style.backgroundColor = matchColor([tag]);
+        button.style.border = "1px solid " + matchColor([tag]);
+        button.style.color = "#FFFFFF";
         filters = [];
         filters.push(tag);
         clearButton.style.display = "block";
@@ -473,17 +475,15 @@ function arrayRemove(arr, value) {
 }
 
 function matchColor(tags) {
-  if (tags.includes("about")) {
-    return details.typeColors.about;
-  } else if (tags.includes("project")) {
-    return details.typeColors.project;
-  } else if (tags.includes("experience")) {
-    return details.typeColors.experience;
-  } else if (tags.includes("education")) {
-    return details.typeColors.education;
-  } else if (tags.includes("blog")) {
-    return details.typeColors.blog;
-  } else return details.typeColors.fallback;
+  for (var i = 0; i < tags.length; i++) {
+    tags[i] = tags[i].toLowerCase();
+  }
+  let matches = allTags.filter(x => tags.includes(x));
+  if (matches[0] && matches[0] !== "") {
+    return details.typeColors[matches[0]];
+  } else {
+    return details.typeColors.fallback;
+  }
 }
 
 function parseHash(queryString) {
@@ -531,6 +531,6 @@ function setUrlParameter(key, value) {
   } else {
     params.append(key, value);
   }
-  console.log([...params.entries()]);
+  // console.log([...params.entries()]);
   setURL("?" + params.toString());
 }

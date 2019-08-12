@@ -65,7 +65,7 @@ class Article {
 
     cardIcon.style.position = "absolute";
     cardIcon.style.left = this.isMobile ? this.spacing + "px" : "-20px";
-    cardIcon.style.top = this.isMobile ? "-20px" : "35px";
+    cardIcon.style.top = this.isMobile ? "-20px" : "34px";
     cardIcon.style.width = iconSize * 2 + "px";
     cardIcon.style.height = iconSize * 2 + "px";
     cardIcon.style.borderRadius = this.radius + "px";
@@ -316,6 +316,7 @@ class Article {
 
         if (item.full !== false) {
           fullImg.id = "article-fullImg";
+          fullImg.style.backgroundColor = this.colorCard;
           fullImg.style.backgroundPosition = "center";
           fullImg.style.backgroundRepeat = "no-repeat";
           fullImg.style.backgroundSize = "cover";
@@ -342,6 +343,14 @@ class Article {
             closeButton.classList = "fas fa-times-circle";
             closeButton.onclick = closeImg;
           }
+
+          // let item = this;
+          // thumbnail.addEventListener("mousemove", function(e) {
+          //   console.log(e);
+          //   // fullImg.style.backgroundPositionX = -e.offsetX + "px";
+          //   fullImg.style.backgroundPositionY =
+          //     (-e.offsetY * item.size) / 100 + "px";
+          // });
 
           thumbnail.onmouseover = function() {
             fullImg.style.backgroundImage = `url(${item.image})`;

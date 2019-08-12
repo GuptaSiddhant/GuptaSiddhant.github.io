@@ -1,13 +1,58 @@
 let details = {
   title: "Gupta Siddhant",
+  tags: [
+    {
+      name: "about",
+      color: "#A550A7",
+      icon: "fas fa-info"
+    },
+    {
+      name: "project",
+      color: "#62BA46",
+      icon: "fas fa-palette"
+    },
+    {
+      name: "experience",
+      color: "#017AFF",
+      icon: "fas fa-briefcase"
+    },
+    {
+      name: "education",
+      color: "#FE5257",
+      icon: "fas fa-graduation-cap"
+    },
+    {
+      name: "testemonial",
+      color: "#F74F9E",
+      icon: "fas fa-quote-left"
+    },
+    {
+      name: "blog",
+      color: "#F7821B",
+      icon: "fas fa-feather-alt"
+    },
+    {
+      name: "other",
+      color: "#8C8C8C",
+      icon: "fas fa-history"
+    }
+  ],
+
+  navTags: [
+    "about",
+    "project",
+    "experience",
+    "education",
+    "testemonial",
+    "blog"
+  ],
   typeColors: {
     about: "#A550A7",
     project: "#62BA46",
     education: "#017AFF",
     experience: "#FE5257",
-    blog: "#FCB828",
-    pink: "#F74F9E",
-    orange: "#F7821B",
+    blog: "#F7821B",
+    testemonial: "#F74F9E",
     fallback: "#8C8C8C"
   },
   socialActions: [
@@ -74,7 +119,8 @@ let articles = [
   {
     title: "M.Sc. Human Computer Interaction & Design",
     icon: "fas fa-graduation-cap",
-    subtitle: "Aalto University & KTH Royal Institute of Technology",
+    subtitle: `Aalto University, Finland
+       KTH Royal Institute of Technology, Sweden`,
     date: "August 2017 - June 2019",
     tags: ["education", "masters"],
     summary: "Dual degree program as a part of EIT Digital Master School.",
@@ -149,9 +195,10 @@ let articles = [
   },
   {
     title: "The Passport - Concept",
-    icon: "far fa-lightbulb",
+    subtitle: "The Startup - Medium",
+    icon: "far fa-feather-alt",
     date: "February 2017",
-    tags: ["project", "blog", "concept"],
+    tags: ["blog", "concept"],
     summary: "The elegant All-In-One Identity solution for every Citizen.",
     role:
       "Conceptualised and designed a mock representation of possible Passport Card.",
@@ -222,9 +269,62 @@ let articles = [
     ]
   },
   {
+    title: "Graphic Designer",
+    icon: "fas fa-briefcase",
+    subtitle: "Birla Institute of Technology and Science, Pilani",
+    date: "September 2014 - December 2015",
+    tags: ["experience", "design", "assistant"],
+    summary: `Graphic Designer & Professional Assistant to the Dean of Student Welfare Division. Designed banners, advertisements, posters and other materials for Admissions Department.`,
+    attachments: [
+      {
+        name: "Achieve@BITS",
+        image: "images/bits1.jpg"
+      },
+      {
+        name: "Lead@BITS",
+        image: "images/bits2.jpg"
+      }
+    ],
+    actions: [
+      {
+        name: "BITS Pilani",
+        link: "https://bits-pilani.ac.in"
+      }
+    ]
+  },
+  {
+    title:
+      "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
+    icon: "fas fa-quote-left",
+    subtitle: "Manish K.",
+    date: "14 August 2015",
+    tags: ["testemonial"],
+    summary: "Manish and I worked together over a website design.",
+    actions: [
+      {
+        name: "LinkedIn",
+        link: "https://www.linkedin.com/in/guptasiddhant9/"
+      }
+    ]
+  },
+  {
+    title: "Graphic Design Intern",
+    icon: "fas fa-briefcase",
+    subtitle: "Zikr Studio, Delhi, India",
+    date: "July 2015 - August 2015",
+    tags: ["experience", "design", "intern"],
+    summary: `I catered to all design needs of Zikr Studio. From designing website pages, logos, App UI/UX and more.`,
+    actions: [
+      {
+        name: "Zikr Studio",
+        link: "http://www.zikrstudio.com/"
+      }
+    ]
+  },
+  {
     title: "High School",
     icon: "fas fa-graduation-cap",
-    subtitle: "K. R. Mangalam World School, Vikaspuri",
+    subtitle: "K. R. Mangalam World School, Vikaspuri, India",
     date: "April 2008 - May 2012",
     tags: ["education", "school", "computers", "C++"],
     summary:
