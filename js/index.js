@@ -69,7 +69,6 @@ function buildDOM() {
   BODY.style.overflowY = "scroll";
 
   BODY.innerHTML = "";
-  console.log(Size.isMobile);
   BODY.appendChild(buildLifeline(Size));
   if (Size.isMobile) {
     BODY.appendChild(buildHeadbar(Size));
@@ -141,13 +140,15 @@ function buildSocialActions(size) {
   let sButtons = document.createElement("div");
   sButtons.id = "social-actions";
   sButtons.style.display = "flex";
-  sButtons.style.justifyContent = "flex-end";
+  sButtons.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
   sButtons.style.margin = size.radius + "px 0";
   sButtons.style.color = "#1A1A1A";
   sButtons.style.cursor = "pointer";
 
   details.socialActions.forEach(action => {
-    let button = buildButton(size, action, true);
+    let button = size.isMobile
+      ? buildButton(size, action)
+      : buildButton(size, action, true);
     sButtons.appendChild(button);
 
     button.onclick = function() {
@@ -169,7 +170,8 @@ function buildButton(size, action, icon = false) {
   let button = document.createElement("div");
   button.id = "social-actionButton";
 
-  button.style.marginLeft = size.radius + "px";
+  button.style.marginLeft = size.isMobile ? "0" : size.radius + "px";
+  button.style.marginRight = size.isMobile ? size.radius + "px" : "0";
   button.style.padding = size.radius / 2 + "px " + (size.radius * 3) / 2 + "px";
   button.style.borderRadius = size.radius / 2 + "px";
   button.style.border = "1px solid #1A1A1A";
@@ -210,7 +212,8 @@ function buildNavigation(size) {
   let nav = document.createElement("nav");
   nav.id = "nav-area";
   nav.style.display = "flex";
-  nav.style.flexDirection = "column";
+  nav.style.flexDirection = size.isMobile ? "row" : "column";
+  nav.style.flexWrap = "wrap";
   nav.style.justifyContent = "flex-start";
   nav.style.margin = size.spacing / 2 + "px 0";
   nav.style.color = "#1A1A1A";
@@ -237,17 +240,19 @@ function buildNavigation(size) {
     setURL();
     initiate();
   };
-  nav.appendChild(clearButton);
+  if (!size.isMobile) {
+    nav.appendChild(clearButton);
+  }
 
   allTags.forEach(tag => {
     let name = tag.charAt(0).toUpperCase() + tag.slice(1);
 
     let button = buildButton(size, { name: name });
     nav.appendChild(button);
-    button.style.position = "absolute";
+    button.style.position = size.isMobile ? "initial" : "absolute";
     button.style.top = posTop + "px";
     button.style.right = "0";
-    button.style.width = "115px";
+    button.style.width = size.isMobile ? "100px" : "115px";
     button.style.marginBottom = "0.5rem";
 
     posTop += size.spacing;
@@ -295,11 +300,12 @@ function buildNavigation(size) {
 
 function buildColorToggle(size) {
   let switcher = document.createElement("div");
-  switcher.style.position = "absolute";
+  switcher.style.position = size.isMobile ? "initial" : "absolute";
   switcher.style.top = "0px";
   switcher.style.right = size.spacing + "px";
   switcher.style.display = "flex";
-  switcher.style.justifyContent = "flex-end";
+  switcher.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
+  switcher.style.marginTop = size.isMobile ? size.radius + "px" : "0";
 
   let modeSwitch = document.createElement("div");
   switcher.appendChild(modeSwitch);
@@ -374,13 +380,63 @@ function buildHeadbar(size) {
   menuIcon.style.position = "fixed";
   menuIcon.style.top = size.spacing / 2 + "px";
   menuIcon.style.right = size.spacing + "px";
-  menuIcon.appendChild(buildButton(size, { icon: "fas fa-bars" }, true));
+  menuIcon.appendChild(
+    buildButton(size, { icon: "fas fa-bars", name: "Menu" }, true)
+  );
 
-  //   headbar.appendChild(buildSocialActions(size));
-  //   headbar.appendChild(buildNavigation(size));
-  //   headbar.appendChild(buildColorToggle(size));
+  let Menu = buildMenu(size);
+  Menu.style.display = "none";
 
+  menuIcon.onclick = function() {
+    if (Menu.style.display === "none") {
+      Menu.style.display = "block";
+      menuIcon.innerHTML = "";
+      menuIcon.appendChild(buildButton(size, { icon: "fas fa-times" }, true));
+    } else {
+      Menu.style.display = "none";
+      menuIcon.innerHTML = "";
+      menuIcon.appendChild(buildButton(size, { icon: "fas fa-bars" }, true));
+    }
+  };
+
+  headbar.appendChild(Menu);
   return headbar;
+}
+
+function buildMenu(size) {
+  let Menu = document.createElement("div");
+  Menu.id = "menu";
+  Menu.style.position = "fixed";
+  Menu.style.top = "60px";
+  Menu.style.left = "0px";
+  Menu.style.right = "0px";
+  Menu.style.backgroundColor = `#FFFFFF`;
+  Menu.style.height = "auto";
+  Menu.style.zIndex = "0";
+  Menu.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,0.1)`;
+  Menu.style.position = "relative";
+  Menu.style.padding = `${size.spacing / 2}px ${size.spacing}px  ${
+    size.spacing
+  }px`;
+
+  function divider(text) {
+    let divider = document.createElement("div");
+    divider.innerText = text;
+    divider.style.marginTop = size.radius + "px";
+    divider.style.borderBottom = "1px solid #8c8c8c";
+    return divider;
+  }
+
+  Menu.appendChild(divider("Contact"));
+  Menu.appendChild(buildSocialActions(size));
+
+  Menu.appendChild(divider("Navigate"));
+  Menu.appendChild(buildNavigation(size));
+
+  Menu.appendChild(divider("Color Mode"));
+  Menu.appendChild(buildColorToggle(size));
+
+  return Menu;
 }
 
 // Supporting functions
