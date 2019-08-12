@@ -374,6 +374,9 @@ function buildHeadbar(size) {
   headingTitle.style.textTransform = "uppercase";
   headingTitle.style.marginBottom = "1rem";
   headingTitle.innerText = details.title;
+  headingTitle.onclick = function() {
+    window.scrollTo(0, 0);
+  };
 
   let menuIcon = document.createElement("div");
   headbar.appendChild(menuIcon);
