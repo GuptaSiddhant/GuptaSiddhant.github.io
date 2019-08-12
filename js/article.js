@@ -19,10 +19,11 @@ class Article {
   }
 
   buildArticle() {
-    let fullImg = document.createElement("div");
-
     let card = document.createElement("article");
     card.id = "article-card";
+
+    let fullImg = document.createElement("div");
+    let closeButton = document.createElement("i");
 
     card.style.backgroundColor = "#FFFFFF";
     card.style.margin = this.spacing + "px";
@@ -48,7 +49,8 @@ class Article {
     card.appendChild(this.buildDescription());
     card.appendChild(this.buildActions());
     card.appendChild(fullImg);
-    card.appendChild(this.buildAttachments(fullImg));
+    card.appendChild(closeButton);
+    card.appendChild(this.buildAttachments(fullImg, closeButton));
     return card;
   }
 
@@ -267,7 +269,7 @@ class Article {
     return actionButtons;
   }
 
-  buildAttachments(fullImg) {
+  buildAttachments(fullImg, closeButton) {
     let imageSize = 100;
     let attachImages = document.createElement("div");
     attachImages.id = "article-attachments";
@@ -322,6 +324,19 @@ class Article {
           fullImg.style.opacity = "0";
           fullImg.style.transition = "opacity 0.2s ease";
 
+          fullImg.onclick = closeImg;
+
+          if (this.isMobile) {
+            closeButton.style.position = "absolute";
+            closeButton.style.top = this.spacing + "px";
+            closeButton.style.right = this.spacing + "px";
+            closeButton.style.color = "#FFFFFF";
+            closeButton.style.zIndex = "10";
+            closeButton.style.fontSize = "1px";
+            closeButton.classList = "fas fa-times-circle";
+            closeButton.onclick = closeImg;
+          }
+
           thumbnail.onmouseover = function() {
             fullImg.style.backgroundImage = `url(${item.image})`;
             fullImg.style.zIndex = "5";
@@ -332,9 +347,15 @@ class Article {
             fullImg.style.width = "calc(100% - 16px)";
             fullImg.style.height = "calc(100% - 16px)";
             fullImg.style.opacity = "1";
+            closeButton.style.fontSize = "20px";
+            closeButton.style.boxShadow = `0 0 ${
+              this.spacing
+            }px 0 rgba(0,0,0,0.25)`;
           };
 
-          thumbnail.onmouseleave = function() {
+          thumbnail.onmouseleave = closeImg;
+
+          function closeImg() {
             fullImg.style.backgroundImage = `none`;
             fullImg.style.zIndex = "1";
             fullImg.style.right = `${this.radius}px`;
@@ -342,7 +363,10 @@ class Article {
             fullImg.style.bottom = `${this.radius}px`;
             fullImg.style.height = "0";
             fullImg.style.opacity = "0";
-          };
+
+            closeButton.style.fontSize = "1px";
+            closeButton.style.boxShadow = `0 0 0 0 rgba(0,0,0,0.25)`;
+          }
         } else {
           thumbnail.onmouseover = function() {
             thumbnail.style.width = "120px";
