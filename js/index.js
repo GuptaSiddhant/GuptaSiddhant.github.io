@@ -362,7 +362,9 @@ function buildHeadbar(size, color) {
   headbar.style.backgroundColor = color.card;
   headbar.style.height = (size.spacing * 5) / 2 + "px";
   headbar.style.zIndex = "50";
-  headbar.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,0.1)`;
+  headbar.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,${
+    darkMode ? 0.5 : 0.2
+  })`;
 
   let headingTitle = document.createElement("div");
   headbar.appendChild(headingTitle);
@@ -395,6 +397,16 @@ function buildHeadbar(size, color) {
 
   let Menu = buildMenu(size, color);
   Menu.style.display = "none";
+  let overlay = document.createElement("div");
+  overlay.style.display = "none";
+  overlay.style.position = "fixed";
+  overlay.style.top = "50px";
+  overlay.style.left = "0px";
+  overlay.style.right = "0px";
+  overlay.style.bottom = "0px";
+  overlay.style.backgroundColor = "#000000";
+  overlay.style.opacity = "0.5";
+  overlay.style.zIndex = "20";
 
   menuIcon.onclick = function() {
     if (Menu.style.display === "none") {
@@ -403,15 +415,17 @@ function buildHeadbar(size, color) {
       menuIcon.appendChild(
         buildButton(size, color, { icon: "fas fa-times" }, true)
       );
+      overlay.style.display = "block";
     } else {
       Menu.style.display = "none";
       menuIcon.innerHTML = "";
       menuIcon.appendChild(
         buildButton(size, color, { icon: "fas fa-bars" }, true)
       );
+      overlay.style.display = "none";
     }
   };
-
+  headbar.appendChild(overlay);
   headbar.appendChild(Menu);
   return headbar;
 }
@@ -425,11 +439,11 @@ function buildMenu(size, color) {
   Menu.style.right = "0px";
   Menu.style.backgroundColor = color.card;
   Menu.style.height = "auto";
-  Menu.style.zIndex = "0";
-  Menu.style.boxShadow = `0 ${size.spacing / 2}px ${size.spacing /
-    2}px 0 rgba(0,0,0,0.1)`;
+  Menu.style.zIndex = "50";
   Menu.style.position = "relative";
-  Menu.style.padding = `0px ${size.spacing}px  ${size.spacing}px`;
+  Menu.style.padding = `${size.spacing / 2}px ${size.spacing}px  ${
+    size.spacing
+  }px`;
 
   function divider(text) {
     let divider = document.createElement("div");
