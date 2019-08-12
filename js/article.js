@@ -1,5 +1,5 @@
 class Article {
-  constructor(article, size) {
+  constructor(article, size, color) {
     // title, static, subtitle, icon, date, tags, description, role, tech, attachments, actions
     this.title = article.title;
     this.subtitle = article.subtitle;
@@ -11,11 +11,15 @@ class Article {
     this.tech = article.tech;
     this.attachments = article.attachments;
     this.actions = article.actions;
-    this.color = matchColor(article.tags);
     this.spacing = size.spacing;
     this.size = size.widthMain - 4 * size.spacing;
     this.radius = size.radius;
     this.isMobile = size.isMobile;
+    this.colorAccent = matchColor(article.tags);
+    this.colorPrimary = color.primary;
+    this.colorSecondary = color.secondary;
+    this.colorInverse = color.inverse;
+    this.colorCard = color.card;
   }
 
   buildArticle() {
@@ -25,7 +29,7 @@ class Article {
     let fullImg = document.createElement("div");
     let closeButton = document.createElement("i");
 
-    card.style.backgroundColor = "#FFFFFF";
+    card.style.backgroundColor = this.colorCard;
     card.style.margin = this.spacing + "px";
     card.style.marginBottom = this.isMobile
       ? `${this.spacing * 2}px`
@@ -72,7 +76,7 @@ class Article {
     cardIcon.style.fontSize = iconSize + "px";
     cardIcon.style.zIndex = "10";
 
-    cardIcon.style.backgroundColor = this.color;
+    cardIcon.style.backgroundColor = this.colorAccent;
     if (this.icon && this.icon !== "") {
       cardIcon.className = this.icon;
     } else {
@@ -92,7 +96,7 @@ class Article {
     title.style.fontFamily = "Kameron, serif";
     title.style.fontWeight = "bold";
     title.style.fontSize = "24px";
-    title.style.color = "#1A1A1A";
+    title.style.color = this.colorPrimary;
     title.style.lineHeight = "30px";
     title.style.marginBottom = "4px";
     title.innerText = this.title;
@@ -104,7 +108,7 @@ class Article {
 
       subtitle.style.fontWeight = "500";
       subtitle.style.fontSize = "16px";
-      subtitle.style.color = this.color;
+      subtitle.style.color = this.colorAccent;
       subtitle.style.letterSpacing = "0.5px";
       subtitle.style.lineHeight = "20px";
       subtitle.style.textTransform = "uppercase";
@@ -118,7 +122,7 @@ class Article {
       heading.appendChild(subtitle2);
 
       subtitle2.style.fontSize = "16px";
-      subtitle2.style.color = "#4D4D4D";
+      subtitle2.style.color = this.colorSecondary;
       subtitle2.style.lineHeight = "20px";
       subtitle2.style.textTransform = "capitalize";
       subtitle2.style.marginBottom = "8px";
@@ -147,7 +151,7 @@ class Article {
     description.id = "article-description";
 
     description.style.fontSize = "14px";
-    description.style.color = "#4D4D4D";
+    description.style.color = this.colorSecondary;
     description.style.lineHeight = "20px";
     description.style.marginBottom = "4px";
 
@@ -209,7 +213,7 @@ class Article {
     if (this.actions && this.actions.length !== 0) {
       actionButtons.style.display = "flex";
       actionButtons.style.flexWrap = "wrap";
-      actionButtons.style.color = "#1A1A1A";
+      actionButtons.style.color = this.colorPrimary;
       actionButtons.style.cursor = "pointer";
 
       this.actions.forEach(action => {
@@ -221,7 +225,7 @@ class Article {
         button.style.marginRight = `${this.radius}px`;
         button.style.padding = `${this.radius / 2}px ${this.radius}px`;
         button.style.borderRadius = `${this.radius / 2}px`;
-        button.style.border = "1px solid #1A1A1A";
+        button.style.border = "1px solid " + this.colorPrimary;
         button.style.transition = "background-color 0.2s ease";
 
         let buttonIcon = document.createElement("i");
@@ -242,15 +246,15 @@ class Article {
         let article = this;
         button.onmouseover = function() {
           button.classList.add("hover");
-          button.style.backgroundColor = article.color;
-          button.style.border = "1px solid " + article.color;
+          button.style.backgroundColor = article.colorAccent;
+          button.style.border = "1px solid " + article.colorAccent;
           button.style.color = "#FFFFFF";
         };
         button.onmouseleave = function() {
           button.classList.remove("hover");
           button.style.backgroundColor = "transparent";
-          button.style.border = "1px solid " + "#1A1A1A";
-          button.style.color = "#1A1A1A";
+          button.style.border = "1px solid " + article.colorPrimary;
+          button.style.color = article.colorPrimary;
         };
 
         button.onclick = function() {
@@ -333,6 +337,8 @@ class Article {
             closeButton.style.color = "#FFFFFF";
             closeButton.style.zIndex = "10";
             closeButton.style.fontSize = "1px";
+            closeButton.style.textShadow = `0 0 ${this.spacing /
+              2}px rgba(0,0,0,0.5)`;
             closeButton.classList = "fas fa-times-circle";
             closeButton.onclick = closeImg;
           }

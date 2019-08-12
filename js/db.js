@@ -1,11 +1,13 @@
 let details = {
   title: "Siddhant Gupta",
   typeColors: {
-    about: "#A551A9",
+    about: "#A550A7",
     project: "#62BA46",
     education: "#017AFF",
-    experience: "#F04D52",
-    blog: "#FCB927",
+    experience: "#FE5257",
+    blog: "#FCB828",
+    pink: "#F74F9E",
+    orange: "#F7821B",
     fallback: "#8C8C8C"
   },
   semanticColorsDark: {

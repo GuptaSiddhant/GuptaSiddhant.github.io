@@ -35,12 +35,6 @@ function buildDOM() {
   // HEAD
   let title = document.getElementsByTagName("title")[0];
   title.innerText = details.title;
-  let colorCSS = document.getElementById("color-css");
-  if (darkMode) {
-    colorCSS.href = "css/dark.css";
-  } else {
-    colorCSS.href = "css/light.css";
-  }
 
   // BODY
   let mobileBreakPoint = 1000;
@@ -56,29 +50,38 @@ function buildDOM() {
     radius: 8
   };
 
+  let Color = {
+    primary: darkMode ? "#E6E6E6" : "#1A1A1A",
+    secondary: darkMode ? "#B3B3B3" : "#4D4D4D",
+    inverse: darkMode ? "#FFFFFF" : "#000000",
+    highlight: darkMode ? "#000000" : "#FFFFFF",
+    background: darkMode ? "#000000" : "#F2F2F2",
+    card: darkMode ? "#222222" : "#FFFFFF"
+  };
+
   let BODY = document.getElementById("app");
   BODY.style.height = "100vh";
   BODY.style.width = Size.widthWindow + "px";
   BODY.style.padding = `0`;
   BODY.style.margin = "0";
-  BODY.style.backgroundColor = "#F2f2f2";
+  BODY.style.backgroundColor = Color.background;
   BODY.style.fontFamily = "Poppins, Arial, sans-serif";
   BODY.style.fontSize = "16px";
-  BODY.style.color = "#1A1A1A";
+  BODY.style.color = Color.primary;
   BODY.style.overflow = "hidden";
   BODY.style.overflowY = "scroll";
 
   BODY.innerHTML = "";
-  BODY.appendChild(buildLifeline(Size));
+  BODY.appendChild(buildLifeline(Size, Color));
   if (Size.isMobile) {
-    BODY.appendChild(buildHeadbar(Size));
+    BODY.appendChild(buildHeadbar(Size, Color));
   } else {
-    BODY.appendChild(buildSidebar(Size));
+    BODY.appendChild(buildSidebar(Size, Color));
   }
 }
 
 // MAIN
-function buildLifeline(size) {
+function buildLifeline(size, color) {
   let lifeline = document.createElement("main");
   lifeline.id = "lifeline";
   lifeline.style.width = size.widthMain + "px";
@@ -96,7 +99,7 @@ function buildLifeline(size) {
   articles.forEach(data => {
     let matched = data.tags.some(r => filters.includes(r));
     if (matched || filters.length === 0) {
-      let article = new Article(data, size);
+      let article = new Article(data, size, color);
       lifeline.appendChild(article.buildArticle());
     }
   });
@@ -105,7 +108,7 @@ function buildLifeline(size) {
 }
 
 // SIDEBAR
-function buildSidebar(size) {
+function buildSidebar(size, color) {
   let sidebar = document.createElement("side");
   sidebar.style.width =
     size.widthBody - size.widthMain - 2 * size.spacing + "px";
@@ -120,7 +123,7 @@ function buildSidebar(size) {
   headingTitle.style.margin = "0";
   headingTitle.style.fontFamily = "Kameron, serif";
   headingTitle.style.fontWeight = "bold";
-  headingTitle.style.color = "#1A1A1A";
+  headingTitle.style.color = color.primary;
   headingTitle.style.fontSize = "2rem";
   headingTitle.style.lineHeight = "2.5rem";
   headingTitle.style.letterSpacing = "1px";
@@ -129,26 +132,26 @@ function buildSidebar(size) {
 
   headingTitle.innerText = details.title;
 
-  sidebar.appendChild(buildSocialActions(size));
-  sidebar.appendChild(buildNavigation(size));
-  sidebar.appendChild(buildColorToggle(size));
+  sidebar.appendChild(buildSocialActions(size, color));
+  sidebar.appendChild(buildNavigation(size, color));
+  sidebar.appendChild(buildColorToggle(size, color));
 
   return sidebar;
 }
 
-function buildSocialActions(size) {
+function buildSocialActions(size, color) {
   let sButtons = document.createElement("div");
   sButtons.id = "social-actions";
   sButtons.style.display = "flex";
   sButtons.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
   sButtons.style.margin = size.radius + "px 0";
-  sButtons.style.color = "#1A1A1A";
+  sButtons.style.color = color.primary;
   sButtons.style.cursor = "pointer";
 
   details.socialActions.forEach(action => {
     let button = size.isMobile
-      ? buildButton(size, action)
-      : buildButton(size, action, true);
+      ? buildButton(size, color, action)
+      : buildButton(size, color, action, true);
     sButtons.appendChild(button);
 
     button.onclick = function() {
@@ -166,7 +169,7 @@ function buildSocialActions(size) {
   return sButtons;
 }
 
-function buildButton(size, action, icon = false) {
+function buildButton(size, color, action, icon = false) {
   let button = document.createElement("div");
   button.id = "social-actionButton";
 
@@ -174,7 +177,8 @@ function buildButton(size, action, icon = false) {
   button.style.marginRight = size.isMobile ? size.radius + "px" : "0";
   button.style.padding = size.radius / 2 + "px " + (size.radius * 3) / 2 + "px";
   button.style.borderRadius = size.radius / 2 + "px";
-  button.style.border = "1px solid #1A1A1A";
+  button.style.border = "1px solid " + color.primary;
+  button.style.color = color.primary;
   button.style.transition = "background-color 0.2s ease";
   button.style.cursor = "pointer";
 
@@ -195,20 +199,20 @@ function buildButton(size, action, icon = false) {
   }
   button.onmouseover = function() {
     button.classList.add("hover");
-    button.style.backgroundColor = "#1A1A1A";
-    button.style.border = "1px solid " + "#1A1A1A";
-    button.style.color = "#FFFFFF";
+    button.style.backgroundColor = color.primary;
+    button.style.border = "1px solid " + color.primary;
+    button.style.color = color.highlight;
   };
   button.onmouseleave = function() {
     button.classList.remove("hover");
     button.style.backgroundColor = "transparent";
-    button.style.border = "1px solid " + "#1A1A1A";
-    button.style.color = "#1A1A1A";
+    button.style.border = "1px solid " + color.primary;
+    button.style.color = color.primary;
   };
   return button;
 }
 
-function buildNavigation(size) {
+function buildNavigation(size, color) {
   let nav = document.createElement("nav");
   nav.id = "nav-area";
   nav.style.display = "flex";
@@ -216,7 +220,7 @@ function buildNavigation(size) {
   nav.style.flexWrap = "wrap";
   nav.style.justifyContent = "flex-start";
   nav.style.margin = size.spacing / 2 + "px 0";
-  nav.style.color = "#1A1A1A";
+  nav.style.color = color.padding;
   nav.style.position = "relative";
 
   nav.innerHTML = "";
@@ -247,7 +251,7 @@ function buildNavigation(size) {
   allTags.forEach(tag => {
     let name = tag.charAt(0).toUpperCase() + tag.slice(1);
 
-    let button = buildButton(size, { name: name });
+    let button = buildButton(size, color, { name: name });
     nav.appendChild(button);
     button.style.position = size.isMobile ? "initial" : "absolute";
     button.style.top = posTop + "px";
@@ -259,9 +263,9 @@ function buildNavigation(size) {
 
     if (filters.includes(tag)) {
       button.classList.add("active");
-      button.style.backgroundColor = "#1A1A1A";
-      button.style.border = "1px solid " + "#1A1A1A";
-      button.style.color = "#FFFFFF";
+      button.style.backgroundColor = color.primary;
+      button.style.border = "1px solid " + color.primary;
+      button.style.color = color.highlight;
       clearButton.style.display = "block";
       button.onmouseleave = function() {};
     }
@@ -270,21 +274,21 @@ function buildNavigation(size) {
       if (button.classList.contains("active")) {
         button.classList.remove("active");
         button.style.backgroundColor = "transparent";
-        button.style.border = "1px solid " + "#1A1A1A";
-        button.style.color = "#1A1A1A";
+        button.style.border = "1px solid " + color.primary;
+        button.style.color = color.primary;
         clearButton.style.display = "none";
         filters = [];
         button.onmouseleave = function() {
           button.classList.remove("hover");
           button.style.backgroundColor = "transparent";
-          button.style.border = "1px solid " + "#1A1A1A";
-          button.style.color = "#1A1A1A";
+          button.style.border = "1px solid " + color.primary;
+          button.style.color = color.primary;
         };
       } else {
         button.classList.add("active");
-        button.style.backgroundColor = "#1A1A1A";
-        button.style.border = "1px solid " + "#1A1A1A";
-        button.style.color = "#FFFFFF";
+        button.style.backgroundColor = color.primary;
+        button.style.border = "1px solid " + color.primary;
+        button.style.color = color.highlight;
         filters = [];
         filters.push(tag);
         clearButton.style.display = "block";
@@ -298,7 +302,7 @@ function buildNavigation(size) {
   return nav;
 }
 
-function buildColorToggle(size) {
+function buildColorToggle(size, color) {
   let switcher = document.createElement("div");
   switcher.style.position = size.isMobile ? "initial" : "absolute";
   switcher.style.top = "0px";
@@ -349,15 +353,16 @@ function buildColorToggle(size) {
 }
 
 // HEADBAR
-function buildHeadbar(size) {
+function buildHeadbar(size, color) {
   let headbar = document.createElement("header");
   headbar.style.position = "fixed";
   headbar.style.top = "0px";
   headbar.style.left = "0px";
   headbar.style.right = "0px";
-  headbar.style.backgroundColor = `#FFFFFF`;
+  headbar.style.backgroundColor = color.card;
   headbar.style.height = (size.spacing * 5) / 2 + "px";
   headbar.style.zIndex = "50";
+  headbar.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,0.1)`;
 
   let headingTitle = document.createElement("div");
   headbar.appendChild(headingTitle);
@@ -367,12 +372,13 @@ function buildHeadbar(size) {
   headingTitle.style.margin = "0";
   headingTitle.style.fontFamily = "Kameron, serif";
   headingTitle.style.fontWeight = "bold";
-  headingTitle.style.color = "#1A1A1A";
+  headingTitle.style.color = color.primary;
   headingTitle.style.fontSize = "1.5rem";
   headingTitle.style.lineHeight = "38px";
   headingTitle.style.letterSpacing = "1px";
   headingTitle.style.textTransform = "uppercase";
   headingTitle.style.marginBottom = "1rem";
+  headingTitle.style.cursor = "pointer";
   headingTitle.innerText = details.title;
   headingTitle.onclick = function() {
     window.scrollTo(0, 0);
@@ -384,21 +390,25 @@ function buildHeadbar(size) {
   menuIcon.style.top = size.spacing / 2 + "px";
   menuIcon.style.right = size.spacing + "px";
   menuIcon.appendChild(
-    buildButton(size, { icon: "fas fa-bars", name: "Menu" }, true)
+    buildButton(size, color, { icon: "fas fa-bars", name: "Menu" }, true)
   );
 
-  let Menu = buildMenu(size);
+  let Menu = buildMenu(size, color);
   Menu.style.display = "none";
 
   menuIcon.onclick = function() {
     if (Menu.style.display === "none") {
       Menu.style.display = "block";
       menuIcon.innerHTML = "";
-      menuIcon.appendChild(buildButton(size, { icon: "fas fa-times" }, true));
+      menuIcon.appendChild(
+        buildButton(size, color, { icon: "fas fa-times" }, true)
+      );
     } else {
       Menu.style.display = "none";
       menuIcon.innerHTML = "";
-      menuIcon.appendChild(buildButton(size, { icon: "fas fa-bars" }, true));
+      menuIcon.appendChild(
+        buildButton(size, color, { icon: "fas fa-bars" }, true)
+      );
     }
   };
 
@@ -406,21 +416,20 @@ function buildHeadbar(size) {
   return headbar;
 }
 
-function buildMenu(size) {
+function buildMenu(size, color) {
   let Menu = document.createElement("div");
   Menu.id = "menu";
   Menu.style.position = "fixed";
-  Menu.style.top = "60px";
+  Menu.style.top = "50px";
   Menu.style.left = "0px";
   Menu.style.right = "0px";
-  Menu.style.backgroundColor = `#FFFFFF`;
+  Menu.style.backgroundColor = color.card;
   Menu.style.height = "auto";
   Menu.style.zIndex = "0";
-  Menu.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,0.1)`;
+  Menu.style.boxShadow = `0 ${size.spacing / 2}px ${size.spacing /
+    2}px 0 rgba(0,0,0,0.1)`;
   Menu.style.position = "relative";
-  Menu.style.padding = `${size.spacing / 2}px ${size.spacing}px  ${
-    size.spacing
-  }px`;
+  Menu.style.padding = `0px ${size.spacing}px  ${size.spacing}px`;
 
   function divider(text) {
     let divider = document.createElement("div");
@@ -431,13 +440,13 @@ function buildMenu(size) {
   }
 
   Menu.appendChild(divider("Contact"));
-  Menu.appendChild(buildSocialActions(size));
+  Menu.appendChild(buildSocialActions(size, color));
 
   Menu.appendChild(divider("Navigate"));
-  Menu.appendChild(buildNavigation(size));
+  Menu.appendChild(buildNavigation(size, color));
 
   Menu.appendChild(divider("Color Mode"));
-  Menu.appendChild(buildColorToggle(size));
+  Menu.appendChild(buildColorToggle(size, color));
 
   return Menu;
 }
