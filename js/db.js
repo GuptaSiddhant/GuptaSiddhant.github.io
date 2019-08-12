@@ -10,16 +10,6 @@ let details = {
     orange: "#F7821B",
     fallback: "#8C8C8C"
   },
-  semanticColorsDark: {
-    border: "#ffffff",
-    buttonText: "#b3b3b3",
-    buttonTextHover: "#ffffff"
-  },
-  semanticColorsLight: {
-    border: "#000000",
-    buttonText: "#1a1a1a",
-    buttonTextHover: "#ffffff"
-  },
   socialActions: [
     {
       name: "LinkedIn",
@@ -161,7 +151,7 @@ let articles = [
     title: "The Passport - Concept",
     icon: "far fa-lightbulb",
     date: "February 2017",
-    tags: ["project", "concept"],
+    tags: ["project", "blog", "concept"],
     summary: "The elegant All-In-One Identity solution for every Citizen.",
     role:
       "Conceptualised and designed a mock representation of possible Passport Card.",
@@ -180,7 +170,8 @@ let articles = [
       {
         name: "Read More",
         icon: "fas fa-align-left",
-        link: "https://guptasiddhant.com/the-passport-concept-289733ba7963"
+        link:
+          "https://medium.com/swlh/the-passport-concept-b95c1d24e02e?source=your_stories_page---------------------------"
       }
     ]
   },
