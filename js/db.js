@@ -1,5 +1,5 @@
 let details = {
-  title: "Siddhant Gupta",
+  title: "Gupta Siddhant",
   typeColors: {
     about: "#A550A7",
     project: "#62BA46",
