@@ -33,14 +33,15 @@ class Article {
         let closeButton = document.createElement("i");
         fullArticle.appendChild(closeButton);
         closeButton.style.position = "absolute";
-        closeButton.style.top = "0px";
-        closeButton.style.right =  "40px";
+        closeButton.style.top = "-8px";
+        closeButton.style.right =  "32px";
         closeButton.style.color = this.colorInverse;
         closeButton.style.zIndex = "10";
         closeButton.style.cursor = "pointer";
         closeButton.style.fontSize = "20px";
         closeButton.style.textShadow = `0 0 ${this.spacing / 2}px rgba(0,0,0,0.5)`;
-        closeButton.classList = 'fas fa-times-circle';
+        // noinspection JSValidateTypes
+        closeButton.classList = `fas fa-times-circle`;
         closeButton.onclick = function () {
             navigation.subNav = false;
             setURL();
@@ -393,6 +394,20 @@ class Article {
                     fullImg.style.opacity = "0";
                     fullImg.style.transition = "opacity 0.2s ease";
 
+                    let a = this;
+                    const closeImg = function (){
+                        fullImg.style.backgroundImage = `none`;
+                        fullImg.style.zIndex = "1";
+                        fullImg.style.right = `${a.radius}px`;
+                        fullImg.style.width = "0";
+                        fullImg.style.bottom = `${a.radius}px`;
+                        fullImg.style.height = "0";
+                        fullImg.style.opacity = "0";
+
+                        closeButton.style.fontSize = "1px";
+                        closeButton.style.boxShadow = `0 0 0 0 rgba(0,0,0,0.25)`;
+                    };
+
                     fullImg.onclick = closeImg;
 
                     if (this.isMobile) {
@@ -419,33 +434,21 @@ class Article {
                     thumbnail.onmouseover = function () {
                         fullImg.style.backgroundImage = `url(${item.image})`;
                         fullImg.style.zIndex = "5";
-                        fullImg.style.right = `${this.radius}px`;
-                        fullImg.style.top = `${this.radius}px`;
-                        fullImg.style.bottom = `${this.radius}px`;
-                        fullImg.style.left = `${this.radius}px`;
+                        fullImg.style.right = `${a.radius}px`;
+                        fullImg.style.top = `${a.radius}px`;
+                        fullImg.style.bottom = `${a.radius}px`;
+                        fullImg.style.left = `${a.radius}px`;
                         fullImg.style.width = "calc(100% - 16px)";
                         fullImg.style.height = "calc(100% - 16px)";
                         fullImg.style.opacity = "1";
                         closeButton.style.fontSize = "20px";
                         closeButton.style.boxShadow = `0 0 ${
-                            this.spacing
+                            a.spacing
                             }px 0 rgba(0,0,0,0.25)`;
                     };
 
                     thumbnail.onmouseleave = closeImg;
 
-                    function closeImg() {
-                        fullImg.style.backgroundImage = `none`;
-                        fullImg.style.zIndex = "1";
-                        fullImg.style.right = `${this.radius}px`;
-                        fullImg.style.width = "0";
-                        fullImg.style.bottom = `${this.radius}px`;
-                        fullImg.style.height = "0";
-                        fullImg.style.opacity = "0";
-
-                        closeButton.style.fontSize = "1px";
-                        closeButton.style.boxShadow = `0 0 0 0 rgba(0,0,0,0.25)`;
-                    }
                 } else {
                     thumbnail.onmouseover = function () {
                         thumbnail.style.width = "110px";
