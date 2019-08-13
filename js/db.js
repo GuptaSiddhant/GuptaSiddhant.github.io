@@ -13,12 +13,12 @@ let details = {
     },
     {
       name: "experience",
-      color: "#017AFF",
+      color: "#FE5257",
       icon: "fas fa-briefcase"
     },
     {
       name: "education",
-      color: "#FE5257",
+      color: "#017AFF",
       icon: "fas fa-graduation-cap"
     },
     {
@@ -37,24 +37,6 @@ let details = {
       icon: "fas fa-history"
     }
   ],
-
-  navTags: [
-    "about",
-    "project",
-    "experience",
-    "education",
-    "testemonial",
-    "blog"
-  ],
-  typeColors: {
-    about: "#A550A7",
-    project: "#62BA46",
-    education: "#017AFF",
-    experience: "#FE5257",
-    blog: "#F7821B",
-    testemonial: "#F74F9E",
-    fallback: "#8C8C8C"
-  },
   socialActions: [
     {
       name: "LinkedIn",
@@ -79,7 +61,6 @@ let details = {
 let articles = [
   {
     title: "Hi, I'm Siddhant Gupta",
-    icon: "fas fa-info",
     subtitle: "UX Designer • Full-Stack Developer • Entrepreneur",
     tags: ["about"],
     summary:
@@ -101,7 +82,6 @@ let articles = [
   },
   {
     title: "UX Designer",
-    icon: "fas fa-briefcase",
     subtitle: "FA Solutions Oy, Helsinki, Finland",
     date: "January 2019 - Present",
     tags: ["experience", "design"],
@@ -118,7 +98,6 @@ let articles = [
   },
   {
     title: "M.Sc. Human Computer Interaction & Design",
-    icon: "fas fa-graduation-cap",
     subtitle: `Aalto University, Finland
        KTH Royal Institute of Technology, Sweden`,
     date: "August 2017 - June 2019",
@@ -196,7 +175,6 @@ let articles = [
   {
     title: "The Passport - Concept",
     subtitle: "The Startup - Medium",
-    icon: "far fa-feather-alt",
     date: "February 2017",
     tags: ["blog", "concept"],
     summary: "The elegant All-In-One Identity solution for every Citizen.",
@@ -224,7 +202,6 @@ let articles = [
   },
   {
     title: "Co-Founder & Product Designer",
-    icon: "fas fa-briefcase",
     subtitle: "QB Middle East FZ-LLC, Dubai, U.A.E.",
     date: "August 2016 - August 2017",
     tags: ["experience", "entrepreneur", "design", "management"],
@@ -240,7 +217,6 @@ let articles = [
   },
   {
     title: "Design Executive",
-    icon: "fas fa-briefcase",
     subtitle: "Sprint Middle East LLC, Dubai, U.A.E.",
     date: "February 2016 - April 2017",
     tags: ["experience", "design", "marketing"],
@@ -256,7 +232,6 @@ let articles = [
   },
   {
     title: "B.Eng. (Honors) Mechanical Engineering",
-    icon: "fas fa-graduation-cap",
     subtitle: "Birla Institute of Technology and Science (BITS), Pilani",
     date: "September 2012 - July 2016",
     tags: ["education", "bachelors", "engineering"],
@@ -270,7 +245,6 @@ let articles = [
   },
   {
     title: "Graphic Designer",
-    icon: "fas fa-briefcase",
     subtitle: "Birla Institute of Technology and Science, Pilani",
     date: "September 2014 - December 2015",
     tags: ["experience", "design", "assistant"],
@@ -295,7 +269,6 @@ let articles = [
   {
     title:
       "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
-    icon: "fas fa-quote-left",
     subtitle: "Manish K.",
     date: "14 August 2015",
     tags: ["testemonial"],
@@ -309,7 +282,6 @@ let articles = [
   },
   {
     title: "Graphic Design Intern",
-    icon: "fas fa-briefcase",
     subtitle: "Zikr Studio, Delhi, India",
     date: "July 2015 - August 2015",
     tags: ["experience", "design", "intern"],
@@ -323,7 +295,6 @@ let articles = [
   },
   {
     title: "High School",
-    icon: "fas fa-graduation-cap",
     subtitle: "K. R. Mangalam World School, Vikaspuri, India",
     date: "April 2008 - May 2012",
     tags: ["education", "school", "computers", "C++"],

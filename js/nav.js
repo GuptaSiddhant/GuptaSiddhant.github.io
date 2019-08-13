@@ -241,7 +241,7 @@ function buildColorToggle() {
     } else {
       setUrlParameter("color", "light");
     }
-    setTimeout(initiate, 150);
+    initiate();
   };
 
   // switcher.addEventListener("click", function() {

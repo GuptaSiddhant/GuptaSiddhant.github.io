@@ -1,25 +1,12 @@
 // Global Variables
 let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || true;
-let allTags = details.navTags;
 let navFilter = "";
 let mobileBreakPoint = 1000;
-let size = {
-  isMobile: window.innerWidth < mobileBreakPoint ? true : false,
-  widthWindow: window.innerWidth,
-  widthBody:
-    window.innerWidth > mobileBreakPoint ? mobileBreakPoint : window.innerWidth,
-  widthMain: window.innerWidth > mobileBreakPoint ? 700 : window.innerWidth,
-  spacing: window.innerWidth > mobileBreakPoint ? 40 : 24,
-  radius: 8
-};
-let color = {
-  primary: darkMode ? "#E6E6E6" : "#1A1A1A",
-  secondary: darkMode ? "#B3B3B3" : "#4D4D4D",
-  inverse: darkMode ? "#FFFFFF" : "#000000",
-  highlight: darkMode ? "#000000" : "#FFFFFF",
-  background: darkMode ? "#000000" : "#F2F2F2",
-  card: darkMode ? "#222222" : "#FFFFFF"
-};
+let allTags = [];
+details.tags.forEach(tag => {
+  tag.name !== "other" ? allTags.push(tag.name) : null;
+});
+let size, color;
 
 // On DOM Loaded -> Initialise
 document.addEventListener("DOMContentLoaded", initiate);
@@ -69,6 +56,25 @@ function buildDOM(NAV) {
   title.innerText = details.title;
 
   // BODY
+  size = {
+    isMobile: window.innerWidth < mobileBreakPoint ? true : false,
+    widthWindow: window.innerWidth,
+    widthBody:
+      window.innerWidth > mobileBreakPoint
+        ? mobileBreakPoint
+        : window.innerWidth,
+    widthMain: window.innerWidth > mobileBreakPoint ? 700 : window.innerWidth,
+    spacing: window.innerWidth > mobileBreakPoint ? 40 : 24,
+    radius: 8
+  };
+  color = {
+    primary: darkMode ? "#E6E6E6" : "#1A1A1A",
+    secondary: darkMode ? "#B3B3B3" : "#4D4D4D",
+    inverse: darkMode ? "#FFFFFF" : "#000000",
+    highlight: darkMode ? "#000000" : "#FFFFFF",
+    background: darkMode ? "#000000" : "#F2F2F2",
+    card: darkMode ? "#222222" : "#FFFFFF"
+  };
   let BODY = document.getElementById("app");
   BODY.style.height = "100vh";
   BODY.style.width = size.widthWindow + "px";
@@ -129,15 +135,31 @@ function arrayRemove(arr, value) {
   });
 }
 
+function findOBJ(key, val) {
+  return details.tags.find(obj => obj[key] === val);
+}
+
 function matchColor(tags) {
   for (var i = 0; i < tags.length; i++) {
     tags[i] = tags[i].toLowerCase();
   }
   let matches = allTags.filter(x => tags.includes(x));
   if (matches[0] && matches[0] !== "") {
-    return details.typeColors[matches[0]];
+    return findOBJ("name", matches[0]).color;
   } else {
-    return details.typeColors.fallback;
+    return findOBJ("name", "other").color;
+  }
+}
+
+function matchIcon(tags) {
+  for (var i = 0; i < tags.length; i++) {
+    tags[i] = tags[i].toLowerCase();
+  }
+  let matches = allTags.filter(x => tags.includes(x));
+  if (matches[0] && matches[0] !== "") {
+    return findOBJ("name", matches[0]).icon;
+  } else {
+    return findOBJ("name", "other").icon;
   }
 }
 

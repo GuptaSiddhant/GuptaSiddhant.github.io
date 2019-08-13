@@ -80,7 +80,7 @@ class Article {
     if (this.icon && this.icon !== "") {
       cardIcon.className = this.icon;
     } else {
-      cardIcon.className = "fas fa-history";
+      cardIcon.className = matchIcon(this.tags);
     }
     return cardIcon;
   }
