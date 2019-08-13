@@ -113,7 +113,9 @@ function buildSidebar(size, color) {
   sidebar.style.width =
     size.widthBody - size.widthMain - 2 * size.spacing + "px";
   sidebar.style.position = "fixed";
-  sidebar.style.top = size.spacing * 2 + "px";
+  sidebar.style.top = size.spacing * 1 + "px";
+  sidebar.style.height = 200 + allTags.length * 40 + "px";
+  // sidebar.style.bottom = size.spacing * 1 + "px";
   sidebar.style.left = (size.widthWindow - size.widthBody) / 2 + "px";
   sidebar.style.padding = size.spacing + "px";
   sidebar.style.textAlign = "right";
@@ -307,50 +309,67 @@ function buildNavigation(size, color) {
 function buildColorToggle(size, color) {
   let switcher = document.createElement("div");
   switcher.style.position = size.isMobile ? "initial" : "absolute";
-  switcher.style.top = "0px";
+  switcher.style.bottom = "0px";
   switcher.style.right = size.spacing + "px";
   switcher.style.display = "flex";
+  switcher.style.flexDirection = "column";
   switcher.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
   switcher.style.marginTop = size.isMobile ? size.radius + "px" : "0";
 
-  let modeSwitch = document.createElement("div");
-  switcher.appendChild(modeSwitch);
-  modeSwitch.className = "onoffswitch";
+  let mode = document.createElement("div");
+  switcher.appendChild(mode);
+  if (!size.isMobile) {
+    let switchLabel = document.createElement("div");
+    switcher.appendChild(switchLabel);
+    switchLabel.innerHTML = `Dark Mode ${darkMode ? "ON" : "OFF"}`;
+    switchLabel.style.opacity = "0.7";
+    switchLabel.style.fontSize = "0.8rem";
+  }
+
+  let modeLabel = document.createElement("label");
+  mode.appendChild(modeLabel);
+  modeLabel.classList = "switch";
 
   let modeInput = document.createElement("input");
-  modeSwitch.appendChild(modeInput);
-  modeInput.className = "onoffswitch-checkbox";
+  modeLabel.appendChild(modeInput);
   modeInput.type = "checkbox";
   modeInput.name = "onoffswitch";
   modeInput.id = "myonoffswitch";
   modeInput.checked = darkMode;
 
-  let modeLabel = document.createElement("label");
-  modeSwitch.appendChild(modeLabel);
-  modeLabel.className = "onoffswitch-label";
-  modeLabel.for = "myonoffswitch";
+  let modeSpan = document.createElement("span");
+  modeLabel.appendChild(modeSpan);
+  modeSpan.classList = "slider round";
 
-  let innerSpan = document.createElement("span");
-  modeLabel.appendChild(innerSpan);
-  innerSpan.className = "onoffswitch-inner";
-  let outerSpan = document.createElement("span");
-  modeLabel.appendChild(outerSpan);
-  outerSpan.className = "onoffswitch-switch";
-
-  modeSwitch.addEventListener("click", function() {
+  switcher.onclick = function(e) {
     modeInput.checked = !modeInput.checked;
-    if (modeInput.checked) {
-      darkMode = true;
-      // colorCSS.href = "css/dark.css";
+    darkMode = modeInput.checked;
+    e.stopPropagation();
+    if (darkMode) {
       setUrlParameter("color", "dark");
-      initiate();
     } else {
-      darkMode = false;
-      // colorCSS.href = "css/light.css";
       setUrlParameter("color", "light");
-      initiate();
     }
-  });
+    setTimeout(initiate, 150);
+  };
+
+  // switcher.addEventListener("click", function() {
+  //   // modeInput.checked = !modeInput.checked;
+  //   console.log(modeInput.checked);
+  //   if (modeInput.checked) {
+  //     modeInput.checked = false;
+  //     darkMode = true;
+  //     // colorCSS.href = "css/dark.css";
+  //     setUrlParameter("color", "dark");
+  //     initiate();
+  //   } else {
+  //     modeInput.checked = true;
+  //     darkMode = false;
+  //     // colorCSS.href = "css/light.css";
+  //     setUrlParameter("color", "light");
+  //     initiate();
+  //   }
+  // });
   return switcher;
 }
 
@@ -461,7 +480,7 @@ function buildMenu(size, color) {
   Menu.appendChild(divider("Navigate"));
   Menu.appendChild(buildNavigation(size, color));
 
-  Menu.appendChild(divider("Color Mode"));
+  Menu.appendChild(divider(`Dark Mode - ${darkMode ? "ON" : "OFF"}`));
   Menu.appendChild(buildColorToggle(size, color));
 
   return Menu;
@@ -521,7 +540,7 @@ function setURL(queryURL = "") {
   if (hashURL === "") {
     hashURL = "#";
   }
-  history.pushState({}, "Siddhant Gupta", queryURL + hashURL);
+  history.pushState({}, details.title, queryURL + hashURL);
 }
 
 function setUrlParameter(key, value) {
