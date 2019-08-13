@@ -1,63 +1,4 @@
-let details = {
-  title: "Gupta Siddhant",
-  tags: [
-    {
-      name: "about",
-      color: "#A550A7",
-      icon: "fas fa-info"
-    },
-    {
-      name: "project",
-      color: "#62BA46",
-      icon: "fas fa-palette"
-    },
-    {
-      name: "experience",
-      color: "#FE5257",
-      icon: "fas fa-briefcase"
-    },
-    {
-      name: "education",
-      color: "#017AFF",
-      icon: "fas fa-graduation-cap"
-    },
-    {
-      name: "testemonial",
-      color: "#F74F9E",
-      icon: "fas fa-quote-left"
-    },
-    {
-      name: "blog",
-      color: "#F7821B",
-      icon: "fas fa-feather-alt"
-    },
-    {
-      name: "other",
-      color: "#8C8C8C",
-      icon: "fas fa-history"
-    }
-  ],
-  socialActions: [
-    {
-      name: "LinkedIn",
-      icon: "fab fa-linkedin",
-      link: "https://www.linkedin.com/in/guptasiddhant9/"
-    },
-    {
-      name: "GitHub",
-      icon: "fab fa-github",
-      link: "https://www.github.com/guptasiddhant/"
-    },
-    {
-      name: "Mail",
-      icon: "fas fa-envelope",
-      link: "mailto:me@guptasiddhant.com"
-    }
-  ]
-};
-
 // title, static, subtitle, icon, date, tags, summary, role, tech, attachments, actions
-
 let articles = [
   {
     title: "Hi, I'm Siddhant Gupta",
@@ -122,7 +63,6 @@ let articles = [
   },
   {
     title: "Business Espoo - Visual Identity",
-    icon: "fas fa-bezier-curve",
     subtitle: "Stalwart Design",
     date: "April 2019",
     tags: ["project", "branding", "styling"],
@@ -145,7 +85,6 @@ let articles = [
   },
   {
     title: "Arcadia - Web Game Store",
-    icon: "fas fa-globe",
     subtitle: "Aalto University",
     date: "April 2019",
     tags: ["project", "back-end", "front-end", "UI"],
@@ -309,7 +248,6 @@ let articles = [
   },
   {
     title: "SyburyOS in C++",
-    icon: "fas fa-code",
     subtitle: "High School Project",
     date: "April 2008 - May 2012",
     tags: ["project", "school", "C++"],

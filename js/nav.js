@@ -23,7 +23,7 @@ function buildSidebar() {
   headingTitle.style.textTransform = "uppercase";
   headingTitle.style.marginBottom = "1rem";
 
-  headingTitle.innerText = details.title;
+  headingTitle.innerText = info.title;
 
   sidebar.appendChild(buildSocialActions());
   sidebar.appendChild(buildNavigation());
@@ -41,7 +41,7 @@ function buildSocialActions() {
   sButtons.style.color = color.primary;
   sButtons.style.cursor = "pointer";
 
-  details.socialActions.forEach(action => {
+  info.socialActions.forEach(action => {
     let button = size.isMobile
       ? buildButton(action)
       : buildButton(action, true);
@@ -173,6 +173,7 @@ function buildNavigation() {
         button.style.color = color.primary;
         clearButton.style.display = "none";
         navFilter = "";
+        navigation.subNav = false;
         button.onmouseleave = function() {
           button.classList.remove("hover");
           button.style.backgroundColor = "transparent";
@@ -293,7 +294,7 @@ function buildHeadbar() {
   headingTitle.style.textTransform = "uppercase";
   headingTitle.style.marginBottom = "1rem";
   headingTitle.style.cursor = "pointer";
-  headingTitle.innerText = details.title;
+  headingTitle.innerText = info.title;
   headingTitle.onclick = function() {
     window.scrollTo(0, 0);
   };

@@ -3,10 +3,15 @@ let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || true;
 let navFilter = "";
 let mobileBreakPoint = 1000;
 let allTags = [];
-details.tags.forEach(tag => {
+info.tags.forEach(tag => {
   tag.name !== "other" ? allTags.push(tag.name) : null;
 });
 let size, color;
+let navigation = {
+  subNav: false,
+  subFilter: "",
+  subURL: ""
+};
 
 // On DOM Loaded -> Initialise
 document.addEventListener("DOMContentLoaded", initiate);
@@ -22,12 +27,6 @@ function initiate() {
       darkMode = false;
     }
   }
-
-  let navigation = {
-    subNav: false,
-    subFilter: "",
-    subURL: ""
-  };
 
   let hash = window.location.hash;
   hash = decodeURIComponent(hash);
@@ -53,7 +52,7 @@ function initiate() {
 function buildDOM(NAV) {
   // HEAD
   let title = document.getElementsByTagName("title")[0];
-  title.innerText = details.title;
+  title.innerText = info.title;
 
   // BODY
   size = {
@@ -113,7 +112,23 @@ function buildLifeline(NAV) {
     lifeline.style.paddingTop = "80px";
   }
 
-  if (!NAV.subNav) {
+  if (NAV.subNav && NAV.subFilter === navFilter) {
+    let dObj = findDetailsOBJ("url", NAV.subURL);
+    if (dObj) {
+      if (dObj.tags.includes(NAV.subFilter)) {
+        let iObj = findInfoOBJ("name", NAV.subFilter);
+
+        console.log(dObj);
+        console.log(iObj);
+      } else {
+        navigation.subNav = false;
+        buildDOM(NAV);
+      }
+    } else {
+      navigation.subNav = false;
+      buildDOM(NAV);
+    }
+  } else {
     articles.forEach(data => {
       let matched = data.tags.some(r => navFilter === r);
       if (matched || navFilter === "") {
@@ -121,8 +136,6 @@ function buildLifeline(NAV) {
         lifeline.appendChild(article.buildArticle());
       }
     });
-  } else {
-    console.log(NAV.subURL);
   }
 
   return lifeline;
@@ -135,8 +148,12 @@ function arrayRemove(arr, value) {
   });
 }
 
-function findOBJ(key, val) {
-  return details.tags.find(obj => obj[key] === val);
+function findDetailsOBJ(key, val) {
+  return details.find(obj => obj[key] === val);
+}
+
+function findInfoOBJ(key, val) {
+  return info.tags.find(obj => obj[key] === val);
 }
 
 function matchColor(tags) {
@@ -145,9 +162,9 @@ function matchColor(tags) {
   }
   let matches = allTags.filter(x => tags.includes(x));
   if (matches[0] && matches[0] !== "") {
-    return findOBJ("name", matches[0]).color;
+    return findInfoOBJ("name", matches[0]).color;
   } else {
-    return findOBJ("name", "other").color;
+    return findInfoOBJ("name", "other").color;
   }
 }
 
@@ -157,9 +174,9 @@ function matchIcon(tags) {
   }
   let matches = allTags.filter(x => tags.includes(x));
   if (matches[0] && matches[0] !== "") {
-    return findOBJ("name", matches[0]).icon;
+    return findInfoOBJ("name", matches[0]).icon;
   } else {
-    return findOBJ("name", "other").icon;
+    return findInfoOBJ("name", "other").icon;
   }
 }
 
@@ -177,13 +194,14 @@ function parseQuery(queryString) {
 }
 
 function setURL(queryURL = "") {
-  let hashURL = "";
+  let hashURL = "#";
   if (navFilter !== "") {
-    hashURL = "#" + navFilter;
-  } else {
-    hashURL = "#";
+    hashURL += navFilter;
+    if (navigation.subNav && navigation.subFilter === navFilter) {
+      hashURL += "/" + navigation.subURL;
+    }
   }
-  history.pushState({}, details.title, queryURL + hashURL);
+  history.pushState({}, info.title, queryURL + hashURL);
 }
 
 function setUrlParameter(key, value) {
