@@ -20,6 +20,7 @@ class Article {
         this.colorSecondary = color.secondary;
         this.colorInverse = color.inverse;
         this.colorCard = color.card;
+        this.link = article.link; //Viewer
     }
 
     buildFullArticle() {
@@ -33,9 +34,9 @@ class Article {
         let closeButton = document.createElement("i");
         fullArticle.appendChild(closeButton);
         closeButton.style.position = "absolute";
-        closeButton.style.top = "-8px";
-        closeButton.style.right =  "32px";
-        closeButton.style.color = this.colorInverse;
+        closeButton.style.top = size.isMobile ? "-24px" : "-8px";
+        closeButton.style.right = size.isMobile ? "16px" :  "32px";
+        closeButton.style.color = this.colorSecondary;
         closeButton.style.zIndex = "10";
         closeButton.style.cursor = "pointer";
         closeButton.style.fontSize = "20px";
@@ -76,8 +77,18 @@ class Article {
         frame.style.width = `100%`;
         frame.style.height = `100%`;
         frame.style.borderRadius = `${this.radius}px`;
-        // frame.src = 'projects/passport.html';
-        frame.src ='https://medium.com/swlh/the-passport-concept-b95c1d24e02e';
+        frame.sandbox = true;
+        frame.src = this.link;
+
+        // $("iframe").load(function() {
+        //     $("iframe").contents().find("a").each(function(index) {
+        //         $(this).on("click", function(event) {
+        //             event.preventDefault();
+        //             event.stopPropagation();
+        //         });
+        //     });
+        // });
+
         return fullArticle;
     }
 
@@ -109,9 +120,9 @@ class Article {
         card.style.width = this.size + "px";
         card.style.position = "relative";
         card.style.zIndex = "2";
-        card.style.height = navigation.subNav ? `calc(100vh - ${size.isMobile ? (size.spacing + 1) * 8 : size.spacing * 6}px)` : 'auto';
+        card.style.height = navigation.subNav ? `calc(100vh - ${size.isMobile ? 180 : size.spacing * 6}px)` : 'auto';
         card.style.marginBottom = this.isMobile
-            ? navigation.subNav ? this.spacing + "px" : `${this.spacing * 2}px`
+            ? navigation.subNav ?  "0px" : `${this.spacing * 2}px`
             : this.spacing + "px";
         if (this.attachments && this.attachments.length > 0 && this.isMobile) {
             card.style.paddingBottom = `${this.spacing + 120}px`;

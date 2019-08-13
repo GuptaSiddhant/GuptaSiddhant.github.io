@@ -131,7 +131,7 @@ function buildNavigation() {
   clearButton.style.opacity = "0.7";
   clearButton.style.cursor = "pointer";
   clearButton.style.display = "none";
-  clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear Choice';
+  clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear';
 
   clearButton.onclick = function() {
     navFilter = "";

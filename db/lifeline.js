@@ -137,12 +137,12 @@ let articles = [
                 link: "#blog/passport",
                 target: '_self'
             },
-            {
-                name: "Read More (Ext)",
-                icon: "fas fa-align-left",
-                link:
-                    "https://medium.com/swlh/the-passport-concept-b95c1d24e02e?source=your_stories_page---------------------------"
-            }
+            // {
+            //     name: "Read More (Ext)",
+            //     icon: "fas fa-align-left",
+            //     link:
+            //         "https://medium.com/swlh/the-passport-concept-b95c1d24e02e?source=your_stories_page---------------------------"
+            // }
         ]
     },
     {
