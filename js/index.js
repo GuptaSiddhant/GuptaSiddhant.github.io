@@ -46,10 +46,10 @@ function initiate() {
     }
   }
 
-  buildDOM(navigation);
+  buildDOM();
 }
 
-function buildDOM(NAV) {
+function buildDOM() {
   // HEAD
   let title = document.getElementsByTagName("title")[0];
   title.innerText = info.title;
@@ -83,8 +83,6 @@ function buildDOM(NAV) {
   BODY.style.fontFamily = "Poppins, Arial, sans-serif";
   BODY.style.fontSize = "16px";
   BODY.style.color = color.primary;
-  BODY.style.overflow = "hidden";
-  BODY.style.overflowY = "scroll";
 
   BODY.innerHTML = "";
   if (size.isMobile) {
@@ -93,11 +91,11 @@ function buildDOM(NAV) {
     BODY.appendChild(buildSidebar());
   }
 
-  BODY.appendChild(buildLifeline(NAV));
+  BODY.appendChild(buildLifeline());
 }
 
 // MAIN
-function buildLifeline(NAV) {
+function buildLifeline() {
   let lifeline = document.createElement("main");
   lifeline.id = "lifeline";
   lifeline.style.width = size.widthMain + "px";
@@ -112,28 +110,27 @@ function buildLifeline(NAV) {
     lifeline.style.paddingTop = "80px";
   }
 
-  if (NAV.subNav && NAV.subFilter === navFilter) {
-    let dObj = findDetailsOBJ("url", NAV.subURL);
+  if (navigation.subNav && navigation.subFilter === navFilter) {
+    let dObj = findDetailsOBJ("url", navigation.subURL);
     if (dObj) {
-      if (dObj.tags.includes(NAV.subFilter)) {
-        let iObj = findInfoOBJ("name", NAV.subFilter);
-
+      if (dObj.tags.includes(navigation.subFilter)) {
+        let article = new Article(dObj);
         console.log(dObj);
-        console.log(iObj);
+        lifeline.appendChild(article.buildFullArticle());
       } else {
         navigation.subNav = false;
-        buildDOM(NAV);
+        buildDOM();
       }
     } else {
       navigation.subNav = false;
-      buildDOM(NAV);
+      buildDOM();
     }
   } else {
     articles.forEach(data => {
       let matched = data.tags.some(r => navFilter === r);
       if (matched || navFilter === "") {
         let article = new Article(data);
-        lifeline.appendChild(article.buildArticle());
+        lifeline.appendChild(article.buildSummaryCard());
       }
     });
   }

@@ -126,12 +126,12 @@ function buildNavigation() {
   clearButton.style.position = "absolute";
   clearButton.style.top = size.spacing * allTags.length + "px";
   clearButton.style.right = "0";
-  clearButton.style.width = "115px";
+  clearButton.style.width = "130px";
   clearButton.style.marginBottom = "0.5rem";
   clearButton.style.opacity = "0.7";
   clearButton.style.cursor = "pointer";
   clearButton.style.display = "none";
-  clearButton.innerHTML = '<i class="far fa-times-circle"></i> Reset';
+  clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear Choice';
 
   clearButton.onclick = function() {
     navFilter = "";
@@ -244,24 +244,6 @@ function buildColorToggle() {
     }
     initiate();
   };
-
-  // switcher.addEventListener("click", function() {
-  //   // modeInput.checked = !modeInput.checked;
-  //   console.log(modeInput.checked);
-  //   if (modeInput.checked) {
-  //     modeInput.checked = false;
-  //     darkMode = true;
-  //     // colorCSS.href = "css/dark.css";
-  //     setUrlParameter("color", "dark");
-  //     initiate();
-  //   } else {
-  //     modeInput.checked = true;
-  //     darkMode = false;
-  //     // colorCSS.href = "css/light.css";
-  //     setUrlParameter("color", "light");
-  //     initiate();
-  //   }
-  // });
   return switcher;
 }
 
