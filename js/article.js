@@ -1,5 +1,5 @@
 class Article {
-  constructor(article, size, color) {
+  constructor(article) {
     // title, static, subtitle, icon, date, tags, description, role, tech, attachments, actions
     this.title = article.title;
     this.subtitle = article.subtitle;
