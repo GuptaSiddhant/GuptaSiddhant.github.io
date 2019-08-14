@@ -1,87 +1,105 @@
 root {
-    --colorAccent: #017AFF;
-    --colorPrimary: #000000;
-    --colorSecondary: #222222;
-    --colorCard: #FFFFFF;
-    --colorInverse: #F2F2F2;
+  --colorAccent: #017aff;
+  --colorPrimary: #1a1a1a;
+  --colorSecondary: #4d4d4d;
+  --colorCard: #ffffff;
+  --colorInverse: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  root {
+    --colorAccent: #017aff;
+    --colorPrimary: #e6e6e6;
+    --colorSecondary: #b3b3b3;
+    --colorCard: #222222;
+    --colorInverse: #ffffff;
+  }
 }
 
 h1 {
-    font-family: 'Kameron', serif;
-    font-weight: bold;
-    font-size: 2rem;
-    line-height: 2.5rem;
-    letter-spacing: 1px;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    text-transform: capitalize;
+  font-family: "Kameron", serif;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
 }
 
 h2 {
-    font-family: 'Kameron', serif;
-    font-weight: bold;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    margin-top: 1rem;
-    margin-bottom: 0.75rem;
+  font-family: "Kameron", serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
 }
 
-h3, h4, h5, h6, th {
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-    text-transform: capitalize;
-    font-weight: 500;
+h3,
+h4,
+h5,
+h6,
+th {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
+  font-weight: 500;
 }
 
-h3, h5 {
-    text-transform: uppercase;
-    font-weight: bold;
+h3,
+h5 {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 blockquote {
-    font-style: italic;
-    color: var(--colorPrimary);
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0 20px;
-    border-left: 2px solid var(--colorSecondary);
+  font-style: italic;
+  color: var(--colorPrimary);
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0 20px;
+  border-left: 2px solid var(--colorSecondary);
 }
 
-p, li, td {
-    color: var(--colorSecondary);
-    font-size: 0.9rem;
+p,
+li,
+td {
+  color: var(--colorSecondary);
+  font-size: 0.9rem;
 }
 
 pre {
-    border: 1px solid var(--colorSecondary);
-    border-radius: 4px;
-    padding: 8px;
+  border: 1px solid var(--colorSecondary);
+  border-radius: 4px;
+  padding: 8px;
 }
 
 code {
-    color: var(--colorPrimary);
-    font-size: 0.8rem;
+  color: var(--colorPrimary);
+  font-size: 0.8rem;
 }
 
-a, a:visited, a:active {
-    text-decoration: none;
-    color: var(--colorAccent);
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: var(--colorAccent);
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 a::after {
-    content: '\f360';
-    font-family: "Font Awesome 5 Free", sans-serif;
-    font-weight: bold;
-    font-style: normal;
-    margin: 0 0.25rem 0 0.5rem;
-    text-decoration: none;
+  content: "\f360";
+  font-family: "Font Awesome 5 Free", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  margin: 0 0.25rem 0 0.5rem;
+  text-decoration: none;
 }
 
-
 img {
-    object-fit: cover;
+  object-fit: cover;
 }
