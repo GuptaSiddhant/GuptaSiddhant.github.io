@@ -78,13 +78,13 @@ let articles = [
         name: "BE Logo",
         image: "articles/businessespoo/BE.jpg"
       }
-    ],
-    actions: [
-      {
-        name: "View case study",
-        link: "#"
-      }
     ]
+    // actions: [
+    //   {
+    //     name: "View case study",
+    //     link: "#"
+    //   }
+    // ]
   },
   {
     title: "Arcadia - Web Game Store",

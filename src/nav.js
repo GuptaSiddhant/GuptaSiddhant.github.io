@@ -135,6 +135,7 @@ function buildNavigation() {
 
   clearButton.onclick = function() {
     navFilter = "";
+    navigation.subNav = false;
     clearButton.style.display = "none";
     setURL();
     initiate();
@@ -185,7 +186,7 @@ function buildNavigation() {
         button.style.backgroundColor = matchColor([tag]);
         button.style.border = "1px solid " + matchColor([tag]);
         button.style.color = "#FFFFFF";
-        navFilter = "";
+        navigation.subNav = false;
         navFilter = tag;
         clearButton.style.display = "block";
         button.onmouseleave = function() {};
