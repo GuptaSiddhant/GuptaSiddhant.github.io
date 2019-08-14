@@ -66,7 +66,7 @@ let articles = [
   },
   {
     title: "Business Espoo - Visual Identity",
-    subtitle: "Stalwart Design",
+    subtitle: "KALPIK Design",
     date: "April 2019",
     tags: ["project", "branding", "styling"],
     summary:
@@ -204,8 +204,19 @@ let articles = [
     summary: "Graduated in First Division with a focus on 3D modelling",
     actions: [
       {
+        name: "Degree Certificate",
+        link: "assets/BITSDegree.jpg",
+        icon: "fas fa-camera"
+      },
+      {
         name: "BITS Pilani",
         link: "https://bits-pilani.ac.in"
+      }
+    ],
+    attachments: [
+      {
+        name: "Degree",
+        image: "assets/BITSDegree.jpg"
       }
     ]
   },
