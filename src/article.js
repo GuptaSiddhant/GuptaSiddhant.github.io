@@ -172,7 +172,7 @@ class Article {
     card.appendChild(this.buildActions());
     card.appendChild(fullImg);
     card.appendChild(closeButton);
-    card.appendChild(this.buildAttachments(fullImg, closeButton));
+    card.appendChild(this.buildAttachments(card, fullImg, closeButton));
     return card;
   }
 
@@ -394,7 +394,7 @@ class Article {
     return actionButtons;
   }
 
-  buildAttachments(fullImg, closeButton) {
+  buildAttachments(card, fullImg, closeButton) {
     let imageSize = 100;
     let attachImages = document.createElement("div");
     attachImages.id = "article-attachments";
@@ -494,6 +494,24 @@ class Article {
               a.spacing
             }px 0 rgba(0,0,0,0.25)`;
           };
+          if (!this.isMobile) {
+            thumbnail.onmousemove = function(evt) {
+              let IMG = new Image();
+              IMG.src = item.image;
+              let ratio = IMG.height / IMG.width;
+              let renderWidth = a.size; //a
+              let renderHeight = ratio * renderWidth; //b
+              let clientHeight = card.clientHeight - 16; //c
+              let clientWidth = card.clientWidth;
+              if (renderHeight > clientHeight) {
+                let hiddenHeight = renderHeight - clientHeight;
+                let offsetHeight = hiddenHeight / 2;
+                let moveRatio = offsetHeight / 40;
+                fullImg.style.backgroundPositionY =
+                  -1 * moveRatio * evt.offsetY + "px";
+              }
+            };
+          }
 
           thumbnail.onmouseleave = closeImg;
         } else {
