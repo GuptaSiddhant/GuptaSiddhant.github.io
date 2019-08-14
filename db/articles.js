@@ -1,4 +1,7 @@
-// title, static, subtitle, icon, date, tags, summary, role, tech, attachments, actions
+// Primary:     title, subtitle, icon, date, tags,
+// Secondary:   summary, role, tech, attachments, actions
+// Viewer:      url, file, filetype(md)
+
 let articles = [
     {
         title: "Hi, I'm Siddhant Gupta",
@@ -17,7 +20,7 @@ let articles = [
             {
                 name: "Resume (PDF)",
                 icon: "fas fa-file-download",
-                link: "assets/Siddhant_Gupta_Resume.pdf"
+                link: "Siddhant_Gupta_Resume.pdf"
             }
         ]
     },
@@ -28,7 +31,7 @@ let articles = [
         tags: ["experience", "design"],
         summary:
             "- Designing the product features.\n" +
-            "- Supporting UI/UX development of core product and projects team \n" +
+            "- Supporting UI/UX development of core product and articles team \n" +
             "- Generating graphic design for marketing team",
         actions: [
             {
@@ -133,17 +136,13 @@ let articles = [
         actions: [
             {
                 name: "Read More",
-                icon: "fas fa-align-left",
                 link: "#blog/passport",
-                target: '_self'
+                target: '_self',
             },
-            // {
-            //     name: "Read More (Ext)",
-            //     icon: "fas fa-align-left",
-            //     link:
-            //         "https://medium.com/swlh/the-passport-concept-b95c1d24e02e?source=your_stories_page---------------------------"
-            // }
-        ]
+        ],
+        url: "passport",
+        file: 'articles/passportconcept.md',
+        filetype: 'md'
     },
     {
         title: "Co-Founder & Product Designer",

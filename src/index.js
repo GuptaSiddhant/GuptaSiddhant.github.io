@@ -111,11 +111,10 @@ function buildLifeline() {
   }
 
   if (navigation.subNav && navigation.subFilter === navFilter) {
-    let dObj = findDetailsOBJ("url", navigation.subURL);
+    let dObj = findArticlesOBJ("url", navigation.subURL);
     if (dObj) {
       if (dObj.tags.includes(navigation.subFilter)) {
         let article = new Article(dObj);
-        console.log(dObj);
         lifeline.appendChild(article.buildFullArticle());
       } else {
         navigation.subNav = false;
@@ -145,8 +144,8 @@ function arrayRemove(arr, value) {
   });
 }
 
-function findDetailsOBJ(key, val) {
-  return details.find(obj => obj[key] === val);
+function findArticlesOBJ(key, val) {
+  return articles.find(obj => obj[key] === val);
 }
 
 function findInfoOBJ(key, val) {

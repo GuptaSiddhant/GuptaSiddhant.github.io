@@ -20,24 +20,58 @@ class Article {
         this.colorSecondary = color.secondary;
         this.colorInverse = color.inverse;
         this.colorCard = color.card;
-        this.link = article.link; //Viewer
+        this.file = article.file;//Viewer
+        this.filetype = article.filetype;//Viewer
     }
 
     buildFullArticle() {
 
         let fullArticle = document.createElement('div');
         fullArticle.style.position = 'relative';
+        if (this.isMobile) {
+            fullArticle.style.position = 'fixed';
+            fullArticle.style.top = '0';
+            fullArticle.style.right = '0';
+            fullArticle.style.bottom = '0';
+            fullArticle.style.left = '0';
+            fullArticle.style.zIndex = '70';
+            fullArticle.style.backgroundColor = 'rgba(0,0,0,0.5)';
+        }
 
-        let card = this.buildCard();
+        let card = document.createElement('div');
         fullArticle.appendChild(card);
+        card.style.position = 'absolute';
+        card.style.backgroundColor = this.colorCard;
+        card.style.margin = this.spacing + "px";
+        card.style.borderRadius = 2 * this.radius + "px";
+        card.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`;
+        card.style.width = this.isMobile ? 'auto' : this.size + "px";
+        card.style.zIndex = "75";
+        card.style.height = this.isMobile ? 'auto' : `calc(100vh - ${size.spacing * 4}px)`;
+
+        if (size.isMobile) {
+            card.style.top = '0px';
+            card.style.left = '0px';
+            card.style.right = '0px';
+            card.style.bottom = "0px";
+        }
+
+        // CSS Start
+        const root = document.documentElement;
+        root.style.setProperty('--colorAccent', this.colorAccent);
+        root.style.setProperty('--colorPrimary', this.colorPrimary);
+        root.style.setProperty('--colorSecondary', this.colorSecondary);
+        root.style.setProperty('--colorCard', this.colorCard);
+        root.style.setProperty('--colorInverse', this.colorInverse);
+        // CSS End
 
         let closeButton = document.createElement("i");
-        fullArticle.appendChild(closeButton);
+        card.appendChild(closeButton);
         closeButton.style.position = "absolute";
-        closeButton.style.top = size.isMobile ? "-24px" : "-8px";
-        closeButton.style.right = size.isMobile ? "16px" :  "32px";
-        closeButton.style.color = this.colorSecondary;
-        closeButton.style.zIndex = "10";
+        closeButton.style.top = "-10px";
+        closeButton.style.right = "-10px";
+        closeButton.style.color = this.isMobile ? "#f2f2f2" : this.colorSecondary;
+        closeButton.style.zIndex = "80";
         closeButton.style.cursor = "pointer";
         closeButton.style.fontSize = "20px";
         closeButton.style.textShadow = `0 0 ${this.spacing / 2}px rgba(0,0,0,0.5)`;
@@ -50,66 +84,63 @@ class Article {
         };
 
         card.appendChild(this.buildCardIcon());
+        card.appendChild(this.buildViewer());
 
+        return fullArticle;
+    }
+
+    buildViewer() {
         let viewer = document.createElement("div");
-        card.appendChild(viewer);
-        // viewer.style.backgroundImage = `url(${item.image})`;
-        viewer.id = "article-viewer";
+        viewer.id = "article-showdown";
         viewer.style.position = "absolute";
         viewer.style.backgroundColor = this.colorCard;
         viewer.style.backgroundPosition = "center";
         viewer.style.backgroundRepeat = "no-repeat";
         viewer.style.backgroundSize = "cover";
         viewer.style.borderRadius = `${this.radius}px`;
-        viewer.style.zIndex = "5";
         viewer.style.right = `${this.radius}px`;
         viewer.style.top = `${this.radius}px`;
         viewer.style.bottom = `${this.radius}px`;
         viewer.style.left = `${this.radius}px`;
         viewer.style.opacity = "1";
-        viewer.style.overflow = 'hidden';
+        viewer.style.padding = "20px";
 
-        let frame = document.createElement('iframe');
-        viewer.appendChild(frame);
-        frame.style.margin = `0`;
-        frame.style.padding = `0`;
-        frame.style.border = `none`;
-        frame.style.width = `100%`;
-        frame.style.height = `100%`;
-        frame.style.borderRadius = `${this.radius}px`;
-        frame.sandbox = true;
-        frame.src = this.link;
+        if (this.filetype === 'html') {
+            let frame = document.createElement('iframe');
+            viewer.appendChild(frame);
+            viewer.style.overflow = 'hidden';
+            viewer.style.padding = "0px";
 
-        // $("iframe").load(function() {
-        //     $("iframe").contents().find("a").each(function(index) {
-        //         $(this).on("click", function(event) {
-        //             event.preventDefault();
-        //             event.stopPropagation();
-        //         });
-        //     });
-        // });
+            frame.src = this.file;
+            frame.style.width = '100%';
+            frame.style.height = '100%';
+            frame.style.backgroundColor = 'transparent';
+            frame.style.border = 'none';
 
-        return fullArticle;
+        } else {
+            viewer.style.overflow = 'scroll';
+
+            let converter = new showdown.Converter({extensions: ['youtube']});
+            converter.setOption('parseImgDimensions', true);
+            converter.setOption('simplifiedAutoLink', true);
+            converter.setOption('tables', true);
+            converter.setOption('openLinksInNewWindow', true);
+            converter.setOption('emoji', true);
+
+            let request = new XMLHttpRequest();
+            request.addEventListener('load', function () {
+                viewer.innerHTML = converter.makeHtml(this.responseText);
+            });
+            request.open('GET', this.file);
+            request.send();
+        }
+        return viewer;
     }
 
     buildSummaryCard() {
-        let summaryCard = document.createElement('div');
         let fullImg = document.createElement("div");
         let closeButton = document.createElement("i");
-        let card = this.buildCard();
-        summaryCard.appendChild(card);
-        card.appendChild(this.buildCardIcon());
-        card.appendChild(this.buildHeading());
-        card.appendChild(this.buildDescription());
-        card.appendChild(this.buildActions());
-        card.appendChild(fullImg);
-        card.appendChild(closeButton);
-        card.appendChild(this.buildAttachments(fullImg, closeButton));
-        return summaryCard;
-    }
 
-
-    buildCard() {
         let card = document.createElement("article");
         card.id = "article-card";
         card.style.backgroundColor = this.colorCard;
@@ -120,9 +151,9 @@ class Article {
         card.style.width = this.size + "px";
         card.style.position = "relative";
         card.style.zIndex = "2";
-        card.style.height = navigation.subNav ? `calc(100vh - ${size.isMobile ? 180 : size.spacing * 6}px)` : 'auto';
+        card.style.height = navigation.subNav ? `calc(100vh - ${size.spacing * 6}px)` : 'auto';
         card.style.marginBottom = this.isMobile
-            ? navigation.subNav ?  "0px" : `${this.spacing * 2}px`
+            ? `${this.spacing * 2}px`
             : this.spacing + "px";
         if (this.attachments && this.attachments.length > 0 && this.isMobile) {
             card.style.paddingBottom = `${this.spacing + 120}px`;
@@ -131,6 +162,14 @@ class Article {
             card.style.paddingRight = this.spacing + 80 + "px";
             card.style.width = this.size - 80 + "px";
         }
+
+        card.appendChild(this.buildCardIcon());
+        card.appendChild(this.buildHeading());
+        card.appendChild(this.buildDescription());
+        card.appendChild(this.buildActions());
+        card.appendChild(fullImg);
+        card.appendChild(closeButton);
+        card.appendChild(this.buildAttachments(fullImg, closeButton));
         return card;
     }
 
@@ -308,7 +347,7 @@ class Article {
                 button.appendChild(buttonIcon);
                 buttonIcon.alt = action.name;
                 buttonIcon.title = action.name;
-                buttonIcon.className = "fas fa-external-link-alt";
+                buttonIcon.className = action.target === '_self' ? "fas fa-align-left fa-flip-vertical" : "fas fa-external-link-square-alt";
                 if (action.icon && action.icon !== "") {
                     buttonIcon.className = action.icon;
                 }
@@ -406,7 +445,7 @@ class Article {
                     fullImg.style.transition = "opacity 0.2s ease";
 
                     let a = this;
-                    const closeImg = function (){
+                    const closeImg = function () {
                         fullImg.style.backgroundImage = `none`;
                         fullImg.style.zIndex = "1";
                         fullImg.style.right = `${a.radius}px`;
@@ -433,14 +472,6 @@ class Article {
                         closeButton.classList = "fas fa-times-circle";
                         closeButton.onclick = closeImg;
                     }
-
-                    // let item = this;
-                    // thumbnail.addEventListener("mousemove", function(e) {
-                    //   console.log(e);
-                    //   // fullImg.style.backgroundPositionX = -e.offsetX + "px";
-                    //   fullImg.style.backgroundPositionY =
-                    //     (-e.offsetY * item.size) / 100 + "px";
-                    // });
 
                     thumbnail.onmouseover = function () {
                         fullImg.style.backgroundImage = `url(${item.image})`;

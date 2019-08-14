@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Gupta Siddhant</title>
 
     <!-- META -->
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
     />
 
     <!-- FAVICON -->
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/favicon/apple-touch-icon.png"
     />
     <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon/favicon-32x32.png"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon/favicon-32x32.png"
     />
     <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon/favicon-16x16.png"
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon/favicon-16x16.png"
     />
     <link
-      rel="mask-icon"
-      href="/favicon/safari-pinned-tab.svg"
-      color="#4d4d4d"
+            rel="mask-icon"
+            href="/favicon/safari-pinned-tab.svg"
+            color="#4d4d4d"
     />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <meta name="apple-mobile-web-app-title" content="GS" />
-    <meta name="application-name" content="GS" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="manifest" href="/favicon/site.webmanifest"/>
+    <link rel="shortcut icon" href="/favicon/favicon.ico"/>
+    <meta name="apple-mobile-web-app-title" content="GS"/>
+    <meta name="application-name" content="GS"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml"/>
+    <meta name="theme-color" content="#ffffff"/>
 
     <!-- Facebook OG -->
-    <meta property="og:image" content="/assets/og-image.jpg" />
-    <meta property="og:image:width" content="279" />
-    <meta property="og:image:height" content="279" />
-    <meta property="og:title" content="Gupta Siddhant" />
+    <meta property="og:image" content="/favicon/og-image.jpg"/>
+    <meta property="og:image:width" content="279"/>
+    <meta property="og:image:height" content="279"/>
+    <meta property="og:title" content="Gupta Siddhant"/>
     <meta
-      property="og:description"
-      content="Personal website of Gupta Siddhant"
+            property="og:description"
+            content="Personal website of Gupta Siddhant"
     />
-    <meta property="og:url" content="https://guptasiddhant.com" />
+    <meta property="og:url" content="https://guptasiddhant.com"/>
 
     <!-- Twitter Cards -->
-    <meta name="twitter:title" content="Gupta Siddhant" />
+    <meta name="twitter:title" content="Gupta Siddhant"/>
     <meta
-      name="twitter:description"
-      content="Personal website of Gupta Siddhant"
+            name="twitter:description"
+            content="Personal website of Gupta Siddhant"
     />
-    <meta name="twitter:image" content="/assets/og-image.jpg" />
-    <meta name="twitter:creator" content="@guptasiddhant9" />
+    <meta name="twitter:image" content="/assets/og-image.jpg"/>
+    <meta name="twitter:creator" content="@guptasiddhant9"/>
 
     <!-- Font / CSS -->
     <link
-      href="https://fonts.googleapis.com/css?family=Kameron:700&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Kameron:700&display=swap"
+            rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap"
+            rel="stylesheet"
     />
-    <link href="css/colorToggle.css" rel="stylesheet" />
+    <link href="src/css/colorToggle.css" rel="stylesheet"/>
+    <link href="src/css/viewer.css" rel="stylesheet" id="viewerCSS"/>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
-      rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+            rel="stylesheet"
     />
     <!-- JS -->
-    <!-- <script src="https://kit.fontawesome.com/73ace2ab09.js"></script> -->
     <script src="db/info.js"></script>
-    <script src="db/lifeline.js"></script>
-    <script src="db/details.js"></script>
-    <script src="js/article.js"></script>
-    <script src="js/nav.js"></script>
-    <script src="js/index.js"></script>
-  </head>
-  <body id="app"></body>
+    <script src="db/articles.js"></script>
+
+    <script src="src/showdown/showdown.min.js"></script>
+    <script src="src/showdown/showdown-youtube.min.js"></script>
+
+    <script src="src/article.js"></script>
+    <script src="src/nav.js"></script>
+    <script src="src/index.js"></script>
+</head>
+<body id="app"></body>
 </html>
