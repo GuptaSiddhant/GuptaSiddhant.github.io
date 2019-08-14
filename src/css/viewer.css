@@ -75,7 +75,7 @@ a:hover {
 a::after {
     content: '\f360';
     font-family: "Font Awesome 5 Free", sans-serif;
-    /*font-size: 12px;*/
+    font-weight: bold;
     font-style: normal;
     margin: 0 0.25rem 0 0.5rem;
     text-decoration: none;
