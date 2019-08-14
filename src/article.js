@@ -420,6 +420,7 @@ class Article {
         thumbnail.id = "article-thumbnail";
 
         attachImages.appendChild(thumbnail);
+        thumbnail.style.backgroundColor = this.colorCard;
         thumbnail.style.margin = this.isMobile
           ? `0 ${this.radius}px 0 0`
           : this.radius + "px 0";

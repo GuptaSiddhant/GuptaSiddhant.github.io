@@ -25,6 +25,19 @@ let articles = [
     ]
   },
   {
+    title: "Freelance Designer",
+    subtitle: "KALPIK",
+    tags: ["experience", "startup", "design"],
+    summary: `Porjects: Business Espoo - Visual Identity`,
+    role: `Started a freelance firm to do different and interesting projects in the field of of branding, UI design, and app/web development.`,
+    actions: [
+      {
+        name: "Coming Soon",
+        link: "#"
+      }
+    ]
+  },
+  {
     title: "UX Designer",
     subtitle: "FA Solutions Oy, Helsinki, Finland",
     date: "January 2019 - Present",
@@ -77,14 +90,18 @@ let articles = [
       {
         name: "BE Logo",
         image: "articles/businessespoo/BE.jpg"
+      },
+      {
+        name: "BE Guidelines Mockup",
+        image: "articles/businessespoo/bebook.jpg"
+      }
+    ],
+    actions: [
+      {
+        name: "Style Guidelines",
+        link: "articles/businessespoo/BE_VIS_Guidelines_EN-2019-150dpi.pdf"
       }
     ]
-    // actions: [
-    //   {
-    //     name: "View case study",
-    //     link: "#"
-    //   }
-    // ]
   },
   {
     title: "Arcadia - Web Game Store",
@@ -170,7 +187,7 @@ let articles = [
     title: "Co-Founder & Product Designer",
     subtitle: "QB Middle East FZ-LLC, Dubai, U.A.E.",
     date: "August 2016 - August 2017",
-    tags: ["experience", "entrepreneur", "design", "management"],
+    tags: ["experience", "startup", "entrepreneur", "design", "management"],
     summary: `- Designing UI for web and mobile app.
              - Service Design and customer journey design.
              - Managing team of developers and designer.`,
@@ -206,7 +223,7 @@ let articles = [
       {
         name: "Degree Certificate",
         link: "assets/BITSDegree.jpg",
-        icon: "fas fa-camera"
+        icon: "fas fa-image"
       },
       {
         name: "BITS Pilani",
