@@ -462,6 +462,7 @@ class Article {
             fullImg.style.opacity = "0";
 
             closeButton.style.fontSize = "1px";
+            closeButton.style.opacity = "0";
             closeButton.style.boxShadow = `0 0 0 0 rgba(0,0,0,0.25)`;
           };
 
@@ -474,6 +475,7 @@ class Article {
             closeButton.style.color = "#FFFFFF";
             closeButton.style.zIndex = "10";
             closeButton.style.fontSize = "1px";
+            closeButton.style.opacity = "0";
             closeButton.style.textShadow = `0 0 ${this.spacing /
               2}px rgba(0,0,0,0.5)`;
             closeButton.classList = "fas fa-times-circle";
@@ -491,6 +493,7 @@ class Article {
             fullImg.style.height = "calc(100% - 16px)";
             fullImg.style.opacity = "1";
             closeButton.style.fontSize = "20px";
+            closeButton.style.opacity = "1";
             closeButton.style.boxShadow = `0 0 ${
               a.spacing
             }px 0 rgba(0,0,0,0.25)`;
