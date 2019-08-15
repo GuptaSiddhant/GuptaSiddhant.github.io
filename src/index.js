@@ -32,6 +32,20 @@ function initiate() {
   hash = decodeURIComponent(hash);
   // Router
   if (hash && hash !== "") {
+    if (hash.includes("#404")) {
+      console.log(hash.split["/"][1]);
+      // Redirect 301 /about https://guptasiddhant.com/#about
+      // Redirect 301 /projects https://guptasiddhant.com/#project
+      // Redirect 301 /project https://guptasiddhant.com/#project
+      // Redirect 301 /experience https://guptasiddhant.com/#experience
+      // Redirect 301 /education https://guptasiddhant.com/#education
+      // Redirect 301 /testemonial https://guptasiddhant.com/#testemonial
+      // Redirect 301 /blog https://guptasiddhant.com/#blog
+      // Redirect 301 /dark https://guptasiddhant.com/?color=dark
+      // Redirect 301 /light https://guptasiddhant.com/?color=light
+      // Redirect 301 /passport https://guptasiddhant.com/#blog/passport
+    }
+
     // Main Nav
     let hashParts = hash.split("/");
     let nav = hashParts[0].split("#")[1];
