@@ -197,7 +197,8 @@ function setURL(queryURL = "") {
       hashURL += "/" + navigation.subURL;
     }
   }
-  history.pushState({}, info.title, queryURL + hashURL);
+  let newURL = queryURL + hashURL;
+  history.pushState({}, info.title, newURL);
 }
 
 function setUrlParameter(key, value) {
