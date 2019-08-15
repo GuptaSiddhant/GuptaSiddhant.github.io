@@ -1,5 +1,7 @@
 let info = {
   title: "Gupta Siddhant",
+  description: "Personal website of Gupta Siddhant",
+  image: "/favicon/og-image.jpg",
   tags: [
     {
       name: "about",

@@ -32,7 +32,7 @@ h2 {
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 2rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
 
@@ -42,7 +42,7 @@ h5,
 h6,
 th {
   margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0;
   text-transform: capitalize;
   font-weight: 500;
 }
@@ -53,6 +53,19 @@ h5 {
   font-weight: bold;
 }
 
+p,
+li,
+td {
+  margin: 0.5rem 0;
+  color: var(--colorSecondary);
+  font-size: 0.9rem;
+}
+
+em {
+  font-size: 0.75rem;
+}
+
+
 blockquote {
   font-style: italic;
   color: var(--colorPrimary);
@@ -62,11 +75,8 @@ blockquote {
   border-left: 2px solid var(--colorSecondary);
 }
 
-p,
-li,
-td {
-  color: var(--colorSecondary);
-  font-size: 0.9rem;
+blockquote p {
+  font-size: 1rem;
 }
 
 pre {
@@ -102,4 +112,5 @@ a::after {
 
 img {
   object-fit: cover;
+  border-radius: 8px;
 }

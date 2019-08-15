@@ -1,0 +1,99 @@
+# The Passport - Concept
+
+**8 May 2017 • Siddhant Gupta**
+
+> One Card Replacement for Passport Booklet, National ID, Driver’s License, Voter ID card, Government National ID, Car Registrations, Bank Debit/Credit Card and every other Personal ID.
+
+Have you ever considered the Passport Booklet to be big, thick and fairly futile. I question if it is the smartest way to make the most important and accepted identification document on the planet.
+
+> Originally posted on [THE STARTUP - MEDIUM](https://medium.com/swlh/the-passport-concept-b95c1d24e02e)
+
+![Passport 2](articles/passport/passport2.jpg =100%x* "Front View")
+
+## Catching up with the world.
+
+Countries across the globe have implemented and have been successfully using National ID numbers/cards for decades now. USA, UAE, South Korea, Countries of EU, UK and many more have some version of National ID number in place to link all local activities to. India has entered the race with Aadhaar but there is a lot catching up to do. Currently Aadhaar only serves as a ID number but there is minimum linking to other government services.
+
+With e-passport, there can be change in airport immigration. With Non-biotmetric passport, an individual is required to get an immigration stamp from authority to successfully travel between countries.
+Using a Biometric or E-Passport, an individual can quickly pass through an E-Gate or Smart Gate at Immigration without any human interference. These kind of immigration is successfully offered by many cities in Europe and other parts of the world.
+This kind of immigration solves quite a problems. It avoids long queueing or need of multiple immigration officers. The process is simple and doens’t end with passport pages full of ugly stamps.
+
+**BUT**… the addition of biometric chip still not make much difference to the User Experience when it comes to whole size and usability of Passport Booklet.
+
+## The solution - Passport Card
+An International ID Document which contains all information and benefits of a traditional Passport Booklet and National ID, but is compact and fits in your pocket like any other bank card or driving license.
+
+![Passport Card Design](articles/passport/passport-france-korea-uae.png =100%x*)
+
+I tried to design the very passport, after wondering just too much. What if, our Passport was a card and not a booklet, which would sit easily inside our wallet and we are not worried if the pages will eventually run out. If you are worried about Visa and immigration stamping, just read along. While designing, I researched many passports, the requirements, the guidelines, the design and the technology. Mostly impressed with what I witnessed, I went on creating designs which could serve as base model to all countries.
+
+**Passport Card** contains all vital information spread across front and back side in multiple languages (if required).
+
+- **Front Side**: Passport Number, Nation’s Emblem, Country Code, Document Type, National ID number (SSN), Full Name, Date of Birth, Sex, Nationality, Place of Birth, Color Photo and Digital Signature. 
+More Date can be added as per country’s requirement; for e.g. France requires individual’s height and color of eyes to be on passport.
+- **Back Side**: Permanent Address, Issuing Authority, Date of Issuing, Date of Expiry, Document Number, Place of Issuing; EMV Chip, Flag of Nation, Contactless Payment Symbol and Machine Readable Zone (MRZ).
+- **Both sides**: Name of Country, biometric logo, Nation’s Emblem (watermark with voluntary Design) and Document Name (like “Passport” or “Diplomatic Passport” or “Laissez-Passer”, etc.)
+- **Inside**: RFID/Biometric Chip containing required info, color photo and set of finger prints.
+
+### Benefits of Passport Card
+Let’s discuss the benefits of a Passport Card one-by-one.
+
+#### Wallet Size
+A size that fits in Wallet. According to International Standards ([ISO\_IEC\_7810](https://en.wikipedia.org/wiki/ISO/IEC_7810)), Passport Booklet size is 125.00x88.00 mm (ID-3) in size, where as a normal debit/credit/identity card is 85.60x53.98 mm (ID-1) in size.
+That’s even less than half the size of the booklet.
+
+Imagine, a passport in the same size of a credit card that easily slides in and out of your wallet.
+
+![Passport 1](articles/passport/passport1.jpg =100%x* "Passport in wallet")
+
+
+#### Technology
+
+- **EMV Chip**: EMV cards are smart cards that store their data on integrated circuits. This integration can be useful to replace banks cards. This also allows special card readers to read card biometric and other data (normally used by government or govt.-affiliated companies). [Read More](https://en.wikipedia.org/wiki/EMV)
+- **Contactless Smart Card**: To store Biometrics. Also can be used for contactless payments or terminal tagging (like keyless entry in office buildings or metro-rail stations). [Read More](https://en.wikipedia.org/wiki/Contactless_smart_card)
+- **Machine Readable Zone (MRZ)**: The area covering bottom one-third of card’s back. This zone contains text formatted in certain way that a machine/scanner can read the most important data quickly. Normally, Passport booklets have 2 rows of data but on Cards, the data is divided in 3 rows. [Read More](https://en.wikipedia.org/wiki/Machine-readable_passport)
+	*This technology is relative for now but will soon be completely replaced by the others mentioned here. Then maybe, the passport card can be redesigned better with more space.*
+- **Online Visa & Immigration**: This is a no-brainer. 
+We carry big booklets for passport so that it can be stamped on. There are 2 kinds of stamp — Visa & Immigration.
+Immigration: As I have covered before with Smart Gates, Immigration stamps are not a necessary any more. USA doesn’t even stamp passport on exit.
+VISA: We as a community do not require a paper sticker on passport to remind us of valid visas. I agree they might look appealing as a collection but they do not serve any function which cannot be served by an E-Visa.
+Many countries with higher passport rank enjoy Visa-free travel across other countries and for them passport booklet is no better that an ID card.
+
+#### Web Portal & Mobile App
+Every Passport / I-ID holder will be able to use the Web Portal or a Mobile App to track all their activities. The web Portal or app will allow User to:
+- View Passport Details and apply for renewal and updation.
+- Visa Details: Valid and other Visas from different Authorities.
+- Immigration Details: All In-Out details from each visit.
+- Linked Documents: Local ID, Driving license, bank cardsand more which also can be managed from here from multiple Issuing Authorities/Countries.
+
+![Passport Portal](articles/passport/passport-portal.png =100%x* "Web Portal")
+
+## Conclusion
+
+- A single smart card to replace all cards (bank, license, registrations, national ID, Voter ID, etc.)and passport booklet (Using in-built technology like EMV Chip, RFID Biometrics Chip & MRZ).
+- Compact in Size — fits in wallet.
+- Works with Smart Gates for immigration, removing the need for VISA and immigration stamps.
+- All information including details, visa and immigration can be well managed by a web portal and mobile app.
+
+![Passport 3](articles/passport/passport3.jpg =100%x*)
+
+
+## Appendix
+I am no fool to believe that it is easy to implement this. No single country alone can even think about doing something like this. Since, international documents like passport are designed to meet a set of guidelines made by international organizations, something similar must happen to make this a reality.
+
+If we are talking about it, let me put one more thing in perspective: the concept of **International Residency**.
+
+*International Resident means, a person while being citizen of one particular country, be allowed free movement across the globe without rights (like voting) in a foreign country.
+International Citizen means, a person should not be a citizen one country but of the world and should be allowed free movement and complete rights everywhere.*
+
+In my current concept, every person born in to this world will be given a card by their country which would contain a National ID Number and a Passport Number. Here, the National ID can be used for all national (internal) purposes; and Passport Number will be used all international (external) purposes (like travelling or purchasing in foreign country). 
+**This in not an example of International Residency**.
+
+True International Residency will be created only when there is only one Identification number for both internal and external purposes. Abolishing internal national ID number is favor of unique passport number for every human in this world. That shouldn’t be very difficult as a string of 7 alpha-numeric characters can give more than 78 billion+ unique IDs (A-Z, 0–9). Not to mention 8 characters = 2.8 trillion+ IDs; 9 characters = 101 trillion+ IDs; and so on.
+
+This will allow a single database maintained and shared by all countries. No matter where you are or where you go, you are a Resident not a Tourist. Your medical records, driving status, credit report, bank details and identity moves with you. You are not required to register again with any country or get a new ID certification. 
+Countries can tag their additional data onto the common passport database like labor/employment status, etc.
+
+> In theory, this would also abolish the concept of dual citizenship, but if this is still required for some reason, just carry two cards.
+
+So, what do you think about it?

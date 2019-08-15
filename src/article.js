@@ -25,6 +25,23 @@ class Article {
   }
 
   buildFullArticle() {
+    let title = document.getElementById("app-title");
+    let titleOG = document.getElementById("og-title");
+    let titleTwitter = document.getElementById("twitter-title");
+    title.content += ' / ' + this.title;
+    titleOG.content += ' / ' + this.title;
+    titleTwitter.content += ' / ' + this.title;
+
+    let descOG = document.getElementById('og-desc');
+    let descTwitter = document.getElementById('twitter-desc');
+    descOG.content = this.summary;
+    descTwitter.content = this.summary;
+
+    let imageOG = document.getElementById('og-image');
+    let imageTwitter = document.getElementById('twitter-image');
+    imageOG.content = this.attachments[0].image;
+    imageTwitter.content = this.attachments[0].image;
+
     let fullArticle = document.createElement("div");
     fullArticle.style.position = "relative";
     if (this.isMobile) {
@@ -44,7 +61,7 @@ class Article {
     card.style.margin = this.spacing + "px";
     card.style.borderRadius = 2 * this.radius + "px";
     card.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`;
-    card.style.width = this.isMobile ? "auto" : this.size + "px";
+    card.style.width = this.isMobile ? "auto" : this.size + 2 * this.spacing + "px";
     card.style.zIndex = "75";
     card.style.height = this.isMobile
       ? "auto"

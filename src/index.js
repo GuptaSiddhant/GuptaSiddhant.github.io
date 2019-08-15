@@ -20,6 +20,11 @@ function initiate() {
     window.addEventListener("resize", initiate);
     window.addEventListener("popstate", initiate);
 
+    router();
+    buildDOM();
+}
+
+function router() {
     let query = parseQuery(window.location.search);
     if (query && query.color) {
         if (query.color === "dark") {
@@ -59,7 +64,6 @@ function initiate() {
                     }
                 }
             }
-
             let otherHash = hash;
             hash = '#' + otherHash.split('/')[1];
             if (otherHash.split('/')[2] && otherHash.split('/')[2] !== '') {
@@ -102,14 +106,32 @@ function initiate() {
     } else {
         setURL();
     }
-
-    buildDOM();
 }
 
 function buildDOM() {
     // HEAD
-    let title = document.getElementsByTagName("title")[0];
+    let title = document.getElementById("app-title");
+    let titleOG = document.getElementById("og-title");
+    let titleTwitter = document.getElementById("twitter-title");
     title.innerText = info.title;
+    titleOG.content = info.title;
+    titleTwitter.content = info.title;
+    if (navFilter!=='') {
+        let name = navFilter.charAt(0).toUpperCase() + navFilter.slice(1);
+        title.innerText += ' - ' + name;
+        titleOG.content += ' - ' + name;
+        titleTwitter.content += ' - ' + name;
+    }
+    let descOG = document.getElementById('og-desc');
+    let descTwitter = document.getElementById('twitter-desc');
+    descOG.content = info.description;
+    descTwitter.content = info.description;
+
+    let imageOG = document.getElementById('og-image');
+    let imageTwitter = document.getElementById('twitter-image');
+    imageOG.content = info.image;
+    imageTwitter.content = info.image;
+
 
     // BODY
     size = {
