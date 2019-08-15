@@ -279,7 +279,7 @@ class Article {
       description.appendChild(summary);
 
       summary.style.marginBottom = "8px";
-      summary.innerText = this.summary;
+      summary.innerHTML = this.summary;
     }
 
     if (this.role) {

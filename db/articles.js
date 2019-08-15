@@ -58,8 +58,8 @@ let articles = [
     date: "January 2019 - Present",
     tags: ["experience", "design"],
     summary:
-      "- Designing the product features.\n" +
-      "- Supporting UI/UX development of core product and articles team \n" +
+      "- Designing the product features.<br>" +
+      "- Supporting UI/UX development of core product and articles team <br>" +
       "- Generating graphic design for marketing team",
     actions: [
       {
@@ -185,10 +185,6 @@ let articles = [
       {
         name: "Passport Concept",
         image: "articles/passportconcept/passport2.jpg"
-      },
-      {
-        name: "Passport Concept",
-        image: "articles/passportconcept/passport3.jpg"
       }
     ],
     actions: [
@@ -207,8 +203,8 @@ let articles = [
     subtitle: "QB Middle East FZ-LLC, Dubai, U.A.E.",
     date: "August 2016 - August 2017",
     tags: ["experience", "startup", "entrepreneur", "design", "management"],
-    summary: `- Designing UI for web and mobile app.
-             - Service Design and customer journey design.
+    summary: `- Designing UI for web and mobile app. <br>
+             - Service Design and customer journey design. <br>
              - Managing team of developers and designer.`,
     actions: [
       {
@@ -222,8 +218,8 @@ let articles = [
     subtitle: "Sprint Middle East LLC, Dubai, U.A.E.",
     date: "February 2016 - April 2017",
     tags: ["experience", "design", "marketing"],
-    summary: `- Designing UI for web and mobile apps.
-        - Communicating with target audiences, presenting the demo.
+    summary: `- Designing UI for web and mobile apps. <br>
+        - Communicating with target audiences, presenting the demo. <br>
         - Managing customer relationships and Conducting market research`,
     actions: [
       {
