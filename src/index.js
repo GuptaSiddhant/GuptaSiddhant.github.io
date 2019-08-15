@@ -32,10 +32,11 @@ function initiate() {
     let hash = window.location.hash;
     hash = decodeURIComponent(hash);
     // Router
-    let notFound = true;
+    let notFound = false;
     let errorText1 = '';
     if (hash && hash !== "") {
         if (hash.includes("#404")) {
+            notFound = true;
             errorText1 = hash.split("/")[1];
             if (errorText1 && errorText1 !== '') {
                 if (errorText1.includes('?color=')) {
@@ -54,28 +55,29 @@ function initiate() {
             let errorText2 = hash.split('#')[2];
             if (errorText2 && errorText2 !== '') {
                 hash = '#' + errorText2;
-                console.log(hash);
+                notFound = false;
             } else {
                 errorText2 = hash.split('/')[1];
                 if (errorText2 && errorText2 !== '') {
                     hash = '#' + errorText2;
-                    console.log(hash);
+                    notFound = false;
                 }
             }
         }
 
-        // Main Nav
-        let hashParts = hash.split("/");
-        let nav = hashParts[0].split("#")[1];
-        if (allTags.includes(nav)) {
-            notFound = false;
-            navFilter = nav;
-        }
-        // Sub Nav
-        if (hashParts[1]) {
-            navigation.subNav = true;
-            navigation.subFilter = navFilter;
-            navigation.subURL = hashParts[1];
+        if (!notFound) {
+            // Main Nav
+            let hashParts = hash.split("/");
+            let nav = hashParts[0].split("#")[1];
+            if (allTags.includes(nav)) {
+                navFilter = nav;
+            }
+            // Sub Nav
+            if (hashParts[1]) {
+                navigation.subNav = true;
+                navigation.subFilter = navFilter;
+                navigation.subURL = hashParts[1];
+            }
         }
     }
 
