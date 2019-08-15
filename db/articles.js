@@ -326,7 +326,7 @@ let articles = [
       },
       {
         name: "Downlaod for DOS",
-        icon: "fab fa-download",
+        icon: "fas fa-download",
         link:
           "https://drive.google.com/file/d/1Df4FAB9BXO1-gBa59fQvnb5pkJXwz8lM/view"
       }
