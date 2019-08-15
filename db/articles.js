@@ -21,6 +21,21 @@ let articles = [
         name: "Resume (PDF)",
         icon: "fas fa-file-download",
         link: "assets/Siddhant_Gupta_Resume.pdf"
+      },
+      {
+        name: "LinkedIn",
+        icon: "fab fa-linkedin",
+        link: "https://www.linkedin.com/in/guptasiddhant9/"
+      },
+      {
+        name: "GitHub",
+        icon: "fab fa-github",
+        link: "https://www.github.com/guptasiddhant/"
+      },
+      {
+        name: "Mail",
+        icon: "fas fa-envelope",
+        link: "mailto:me@guptasiddhant.com"
       }
     ]
   },
@@ -170,6 +185,10 @@ let articles = [
       {
         name: "Passport Concept",
         image: "articles/passportconcept/passport2.jpg"
+      },
+      {
+        name: "Passport Concept",
+        image: "articles/passportconcept/passport3.jpg"
       }
     ],
     actions: [
