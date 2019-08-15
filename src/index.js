@@ -29,18 +29,25 @@ function initiate() {
         }
     }
 
+    if (articles[0].tags[0] === 'error') {
+        articles.shift();
+    }
+
     let hash = window.location.hash;
     hash = decodeURIComponent(hash);
     // Router
     let notFound = false;
-    let errorText1 = '';
+    console.log(hash);
+    let errorText = "";
+
     if (hash && hash !== "") {
-        if (hash.includes("#404")) {
+        if (hash.includes("#404/")) {
             notFound = true;
-            errorText1 = hash.split("/")[1];
-            if (errorText1 && errorText1 !== '') {
-                if (errorText1.includes('?color=')) {
-                    let colorQuery = errorText1.split('=')[1];
+            errorText = hash.split("/")[0];
+
+            if (errorText && errorText !== '') {
+                if (errorText.includes('?color=')) {
+                    let colorQuery = errorText.split('=')[1];
                     colorQuery = colorQuery.split('#')[0];
                     colorQuery = colorQuery.split('/')[0];
                     if (colorQuery === 'dark') {
@@ -52,32 +59,27 @@ function initiate() {
                     }
                 }
             }
-            let errorText2 = hash.split('#')[2];
-            if (errorText2 && errorText2 !== '') {
-                hash = '#' + errorText2;
-                notFound = false;
-            } else {
-                errorText2 = hash.split('/')[1];
-                if (errorText2 && errorText2 !== '') {
-                    hash = '#' + errorText2;
-                    notFound = false;
-                }
+
+            let otherHash = hash;
+            hash = '#' + otherHash.split('/')[1];
+            if (otherHash.split('/')[2] && otherHash.split('/')[2] !== '') {
+                hash += '/' + otherHash.split('/')[2];
             }
         }
 
-        if (!notFound) {
-            // Main Nav
-            let hashParts = hash.split("/");
-            let nav = hashParts[0].split("#")[1];
-            if (allTags.includes(nav)) {
-                navFilter = nav;
-            }
-            // Sub Nav
-            if (hashParts[1]) {
-                navigation.subNav = true;
-                navigation.subFilter = navFilter;
-                navigation.subURL = hashParts[1];
-            }
+        // Main Nav
+        let hashParts = hash.split("/");
+        let nav = hashParts[0].split("#")[1];
+        if (allTags.includes(nav)) {
+            notFound = false;
+            navFilter = nav;
+        }
+        // Sub Nav
+        if (hashParts[1]) {
+
+            navigation.subNav = true;
+            navigation.subFilter = navFilter;
+            navigation.subURL = hashParts[1];
         }
     }
 
@@ -91,7 +93,7 @@ function initiate() {
                 2. Explore the website by using the navigation or scrolling downwards <i class="fas fa-arrow-down"></i>.<br>
                 3. Contact me and reach your preferred destination as a VIP.`
         })
-    } else if (errorText1.includes('?color=')) {
+    } else if (errorText.includes('?color=')) {
         if (darkMode === true) {
             setUrlParameter('color', 'dark');
         } else {
@@ -102,10 +104,6 @@ function initiate() {
     }
 
     buildDOM();
-
-    if (articles[0].tags[0] === 'error') {
-        articles.shift();
-    }
 }
 
 function buildDOM() {
