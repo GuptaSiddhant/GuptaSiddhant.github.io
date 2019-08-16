@@ -1,4 +1,4 @@
-// Primary:     title, subtitle, icon, date, tags,
+// Primary:     title, subtitle, icon, date, tags, pinned
 // Secondary:   summary, role, tech, attachments, actions
 // Viewer:      url, file, filetype(md)
 
@@ -291,8 +291,9 @@ let articles = [
     summary: `I catered to all design needs of Zikr Studio. From designing website pages, logos, App UI/UX and more.`,
     actions: [
       {
-        name: "Zikr Studio",
-        link: "http://www.zikrstudio.com/"
+        name: "Zikr Studio LinkedIn",
+        icon: "fab fa-linkedin",
+        link: "https://www.linkedin.com/company/zikr-studio/about/"
       }
     ]
   },
@@ -317,7 +318,7 @@ let articles = [
     tags: ["project", "school", "C++"],
     summary:
       "DOS-based Operating System UI bundled with a desktop, text-editor, game and voting software.",
-    tech: ["C++"],
+    tech: ["C++", "Turbo C++ 3.0"],
     actions: [
       {
         name: "GitHub",
@@ -325,7 +326,7 @@ let articles = [
         link: "https://github.com/GuptaSiddhant/SyburyOS"
       },
       {
-        name: "Downlaod for DOS",
+        name: "Download for DOS",
         icon: "fas fa-download",
         link:
           "https://drive.google.com/file/d/1Df4FAB9BXO1-gBa59fQvnb5pkJXwz8lM/view"

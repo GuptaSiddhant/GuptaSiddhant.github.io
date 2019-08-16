@@ -191,6 +191,7 @@ function buildNavigation() {
         clearButton.style.display = "block";
         button.onmouseleave = function() {};
       }
+      scrollPosition = 0;
       setURL();
       initiate();
     };

@@ -2,6 +2,7 @@
 let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || false;
 let navFilter = "";
 let mobileBreakPoint = 1000;
+let scrollPosition = 0;
 let allTags = [];
 info.tags.forEach(tag => {
     tag.name !== "other" ? allTags.push(tag.name) : null;
@@ -19,9 +20,13 @@ document.addEventListener("DOMContentLoaded", initiate);
 function initiate() {
     window.addEventListener("resize", initiate);
     window.addEventListener("popstate", initiate);
-
     router();
     buildDOM();
+
+    window.scrollTo(0, scrollPosition);
+    document.body.onscroll = function () {
+            scrollPosition = document.body.scrollTop;
+    };
 }
 
 function router() {
@@ -42,7 +47,6 @@ function router() {
     hash = decodeURIComponent(hash);
     // Router
     let notFound = false;
-    console.log(hash);
     let errorText = "";
 
     if (hash && hash !== "") {
@@ -91,6 +95,7 @@ function router() {
         articles.unshift({
             title: "Page not Found",
             icon: 'fas fa-exclamation-circle',
+            pinned: true,
             tags: ["error", "404"],
             summary: `The page you are looking for might have been removed, had its name changed or is temporarily available. There are 3 things that can be done:<br><br>
                 1. You can either check the URL for any errors. <br>
@@ -116,7 +121,7 @@ function buildDOM() {
     title.innerText = info.title;
     titleOG.content = info.title;
     titleTwitter.content = info.title;
-    if (navFilter!=='') {
+    if (navFilter !== '') {
         let name = navFilter.charAt(0).toUpperCase() + navFilter.slice(1);
         title.innerText += ' - ' + name;
         titleOG.content += ' - ' + name;
@@ -206,7 +211,7 @@ function buildLifeline() {
     } else {
         articles.forEach(data => {
             let matched = data.tags.some(r => navFilter === r);
-            if (matched || navFilter === "" || data.tags[0] === 'error') {
+            if (matched || navFilter === "" || data.pinned) {
                 let article = new Article(data);
                 lifeline.appendChild(article.buildSummaryCard());
             }
