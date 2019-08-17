@@ -4,6 +4,7 @@ class Article {
         this.title = article.title;
         this.subtitle = article.subtitle;
         this.icon = article.icon;
+        this.logo = article.logo;
         this.date = article.date;
         this.tags = article.tags;
         this.summary = article.summary;
@@ -22,7 +23,6 @@ class Article {
         this.colorCard = color.card;
         this.file = article.file; //Viewer
         this.filetype = article.filetype; //Viewer
-        this.scrollY = 0; //Viewer
     }
 
     buildFullArticle() {
@@ -215,11 +215,20 @@ class Article {
         cardIcon.style.zIndex = "10";
 
         cardIcon.style.backgroundColor = this.colorAccent;
-        if (this.icon && this.icon !== "") {
+        if (this.logo && this.logo !== "") {
+            let logoImage = document.createElement('img');
+            cardIcon.appendChild(logoImage);
+            logoImage.style.margin= '5px 0';
+            logoImage.src = this.logo;
+            logoImage.style.height = iconSize * 1.5 + 'px';
+            logoImage.style.width = iconSize * 1.5 + 'px';
+
+        } else if (this.icon && this.icon !== "") {
             cardIcon.className = this.icon;
         } else {
             cardIcon.className = matchIcon(this.tags);
         }
+
         return cardIcon;
     }
 
