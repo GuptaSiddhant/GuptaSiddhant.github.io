@@ -24,7 +24,7 @@ let info = {
       icon: "fas fa-graduation-cap"
     },
     {
-      name: "testemonial",
+      name: "testimonial",
       color: "#F74F9E",
       icon: "fas fa-quote-left"
     },
