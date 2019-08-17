@@ -274,7 +274,7 @@ let articles = [
       "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
     subtitle: "Manish K.",
     date: "14 August 2015",
-    tags: ["testemonial"],
+    tags: ["testimonial"],
     summary: "Manish and I worked together over a website design.",
     actions: [
       {

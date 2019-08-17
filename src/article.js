@@ -29,9 +29,11 @@ class Article {
         let title = document.getElementById("app-title");
         let titleOG = document.getElementById("og-title");
         let titleTwitter = document.getElementById("twitter-title");
-        title.content += ' / ' + this.title;
+        title.innerText += ' / ' + this.title;
         titleOG.content += ' / ' + this.title;
         titleTwitter.content += ' / ' + this.title;
+
+        console.log(title);
 
         let descOG = document.getElementById('og-desc');
         let descTwitter = document.getElementById('twitter-desc');

@@ -123,9 +123,9 @@ function buildDOM() {
     titleTwitter.content = info.title;
     if (navFilter !== '') {
         let name = navFilter.charAt(0).toUpperCase() + navFilter.slice(1);
-        title.innerText += ' - ' + name;
-        titleOG.content += ' - ' + name;
-        titleTwitter.content += ' - ' + name;
+        title.innerText = 'GS ' + name;
+        titleOG.content = 'GS ' + name;
+        titleTwitter.content = 'GS ' + name;
     }
     let descOG = document.getElementById('og-desc');
     let descTwitter = document.getElementById('twitter-desc');
