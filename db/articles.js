@@ -76,6 +76,26 @@ let articles = [
     ]
   },
   {
+    title: `I had the pleasure of working together with Sid on a couple of projects for a web design course.
+
+       Though at the time, Sid‘s main expertise was with graphic design he had no problem stepping out of his comfort zone and taking on advanced programming tasks. His undertakings radiates ambition and if he’s not already up to the task he’ll make it so he is by asking questions and tirelessly trying stuff out in his spare time.
+    
+       Sid goes to the bottom with things, tries to find the best way to carry out tasks while not getting stuck on details and he works with both graphics and programming in an organized way that’s a pleasure for a computer scientist to watch.
+    
+       It’s been a real pleasure and I’m sure he’ll bring great value wherever he goes.`,
+    subtitle: "Daniel Schlaug, Link-U",
+    date: "19 August 2019",
+    tags: ["about", "testimonial", "recommendation", "group-work"],
+    summary:
+      "Daniel and I worked together on a couple of projects together at KTH, Sweden. I consider Daniel a great friend and mentor.",
+    actions: [
+      {
+        name: "LinkedIn",
+        link: "https://www.linkedin.com/in/guptasiddhant9/"
+      }
+    ]
+  },
+  {
     title: "M.Sc. Human Computer Interaction & Design",
     subtitle: `Aalto University, Finland
        KTH Royal Institute of Technology, Sweden`,
@@ -322,9 +342,8 @@ let articles = [
   {
     title:
       "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
-    subtitle: "Manish K.",
+    subtitle: "Manish K., Growth Catalyst",
     date: "14 August 2015",
-    icon: "fas fa-quote-left",
     tags: ["about", "testimonial"],
     summary: "Manish and I worked together over a website design.",
     actions: [
