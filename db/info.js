@@ -23,15 +23,15 @@ let info = {
       color: "#017AFF",
       icon: "fas fa-graduation-cap"
     },
-    // {
-    //   name: "testimonial",
-    //   color: "#F74F9E",
-    //   icon: "fas fa-quote-left"
-    // },
     {
       name: "blog",
       color: "#F7821B",
       icon: "fas fa-feather-alt"
+    },
+    {
+      name: "starred",
+      color: "#f2c600",
+      icon: "fas fa-star"
     },
     {
       name: "other",

@@ -1,5 +1,5 @@
 // Primary:     title, subtitle, icon, date, tags, pinned, logo
-// Secondary:   summary, role, tech, attachments, actions
+// Secondary:   summary, role, tech, attachments, actions, starred
 // Viewer:      url, file, filetype(md)
 
 let articles = [
@@ -12,14 +12,15 @@ let articles = [
       "While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. " +
       "I am incredibly detail orientated and believe that small things can make the biggest impact. " +
       "One word to describe me : STALWART. <br><br>" +
-      `<details><summary><b>My Skills</b></summary> <table>` +
+      `<b>My Skills:</b><table cellspacing="0px">` +
       `<tr><td>Design</td><td>Sketch, InVision, Figma, XD, Photoshop, InDesign </td></tr>` +
-      `<tr><td>Front-End</td><td>Javascript, ReactJS, Flutter(Dart), Wordpress </td></tr>` +
-      `<tr><td>Back-End</td><td>Django(Python), NodeJS, Google Firebase, Clojure </td></tr>` +
+      `<tr><td>Front-End</td><td>Javascript, ReactJS, Flutter (Dart), Wordpress </td></tr>` +
+      `<tr><td>Back-End</td><td>Django (Python), NodeJS, Google Firebase, Clojure </td></tr>` +
       `<tr><td>Others</td><td>Machine Learning, AutoCAD, Final Cut Pro </td></tr>` +
       `<tr><td>Soft Skills</td><td>Public Speaking, Presentation, Formal Writing </td></tr>` +
       `<tr><td>Languages</td><td>English, Hindi, Finnish (elementary)</td></tr>` +
-      `</table></details>`,
+      `</table>`,
+// </details>`,
     attachments: [
       {
         name: "Siddhant Gupta",
@@ -52,7 +53,7 @@ let articles = [
   },
   {
     title: "Freelance Designer",
-    subtitle: "Kalpik Design",
+    subtitle: "Kalpik Studio",
     tags: ["experience", "startup", "design"],
     logo: "assets/logos/kalpik-logo.png",
     summary: `Projects: Business Espoo - Visual Identity`,
@@ -121,10 +122,11 @@ let articles = [
   },
   {
     title: "Business Espoo - Visual Identity",
-    subtitle: "Kalpik Design",
+    subtitle: "Kalpik Studio",
     date: "April 2019",
-    tags: ["projects", "branding", "styling"],
+    tags: ["projects", "branding", "styling", 'starred'],
     logo: "assets/logos/be-logo.png",
+    starred: true,
     summary:
       "Business Espoo supports the vitality of businesses by offering the best, continuously developing services in one place.",
     role: "Solely designed the Brand Identity and Style Guidelines",
@@ -180,7 +182,7 @@ let articles = [
   },
   {
     title: "PocketInc App",
-    subtitle: "Kalpik Design",
+    subtitle: "Kalpik Studio",
     date: "October 2018",
     tags: ["projects", "branding", "User interface"],
     logo: "assets/logos/pi-logo.png",
@@ -189,14 +191,10 @@ let articles = [
     role: "Solely designed the App's user interface and Brand Identity.",
     tech: ["Sketch", "MarvelApp"],
     attachments: [
-      //   {
-      //     name: "BE Logo",
-      //     image: "articles/pocketinc/Logo-onDark.png"
-      //   },
-      //   {
-      //     name: "BE Guidelines Mockup",
-      //     image: "articles/businessespoo/bebook.jpg"
-      //   }
+        {
+          name: "PocketInc App",
+          image: "articles/pocketinc/pi-overview.jpg"
+        }
     ],
     actions: [
       {
@@ -212,7 +210,7 @@ let articles = [
   {
     title: "DELTA - Help.Share.Earn.",
     subtitle: "KTH Royal Institute of Technology",
-    date: "April 2017",
+    date: "April 2018",
     tags: ["projects", "UI", "research"],
     summary:
       "A mobile based platform where residents can engage with their community and can either benefit from it or help the other residents in their day-to-day work like renting them seldom used commodities, help them move, provide professional help with software help etc. The users can subscribe to the categories they can provide help and feedback for the same will be provided.",
@@ -228,6 +226,32 @@ let articles = [
       {
         name: "Case Study",
         link: "https://bhutani.design/delta.html"
+      }
+    ]
+  },
+  {
+    title: "SustaiNovActin Platform - Mobile App",
+    subtitle: "Kalpik Studio",
+    date: "February 2018",
+    tags: ["projects", "UI", "app"],
+    summary: "A mobile app that allows user to track their challenges to improve environment and reduce their carbon-footprint. " +
+        "The UI prototype was presented in a United Nations (UN) event.",
+    role: "Solely, researched and designed the UI of the app.",
+    tech: ["Sketch", "InVision"],
+    attachments: [
+      {
+        name: "SNA App",
+        image: "articles/sustainovaction/sna-overview.jpg"
+      }
+    ],
+    actions: [
+      {
+        name: "SNAP",
+        link: "http://sustainovaction.org"
+      },
+      {
+        name: "Design Prototype",
+        link: "https://projects.invisionapp.com/share/PHGE9ANR7MQ#/screens"
       }
     ]
   },

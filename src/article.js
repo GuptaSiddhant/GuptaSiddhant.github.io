@@ -12,6 +12,7 @@ class Article {
         this.tech = article.tech;
         this.attachments = article.attachments;
         this.actions = article.actions;
+        this.starred = article.starred;
         this.spacing = size.spacing;
         this.size = size.widthMain - 4 * size.spacing;
         this.radius = size.radius;
@@ -188,6 +189,9 @@ class Article {
         }
 
         card.appendChild(this.buildCardIcon());
+        if (this.starred) {
+            card.appendChild(this.buildCardStarIcon());
+        }
         card.appendChild(this.buildHeading());
         card.appendChild(this.buildDescription());
         card.appendChild(this.buildActions());
@@ -231,6 +235,30 @@ class Article {
             cardIcon.className = matchIcon(this.tags);
         }
 
+        return cardIcon;
+    }
+
+    buildCardStarIcon() {
+        let iconSize = 20;
+        let cardIcon = document.createElement("icon");
+        cardIcon.id = "article-star-icon";
+
+        cardIcon.style.position = "absolute";
+        cardIcon.style.left = this.isMobile ? this.spacing + 3 * iconSize + "px" : "-20px";
+        cardIcon.style.top = this.isMobile ? "-20px" : 34 + 3 * iconSize + "px";
+        cardIcon.style.width = iconSize * 2 + "px";
+        cardIcon.style.height = iconSize * 2 + "px";
+        cardIcon.style.borderRadius = this.radius + "px";
+        cardIcon.style.boxShadow = "0 0 20px 0 rgba(0,0,0,0.2)";
+        cardIcon.style.color = "#FFFFFF";
+        cardIcon.style.textAlign = "center";
+        cardIcon.style.lineHeight = iconSize * 2 + "px";
+        cardIcon.style.fontSize = iconSize + "px";
+        cardIcon.style.zIndex = "10";
+        cardIcon.style.backgroundColor = "#F2C600";
+        cardIcon.className = "fas fa-star";
+        cardIcon.alt = 'Starred';
+        cardIcon.title = 'Starred';
         return cardIcon;
     }
 
