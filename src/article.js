@@ -475,7 +475,7 @@ class Article {
             attachImages.style.zIndex = "10";
 
             this.attachments.forEach(item => {
-                let thumbnail = document.createElement("img");
+                let thumbnail = document.createElement("div");
                 thumbnail.id = "article-thumbnail";
 
                 attachImages.appendChild(thumbnail);
@@ -491,9 +491,37 @@ class Article {
                 thumbnail.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.25)`;
                 thumbnail.style.transition =
                     "width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease-in";
-                thumbnail.src = item.image;
+                // thumbnail.src = item.image;
                 thumbnail.alt = item.name;
                 thumbnail.title = item.name;
+                thumbnail.style.backgroundImage = `url(${item.image})`;
+                thumbnail.style.backgroundSize = `cover`;
+                thumbnail.style.backgroundPosition = `center`;
+
+                thumbnail.style.position = 'relative';
+
+                let thumbOverlay = document.createElement('div');
+                thumbnail.appendChild(thumbOverlay);
+                thumbOverlay.style.position = 'absolute';
+                thumbOverlay.style.top = '0px';
+                thumbOverlay.style.left = '0px';
+                thumbOverlay.style.right = '0px';
+                thumbOverlay.style.bottom = '0px';
+                thumbOverlay.style.borderRadius = thumbnail.style.borderRadius;
+                thumbOverlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
+                thumbOverlay.style.opacity = '0';
+                thumbOverlay.style.color = '#FFFFFF';
+                thumbOverlay.style.fontSize = '20px';
+                thumbOverlay.style.textAlign = 'right';
+                thumbOverlay.style.padding = '10px';
+                thumbOverlay.style.lineHeight = '20px';
+                thumbOverlay.onclick = function () {
+                    window.open(item.image, "_blank");
+                };
+                let thumbOverlayIcon = document.createElement('i');
+                thumbOverlay.appendChild(thumbOverlayIcon);
+                thumbOverlayIcon.className = 'fas fa-external-link-square-alt';
+                thumbOverlayIcon.title = 'Open in New Tab';
 
                 if (item.full !== false) {
                     fullImg.id = "article-fullImg";
@@ -523,6 +551,8 @@ class Article {
                         closeButton.style.fontSize = "1px";
                         closeButton.style.opacity = "0";
                         closeButton.style.boxShadow = `0 0 0 0 rgba(0,0,0,0.25)`;
+
+                        thumbOverlay.style.opacity = '0';
                     };
 
                     fullImg.onclick = closeImg;
@@ -556,6 +586,7 @@ class Article {
                         closeButton.style.boxShadow = `0 0 ${
                             a.spacing
                             }px 0 rgba(0,0,0,0.25)`;
+                        thumbOverlay.style.opacity = '1';
                     };
                     if (!this.isMobile) {
                         thumbnail.onmousemove = function (evt) {

@@ -6,37 +6,44 @@ let info = {
     {
       name: "about",
       color: "#A550A7",
-      icon: "fas fa-info"
+      icon: "fas fa-info",
+      code: 'KeyA'
     },
     {
       name: "projects",
       color: "#62BA46",
-      icon: "fas fa-palette"
+      icon: "fas fa-palette",
+      code: 'KeyP'
     },
     {
       name: "experience",
       color: "#FE5257",
-      icon: "fas fa-briefcase"
+      icon: "fas fa-briefcase",
+      code: 'KeyX'
     },
     {
       name: "education",
       color: "#017AFF",
-      icon: "fas fa-graduation-cap"
+      icon: "fas fa-graduation-cap",
+      code: 'KeyE'
     },
     {
       name: "blog",
       color: "#F7821B",
-      icon: "fas fa-feather-alt"
+      icon: "fas fa-feather-alt",
+      code: 'KeyB'
     },
     {
       name: "starred",
       color: "#f2c600",
-      icon: "fas fa-star"
+      icon: "fas fa-star",
+      code: 'KeyS'
     },
     {
       name: "other",
       color: "#8C8C8C",
-      icon: "fas fa-history"
+      icon: "fas fa-history",
+      code: 'KeyO'
     }
   ],
   socialActions: [

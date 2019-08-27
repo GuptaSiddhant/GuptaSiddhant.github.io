@@ -18,15 +18,55 @@ let navigation = {
 document.addEventListener("DOMContentLoaded", initiate);
 
 function initiate() {
-    window.addEventListener("resize", initiate);
-    window.addEventListener("popstate", initiate);
     router();
     buildDOM();
 
     window.scrollTo(0, scrollPosition);
     document.body.onscroll = function () {
-            scrollPosition = document.body.scrollTop;
+        scrollPosition = document.body.scrollTop;
     };
+
+    window.addEventListener("resize", initiate);
+    window.addEventListener("popstate", initiate);
+
+    document.onkeypress = function (e) {
+        e = e || window.event;
+        keyboardInput(e);
+    };
+}
+
+function keyboardInput(e) {
+    // console.log(e);
+    let code = e.code;
+    switch (code) {
+        case 'KeyD':
+            switchDarkMode(e);
+            e.stopPropagation();
+            break;
+        case 'KeyC':
+            clearAll();
+            e.stopPropagation();
+            break;
+        case 'KeyF':
+            alert('Find function coming soon.');
+            e.stopPropagation();
+            break;
+        default:
+            info.tags.forEach((tag) => {
+               if (tag.code && tag.code === code) {
+                   navButtonClick(tag.name);
+               }
+            });
+            e.stopPropagation();
+            break;
+    }
+}
+
+function navButtonClick(tag) {
+    navFilter = tag;
+    scrollPosition = 0;
+    setURL();
+    initiate();
 }
 
 function router() {

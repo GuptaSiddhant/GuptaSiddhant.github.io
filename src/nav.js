@@ -112,6 +112,13 @@ function buildButton(action, icon = false, accent = false) {
     return button;
 }
 
+function clearAll () {
+    navFilter = "";
+    navigation.subNav = false;
+    setURL();
+    initiate();
+}
+
 function buildNavigation() {
     let nav = document.createElement("nav");
     nav.id = "nav-area";
@@ -131,19 +138,19 @@ function buildNavigation() {
     clearButton.style.position = "absolute";
     clearButton.style.top = size.spacing * allTags.length + "px";
     clearButton.style.right = "0";
-    clearButton.style.width = "130px";
+    clearButton.style.width = "140px";
     clearButton.style.marginBottom = "0.5rem";
     clearButton.style.opacity = "0.7";
     clearButton.style.cursor = "pointer";
     clearButton.style.display = "none";
     clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear';
+    if(!size.isMobile) {
+        clearButton.innerHTML += ` (Press C)`;
+    }
 
     clearButton.onclick = function () {
-        navFilter = "";
-        navigation.subNav = false;
         clearButton.style.display = "none";
-        setURL();
-        initiate();
+        clearAll();
     };
     if (!size.isMobile) {
         nav.appendChild(clearButton);
@@ -245,15 +252,20 @@ function buildColorToggle() {
     switcher.onclick = function (e) {
         modeInput.checked = !modeInput.checked;
         darkMode = modeInput.checked;
-        e.stopPropagation();
-        if (darkMode) {
-            setUrlParameter("color", "dark");
-        } else {
-            setUrlParameter("color", "light");
-        }
-        initiate();
+        switchDarkMode(e);
     };
     return switcher;
+}
+
+function switchDarkMode(e) {
+    darkMode = !darkMode;
+    e.stopPropagation();
+    if (darkMode) {
+        setUrlParameter("color", "dark");
+    } else {
+        setUrlParameter("color", "light");
+    }
+    initiate();
 }
 
 // HEADBAR
