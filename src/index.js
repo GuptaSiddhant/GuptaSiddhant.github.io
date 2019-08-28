@@ -34,8 +34,11 @@ function initiate() {
         e = e || window.event;
         // Ignore Alt, Ctrl, Shift, AltGraph, Command/Windows combinations
         if (!e.altKey && !e.ctrlKey && !e.shiftKey && !e.altGraphKey && !e.metaKey) {
-            e.preventDefault();
-            keyboardInput(e);
+            //Check if search is in focus
+            if (searchInput !== document.activeElement) {
+                e.preventDefault();
+                keyboardInput(e);
+            }
         }
     };
 }
@@ -238,7 +241,6 @@ function buildLifeline() {
     return lifeline;
 }
 
-
 // Bottom Drawer
 function buildShortcutViewer() {
     let container = document.createElement('div');
@@ -267,15 +269,17 @@ function buildShortcutViewer() {
     shortcutDrawerViewer.style.height = shortcutDrawerOpen ? `${shortcutDrawerHeight}px` : `0`;
     shortcutDrawerViewer.style.backgroundColor = color.card;
     shortcutDrawerViewer.style.position = 'relative';
-    shortcutDrawerViewer.innerHTML =``;
+    shortcutDrawerViewer.innerHTML = ``;
     let content = document.createElement('div');
     shortcutDrawerViewer.appendChild(content);
     content.style.position = 'absolute';
     content.style.top = `${size.spacing - 10}px`;
     content.style.left = `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`;
-    content.style.right = `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`;
+    content.style.right = `${(size.widthWindow - size.widthBody) / 2 + 0 * size.spacing}px`;
     content.style.height = `${shortcutDrawerHeight - 2 * size.spacing}px`;
-    content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts</h3>
+    content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts 
+    <span style="font-size: 0.8rem; font-weight: normal; text-transform: capitalize">
+    (Press <b>K</b> to show/hide this panel)</span></h3>
      <div style="column-count: 3">
      <b>A</b> - Navigate to About <br>
      <b>P</b> - Navigate to Projects <br>
@@ -283,11 +287,12 @@ function buildShortcutViewer() {
      
      <b>E</b> - Navigate to Education <br>
      <b>B</b> - Navigate to Blog <br>
-     <b>S</b> - Navigate to Starred <br>
+     <b>F</b> - Navigate to Favourite <br>
      
-     <b>D</b> - Toggle Dark Mode <br>
+     <b>S</b> - Search Website <br>
      <b>C</b> - Clear Selection <br>
-     <b>K</b> - View Keyboard Shortcuts <br>
+     <b>D</b> - Toggle Dark Mode <br>
+     <!--<b>Alt+K</b> - Show/Hide Shortcuts <br>-->
     </div>`;
     container.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,${darkMode ? 0.5 : 0.2})`;
 

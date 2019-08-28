@@ -1,3 +1,5 @@
+let searchInput = document.createElement('input');
+
 // SIDEBAR
 function buildSidebar() {
     let sidebar = document.createElement("side");
@@ -5,7 +7,7 @@ function buildSidebar() {
         size.widthBody - size.widthMain - 2 * size.spacing + "px";
     sidebar.style.position = "fixed";
     sidebar.style.top = size.spacing * 1 + "px";
-    sidebar.style.height = 200 + allTags.length * 40 + "px";
+    sidebar.style.height = 200 + allTags.length * 40 + 60 + "px";
     // sidebar.style.bottom = size.spacing * 1 + "px";
     sidebar.style.left = (size.widthWindow - size.widthBody) / 2 + "px";
     sidebar.style.padding = size.spacing + "px";
@@ -26,6 +28,7 @@ function buildSidebar() {
     headingTitle.innerText = info.title;
 
     sidebar.appendChild(buildSocialActions());
+    sidebar.appendChild(buildSearch());
     sidebar.appendChild(buildNavigation());
     sidebar.appendChild(buildColorToggle());
 
@@ -110,6 +113,74 @@ function buildButton(action, icon = false, accent = false) {
         button.style.color = color.primary;
     };
     return button;
+}
+
+function buildSearch() {
+    let searchHeight = 36;
+    let searchWidthInit = size.isMobile ? 200 : 140;
+    let searchWidthFinal = size.isMobile ? 300 :  180;
+
+    let searchArea = document.createElement('div');
+    searchArea.style.display = "flex";
+    searchArea.style.flexDirection = `row`;
+    searchArea.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
+
+    let searchBox = document.createElement('div');
+    searchArea.appendChild(searchBox);
+    searchBox.style.backgroundColor = color.card;
+    searchBox.style.width = `${searchWidthInit}px`;
+    searchBox.style.height = `${searchHeight}px`;
+    searchBox.style.borderRadius = size.radius / 2 + 'px';
+    searchBox.style.marginTop = size.isMobile ? `8px` :`20px`;
+    searchBox.style.position = 'relative';
+
+    let searchIcon = document.createElement('i');
+    searchBox.appendChild(searchIcon);
+    searchIcon.className = 'fas fa-search';
+    searchIcon.style.position = 'absolute';
+    searchIcon.style.left = `4px`;
+    searchIcon.style.top = size.isMobile ? `12px`: `10px`;
+
+    searchBox.appendChild(searchInput);
+    searchInput.style.position = `absolute`;
+    searchInput.style.right = `0`;
+    searchInput.style.height = `${searchHeight}px`;
+    searchInput.style.width = `${searchWidthInit - 25}px`;
+    searchInput.style.borderRadius = size.radius / 2 + 'px';
+    searchInput.style.border = size.isMobile ? `1px solid ${color.secondary}`: `none`;
+    searchInput.style.paddingLeft = `25px`;
+    searchInput.style.backgroundColor = `transparent`;
+    searchInput.style.color = color.primary;
+    searchInput.style.fontSize = `0.8rem`;
+    searchInput.style.fontFamily = `Poppins, sans-serif`;
+    searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
+
+    searchInput.onfocus = function () {
+        searchBox.style.width = `${searchWidthFinal}px`;
+        searchIcon.style.left = `10px`;
+        searchInput.style.fontSize = `1rem`;
+        searchInput.placeholder = `Title, Tags, Tech`;
+        searchInput.style.width = `${searchWidthFinal - 40}px`;
+        searchInput.style.paddingLeft = `40px`;
+    };
+
+    searchInput.onblur = function () {
+        searchBox.style.width = `${searchWidthInit}px`;
+        searchIcon.style.left = `4px`;
+        searchInput.style.fontSize = `0.8rem`;
+        searchInput.placeholder = `Press S to search`;
+        searchInput.style.width = `${searchWidthInit - 25}px`;
+        searchInput.style.paddingLeft = `25px`;
+    };
+
+    searchInput.onkeypress = function (e) {
+        if (e.code === 'Enter') {
+            console.log(e);
+        }
+
+    };
+
+    return searchArea;
 }
 
 function buildNavigation() {
@@ -346,6 +417,9 @@ function buildMenu() {
 
     Menu.appendChild(divider("Contact"));
     Menu.appendChild(buildSocialActions());
+
+    Menu.appendChild(divider("Search"));
+    Menu.appendChild(buildSearch());
 
     Menu.appendChild(divider("Navigate"));
     Menu.appendChild(buildNavigation());

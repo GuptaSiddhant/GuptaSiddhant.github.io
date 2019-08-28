@@ -16,8 +16,8 @@ function keyboardInput(e) {
             toggleShortcutDrawer();
             e.stopPropagation();
             break;
-        case 'KeyF':
-            alert('Find function coming soon.');
+        case 'KeyS':
+            activateSearch();
             e.stopPropagation();
             break;
         default:
@@ -29,6 +29,10 @@ function keyboardInput(e) {
             e.stopPropagation();
             break;
     }
+}
+
+function activateSearch() {
+    searchInput.focus();
 }
 
 function navButtonClick(tag) {

@@ -34,10 +34,10 @@ let info = {
       code: 'KeyB'
     },
     {
-      name: "starred",
-      color: "#f2c600",
+      name: "favourite",
+      color: "#F74F9E",
       icon: "fas fa-star",
-      code: 'KeyS'
+      code: 'KeyF'
     },
     {
       name: "other",

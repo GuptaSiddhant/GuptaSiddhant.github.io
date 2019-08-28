@@ -12,7 +12,7 @@ class Article {
         this.tech = article.tech;
         this.attachments = article.attachments;
         this.actions = article.actions;
-        this.starred = article.starred;
+        this.starred = article.tags.some(r => 'favourite' === r);
         this.spacing = size.spacing;
         this.size = size.widthMain - 4 * size.spacing;
         this.radius = size.radius;
@@ -255,10 +255,10 @@ class Article {
         cardIcon.style.lineHeight = iconSize * 2 + "px";
         cardIcon.style.fontSize = iconSize + "px";
         cardIcon.style.zIndex = "10";
-        cardIcon.style.backgroundColor = "#F2C600";
-        cardIcon.className = "fas fa-star";
-        cardIcon.alt = 'Starred';
-        cardIcon.title = 'Starred';
+        cardIcon.style.backgroundColor = "#F74F9E";
+        cardIcon.className = "fas fa-heart";
+        cardIcon.alt = 'Favourite';
+        cardIcon.title = 'Favourite';
         return cardIcon;
     }
 

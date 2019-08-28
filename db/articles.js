@@ -1,5 +1,5 @@
 // Primary:     title, subtitle, icon, date, tags, pinned, logo
-// Secondary:   summary, role, tech, attachments, actions, starred
+// Secondary:   summary, role, tech, attachments, actions
 // Viewer:      url, file, filetype(md)
 
 let articles = [
@@ -124,9 +124,8 @@ let articles = [
     title: "Business Espoo - Visual Identity",
     subtitle: "Kalpik Studio",
     date: "April 2019",
-    tags: ["projects", "branding", "styling", 'starred'],
+    tags: ["projects", "branding", "styling", 'favourite'],
     logo: "assets/logos/be-logo.png",
-    starred: true,
     summary:
       "Business Espoo supports the vitality of businesses by offering the best, continuously developing services in one place.",
     role: "Solely designed the Brand Identity and Style Guidelines",
@@ -259,7 +258,7 @@ let articles = [
     title: "The Passport - Concept",
     subtitle: "The Startup - Medium",
     date: "8 May 2017",
-    tags: ["blog", "concept"],
+    tags: ["blog", "concept", 'favourite'],
     summary: "The elegant All-In-One Identity solution for every Citizen.",
     role:
       "Conceptualised and designed a mock representation of possible Passport Card.",
@@ -276,7 +275,7 @@ let articles = [
     ],
     actions: [
       {
-        name: "Read More",
+        name: "Read Post",
         link: "#blog/passport",
         target: "_self"
       }
