@@ -112,13 +112,6 @@ function buildButton(action, icon = false, accent = false) {
     return button;
 }
 
-function clearAll () {
-    navFilter = "";
-    navigation.subNav = false;
-    setURL();
-    initiate();
-}
-
 function buildNavigation() {
     let nav = document.createElement("nav");
     nav.id = "nav-area";
@@ -144,9 +137,6 @@ function buildNavigation() {
     clearButton.style.cursor = "pointer";
     clearButton.style.display = "none";
     clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear';
-    if(!size.isMobile) {
-        clearButton.innerHTML += ` (Press C)`;
-    }
 
     clearButton.onclick = function () {
         clearButton.style.display = "none";
@@ -249,24 +239,13 @@ function buildColorToggle() {
     modeLabel.appendChild(modeSpan);
     modeSpan.classList = "slider round";
 
-    switcher.onclick = function (e) {
-        modeInput.checked = !modeInput.checked;
-        darkMode = modeInput.checked;
-        switchDarkMode(e);
-    };
+    switcher.addEventListener('click', function (e) {
+        e.preventDefault();
+        switchDarkMode();
+    });
     return switcher;
 }
 
-function switchDarkMode(e) {
-    darkMode = !darkMode;
-    e.stopPropagation();
-    if (darkMode) {
-        setUrlParameter("color", "dark");
-    } else {
-        setUrlParameter("color", "light");
-    }
-    initiate();
-}
 
 // HEADBAR
 function buildHeadbar() {

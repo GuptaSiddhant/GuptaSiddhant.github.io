@@ -13,60 +13,31 @@ let navigation = {
     subFilter: "",
     subURL: ""
 };
+let shortcutDrawerOpen;
+let shortcutDrawerButton = document.createElement('div');
+let shortcutDrawerViewer = document.createElement('div');
+let shortcutDrawerHeight = 180;
 
 // On DOM Loaded -> Initialise
 document.addEventListener("DOMContentLoaded", initiate);
 
 function initiate() {
+
+    window.addEventListener("popstate", initiate);
+    window.addEventListener("resize", buildDOM);
+    shortcutDrawerOpen = false;
+
     router();
     buildDOM();
 
-    window.scrollTo(0, scrollPosition);
-    document.body.onscroll = function () {
-        scrollPosition = document.body.scrollTop;
-    };
-
-    window.addEventListener("resize", initiate);
-    window.addEventListener("popstate", initiate);
-
     document.onkeypress = function (e) {
         e = e || window.event;
-        keyboardInput(e);
+        // Ignore Alt, Ctrl, Shift, AltGraph, Command/Windows combinations
+        if (!e.altKey && !e.ctrlKey && !e.shiftKey && !e.altGraphKey && !e.metaKey) {
+            e.preventDefault();
+            keyboardInput(e);
+        }
     };
-}
-
-function keyboardInput(e) {
-    // console.log(e);
-    let code = e.code;
-    switch (code) {
-        case 'KeyD':
-            switchDarkMode(e);
-            e.stopPropagation();
-            break;
-        case 'KeyC':
-            clearAll();
-            e.stopPropagation();
-            break;
-        case 'KeyF':
-            alert('Find function coming soon.');
-            e.stopPropagation();
-            break;
-        default:
-            info.tags.forEach((tag) => {
-               if (tag.code && tag.code === code) {
-                   navButtonClick(tag.name);
-               }
-            });
-            e.stopPropagation();
-            break;
-    }
-}
-
-function navButtonClick(tag) {
-    navFilter = tag;
-    scrollPosition = 0;
-    setURL();
-    initiate();
 }
 
 function router() {
@@ -213,9 +184,15 @@ function buildDOM() {
         BODY.appendChild(buildHeadbar());
     } else {
         BODY.appendChild(buildSidebar());
+        BODY.appendChild(buildShortcutViewer());
     }
 
     BODY.appendChild(buildLifeline());
+
+    window.scrollTo(0, scrollPosition);
+    document.body.onscroll = function () {
+        scrollPosition = document.body.scrollTop;
+    };
 }
 
 // MAIN
@@ -261,105 +238,60 @@ function buildLifeline() {
     return lifeline;
 }
 
-// Supporting functions
-function arrayRemove(arr, value) {
-    return arr.filter(function (ele) {
-        return ele !== value;
-    });
-}
 
-function findArticlesOBJ(key, val) {
-    return articles.find(obj => obj[key] === val);
-}
+// Bottom Drawer
+function buildShortcutViewer() {
+    let container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.bottom = '0';
+    container.style.width = '100%';
+    container.style.zIndex = '100';
 
-function findInfoOBJ(key, val) {
-    return info.tags.find(obj => obj[key] === val);
-}
+    container.appendChild(shortcutDrawerButton);
+    shortcutDrawerButton.style.backgroundColor = color.card;
+    shortcutDrawerButton.style.color = color.primary;
+    shortcutDrawerButton.style.width = '140px';
+    shortcutDrawerButton.style.borderRadius = `${size.radius}px ${size.radius}px 0 0`;
+    shortcutDrawerButton.style.height = `${size.spacing}px`;
+    shortcutDrawerButton.style.lineHeight = `${size.spacing}px`;
+    shortcutDrawerButton.style.textAlign = 'center';
+    shortcutDrawerButton.style.position = `absolute`;
+    shortcutDrawerButton.style.top = `-${size.spacing}px`;
+    shortcutDrawerButton.style.left = (size.widthWindow - size.widthBody) / 2 + 120 + "px";
+    shortcutDrawerButton.style.cursor = `pointer`;
+    shortcutDrawerButton.innerHTML = `Shortcuts `;
+    shortcutDrawerButton.innerHTML += shortcutDrawerOpen ? `<i class="fas fa-times-circle"></i>` : `<i class="fas fa-arrow-up"></i>`;
 
-function matchColor(tags) {
-    for (var i = 0; i < tags.length; i++) {
-        tags[i] = tags[i].toLowerCase();
-    }
-    let matches = allTags.filter(x => tags.includes(x));
-    if (matches[0] && matches[0] !== "") {
-        return findInfoOBJ("name", matches[0]).color;
-    } else {
-        return findInfoOBJ("name", "other").color;
-    }
-}
+    container.appendChild(shortcutDrawerViewer);
+    shortcutDrawerViewer.style.width = `100%`;
+    shortcutDrawerViewer.style.height = shortcutDrawerOpen ? `${shortcutDrawerHeight}px` : `0`;
+    shortcutDrawerViewer.style.backgroundColor = color.card;
+    shortcutDrawerViewer.style.position = 'relative';
+    shortcutDrawerViewer.innerHTML =``;
+    let content = document.createElement('div');
+    shortcutDrawerViewer.appendChild(content);
+    content.style.position = 'absolute';
+    content.style.top = `${size.spacing - 10}px`;
+    content.style.left = `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`;
+    content.style.right = `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`;
+    content.style.height = `${shortcutDrawerHeight - 2 * size.spacing}px`;
+    content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts</h3>
+     <div style="column-count: 3">
+     <b>A</b> - Navigate to About <br>
+     <b>P</b> - Navigate to Projects <br>
+     <b>X</b> - Navigate to Experience <br>
+     
+     <b>E</b> - Navigate to Education <br>
+     <b>B</b> - Navigate to Blog <br>
+     <b>S</b> - Navigate to Starred <br>
+     
+     <b>D</b> - Toggle Dark Mode <br>
+     <b>C</b> - Clear Selection <br>
+     <b>K</b> - View Keyboard Shortcuts <br>
+    </div>`;
+    container.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,${darkMode ? 0.5 : 0.2})`;
 
-function matchIcon(tags) {
-    for (var i = 0; i < tags.length; i++) {
-        tags[i] = tags[i].toLowerCase();
-    }
-    let matches = allTags.filter(x => tags.includes(x));
-    if (matches[0] && matches[0] !== "") {
-        return findInfoOBJ("name", matches[0]).icon;
-    } else {
-        return findInfoOBJ("name", "other").icon;
-    }
-}
+    shortcutDrawerButton.onclick = toggleShortcutDrawer;
 
-function parseQuery(queryString) {
-    let query = {};
-    let pairs = (queryString[0] === "?"
-            ? queryString.substr(1)
-            : queryString
-    ).split("&");
-    for (let i = 0; i < pairs.length; i++) {
-        let pair = pairs[i].split("=");
-        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
-    }
-    return query;
-}
-
-function setURL(queryURL = "") {
-    let hashURL = "#";
-    if (navFilter !== "") {
-        hashURL += navFilter;
-        if (navigation.subNav && navigation.subFilter === navFilter) {
-            hashURL += "/" + navigation.subURL;
-        }
-    }
-    let newURL = queryURL + hashURL;
-    history.pushState({}, info.title, newURL);
-}
-
-function setUrlParameter(key, value) {
-    let params = new URLSearchParams(location.search);
-    if (params.has(key)) {
-        params.set(key, value);
-    } else {
-        params.append(key, value);
-    }
-    // [...params.entries()];
-    setURL("?" + params.toString());
-}
-
-function invertColor(hex, bw = true) {
-    if (hex.indexOf('#') === 0) {
-        hex = hex.slice(1);
-    }
-    // convert 3-digit hex to 6-digits.
-    if (hex.length === 3) {
-        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-    }
-    if (hex.length !== 6) {
-        throw new Error('Invalid HEX color.');
-    }
-    let r = parseInt(hex.slice(0, 2), 16),
-        g = parseInt(hex.slice(2, 4), 16),
-        b = parseInt(hex.slice(4, 6), 16);
-    if (bw) {
-        // http://stackoverflow.com/a/3943023/112731
-        return (r * 0.299 + g * 0.587 + b * 0.114) > 186
-            ? '#1A1A1A'
-            : '#FFFFFF';
-    }
-    // invert color components
-    // r = (255 - r).toString(16);
-    // g = (255 - g).toString(16);
-    // b = (255 - b).toString(16);
-    // // pad each with zeros and return
-    // return "#" + padZero(r) + padZero(g) + padZero(b);
+    return container;
 }
