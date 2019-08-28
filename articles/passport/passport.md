@@ -8,7 +8,7 @@ Have you ever considered the Passport Booklet to be big, thick and fairly futile
 
 > Originally posted on [THE STARTUP - MEDIUM](https://medium.com/swlh/the-passport-concept-b95c1d24e02e)
 
-![Passport 2](/articles/passport/passport2.jpg =100%x\* "Front View")
+![Passport 2](https://guptasiddhant.com/articles/passport/passport2.jpg =100%x\* "Front View")
 
 ## Catching up with the world
 
@@ -24,7 +24,7 @@ This kind of immigration solves quite a problems. It avoids long queueing or nee
 
 An International ID Document which contains all information and benefits of a traditional Passport Booklet and National ID, but is compact and fits in your pocket like any other bank card or driving license.
 
-![Passport Card Design](/articles/passport/passport-france-korea-uae.png =100%x\*)
+![Passport Card Design](https://guptasiddhant.com/articles/passport/passport-france-korea-uae.png =100%x\*)
 
 I tried to design the very passport, after wondering just too much. What if, our Passport was a card and not a booklet, which would sit easily inside our wallet and we are not worried if the pages will eventually run out. If you are worried about Visa and immigration stamping, just read along. While designing, I researched many passports, the requirements, the guidelines, the design and the technology. Mostly impressed with what I witnessed, I went on creating designs which could serve as base model to all countries.
 
