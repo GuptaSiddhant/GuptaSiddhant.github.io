@@ -1,26 +1,31 @@
 let acData = [];
 articles.forEach((article) => {
-    if (!article.tags.includes('testimonial') && !article.tags.includes('recommendation') ){
-        acData.push(article.title);
+    if (!article.tags.includes('testimonial') && !article.tags.includes('recommendation')) {
+        let splits = article.title.split(' ');
+        splits.forEach((text) => {
+            acData.push(text.toLowerCase());
+        });
     }
-
     if (article.subtitle) {
-        acData.push(article.subtitle);
+        let splits = article.subtitle.split(' ');
+        splits.forEach((text) => {
+            acData.push(text.toLowerCase());
+        });
     }
     article.tags.forEach((tag) => {
-        if (!acData.some(r => tag === r)) {
-            acData.push(tag);
-        }
+        acData.push(tag);
     });
     if (article.tech) {
         article.tech.forEach((item) => {
-            if (!acData.some(r => item === r)) {
-                acData.push(item);
-            }
+            acData.push(item);
         });
     }
+    acData = acData.filter(onlyUnique);
 });
 
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
 
 // Supporting functions
 function keyboardInput(e) {
@@ -58,6 +63,12 @@ function activateSearch() {
     searchInput.focus({preventScroll: true});
 }
 
+function submitSearch(text) {
+    setUrlParameter('search', text.toLowerCase());
+    searchText = text.toLowerCase();
+    initiate();
+}
+
 function navButtonClick(tag) {
     navFilter = tag;
     scrollPosition = 0;
@@ -68,7 +79,11 @@ function navButtonClick(tag) {
 function clearAll() {
     navFilter = "";
     navigation.subNav = false;
-    setURL();
+    searchText = ``;
+    searchInput.value = ``;
+    setUrlParameter('search', "");
+    setURL("", true);
+    console.log('clear');
     initiate();
 }
 
@@ -157,16 +172,21 @@ function parseQuery(queryString) {
     return query;
 }
 
-function setURL(queryURL = "") {
-    let hashURL = "#";
-    if (navFilter !== "") {
-        hashURL += navFilter;
-        if (navigation.subNav && navigation.subFilter === navFilter) {
-            hashURL += "/" + navigation.subURL;
+function setURL(queryURL = "", clear = false) {
+    let newURL;
+    if (clear) {
+        newURL = `#`;
+    } else {
+        let hashURL = "#";
+        if (navFilter !== "") {
+            hashURL += navFilter;
+            if (navigation.subNav && navigation.subFilter === navFilter) {
+                hashURL += "/" + navigation.subURL;
+            }
         }
+        newURL = queryURL + hashURL;
     }
-    let newURL = queryURL + hashURL;
-    history.pushState({}, info.title, newURL);
+    history.replaceState({}, info.title, newURL);
 }
 
 function setUrlParameter(key, value) {

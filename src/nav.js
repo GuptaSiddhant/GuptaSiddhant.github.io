@@ -135,12 +135,13 @@ function buildSearch() {
     searchBox.style.marginTop = size.isMobile ? `8px` : `20px`;
     searchBox.style.position = 'relative';
 
-    let sInputWidthInit = size.isMobile ? searchWidthInit - 40 : searchWidthInit - 25;
-    let sInputWidthFinal = searchWidthFinal - 40;
     let sInputPaddingLeftInit = size.isMobile ? 40 : 25;
     let sInputPaddingLeftFinal = 40;
     let sIconLeftInit = size.isMobile ? 10 : 4;
     let sIconLeftFinal = 10;
+    let sInputWidthInit = searchWidthInit - sInputPaddingLeftInit;
+    let sInputWidthFinal = searchWidthFinal - sInputPaddingLeftFinal;
+
 
     let acDataList = document.createElement('datalist');
     acDataList.id = 'acData';
@@ -163,9 +164,12 @@ function buildSearch() {
     searchInput.style.paddingLeft = sInputPaddingLeftInit + `px`;
     searchInput.style.backgroundColor = `transparent`;
     searchInput.style.color = color.primary;
-    searchInput.style.fontSize = `0.8rem`;
+    searchInput.style.fontSize = `0.75rem`;
     searchInput.style.fontFamily = `Poppins, sans-serif`;
     searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
+    if (searchText !== ``) {
+        searchInput.value = searchText;
+    }
 
     let searchIcon = document.createElement('i');
     searchBox.appendChild(searchIcon);
@@ -174,6 +178,24 @@ function buildSearch() {
     searchIcon.style.left = sIconLeftInit + `px`;
     searchIcon.style.top = size.isMobile ? `12px` : `10px`;
 
+    let searchClearIcon = document.createElement('i');
+    if (searchText !== ``) {
+        searchBox.appendChild(searchClearIcon);
+        searchClearIcon.style.display = `block`;
+        searchClearIcon.className = 'fas fa-times-circle';
+        searchClearIcon.style.position = 'absolute';
+        searchClearIcon.style.right = sIconLeftInit + `px`;
+        searchClearIcon.style.top = size.isMobile ? `12px` : `10px`;
+        searchClearIcon.style.cursor = 'pointer';
+        searchClearIcon.onclick = function () {
+            searchText = ``;
+            searchInput.value = searchText;
+            setUrlParameter('search', searchText);
+            initiate();
+        };
+    }
+
+    // let searchSubmitIcon = document.createElement('i');
     searchInput.onfocus = function () {
         animateSize(searchBox, 'width', searchWidthInit, searchWidthFinal, 5);
         searchIcon.style.left = `${sIconLeftFinal}px`;
@@ -181,24 +203,33 @@ function buildSearch() {
         searchInput.placeholder = `Title, Tags, Tech`;
         searchInput.style.width = `${sInputWidthFinal}px`;
         searchInput.style.paddingLeft = sInputPaddingLeftFinal + `px`;
+
+        // searchBox.appendChild(searchSubmitIcon);
+        // searchSubmitIcon.className = 'fas fa-arrow-right';
+        // searchSubmitIcon.style.position = 'absolute';
+        // searchSubmitIcon.style.display = 'block';
+        // searchSubmitIcon.style.right = sIconLeftInit + `px`;
+        // searchSubmitIcon.style.top = size.isMobile ? `12px` : `10px`;
+        // searchSubmitIcon.style.cursor = 'pointer';
+        // searchSubmitIcon.onclick = submitSearch;
+        // searchClearIcon.style.display = `none`;
     };
 
     searchInput.onblur = function () {
         animateSize(searchBox, 'width', searchWidthFinal, searchWidthInit, -5);
         searchIcon.style.left = sIconLeftInit + `px`;
-        searchInput.style.fontSize = `0.8rem`;
+        searchInput.style.fontSize = `0.75rem`;
         searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
         searchInput.style.width = `${sInputWidthInit}px`;
         searchInput.style.paddingLeft = sInputPaddingLeftInit + `px`;
+        // searchSubmitIcon.style.display = 'none';
+        // searchClearIcon.style.display = `block`;
     };
 
-    searchInput.onkeypress = function (e) {
+    searchInput.onkeypress = (e) => {
         if (e.code === 'Enter') {
-            setUrlParameter('search', searchInput.value);
-            searchText = searchInput.value;
-            initiate();
+            submitSearch(searchInput.value)
         }
-
     };
 
     return searchArea;
@@ -227,7 +258,7 @@ function buildNavigation() {
     clearButton.style.marginBottom = "0.5rem";
     clearButton.style.opacity = "0.7";
     clearButton.style.cursor = "pointer";
-    clearButton.style.display = "none";
+    clearButton.style.display = searchText !== `` ? "block" : "none";
     clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear';
 
     clearButton.onclick = function () {

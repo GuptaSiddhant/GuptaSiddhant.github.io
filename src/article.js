@@ -313,10 +313,24 @@ class Article {
             }
             if (this.tags) {
                 this.tags.forEach((tag, index) => {
-                    subtitle2.innerText += tag.toString();
+                    let tagSpan = document.createElement('span');
+                    subtitle2.appendChild(tagSpan);
+                    tagSpan.innerText = tag.toString();
+                    tagSpan.style.cursor = 'pointer';
                     if (index + 1 !== this.tags.length) {
-                        subtitle2.innerHTML += ", ";
+                        let commaSpace = document.createElement('span');
+                        commaSpace.innerText = `, `;
+                        subtitle2.appendChild(commaSpace);
                     }
+                    tagSpan.onclick = function () {
+                        submitSearch(tag.toString());
+                    };
+                    tagSpan.onmouseover = () => {
+                        tagSpan.style.color = color.primary;
+                    };
+                    tagSpan.onmouseleave = () => {
+                        tagSpan.style.color = color.secondary;
+                    };
                 });
             }
         }
@@ -373,10 +387,24 @@ class Article {
             tech.appendChild(value);
 
             this.tech.forEach((item, index) => {
-                value.innerHTML += item;
+                let itemSpan = document.createElement('span');
+                value.appendChild(itemSpan);
+                itemSpan.innerText = item.toString();
+                itemSpan.style.cursor = 'pointer';
                 if (index + 1 !== this.tech.length) {
-                    value.innerHTML += ", ";
+                    let commaSpace = document.createElement('span');
+                    commaSpace.innerText = `, `;
+                    value.appendChild(commaSpace);
                 }
+                itemSpan.onclick = function () {
+                    submitSearch(item.toString());
+                };
+                itemSpan.onmouseover = () => {
+                    itemSpan.style.color = color.primary;
+                };
+                itemSpan.onmouseleave = () => {
+                    itemSpan.style.color = color.secondary;
+                };
             });
         }
 

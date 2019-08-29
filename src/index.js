@@ -46,11 +46,16 @@ function initiate() {
 
 function router() {
     let query = parseQuery(window.location.search);
-    if (query && query.color) {
-        if (query.color === "dark") {
-            darkMode = true;
-        } else if (query.color === "light") {
-            darkMode = false;
+    if (query) {
+        if (query.color) {
+            if (query.color === "dark") {
+                darkMode = true;
+            } else if (query.color === "light") {
+                darkMode = false;
+            }
+        }
+        if (query.search) {
+            searchText = query.search.toLowerCase();
         }
     }
 
@@ -231,10 +236,17 @@ function buildLifeline() {
         }
     } else {
         articles.forEach(data => {
-            let matched = data.tags.some(r => navFilter === r);
-            if (matched || navFilter === "" || data.pinned) {
-                let article = new Article(data);
-                lifeline.appendChild(article.buildSummaryCard());
+            let hashMatch = data.tags.some(r => navFilter === r);
+            let searchMatch = data.title.toLowerCase().includes(searchText) || data.subtitle && data.subtitle.toLowerCase().includes(searchText) || data.tags.some(r => r.toLowerCase().includes(searchText)) || data.tech && data.tech.some(r => r.toLowerCase().includes(searchText));
+
+            if (hashMatch || navFilter === "" || data.pinned) {
+                if (searchText === '') {
+                    let article = new Article(data);
+                    lifeline.appendChild(article.buildSummaryCard());
+                } else if (searchMatch) {
+                    let article = new Article(data);
+                    lifeline.appendChild(article.buildSummaryCard());
+                }
             }
         });
     }
