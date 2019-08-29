@@ -7,6 +7,7 @@ let allTags = [];
 info.tags.forEach(tag => {
     tag.name !== "other" ? allTags.push(tag.name) : null;
 });
+let searchText = ``;
 let size, color;
 let navigation = {
     subNav: false,

@@ -1,3 +1,26 @@
+let acData = [];
+articles.forEach((article) => {
+    if (!article.tags.includes('testimonial') && !article.tags.includes('recommendation') ){
+        acData.push(article.title);
+    }
+
+    if (article.subtitle) {
+        acData.push(article.subtitle);
+    }
+    article.tags.forEach((tag) => {
+        if (!acData.some(r => tag === r)) {
+            acData.push(tag);
+        }
+    });
+    if (article.tech) {
+        article.tech.forEach((item) => {
+            if (!acData.some(r => item === r)) {
+                acData.push(item);
+            }
+        });
+    }
+});
+
 
 // Supporting functions
 function keyboardInput(e) {
@@ -32,7 +55,7 @@ function keyboardInput(e) {
 }
 
 function activateSearch() {
-    searchInput.focus();
+    searchInput.focus({preventScroll: true});
 }
 
 function navButtonClick(tag) {
@@ -42,7 +65,7 @@ function navButtonClick(tag) {
     initiate();
 }
 
-function clearAll () {
+function clearAll() {
     navFilter = "";
     navigation.subNav = false;
     setURL();
@@ -73,11 +96,13 @@ function toggleShortcutDrawer() {
 
 function animateSize(elem, prop, init, final, step = 10) {
     let x = init;
+
     function frame() {
         x += step;
         elem.style[prop] = x + 'px';
         if (x === final) clearInterval(id);
     }
+
     let id = setInterval(frame, 10);
 }
 

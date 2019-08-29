@@ -117,13 +117,14 @@ function buildButton(action, icon = false, accent = false) {
 
 function buildSearch() {
     let searchHeight = 36;
-    let searchWidthInit = size.isMobile ? 200 : 140;
-    let searchWidthFinal = size.isMobile ? 300 :  180;
+    let searchWidthInit = size.isMobile ? size.widthBody - 60 : 140;
+    let searchWidthFinal = size.isMobile ? size.widthBody - 60 : 180;
 
     let searchArea = document.createElement('div');
     searchArea.style.display = "flex";
     searchArea.style.flexDirection = `row`;
     searchArea.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
+    searchArea.style.marginLeft = size.isMobile ? "8px" : "0";
 
     let searchBox = document.createElement('div');
     searchArea.appendChild(searchBox);
@@ -131,51 +132,71 @@ function buildSearch() {
     searchBox.style.width = `${searchWidthInit}px`;
     searchBox.style.height = `${searchHeight}px`;
     searchBox.style.borderRadius = size.radius / 2 + 'px';
-    searchBox.style.marginTop = size.isMobile ? `8px` :`20px`;
+    searchBox.style.marginTop = size.isMobile ? `8px` : `20px`;
     searchBox.style.position = 'relative';
 
-    let searchIcon = document.createElement('i');
-    searchBox.appendChild(searchIcon);
-    searchIcon.className = 'fas fa-search';
-    searchIcon.style.position = 'absolute';
-    searchIcon.style.left = `4px`;
-    searchIcon.style.top = size.isMobile ? `12px`: `10px`;
+    let sInputWidthInit = size.isMobile ? searchWidthInit - 40 : searchWidthInit - 25;
+    let sInputWidthFinal = searchWidthFinal - 40;
+    let sInputPaddingLeftInit = size.isMobile ? 40 : 25;
+    let sInputPaddingLeftFinal = 40;
+    let sIconLeftInit = size.isMobile ? 10 : 4;
+    let sIconLeftFinal = 10;
+
+    let acDataList = document.createElement('datalist');
+    acDataList.id = 'acData';
+    acData.forEach((data) => {
+        let acDataOption = document.createElement('option');
+        acDataList.appendChild(acDataOption);
+        acDataOption.value = data;
+    });
 
     searchBox.appendChild(searchInput);
+    searchBox.appendChild(acDataList);
+    searchInput.id = `autocomplete`;
+    searchInput.setAttribute('list', 'acData');
     searchInput.style.position = `absolute`;
     searchInput.style.right = `0`;
     searchInput.style.height = `${searchHeight}px`;
-    searchInput.style.width = `${searchWidthInit - 25}px`;
+    searchInput.style.width = `${sInputWidthInit}px`;
     searchInput.style.borderRadius = size.radius / 2 + 'px';
-    searchInput.style.border = size.isMobile ? `1px solid ${color.secondary}`: `none`;
-    searchInput.style.paddingLeft = `25px`;
+    searchInput.style.border = size.isMobile ? `1px solid ${color.secondary}` : `none`;
+    searchInput.style.paddingLeft = sInputPaddingLeftInit + `px`;
     searchInput.style.backgroundColor = `transparent`;
     searchInput.style.color = color.primary;
     searchInput.style.fontSize = `0.8rem`;
     searchInput.style.fontFamily = `Poppins, sans-serif`;
     searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
 
+    let searchIcon = document.createElement('i');
+    searchBox.appendChild(searchIcon);
+    searchIcon.className = 'fas fa-search';
+    searchIcon.style.position = 'absolute';
+    searchIcon.style.left = sIconLeftInit + `px`;
+    searchIcon.style.top = size.isMobile ? `12px` : `10px`;
+
     searchInput.onfocus = function () {
-        searchBox.style.width = `${searchWidthFinal}px`;
-        searchIcon.style.left = `10px`;
+        animateSize(searchBox, 'width', searchWidthInit, searchWidthFinal, 5);
+        searchIcon.style.left = `${sIconLeftFinal}px`;
         searchInput.style.fontSize = `1rem`;
         searchInput.placeholder = `Title, Tags, Tech`;
-        searchInput.style.width = `${searchWidthFinal - 40}px`;
-        searchInput.style.paddingLeft = `40px`;
+        searchInput.style.width = `${sInputWidthFinal}px`;
+        searchInput.style.paddingLeft = sInputPaddingLeftFinal + `px`;
     };
 
     searchInput.onblur = function () {
-        searchBox.style.width = `${searchWidthInit}px`;
-        searchIcon.style.left = `4px`;
+        animateSize(searchBox, 'width', searchWidthFinal, searchWidthInit, -5);
+        searchIcon.style.left = sIconLeftInit + `px`;
         searchInput.style.fontSize = `0.8rem`;
-        searchInput.placeholder = `Press S to search`;
-        searchInput.style.width = `${searchWidthInit - 25}px`;
-        searchInput.style.paddingLeft = `25px`;
+        searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
+        searchInput.style.width = `${sInputWidthInit}px`;
+        searchInput.style.paddingLeft = sInputPaddingLeftInit + `px`;
     };
 
     searchInput.onkeypress = function (e) {
         if (e.code === 'Enter') {
-            console.log(e);
+            setUrlParameter('search', searchInput.value);
+            searchText = searchInput.value;
+            initiate();
         }
 
     };
