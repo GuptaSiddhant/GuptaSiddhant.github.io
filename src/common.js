@@ -67,6 +67,7 @@ function submitSearch(text) {
     setUrlParameter('search', text.toLowerCase());
     searchText = text.toLowerCase();
     initiate();
+    // searchInput.value = text + `E`;
 }
 
 function navButtonClick(tag) {

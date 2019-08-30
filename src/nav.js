@@ -126,14 +126,17 @@ function buildSearch() {
     searchArea.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
     searchArea.style.marginLeft = size.isMobile ? "8px" : "0";
 
-    let searchBox = document.createElement('div');
-    searchArea.appendChild(searchBox);
-    searchBox.style.backgroundColor = color.card;
-    searchBox.style.width = `${searchWidthInit}px`;
-    searchBox.style.height = `${searchHeight}px`;
-    searchBox.style.borderRadius = size.radius / 2 + 'px';
-    searchBox.style.marginTop = size.isMobile ? `8px` : `20px`;
-    searchBox.style.position = 'relative';
+    let searchForm = document.createElement('form');
+    searchArea.appendChild(searchForm);
+    searchForm.style.backgroundColor = color.card;
+    searchForm.style.width = `${searchWidthInit}px`;
+    searchForm.style.height = `${searchHeight}px`;
+    searchForm.style.borderRadius = size.radius / 2 + 'px';
+    searchForm.style.marginTop = size.isMobile ? `8px` : `20px`;
+    searchForm.style.position = 'relative';
+    searchForm.onsubmit = function (e) {
+        e.preventDefault();
+    };
 
     let sInputPaddingLeftInit = size.isMobile ? 40 : 25;
     let sInputPaddingLeftFinal = 40;
@@ -151,8 +154,8 @@ function buildSearch() {
         acDataOption.value = data;
     });
 
-    searchBox.appendChild(searchInput);
-    searchBox.appendChild(acDataList);
+    searchForm.appendChild(searchInput);
+    searchForm.appendChild(acDataList);
     searchInput.id = `autocomplete`;
     searchInput.setAttribute('list', 'acData');
     searchInput.style.position = `absolute`;
@@ -172,7 +175,7 @@ function buildSearch() {
     }
 
     let searchIcon = document.createElement('i');
-    searchBox.appendChild(searchIcon);
+    searchForm.appendChild(searchIcon);
     searchIcon.className = 'fas fa-search';
     searchIcon.style.position = 'absolute';
     searchIcon.style.left = sIconLeftInit + `px`;
@@ -180,7 +183,7 @@ function buildSearch() {
 
     let searchClearIcon = document.createElement('i');
     if (searchText !== ``) {
-        searchBox.appendChild(searchClearIcon);
+        searchForm.appendChild(searchClearIcon);
         searchClearIcon.style.display = `block`;
         searchClearIcon.className = 'fas fa-times-circle';
         searchClearIcon.style.position = 'absolute';
@@ -197,14 +200,14 @@ function buildSearch() {
 
     // let searchSubmitIcon = document.createElement('i');
     searchInput.onfocus = function () {
-        animateSize(searchBox, 'width', searchWidthInit, searchWidthFinal, 5);
+        animateSize(searchForm, 'width', searchWidthInit, searchWidthFinal, 5);
         searchIcon.style.left = `${sIconLeftFinal}px`;
         searchInput.style.fontSize = `1rem`;
         searchInput.placeholder = `Title, Tags, Tech`;
         searchInput.style.width = `${sInputWidthFinal}px`;
         searchInput.style.paddingLeft = sInputPaddingLeftFinal + `px`;
 
-        // searchBox.appendChild(searchSubmitIcon);
+        // searchForm.appendChild(searchSubmitIcon);
         // searchSubmitIcon.className = 'fas fa-arrow-right';
         // searchSubmitIcon.style.position = 'absolute';
         // searchSubmitIcon.style.display = 'block';
@@ -216,7 +219,7 @@ function buildSearch() {
     };
 
     searchInput.onblur = function () {
-        animateSize(searchBox, 'width', searchWidthFinal, searchWidthInit, -5);
+        animateSize(searchForm, 'width', searchWidthFinal, searchWidthInit, -5);
         searchIcon.style.left = sIconLeftInit + `px`;
         searchInput.style.fontSize = `0.75rem`;
         searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
