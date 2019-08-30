@@ -119,6 +119,12 @@ function buildSearch() {
     let searchHeight = 36;
     let searchWidthInit = size.isMobile ? size.widthBody - 60 : 140;
     let searchWidthFinal = size.isMobile ? size.widthBody - 60 : 180;
+    let sInputPaddingLeftInit = size.isMobile ? 40 : 25;
+    let sInputPaddingLeftFinal = 40;
+    let sIconLeftInit = size.isMobile ? 10 : 4;
+    let sIconLeftFinal = 10;
+    let sInputWidthInit = searchWidthInit - sInputPaddingLeftInit;
+    let sInputWidthFinal = searchWidthFinal - sInputPaddingLeftFinal;
 
     let searchArea = document.createElement('div');
     searchArea.style.display = "flex";
@@ -137,14 +143,6 @@ function buildSearch() {
     searchForm.onsubmit = function (e) {
         e.preventDefault();
     };
-
-    let sInputPaddingLeftInit = size.isMobile ? 40 : 25;
-    let sInputPaddingLeftFinal = 40;
-    let sIconLeftInit = size.isMobile ? 10 : 4;
-    let sIconLeftFinal = 10;
-    let sInputWidthInit = searchWidthInit - sInputPaddingLeftInit;
-    let sInputWidthFinal = searchWidthFinal - sInputPaddingLeftFinal;
-
 
     let acDataList = document.createElement('datalist');
     acDataList.id = 'acData';
@@ -200,7 +198,9 @@ function buildSearch() {
 
     // let searchSubmitIcon = document.createElement('i');
     searchInput.onfocus = function () {
-        animateSize(searchForm, 'width', searchWidthInit, searchWidthFinal, 5);
+        if (!size.isMobile) {
+            animateSize(searchForm, 'width', searchWidthInit, searchWidthFinal, 5);
+        }
         searchIcon.style.left = `${sIconLeftFinal}px`;
         searchInput.style.fontSize = `1rem`;
         searchInput.placeholder = `Title, Tags, Tech`;
@@ -219,7 +219,9 @@ function buildSearch() {
     };
 
     searchInput.onblur = function () {
-        animateSize(searchForm, 'width', searchWidthFinal, searchWidthInit, -5);
+        if (!size.isMobile) {
+            animateSize(searchForm, 'width', searchWidthFinal, searchWidthInit, -5);
+        }
         searchIcon.style.left = sIconLeftInit + `px`;
         searchInput.style.fontSize = `0.75rem`;
         searchInput.placeholder = size.isMobile ? `Click here to Search` : `Press S to search`;
@@ -229,8 +231,8 @@ function buildSearch() {
         // searchClearIcon.style.display = `block`;
     };
 
-    searchInput.onkeypress = (e) => {
-        if (e.code === 'Enter') {
+    searchInput.onkeydown = (e) => {
+        if (e.code === 'Enter' || e.keyCode === 13) {
             submitSearch(searchInput.value)
         }
     };
