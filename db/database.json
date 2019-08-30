@@ -200,11 +200,11 @@
       "attachments": [
         {
           "name": "BE Logo",
-          "image": "articles/businessespoo/BE.jpg"
+          "image": "db/businessespoo/BE.jpg"
         },
         {
           "name": "BE Guidelines Mockup",
-          "image": "articles/businessespoo/bebook.jpg"
+          "image": "db/businessespoo/bebook.jpg"
         }
       ],
       "actions": [
@@ -214,7 +214,7 @@
         },
         {
           "name": "Style Guidelines",
-          "link": "articles/businessespoo/BE_VIS_Guidelines_EN-2019-150dpi.pdf"
+          "link": "db/businessespoo/BE_VIS_Guidelines_EN-2019-150dpi.pdf"
         }
       ]
     },
@@ -239,7 +239,7 @@
       "attachments": [
         {
           "name": "Arcadia Website",
-          "image": "articles/arcadia/arcadia.jpg"
+          "image": "db/arcadia/arcadia.jpg"
         }
       ],
       "actions": [
@@ -273,7 +273,7 @@
       "attachments": [
         {
           "name": "PocketInc App",
-          "image": "articles/pocketinc/pi-overview.jpg"
+          "image": "db/pocketinc/pi-overview.jpg"
         }
       ],
       "actions": [
@@ -305,7 +305,7 @@
       "attachments": [
         {
           "name": "DELTA",
-          "image": "articles/delta/delta.jpg"
+          "image": "db/delta/delta.jpg"
         }
       ],
       "actions": [
@@ -333,7 +333,7 @@
       "attachments": [
         {
           "name": "SNA App",
-          "image": "articles/sustainovaction/sna-overview.jpg"
+          "image": "db/sustainovaction/sna-overview.jpg"
         }
       ],
       "actions": [
@@ -364,11 +364,11 @@
       "attachments": [
         {
           "name": "Passport Concept",
-          "image": "articles/passport/passport1.jpg"
+          "image": "db/passport/passport1.jpg"
         },
         {
           "name": "Passport Concept",
-          "image": "articles/passport/passport2.jpg"
+          "image": "db/passport/passport2.jpg"
         }
       ],
       "actions": [
@@ -379,7 +379,7 @@
         }
       ],
       "url": "#blog/passport",
-      "file": "articles/passport/passport.md",
+      "file": "db/passport/passport.md",
       "filetype": "md"
     },
     {
@@ -462,11 +462,11 @@
       "attachments": [
         {
           "name": "Achieve@BITS",
-          "image": "articles/bitspilani/bits1.jpg"
+          "image": "db/bitspilani/bits1.jpg"
         },
         {
           "name": "Lead@BITS",
-          "image": "articles/bitspilani/bits2.jpg"
+          "image": "db/bitspilani/bits2.jpg"
         }
       ],
       "actions": [
@@ -557,7 +557,7 @@
       "attachments": [
         {
           "name": "Desktop with Menu",
-          "image": "articles/syburyoscpp/SyburyOSMenu.png"
+          "image": "db/syburyoscpp/SyburyOSMenu.png"
         }
       ]
     },

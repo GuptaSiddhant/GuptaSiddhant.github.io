@@ -1,6 +1,6 @@
 // Global Variables
 let requestInfo = new XMLHttpRequest();
-requestInfo.open("GET", "database.json", false);
+requestInfo.open("GET", "db/database.json", false);
 requestInfo.send(null);
 let info = JSON.parse(requestInfo.responseText);
 let articles = info.articles;
