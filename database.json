@@ -378,7 +378,7 @@
           "target": "_self"
         }
       ],
-      "url": "passport",
+      "url": "#blog/passport",
       "file": "articles/passport/passport.md",
       "filetype": "md"
     },

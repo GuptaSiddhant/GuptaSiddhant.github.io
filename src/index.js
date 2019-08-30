@@ -1,6 +1,6 @@
 // Global Variables
 let requestInfo = new XMLHttpRequest();
-requestInfo.open("GET", "db/database.json", false);
+requestInfo.open("GET", "database.json", false);
 requestInfo.send(null);
 let info = JSON.parse(requestInfo.responseText);
 let articles = info.articles;
@@ -230,7 +230,7 @@ function buildLifeline() {
     }
 
     if (navigation.subNav && navigation.subFilter === navFilter) {
-        let dObj = findArticlesOBJ("url", navigation.subURL);
+        let dObj = findArticlesOBJ("url", '#' + navigation.subFilter + '/' + navigation.subURL);
         if (dObj) {
             if (dObj.tags.includes(navigation.subFilter)) {
                 let article = new Article(dObj);
