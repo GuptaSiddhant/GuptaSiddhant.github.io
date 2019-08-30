@@ -60,7 +60,7 @@ function keyboardInput(e) {
 }
 
 function activateSearch() {
-    searchInput.focus({preventScroll: true});
+    searchInput.focus();
 }
 
 function submitSearch(text) {

@@ -131,6 +131,7 @@ function buildSearch() {
     searchArea.style.flexDirection = `row`;
     searchArea.style.justifyContent = size.isMobile ? "flex-start" : "flex-end";
     searchArea.style.marginLeft = size.isMobile ? "8px" : "0";
+    searchArea.style.marginBottom = size.isMobile ? "16px" : "0";
 
     let searchForm = document.createElement('form');
     searchArea.appendChild(searchForm);

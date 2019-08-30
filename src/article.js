@@ -529,30 +529,31 @@ class Article {
 
                 thumbnail.style.position = 'relative';
 
-                let thumbOverlay = document.createElement('div');
-                thumbnail.appendChild(thumbOverlay);
-                thumbOverlay.style.position = 'absolute';
-                thumbOverlay.style.top = '0px';
-                thumbOverlay.style.left = '0px';
-                thumbOverlay.style.right = '0px';
-                thumbOverlay.style.bottom = '0px';
-                thumbOverlay.style.borderRadius = thumbnail.style.borderRadius;
-                thumbOverlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
-                thumbOverlay.style.opacity = '0';
-                thumbOverlay.style.color = '#FFFFFF';
-                thumbOverlay.style.fontSize = '20px';
-                thumbOverlay.style.textAlign = 'right';
-                thumbOverlay.style.padding = '10px';
-                thumbOverlay.style.lineHeight = '20px';
-                thumbOverlay.onclick = function () {
-                    window.open(item.image, "_blank");
-                };
-                let thumbOverlayIcon = document.createElement('i');
-                thumbOverlay.appendChild(thumbOverlayIcon);
-                thumbOverlayIcon.className = 'fas fa-external-link-square-alt';
-                thumbOverlayIcon.title = 'Open in New Tab';
-
                 if (item.full !== false) {
+
+                    let thumbOverlay = document.createElement('div');
+                    thumbnail.appendChild(thumbOverlay);
+                    thumbOverlay.style.position = 'absolute';
+                    thumbOverlay.style.top = '0px';
+                    thumbOverlay.style.left = '0px';
+                    thumbOverlay.style.right = '0px';
+                    thumbOverlay.style.bottom = '0px';
+                    thumbOverlay.style.borderRadius = thumbnail.style.borderRadius;
+                    thumbOverlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
+                    thumbOverlay.style.opacity = '0';
+                    thumbOverlay.style.color = '#FFFFFF';
+                    thumbOverlay.style.fontSize = '20px';
+                    thumbOverlay.style.textAlign = 'right';
+                    thumbOverlay.style.padding = '10px';
+                    thumbOverlay.style.lineHeight = '20px';
+                    thumbOverlay.onclick = function () {
+                        window.open(item.image, "_blank");
+                    };
+                    let thumbOverlayIcon = document.createElement('i');
+                    thumbOverlay.appendChild(thumbOverlayIcon);
+                    thumbOverlayIcon.className = 'fas fa-external-link-square-alt';
+                    thumbOverlayIcon.title = 'Open in New Tab';
+
                     fullImg.id = "article-fullImg";
                     fullImg.style.backgroundColor = this.colorCard;
                     fullImg.style.backgroundPosition = "center";
