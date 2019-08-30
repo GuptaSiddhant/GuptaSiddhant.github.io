@@ -1,12 +1,9 @@
 // Global Variables
 let requestInfo = new XMLHttpRequest();
-requestInfo.open("GET", "db/info.json", false);
+requestInfo.open("GET", "db/database.json", false);
 requestInfo.send(null);
 let info = JSON.parse(requestInfo.responseText);
-let requestArticles = new XMLHttpRequest();
-requestArticles.open("GET", "db/articles.json", false);
-requestArticles.send(null);
-let articles = JSON.parse(requestArticles.responseText);
+let articles = info.articles;
 
 let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || false;
 let navFilter = "";
