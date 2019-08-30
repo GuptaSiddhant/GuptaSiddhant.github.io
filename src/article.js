@@ -432,6 +432,7 @@ class Article {
                 button.style.borderRadius = `${this.radius / 2}px`;
                 button.style.border = "1px solid " + this.colorPrimary;
                 button.style.transition = "background-color 0.2s ease";
+                button.title = action.link;
 
                 let buttonIcon = document.createElement("i");
                 button.appendChild(buttonIcon);

@@ -259,7 +259,7 @@ function buildNavigation() {
     clearButton.style.opacity = "0.7";
     clearButton.style.cursor = "pointer";
     clearButton.style.display = searchText !== `` ? "block" : "none";
-    clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear';
+    clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear All';
 
     clearButton.onclick = function () {
         clearButton.style.display = "none";

@@ -121,7 +121,7 @@ function router() {
                 1. You can either check the URL for any errors. <br>
                 2. Explore the website by using the navigation or scrolling downwards <i class="fas fa-arrow-down"></i>.<br>
                 3. Contact me and reach your preferred destination as a VIP.`
-        })
+        });
     } else if (errorText.includes('?color=')) {
         if (darkMode === true) {
             setUrlParameter('color', 'dark');
@@ -206,6 +206,8 @@ function buildDOM() {
 
 // MAIN
 function buildLifeline() {
+    let emptyLine = true;
+
     let lifeline = document.createElement("main");
     lifeline.id = "lifeline";
     lifeline.style.width = size.widthMain + "px";
@@ -225,6 +227,7 @@ function buildLifeline() {
         if (dObj) {
             if (dObj.tags.includes(navigation.subFilter)) {
                 let article = new Article(dObj);
+                emptyLine = false;
                 lifeline.appendChild(article.buildFullArticle());
             } else {
                 navigation.subNav = false;
@@ -242,13 +245,30 @@ function buildLifeline() {
             if (hashMatch || navFilter === "" || data.pinned) {
                 if (searchText === '') {
                     let article = new Article(data);
+                    emptyLine = false;
                     lifeline.appendChild(article.buildSummaryCard());
                 } else if (searchMatch) {
                     let article = new Article(data);
+                    emptyLine = false;
                     lifeline.appendChild(article.buildSummaryCard());
                 }
             }
         });
+    }
+
+    if (emptyLine) {
+        let article = new Article({
+            title: "No results found!",
+            icon: 'fas fa-exclamation-circle',
+            pinned: true,
+            tags: ["error"],
+            summary: `You're quite deep into the rabbit hole and there is nothing here.<br> <br>
+                Few possible next steps:<br>
+                1. Try searching for something else or selecting some other navigation option.<br>
+                2. Try clearing all search criteria and selected navigation option (Press C). <br>
+                3. Contact me and find your preferred item as a VIP.`
+        });
+        lifeline.appendChild(article.buildSummaryCard());
     }
 
     return lifeline;
