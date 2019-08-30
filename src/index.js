@@ -1,4 +1,13 @@
 // Global Variables
+let requestInfo = new XMLHttpRequest();
+requestInfo.open("GET", "db/info.json", false);
+requestInfo.send(null);
+let info = JSON.parse(requestInfo.responseText);
+let requestArticles = new XMLHttpRequest();
+requestArticles.open("GET", "db/articles.json", false);
+requestArticles.send(null);
+let articles = JSON.parse(requestArticles.responseText);
+
 let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || false;
 let navFilter = "";
 let mobileBreakPoint = 1000;
@@ -18,6 +27,7 @@ let shortcutDrawerOpen;
 let shortcutDrawerButton = document.createElement('div');
 let shortcutDrawerViewer = document.createElement('div');
 let shortcutDrawerHeight = 180;
+
 
 // On DOM Loaded -> Initialise
 document.addEventListener("DOMContentLoaded", initiate);

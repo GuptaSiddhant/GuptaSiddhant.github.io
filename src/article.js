@@ -165,6 +165,7 @@ class Article {
 
         let card = document.createElement("article");
         card.id = "article-card";
+        card.style.fontSize = '1rem';
         card.style.backgroundColor = this.colorCard;
         card.style.margin = this.spacing + "px";
         card.style.borderRadius = 2 * this.radius + "px";
