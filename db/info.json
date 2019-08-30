@@ -46,7 +46,7 @@
       "code": "KeyO"
     }
   ],
-  "socialActions": [
+  "socialactions": [
     {
       "name": "LinkedIn",
       "icon": "fab fa-linkedin",

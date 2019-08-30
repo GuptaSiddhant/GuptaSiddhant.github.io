@@ -1,4 +1,4 @@
-// Primary:     title, subtitle, icon, date, tags, pinned, logo
+// Primary:     title, subtitle, icon, date, tags, logo
 // Secondary:   summary, role, tech, attachments, actions
 // Viewer:      url, file, filetype(md)
 

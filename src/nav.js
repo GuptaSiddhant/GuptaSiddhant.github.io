@@ -44,7 +44,7 @@ function buildSocialActions() {
     sButtons.style.color = color.primary;
     sButtons.style.cursor = "pointer";
 
-    info.socialActions.forEach(action => {
+    info.socialactions.forEach(action => {
         let button = size.isMobile
             ? buildButton(action)
             : buildButton(action, true);
