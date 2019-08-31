@@ -8,7 +8,7 @@ Have you ever considered the Passport Booklet to be big, thick and fairly futile
 
 > Originally posted on [THE STARTUP - MEDIUM](https://medium.com/swlh/the-passport-concept-b95c1d24e02e)
 
-![Passport 2](/articles/passport/passport2.jpg =100%x* "Front View")
+![Passport 2](/db/passport/passport2.jpg =100%x* "Front View")
 
 ## Catching up with the world
 
@@ -24,7 +24,7 @@ This kind of immigration solves quite a problems. It avoids long queueing or nee
 
 An International ID Document which contains all information and benefits of a traditional Passport Booklet and National ID, but is compact and fits in your pocket like any other bank card or driving license.
 
-![Passport Card Design](/articles/passport/passport-france-korea-uae.png =100%x*)
+![Passport Card Design](/db/passport/passport-france-korea-uae.png =100%x*)
 
 I tried to design the very passport, after wondering just too much. What if, our Passport was a card and not a booklet, which would sit easily inside our wallet and we are not worried if the pages will eventually run out. If you are worried about Visa and immigration stamping, just read along. While designing, I researched many passports, the requirements, the guidelines, the design and the technology. Mostly impressed with what I witnessed, I went on creating designs which could serve as base model to all countries.
 
@@ -47,7 +47,7 @@ That’s even less than half the size of the booklet.
 
 Imagine, a passport in the same size of a credit card that easily slides in and out of your wallet.
 
-![Passport 1](articles/passport/passport1.jpg =100%x\* "Passport in wallet")
+![Passport 1](/db/passport/passport1.jpg =100%x* "Passport in wallet")
 
 #### Technology
 
@@ -70,7 +70,7 @@ Every Passport / I-ID holder will be able to use the Web Portal or a Mobile App 
 - Immigration Details: All In-Out details from each visit.
 - Linked Documents: Local ID, Driving license, bank cardsand more which also can be managed from here from multiple Issuing Authorities/Countries.
 
-![Passport Portal](articles/passport/passport-portal.png =100%x\* "Web Portal")
+![Passport Portal](/db/passport/passport-portal.png =100%x* "Web Portal")
 
 ## Conclusion
 
@@ -79,7 +79,7 @@ Every Passport / I-ID holder will be able to use the Web Portal or a Mobile App 
 - Works with Smart Gates for immigration, removing the need for VISA and immigration stamps.
 - All information including details, visa and immigration can be well managed by a web portal and mobile app.
 
-![Passport 3](articles/passport/passport3.jpg =100%x\*)
+![Passport 3](/db/passport/passport3.jpg =100%x*)
 
 ## Appendix
 
