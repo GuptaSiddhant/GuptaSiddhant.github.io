@@ -64,7 +64,7 @@ class Article {
         fullArticle.appendChild(card);
         card.style.position = "absolute";
         card.style.backgroundColor = this.colorCard;
-        card.style.margin = this.isMobile ? "60px 0 0 0" : this.spacing / 2 + "px";
+        card.style.margin = this.isMobile ? "60px 0 0 0" : this.spacing + "px";
         card.style.borderRadius = this.isMobile ? "0" : 2 * this.radius + "px";
         card.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`;
         card.style.width = this.isMobile

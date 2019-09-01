@@ -139,8 +139,27 @@
       ]
     },
     {
-      "title": "I had the pleasure of working together with Sid on a couple of projects for a web design course.\n\n       Though at the time, Sid‘s main expertise was with graphic design he had no problem stepping out of his comfort zone and taking on advanced programming tasks. His undertakings radiates ambition and if he’s not already up to the task he’ll make it so he is by asking questions and tirelessly trying stuff out in his spare time.\n    \n       Sid goes to the bottom with things, tries to find the best way to carry out tasks while not getting stuck on details and he works with both graphics and programming in an organized way that’s a pleasure for a computer scientist to watch.\n    \n       It’s been a real pleasure and I’m sure he’ll bring great value wherever he goes.",
-      "subtitle": "Daniel Schlaug, Link-U",
+      "title": "I had the pleasure to work with Siddhant last spring when he designed the symbol and visual guidelines for the Business Espoo network. Siddhant did excellent work and cooperation with him was easy and flexible. He is creative and innovative with many good ideas. He also respect customer very well by listening customer needs, values and terms. He did for us also some extras and inspired our whole team which shows that he really concentrated to the project with good attitude and heart.  I would definitely recommend him for different kind of design work.",
+      "subtitle": "Sari Mäkisalo \nMarketing Manager, Espoo Marketing Oy",
+      "date": "1 September 2019",
+      "tags": [
+        "about",
+        "testimonial",
+        "recommendation",
+        "Business Espoo"
+      ],
+      "summary": "Sari represented Business Espoo and I designed the visual identity and style guidelines with her.",
+      "actions": [
+        {
+          "name": "Sari Mäkisalo",
+          "link": "https://www.linkedin.com/in/sarimakisalo/",
+          "icon": "fab fa-linkedin"
+        }
+      ]
+    },
+    {
+      "title": "I had the pleasure of working together with Sid on a couple of projects for a web design course.\n\nThough at the time, Sid‘s main expertise was with graphic design he had no problem stepping out of his comfort zone and taking on advanced programming tasks. His undertakings radiates ambition and if he’s not already up to the task he’ll make it so he is by asking questions and tirelessly trying stuff out in his spare time.\n\nSid goes to the bottom with things, tries to find the best way to carry out tasks while not getting stuck on details and he works with both graphics and programming in an organized way that’s a pleasure for a computer scientist to watch.\n\nIt’s been a real pleasure and I’m sure he’ll bring great value wherever he goes.",
+      "subtitle": "Daniel Schlaug \nReact Native Engineer, Link-U",
       "date": "19 August 2019",
       "tags": [
         "about",
@@ -151,14 +170,15 @@
       "summary": "Daniel and I worked together on a couple of projects together at KTH, Sweden. I consider Daniel a great friend and mentor.",
       "actions": [
         {
-          "name": "LinkedIn",
-          "link": "https://www.linkedin.com/in/guptasiddhant9/"
+          "name": "Daniel Schlaug",
+          "link": "https://www.linkedin.com/in/danielschlaug/",
+          "icon": "fab fa-linkedin"
         }
       ]
     },
     {
       "title": "M.Sc. Human Computer Interaction & Design",
-      "subtitle": "Aalto University, Finland\n       KTH Royal Institute of Technology, Sweden",
+      "subtitle": "Aalto University, Finland •\nKTH Royal Institute of Technology, Sweden",
       "date": "August 2017 - June 2019",
       "tags": [
         "education",
@@ -478,7 +498,7 @@
     },
     {
       "title": "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
-      "subtitle": "Manish K., Growth Catalyst",
+      "subtitle": "Manish K. \nGrowth Catalyst",
       "date": "14 August 2015",
       "tags": [
         "about",
@@ -487,8 +507,9 @@
       "summary": "Manish and I worked together over a website design.",
       "actions": [
         {
-          "name": "LinkedIn",
-          "link": "https://www.linkedin.com/in/guptasiddhant9/"
+          "name": "Manish K.",
+          "link": "https://www.linkedin.com/in/manukolsi/",
+          "icon": "fab fa-linkedin"
         }
       ]
     },
@@ -531,7 +552,7 @@
     {
       "title": "SyburyOS in C++",
       "subtitle": "High School Project",
-      "date": "April 2008 - May 2012",
+      "date": "February 2012",
       "tags": [
         "projects",
         "school",
