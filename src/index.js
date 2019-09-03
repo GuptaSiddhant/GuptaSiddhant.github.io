@@ -86,13 +86,7 @@ function router() {
                     let colorQuery = errorText.split('=')[1];
                     colorQuery = colorQuery.split('#')[0];
                     colorQuery = colorQuery.split('/')[0];
-                    if (colorQuery === 'dark') {
-                        darkMode = true;
-                        // setUrlParameter('color', 'dark');
-                    } else {
-                        darkMode = false;
-                        // setUrlParameter('color', 'light');
-                    }
+                    darkMode = colorQuery === 'dark';
                 }
             }
             let otherHash = hash;
@@ -186,14 +180,16 @@ function buildDOM() {
         card: darkMode ? "#222222" : "#FFFFFF"
     };
     let BODY = document.getElementById("app");
-    BODY.style.height = "100vh";
-    BODY.style.width = size.widthWindow + "px";
-    BODY.style.padding = `0`;
-    BODY.style.margin = "0";
-    BODY.style.backgroundColor = color.background;
-    BODY.style.fontFamily = "Poppins, Arial, sans-serif";
-    BODY.style.fontSize = "16px";
-    BODY.style.color = color.primary;
+    applyCSS(BODY, {
+        height: "100vh",
+        width: size.widthWindow + "px",
+        padding: 0,
+        margin: 0,
+        backgroundColor: color.background,
+        fontFamily: "Poppins, Arial, sans-serif",
+        fontSize: "16px",
+        color: color.primary,
+    });
 
     BODY.innerHTML = "";
     if (size.isMobile) {
@@ -217,16 +213,16 @@ function buildLifeline() {
 
     let lifeline = document.createElement("main");
     lifeline.id = "lifeline";
-    lifeline.style.width = size.widthMain + "px";
-    lifeline.style.paddingTop = size.spacing + "px";
-    lifeline.style.paddingBottom = size.spacing + "px";
+    applyCSS(lifeline, {
+        width: size.widthMain + "px",
+        paddingTop: size.spacing + "px",
+        paddingBottom: size.spacing + "px",
+    });
     if (size.widthWindow > size.widthBody) {
-        lifeline.style.marginLeft =
-            (size.widthWindow + size.widthBody) / 2 - size.widthMain + "px";
-        // `calc((100vw + ${size.widthBody}px) / 2 - ${size.widthMain}px)`;
+        applyCSS(lifeline, {marginLeft: (size.widthWindow + size.widthBody) / 2 - size.widthMain + "px",});
     }
     if (size.isMobile) {
-        lifeline.style.paddingTop = "80px";
+        applyCSS(lifeline, {paddingTop: '80px'});
     }
 
     if (navigation.subNav && navigation.subFilter === navFilter) {
@@ -284,39 +280,49 @@ function buildLifeline() {
 // Bottom Drawer
 function buildShortcutViewer() {
     let container = document.createElement('div');
-    container.style.position = 'fixed';
-    container.style.bottom = '0';
-    container.style.width = '100%';
-    container.style.zIndex = '100';
+    applyCSS(container, {
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
+        zIndex: 100,
+        boxShadow: `0 0 ${size.spacing}px 0 rgba(0,0,0,${darkMode ? 0.5 : 0.2})`,
+    });
 
     container.appendChild(shortcutDrawerButton);
-    shortcutDrawerButton.style.backgroundColor = color.card;
-    shortcutDrawerButton.style.color = color.primary;
-    shortcutDrawerButton.style.width = '140px';
-    shortcutDrawerButton.style.borderRadius = `${size.radius}px ${size.radius}px 0 0`;
-    shortcutDrawerButton.style.height = `${size.spacing}px`;
-    shortcutDrawerButton.style.lineHeight = `${size.spacing}px`;
-    shortcutDrawerButton.style.textAlign = 'center';
-    shortcutDrawerButton.style.position = `absolute`;
-    shortcutDrawerButton.style.top = `-${size.spacing}px`;
-    shortcutDrawerButton.style.left = (size.widthWindow - size.widthBody) / 2 + 120 + "px";
-    shortcutDrawerButton.style.cursor = `pointer`;
-    shortcutDrawerButton.innerHTML = `Shortcuts `;
     shortcutDrawerButton.innerHTML += shortcutDrawerOpen ? `<i class="fas fa-times-circle"></i>` : `<i class="fas fa-arrow-up"></i>`;
+    shortcutDrawerButton.innerHTML = `Shortcuts `;
+    applyCSS(shortcutDrawerButton, {
+        backgroundColor: color.card,
+        color: color.primary,
+        width: '140px',
+        borderRadius: `${size.radius}px ${size.radius}px 0 0`,
+        height: `${size.spacing}px`,
+        lineHeight: `${size.spacing}px`,
+        textAlign: 'center',
+        position: `absolute`,
+        top: `-${size.spacing}px`,
+        left: (size.widthWindow - size.widthBody) / 2 + 120 + "px",
+        cursor: `pointer`,
+    });
 
     container.appendChild(shortcutDrawerViewer);
-    shortcutDrawerViewer.style.width = `100%`;
-    shortcutDrawerViewer.style.height = shortcutDrawerOpen ? `${shortcutDrawerHeight}px` : `0`;
-    shortcutDrawerViewer.style.backgroundColor = color.card;
-    shortcutDrawerViewer.style.position = 'relative';
     shortcutDrawerViewer.innerHTML = ``;
+    applyCSS(shortcutDrawerViewer, {
+        width: `100%`,
+        height: shortcutDrawerOpen ? `${shortcutDrawerHeight}px` : 0,
+        backgroundColor: color.card,
+        position: 'relative',
+    });
+
     let content = document.createElement('div');
     shortcutDrawerViewer.appendChild(content);
-    content.style.position = 'absolute';
-    content.style.top = `${size.spacing - 10}px`;
-    content.style.left = `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`;
-    content.style.right = `${(size.widthWindow - size.widthBody) / 2 + 0 * size.spacing}px`;
-    content.style.height = `${shortcutDrawerHeight - 2 * size.spacing}px`;
+    applyCSS(content, {
+        position: 'absolute',
+        top: `${size.spacing - 10}px`,
+        left: `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`,
+        right: `${(size.widthWindow - size.widthBody) / 2}px`,
+        height: `${shortcutDrawerHeight - 2 * size.spacing}px`,
+    });
     content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts 
     <span style="font-size: 0.8rem; font-weight: normal; text-transform: capitalize">
     (Press <b>K</b> to show/hide this panel)</span></h3>
@@ -334,7 +340,6 @@ function buildShortcutViewer() {
      <b>D</b> - Toggle Dark Mode <br>
      <!--<b>Alt+K</b> - Show/Hide Shortcuts <br>-->
     </div>`;
-    container.style.boxShadow = `0 0 ${size.spacing}px 0 rgba(0,0,0,${darkMode ? 0.5 : 0.2})`;
 
     shortcutDrawerButton.onclick = toggleShortcutDrawer;
 
