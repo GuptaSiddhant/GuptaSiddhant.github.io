@@ -48,61 +48,66 @@ class Article {
         imageTwitter.content = this.attachments[0].image;
 
         let fullArticle = document.createElement("div");
-        fullArticle.style.position = "relative";
+        applyCSS(fullArticle, {position: 'relative'});
         if (this.isMobile) {
-            fullArticle.style.position = "fixed";
-            fullArticle.style.top = "0";
-            fullArticle.style.right = "0";
-            fullArticle.style.bottom = "0";
-            fullArticle.style.left = "0";
-            fullArticle.style.zIndex = "70";
-            fullArticle.style.backgroundColor = "rgba(0,0,0,0.75)";
-            fullArticle.style.setProperty("-webkit-transform", "translateZ(0);");
+            applyCSS(fullArticle, {
+                position: 'fixed',
+                top: 0,
+                bottom: 0,
+                right: 0,
+                left: 0,
+                zIndex: 70,
+                backgroundColor: 'rgba(0,0,0,0.75)',
+            });
         }
 
         let card = document.createElement("div");
         fullArticle.appendChild(card);
-        card.style.position = "absolute";
-        card.style.backgroundColor = this.colorCard;
-        card.style.margin = this.isMobile ? "60px 0 0 0" : this.spacing + "px";
-        card.style.borderRadius = this.isMobile ? "0" : 2 * this.radius + "px";
-        card.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`;
-        card.style.width = this.isMobile
-            ? "auto"
-            : this.size + 2 * this.spacing + "px";
-        card.style.zIndex = "75";
-        card.style.height = this.isMobile
-            ? "auto"
-            : `calc(100vh - ${size.spacing * 3}px)`;
-
+        applyCSS(card, {
+            position: 'absolute',
+            backgroundColor: this.colorCard,
+            margin: this.isMobile ? "60px 0 0 0" : this.spacing + "px",
+            borderRadius: this.isMobile ? 0 : 2 * this.radius + "px",
+            boxShadow: `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`,
+            width: this.isMobile
+                ? "auto"
+                : this.size + 2 * this.spacing + "px",
+            zIndex: "75",
+            height: this.isMobile
+                ? "auto"
+                : `calc(100vh - ${size.spacing * 3}px)`,
+        });
         if (size.isMobile) {
-            card.style.top = "0px";
-            card.style.left = "0px";
-            card.style.right = "0px";
-            card.style.bottom = "0px";
+            applyCSS(card, {
+                top: 0, right: 0, bottom: 0, left: 0
+            });
         }
 
-        // CSS Start
+        // applyCSS Start
         const root = document.documentElement;
-        root.style.setProperty("--colorAccent", this.colorAccent);
-        root.style.setProperty("--colorPrimary", this.colorPrimary);
-        root.style.setProperty("--colorSecondary", this.colorSecondary);
-        root.style.setProperty("--colorCard", this.colorCard);
-        root.style.setProperty("--colorInverse", this.colorInverse);
-        // CSS End
+        applyCSS(root, {
+            "--colorAccent": this.colorAccent,
+            "--colorPrimary": this.colorPrimary,
+            "--colorSecondary": this.colorSecondary,
+            "--colorCard": this.colorCard,
+            "--colorInverse": this.colorInverse,
+        }, true);
+        // applyCSS End
 
         let closeButton = document.createElement("i");
         card.appendChild(closeButton);
-        closeButton.style.position = "absolute";
-        closeButton.style.top = "-10px";
-        closeButton.style.right = this.isMobile ? "10px" : "-10px";
-        closeButton.style.color = this.isMobile ? "#f2f2f2" : this.colorSecondary;
-        closeButton.style.zIndex = "80";
-        closeButton.style.cursor = "pointer";
-        closeButton.style.fontSize = "20px";
-        closeButton.style.textShadow = `0 0 ${this.spacing / 2}px rgba(0,0,0,0.5)`;
         // noinspection JSValidateTypes
         closeButton.classList = `fas fa-times-circle`;
+        applyCSS(closeButton, {
+            position: "absolute",
+            top: "-10px",
+            right: this.isMobile ? "10px" : "-10px",
+            color: this.isMobile ? "#f2f2f2" : this.colorSecondary,
+            zIndex: 80,
+            cursor: "pointer",
+            fontSize: "20px",
+            textShadow: `0 0 ${this.spacing / 2}px rgba(0,0,0,0.5)`,
+        });
         closeButton.onclick = function () {
             navigation.subNav = false;
             setURL();
@@ -118,29 +123,35 @@ class Article {
     buildViewer() {
         let viewer = document.createElement("div");
         viewer.id = "article-showdown";
-        viewer.style.position = "absolute";
-        viewer.style.backgroundColor = this.colorCard;
-        viewer.style.right = `${this.radius}px`;
-        viewer.style.top = `${this.radius}px`;
-        viewer.style.bottom = `${this.radius}px`;
-        viewer.style.left = `${this.radius}px`;
-        viewer.style.opacity = "1";
-        viewer.style.padding = "16px";
-        viewer.style.setProperty("-webkit-overflow-scrolling", "touch");
+        applyCSS(viewer, {
+            position: "absolute",
+            backgroundColor: this.colorCard,
+            right: `${this.radius}px`,
+            top: `${this.radius}px`,
+            bottom: `${this.radius}px`,
+            left: `${this.radius}px`,
+            opacity: "1",
+            padding: "16px",
+            webkitOverflowScrolling: "touch",
+            "-webkit-overflow-scrolling": "touch",
+        });
 
         if (this.filetype === "html") {
             let frame = document.createElement("iframe");
             viewer.appendChild(frame);
-            viewer.style.overflow = "hidden";
-            viewer.style.padding = "0px";
-
+            applyCSS(viewer, {
+                overflow: 'hidden',
+                padding: 0
+            });
+            applyCSS(frame, {
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'transparent',
+                border: 'none',
+            });
             frame.src = this.file;
-            frame.style.width = "100%";
-            frame.style.height = "100%";
-            frame.style.backgroundColor = "transparent";
-            frame.style.border = "none";
         } else {
-            viewer.style.overflow = "scroll";
+            applyCSS(viewer, {overflow: 'scroll'});
 
             let converter = new showdown.Converter({extensions: ["youtube"]});
             converter.setOption("parseImgDimensions", true);
@@ -165,28 +176,24 @@ class Article {
 
         let card = document.createElement("article");
         card.id = "article-card";
-        card.style.fontSize = '1rem';
-        card.style.backgroundColor = this.colorCard;
-        card.style.margin = this.spacing + "px";
-        card.style.borderRadius = 2 * this.radius + "px";
-        card.style.padding = this.spacing + "px";
-        card.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`;
-        card.style.width = this.size + "px";
-        card.style.height = "auto";
-        card.style.position = "relative";
-        card.style.zIndex = "2";
-        card.style.height = navigation.subNav
-            ? `calc(100vh - ${size.spacing * 6}px)`
-            : "auto";
-        card.style.marginBottom = this.isMobile
-            ? `${this.spacing * 2}px`
-            : this.spacing + "px";
+        applyCSS(card, {
+            fontSize: '1rem',
+            backgroundColor: this.colorCard,
+            margin: this.spacing + "px",
+            borderRadius: 2 * this.radius + "px",
+            padding: this.spacing + "px",
+            boxShadow: `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`,
+            width: this.size + "px",
+            position: "relative",
+            zIndex: 2,
+            height: navigation.subNav ? `calc(100vh - ${size.spacing * 6}px)` : "auto",
+            marginBottom: this.isMobile ? `${this.spacing * 2}px` : this.spacing + "px",
+        });
         if (this.attachments && this.attachments.length > 0 && this.isMobile) {
-            card.style.paddingBottom = `${this.spacing + 120}px`;
+            applyCSS(card, {paddingBottom: `${this.spacing + 120}px`});
         }
         if (this.attachments && this.attachments.length > 0 && !this.isMobile) {
-            card.style.paddingRight = this.spacing + 80 + "px";
-            card.style.width = this.size - 80 + "px";
+            applyCSS(card, {paddingRight: this.spacing + 80 + "px", width: this.size - 80 + "px"});
         }
 
         card.appendChild(this.buildCardIcon());
@@ -206,28 +213,30 @@ class Article {
         let iconSize = 20;
         let cardIcon = document.createElement("icon");
         cardIcon.id = "article-icon";
-
-        cardIcon.style.position = "absolute";
-        cardIcon.style.left = this.isMobile ? this.spacing + "px" : "-20px";
-        cardIcon.style.top = this.isMobile ? "-20px" : "34px";
-        cardIcon.style.width = iconSize * 2 + "px";
-        cardIcon.style.height = iconSize * 2 + "px";
-        cardIcon.style.borderRadius = this.radius + "px";
-        cardIcon.style.boxShadow = "0 0 20px 0 rgba(0,0,0,0.2)";
-        cardIcon.style.color = "#FFFFFF";
-        cardIcon.style.textAlign = "center";
-        cardIcon.style.lineHeight = iconSize * 2 + "px";
-        cardIcon.style.fontSize = iconSize + "px";
-        cardIcon.style.zIndex = "10";
-
-        cardIcon.style.backgroundColor = this.colorAccent;
+        applyCSS(cardIcon, {
+            position: "absolute",
+            left: this.isMobile ? this.spacing + "px" : "-20px",
+            top: this.isMobile ? "-20px" : "34px",
+            width: iconSize * 2 + "px",
+            height: iconSize * 2 + "px",
+            borderRadius: this.radius + "px",
+            boxShadow: "0 0 20px 0 rgba(0,0,0,0.2)",
+            color: "#FFFFFF",
+            textAlign: "center",
+            lineHeight: iconSize * 2 + "px",
+            fontSize: iconSize + "px",
+            zIndex: 10,
+            backgroundColor: this.colorAccent
+        });
         if (this.logo && this.logo !== "") {
             let logoImage = document.createElement("img");
             cardIcon.appendChild(logoImage);
-            logoImage.style.margin = "5px 0";
+            applyCSS(logoImage, {
+                margin: '5px 0',
+                height: iconSize * 1.5 + "px",
+                width: iconSize * 1.5 + "px",
+            });
             logoImage.src = this.logo;
-            logoImage.style.height = iconSize * 1.5 + "px";
-            logoImage.style.width = iconSize * 1.5 + "px";
         } else if (this.icon && this.icon !== "") {
             cardIcon.className = this.icon;
         } else if (this.quotation) {
@@ -243,23 +252,24 @@ class Article {
         let iconSize = 20;
         let cardIcon = document.createElement("icon");
         cardIcon.id = "article-star-icon";
-
-        cardIcon.style.position = "absolute";
-        cardIcon.style.left = this.isMobile ? this.spacing + 3 * iconSize + "px" : "-20px";
-        cardIcon.style.top = this.isMobile ? "-20px" : 34 + 3 * iconSize + "px";
-        cardIcon.style.width = iconSize * 2 + "px";
-        cardIcon.style.height = iconSize * 2 + "px";
-        cardIcon.style.borderRadius = this.radius + "px";
-        cardIcon.style.boxShadow = "0 0 20px 0 rgba(0,0,0,0.2)";
-        cardIcon.style.color = "#FFFFFF";
-        cardIcon.style.textAlign = "center";
-        cardIcon.style.lineHeight = iconSize * 2 + "px";
-        cardIcon.style.fontSize = iconSize + "px";
-        cardIcon.style.zIndex = "10";
-        cardIcon.style.backgroundColor = "#F74F9E";
         cardIcon.className = "fas fa-heart";
         cardIcon.alt = 'Favourite';
         cardIcon.title = 'Favourite';
+        applyCSS(cardIcon, {
+            position: "absolute",
+            left: this.isMobile ? this.spacing + 3 * iconSize + "px" : "-20px",
+            top: this.isMobile ? "-20px" : 34 + 3 * iconSize + "px",
+            width: iconSize * 2 + "px",
+            height: iconSize * 2 + "px",
+            borderRadius: this.radius + "px",
+            boxShadow: "0 0 20px 0 rgba(0,0,0,0.2)",
+            color: "#FFFFFF",
+            textAlign: "center",
+            lineHeight: iconSize * 2 + "px",
+            fontSize: iconSize + "px",
+            zIndex: 10,
+            backgroundColor: "#F74F9E"
+        });
         return cardIcon;
     }
 
@@ -268,43 +278,46 @@ class Article {
         heading.id = "article-heading";
 
         let title = document.createElement("div");
-        title.id = "article-title";
         heading.appendChild(title);
-
-        title.style.fontFamily = "Kameron, serif";
-        title.style.fontWeight = this.quotation ? "normal" : "bold";
-        title.style.fontSize = this.quotation ? "20px" : "24px";
-        title.style.color = this.colorPrimary;
-        title.style.lineHeight = this.quotation ? "26px" : "30px";
-        title.style.marginBottom = "4px";
+        title.id = "article-title";
         title.innerText = this.title;
+        applyCSS(title, {
+            fontFamily: "Kameron, serif",
+            fontWeight: this.quotation ? "normal" : "bold",
+            fontSize: this.quotation ? "20px" : "24px",
+            color: this.colorPrimary,
+            lineHeight: this.quotation ? "26px" : "30px",
+            marginBottom: "4px",
+        });
 
         if (this.subtitle) {
             let subtitle = document.createElement("div");
-            subtitle.id = "article-subtitle";
             heading.appendChild(subtitle);
-
-            subtitle.style.fontWeight = "500";
-            subtitle.style.fontSize = "16px";
-            subtitle.style.color = this.colorAccent;
-            subtitle.style.letterSpacing = "0.5px";
-            subtitle.style.lineHeight = "20px";
-            subtitle.style.textTransform = "uppercase";
-            subtitle.style.marginBottom = "8px";
+            subtitle.id = "article-subtitle";
             subtitle.innerText = this.subtitle;
+            applyCSS(subtitle, {
+                fontWeight: "500",
+                fontSize: "16px",
+                color: this.colorAccent,
+                letterSpacing: "0.5px",
+                lineHeight: "20px",
+                textTransform: "uppercase",
+                marginBottom: "8px",
+            });
         }
 
         if (this.tags && this.tags.length > 0) {
             let subtitle2 = document.createElement("div");
-            subtitle2.id = "article-subtitle2";
             heading.appendChild(subtitle2);
-
-            subtitle2.style.fontSize = "16px";
-            subtitle2.style.color = this.colorSecondary;
-            subtitle2.style.lineHeight = "20px";
-            subtitle2.style.textTransform = "capitalize";
-            subtitle2.style.marginBottom = "8px";
+            subtitle2.id = "article-subtitle2";
             subtitle2.innerText = "";
+            applyCSS(subtitle2, {
+                fontSize: "16px",
+                color: this.colorSecondary,
+                lineHeight: "20px",
+                textTransform: "capitalize",
+                marginBottom: "8px",
+            });
 
             if (this.date) {
                 subtitle2.innerText += this.date;
@@ -317,7 +330,7 @@ class Article {
                     let tagSpan = document.createElement('span');
                     subtitle2.appendChild(tagSpan);
                     tagSpan.innerText = tag.toString();
-                    tagSpan.style.cursor = 'pointer';
+                    applyCSS(tagSpan, {cursor: 'pointer'});
                     if (index + 1 !== this.tags.length) {
                         let commaSpace = document.createElement('span');
                         commaSpace.innerText = `, `;
@@ -327,10 +340,10 @@ class Article {
                         submitSearch(tag.toString());
                     };
                     tagSpan.onmouseover = () => {
-                        tagSpan.style.color = color.primary;
+                        applyCSS(tagSpan, {color: color.primary});
                     };
                     tagSpan.onmouseleave = () => {
-                        tagSpan.style.color = color.secondary;
+                        applyCSS(tagSpan, {color: color.secondary});
                     };
                 });
             }
@@ -341,31 +354,31 @@ class Article {
     buildDescription() {
         let description = document.createElement("div");
         description.id = "article-description";
-
-        description.style.fontSize = "14px";
-        description.style.color = this.colorSecondary;
-        description.style.lineHeight = "20px";
-        description.style.marginBottom = "4px";
+        applyCSS(description, {
+            fontSize: "14px",
+            color: this.colorSecondary,
+            lineHeight: "20px",
+            marginBottom: "4px",
+        });
 
         if (this.summary) {
             let summary = document.createElement("div");
-            summary.id = "article-summary";
             description.appendChild(summary);
-
-            summary.style.marginBottom = "8px";
+            summary.id = "article-summary";
             summary.innerHTML = this.summary;
+            applyCSS(summary, {marginBottom: '8px'});
         }
 
         if (this.role) {
             let role = document.createElement("div");
-            role.id = "article-role";
             description.appendChild(role);
-            role.style.marginBottom = "4px";
+            role.id = "article-role";
+            applyCSS(role, {marginBottom: '4px'});
 
             let field = document.createElement("span");
             role.appendChild(field);
-            field.style.fontWeight = "500";
             field.innerText = "Role: ";
+            applyCSS(field, {fontWeight: 'bold'});
 
             let value = document.createElement("span");
             role.appendChild(value);
@@ -376,13 +389,12 @@ class Article {
             let tech = document.createElement("div");
             tech.id = "article-tech";
             description.appendChild(tech);
-            tech.style.marginBottom = "4px";
-            tech.style.textTransform = "capitalize";
+            applyCSS(tech, {marginBottom: '4px', textTransform: 'capitalize'});
 
             let field = document.createElement("span");
             tech.appendChild(field);
-            field.style.fontWeight = "500";
             field.innerText = "Tech: ";
+            applyCSS(field, {fontWeight: 'bold'});
 
             let value = document.createElement("span");
             tech.appendChild(value);
@@ -391,20 +403,20 @@ class Article {
                 let itemSpan = document.createElement('span');
                 value.appendChild(itemSpan);
                 itemSpan.innerText = item.toString();
-                itemSpan.style.cursor = 'pointer';
+                applyCSS(itemSpan, {cursor: 'pointer'});
                 if (index + 1 !== this.tech.length) {
                     let commaSpace = document.createElement('span');
-                    commaSpace.innerText = `, `;
                     value.appendChild(commaSpace);
+                    commaSpace.innerText = `, `;
                 }
                 itemSpan.onclick = function () {
                     submitSearch(item.toString());
                 };
                 itemSpan.onmouseover = () => {
-                    itemSpan.style.color = color.primary;
+                    applyCSS(itemSpan, {color: color.primary});
                 };
                 itemSpan.onmouseleave = () => {
-                    itemSpan.style.color = color.secondary;
+                    applyCSS(itemSpan, {color: color.secondary});
                 };
             });
         }
@@ -417,23 +429,26 @@ class Article {
         actionButtons.id = "article-actions";
 
         if (this.actions && this.actions.length !== 0) {
-            actionButtons.style.display = "flex";
-            actionButtons.style.flexWrap = "wrap";
-            actionButtons.style.color = this.colorPrimary;
-            actionButtons.style.cursor = "pointer";
+            applyCSS(actionButtons, {
+                display: "flex",
+                flexWrap: "wrap",
+                color: this.colorPrimary,
+                cursor: "pointer",
+            });
 
             this.actions.forEach(action => {
                 let button = document.createElement("div");
-                button.id = "article-actionButton";
-
                 actionButtons.appendChild(button);
-                button.style.marginTop = `${this.radius}px`;
-                button.style.marginRight = `${this.radius}px`;
-                button.style.padding = `${this.radius / 2}px ${this.radius}px`;
-                button.style.borderRadius = `${this.radius / 2}px`;
-                button.style.border = "1px solid " + this.colorPrimary;
-                button.style.transition = "background-color 0.2s ease";
+                button.id = "article-actionButton";
                 button.title = action.link;
+                applyCSS(button, {
+                    marginTop: `${this.radius}px`,
+                    marginRight: `${this.radius}px`,
+                    padding: `${this.radius / 2}px ${this.radius}px`,
+                    borderRadius: `${this.radius / 2}px`,
+                    border: "1px solid " + this.colorPrimary,
+                    transition: "background-color 0.2s ease",
+                });
 
                 let buttonIcon = document.createElement("i");
                 button.appendChild(buttonIcon);
@@ -447,7 +462,7 @@ class Article {
                     buttonIcon.className = action.icon;
                 }
                 if (action.name && action.name !== "") {
-                    buttonIcon.style.marginRight = "0.5rem";
+                    applyCSS(buttonIcon, {marginRight: '0.5rem'});
                     let buttonText = document.createElement("span");
                     button.appendChild(buttonText);
                     buttonText.innerText = action.name;
@@ -456,15 +471,19 @@ class Article {
                 let article = this;
                 button.onmouseover = function () {
                     button.classList.add("hover");
-                    button.style.backgroundColor = article.colorAccent;
-                    button.style.border = "1px solid " + article.colorAccent;
-                    button.style.color = "#FFFFFF";
+                    applyCSS(button, {
+                        backgroundColor: article.colorAccent,
+                        border: "1px solid " + article.colorAccent,
+                        color: "#FFFFFF",
+                    });
                 };
                 button.onmouseleave = function () {
                     button.classList.remove("hover");
-                    button.style.backgroundColor = "transparent";
-                    button.style.border = "1px solid " + article.colorPrimary;
-                    button.style.color = article.colorPrimary;
+                    applyCSS(button, {
+                        backgroundColor: "transparent",
+                        border: "1px solid " + article.colorPrimary,
+                        color: article.colorPrimary,
+                    });
                 };
 
                 button.onclick = function () {
@@ -489,64 +508,69 @@ class Article {
         attachImages.id = "article-attachments";
 
         if (this.attachments && this.attachments.length > 0) {
-            attachImages.style.position = "absolute";
+            applyCSS(attachImages, {
+                position: 'absolute',
+            });
 
             if (this.isMobile) {
-                attachImages.style.left = this.spacing + "px";
-                attachImages.style.bottom = "20px";
+                applyCSS(attachImages, {
+                    left: this.spacing + 'px',
+                    bottom: '20px',
+                });
             } else {
-                attachImages.style.right = "-20px";
-                attachImages.style.top = "20px";
-                attachImages.style.bottom = "20px";
+                applyCSS(attachImages, {
+                    right: '-20px',
+                    top: '20px',
+                    bottom: '20px',
+                });
             }
-            attachImages.style.display = "flex";
-            attachImages.style.flexDirection = this.isMobile ? "row" : "column";
-            attachImages.style.justifyContent = "space-around";
-            attachImages.style.zIndex = "10";
+            applyCSS(attachImages, {
+                display: "flex",
+                flexDirection: this.isMobile ? "row" : "column",
+                justifyContent: "space-around",
+                zIndex: 10,
+            });
 
             this.attachments.forEach(item => {
                 let thumbnail = document.createElement("div");
-                thumbnail.id = "article-thumbnail";
-
                 attachImages.appendChild(thumbnail);
-                thumbnail.style.backgroundColor = this.colorCard;
-                thumbnail.style.margin = this.isMobile
-                    ? `0 ${this.radius}px 0 0`
-                    : this.radius + "px 0";
-                thumbnail.style.width = imageSize + "px";
-                thumbnail.style.height = imageSize + "px";
-                thumbnail.style.borderRadius = this.radius + "px";
-                thumbnail.style.border = "none";
-                thumbnail.style.objectFit = "cover";
-                thumbnail.style.boxShadow = `0 0 ${this.spacing}px 0 rgba(0,0,0,0.25)`;
-                thumbnail.style.transition =
-                    "width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease-in";
-                // thumbnail.src = item.image;
+                thumbnail.id = "article-thumbnail";
                 thumbnail.alt = item.name;
                 thumbnail.title = item.name;
-                thumbnail.style.backgroundImage = `url(${item.image})`;
-                thumbnail.style.backgroundSize = `cover`;
-                thumbnail.style.backgroundPosition = `center`;
-
-                thumbnail.style.position = 'relative';
+                applyCSS(thumbnail, {
+                    position: 'relative',
+                    backgroundColor: this.colorCard,
+                    margin: this.isMobile ? `0 ${this.radius}px 0 0` : this.radius + "px 0",
+                    width: imageSize + "px",
+                    height: imageSize + "px",
+                    borderRadius: this.radius + "px",
+                    border: "none",
+                    objectFit: "cover",
+                    boxShadow: `0 0 ${this.spacing}px 0 rgba(0,0,0,0.25)`,
+                    transition: "width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease-in",
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: `cover`,
+                    backgroundPosition: `center`,
+                });
 
                 if (item.full !== false) {
-
                     let thumbOverlay = document.createElement('div');
                     thumbnail.appendChild(thumbOverlay);
-                    thumbOverlay.style.position = 'absolute';
-                    thumbOverlay.style.top = '0px';
-                    thumbOverlay.style.left = '0px';
-                    thumbOverlay.style.right = '0px';
-                    thumbOverlay.style.bottom = '0px';
-                    thumbOverlay.style.borderRadius = thumbnail.style.borderRadius;
-                    thumbOverlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
-                    thumbOverlay.style.opacity = '0';
-                    thumbOverlay.style.color = '#FFFFFF';
-                    thumbOverlay.style.fontSize = '20px';
-                    thumbOverlay.style.textAlign = 'right';
-                    thumbOverlay.style.padding = '10px';
-                    thumbOverlay.style.lineHeight = '20px';
+                    applyCSS(thumbOverlay, {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        borderRadius: thumbnail.style.borderRadius,
+                        backgroundColor: 'rgba(0,0,0,0.4)',
+                        opacity: 0,
+                        color: '#FFFFFF',
+                        fontSize: '20px',
+                        textAlign: 'right',
+                        padding: '10px',
+                        lineHeight: '20px',
+                    });
                     thumbOverlay.onclick = function () {
                         window.open(item.image, "_blank");
                     };
@@ -556,68 +580,75 @@ class Article {
                     thumbOverlayIcon.title = 'Open in New Tab';
 
                     fullImg.id = "article-fullImg";
-                    fullImg.style.backgroundColor = this.colorCard;
-                    fullImg.style.backgroundPosition = "center";
-                    fullImg.style.backgroundRepeat = "no-repeat";
-                    fullImg.style.backgroundSize = "cover";
-                    fullImg.style.position = "absolute";
-                    fullImg.style.borderRadius = `${this.radius}px`;
-                    fullImg.style.right = `${this.radius}px`;
-                    fullImg.style.width = "0";
-                    fullImg.style.bottom = `${this.radius}px`;
-                    fullImg.style.height = "0";
-                    fullImg.style.opacity = "0";
-                    fullImg.style.transition = "opacity 0.2s ease";
+                    applyCSS(fullImg, {
+                        backgroundColor: this.colorCard,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        position: "absolute",
+                        borderRadius: `${this.radius}px`,
+                        right: `${this.radius}px`,
+                        width: "0",
+                        bottom: `${this.radius}px`,
+                        height: "0",
+                        opacity: "0",
+                        transition: "opacity 0.2s ease",
+                    });
 
                     let a = this;
                     const closeImg = function () {
-                        fullImg.style.backgroundImage = `none`;
-                        fullImg.style.zIndex = "1";
-                        fullImg.style.right = `${a.radius}px`;
-                        fullImg.style.width = "0";
-                        fullImg.style.bottom = `${a.radius}px`;
-                        fullImg.style.height = "0";
-                        fullImg.style.opacity = "0";
-
-                        closeButton.style.fontSize = "1px";
-                        closeButton.style.opacity = "0";
-                        closeButton.style.boxShadow = `0 0 0 0 rgba(0,0,0,0.25)`;
-
-                        thumbOverlay.style.opacity = '0';
+                        applyCSS(fullImg, {
+                            backgroundImage: `none`,
+                            zIndex: 1,
+                            right: `${a.radius}px`,
+                            width: 0,
+                            bottom: `${a.radius}px`,
+                            height: 0,
+                            opacity: 0,
+                        });
+                        applyCSS(closeButton, {
+                            fontSize: "1px",
+                            opacity: 0,
+                            boxShadow: `0 0 0 0 rgba(0,0,0,0.25)`,
+                        });
+                        applyCSS(thumbOverlay, {opacity: 0});
                     };
 
                     fullImg.onclick = closeImg;
 
                     if (this.isMobile) {
-                        closeButton.style.position = "absolute";
-                        closeButton.style.top = this.spacing + "px";
-                        closeButton.style.right = this.spacing + "px";
-                        closeButton.style.color = "#FFFFFF";
-                        closeButton.style.zIndex = "10";
-                        closeButton.style.fontSize = "1px";
-                        closeButton.style.opacity = "0";
-                        closeButton.style.textShadow = `0 0 ${this.spacing /
-                        2}px rgba(0,0,0,0.5)`;
+                        applyCSS(closeButton, {
+                            position: "absolute",
+                            top: this.spacing + "px",
+                            right: this.spacing + "px",
+                            color: "#FFFFFF",
+                            zIndex: "10",
+                            fontSize: "1px",
+                            opacity: "0",
+                            textShadow: `0 0 ${this.spacing / 2}px rgba(0,0,0,0.5)`,
+                        });
                         closeButton.classList = "fas fa-times-circle";
                         closeButton.onclick = closeImg;
                     }
 
                     thumbnail.onmouseover = function () {
-                        fullImg.style.backgroundImage = `url(${item.image})`;
-                        fullImg.style.zIndex = "5";
-                        fullImg.style.right = `${a.radius}px`;
-                        fullImg.style.top = `${a.radius}px`;
-                        fullImg.style.bottom = `${a.radius}px`;
-                        fullImg.style.left = `${a.radius}px`;
-                        fullImg.style.width = "calc(100% - 16px)";
-                        fullImg.style.height = "calc(100% - 16px)";
-                        fullImg.style.opacity = "1";
-                        closeButton.style.fontSize = "20px";
-                        closeButton.style.opacity = "1";
-                        closeButton.style.boxShadow = `0 0 ${
-                            a.spacing
-                            }px 0 rgba(0,0,0,0.25)`;
-                        thumbOverlay.style.opacity = '1';
+                        applyCSS(fullImg, {
+                            backgroundImage: `url(${item.image})`,
+                            zIndex: 5,
+                            right: `${a.radius}px`,
+                            top: `${a.radius}px`,
+                            bottom: `${a.radius}px`,
+                            left: `${a.radius}px`,
+                            width: "calc(100% - 16px)",
+                            height: "calc(100% - 16px)",
+                            opacity: 1,
+                        });
+                        applyCSS(closeButton, {
+                            fontSize: "20px",
+                            opacity: 1,
+                            boxShadow: `0 0 ${a.spacing}px 0 rgba(0,0,0,0.25)`,
+                        });
+                        applyCSS(thumbOverlay, {opacity: 1});
                     };
                     if (!this.isMobile) {
                         thumbnail.onmousemove = function (evt) {
@@ -627,13 +658,12 @@ class Article {
                             let renderWidth = a.size; //a
                             let renderHeight = ratio * renderWidth; //b
                             let clientHeight = card.clientHeight - 16; //c
-                            let clientWidth = card.clientWidth;
+                            // let clientWidth = card.clientWidth;
                             if (renderHeight > clientHeight) {
                                 let hiddenHeight = renderHeight - clientHeight;
                                 let offsetHeight = hiddenHeight / 2;
                                 let moveRatio = offsetHeight / 40;
-                                fullImg.style.backgroundPositionY =
-                                    -1 * moveRatio * evt.offsetY + "px";
+                                applyCSS(fullImg, {backgroundPositionY: -1 * moveRatio * evt.offsetY + "px"});
                             }
                         };
                     }
@@ -641,14 +671,18 @@ class Article {
                     thumbnail.onmouseleave = closeImg;
                 } else {
                     thumbnail.onmouseover = function () {
-                        thumbnail.style.width = "110px";
-                        thumbnail.style.height = "110px";
-                        thumbnail.style.boxShadow = "0 0 40px 0 rgba(0,0,0,0.5)";
+                        applyCSS(thumbnail, {
+                            width: "110px",
+                            height: "110px",
+                            boxShadow: "0 0 40px 0 rgba(0,0,0,0.5)",
+                        });
                     };
                     thumbnail.onmouseleave = function () {
-                        thumbnail.style.width = "100px";
-                        thumbnail.style.height = "100px";
-                        thumbnail.style.boxShadow = "0 0 40px 0 rgba(0,0,0,0.25)";
+                        applyCSS(thumbnail, {
+                            width: "100px",
+                            height: "100px",
+                            boxShadow: "0 0 40px 0 rgba(0,0,0,0.25)",
+                        });
                     };
                 }
             });

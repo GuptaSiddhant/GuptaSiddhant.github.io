@@ -23,6 +23,16 @@ articles.forEach((article) => {
     acData = acData.filter(onlyUnique);
 });
 
+function applyCSS(el, styles = {}, setProp = false) {
+    for (let property in styles) {
+        if (setProp) {
+            el.style.setProperty(property, styles[property]);
+        } else {
+            el.style[property] = styles[property].toString();
+        }
+    }
+}
+
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
@@ -88,7 +98,7 @@ function clearAll() {
     initiate();
 }
 
-function switchDarkMode(e) {
+function switchDarkMode() {
     darkMode = !darkMode;
     if (darkMode) {
         setUrlParameter("color", "dark");
