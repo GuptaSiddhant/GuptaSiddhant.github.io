@@ -422,7 +422,7 @@
         "management"
       ],
       "logo": "assets/logos/qb-logo.png",
-      "summary": "- Designing UI for web and mobile app. <br>\n             - Service Design and customer journey design. <br>\n             - Managing team of developers and designer.",
+      "summary": "- Designing UI for web and mobile app. <br>- Service Design and customer journey design. <br>- Managing team of developers and designer.",
       "actions": [
         {
           "name": "QuickBytz",
@@ -440,7 +440,7 @@
         "design",
         "marketing"
       ],
-      "summary": "- Designing UI for web and mobile apps. <br>\n        - Communicating with target audiences, presenting the demo. <br>\n        - Managing customer relationships and Conducting market research",
+      "summary": "- Designing UI for web and mobile apps. <br>- Communicating with target audiences, presenting the demo. <br>- Managing customer relationships and Conducting market research",
       "actions": [
         {
           "name": "Sprint ME",
@@ -489,8 +489,8 @@
       "summary": "Verbal Reasoning - 150/170 <br>Quantitative Reasoning - 168/170  <br>Analytical Writing - 3.0/6.0",
       "actions": [
         {
-          "name": "BITS Pilani",
-          "link": "https://bits-pilani.ac.in"
+          "name": "GRE Score Report",
+          "link": "assets/GRE.pdf"
         }
       ]
     },
