@@ -528,6 +528,7 @@ class Article {
                 display: "flex",
                 flexDirection: this.isMobile ? "row" : "column",
                 justifyContent: "space-around",
+                alignItems: 'flex-end',
                 zIndex: 10,
             });
 
