@@ -72,7 +72,7 @@
       "tags": [
         "about"
       ],
-      "summary": "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small things can make the biggest impact. One word to describe me : STALWART. <br><br><b>My Skills:</b><table cellspacing='0px'><tr><th>Design</th><td>Sketch, InVision, Figma, XD, Photoshop, InDesign </td></tr><tr><th>Front-End</th><td>Javascript, ReactJS, Flutter (Dart), Wordpress </td></tr><tr><th>Back-End</th><td>Django (Python), NodeJS, Google Firebase, Clojure </td></tr><tr><th>Others</th><td>Machine Learning, AutoCAD, Final Cut Pro </td></tr><tr><th>Soft Skills</th><td>Public Speaking, Presentation, Formal Writing </td></tr><tr><th>Languages</th><td>English, Hindi, Finnish (elementary)</td></tr></table>",
+      "summary": "Ever since I could first remember, I’ve been fascinated by how things work. While it took me some time to discover my passion for design, I haven’t stopped pursuing it since. I am incredibly detail orientated and believe that small things can make the biggest impact. One word to describe me : STALWART. <br><br><b>My Skills:</b><table translate='no' class='notranslate' cellspacing='0px'><tr><th>Design</th><td>Sketch, InVision, Figma, XD, Photoshop, InDesign </td></tr><tr><th>Front-End</th><td>Javascript, ReactJS, Flutter (Dart), Wordpress </td></tr><tr><th>Back-End</th><td>Django (Python), NodeJS, Google Firebase, Clojure </td></tr><tr><th>Others</th><td>Machine Learning, AutoCAD, Final Cut Pro </td></tr><tr><th>Soft Skills</th><td>Public Speaking, Presentation, Formal Writing </td></tr><tr><th>Languages</th><td>English, Hindi, Finnish (elementary)</td></tr></table>",
       "attachments": [
         {
           "name": "Siddhant Gupta",
@@ -192,7 +192,7 @@
         "education",
         "masters"
       ],
-      "summary": "Dual degree program as a part of EIT Digital Master School.<br><br><b>Courses:</b><table cellspacing='0px'><tr><th>Aalto</th><td>Computational UI Design, Machine Learning, Web Software Development, Speech Recognition</td></tr><tr><th>KTH</th><td>HCI-Principles & Design, Information Visualisation, Methodology of Interaction Design, Interaction Prohramming and the Dynamic Web, Entrepreneurship for Engineers, Open and User Innovation</td></tr></table>",
+      "summary": "Dual degree program as a part of EIT Digital Master School.<br><br><b>Courses:</b><table cellspacing='0px' translate='no' class='notranslate'><tr><th>Aalto</th><td>Computational UI Design, Machine Learning, Web Software Development, Speech Recognition</td></tr><tr><th>KTH</th><td>HCI-Principles & Design, Information Visualisation, Methodology of Interaction Design, Interaction Prohramming and the Dynamic Web, Entrepreneurship for Engineers, Open and User Innovation</td></tr></table>",
       "actions": [
         {
           "name": "Masters thesis",

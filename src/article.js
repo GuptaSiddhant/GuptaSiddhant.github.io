@@ -281,6 +281,8 @@ class Article {
         heading.appendChild(title);
         title.id = "article-title";
         title.innerText = this.title;
+        title.translate = false;
+        title.classList.add('notranslate');
         applyCSS(title, {
             fontFamily: "Kameron, serif",
             fontWeight: this.quotation ? "normal" : "bold",
@@ -295,6 +297,8 @@ class Article {
             heading.appendChild(subtitle);
             subtitle.id = "article-subtitle";
             subtitle.innerText = this.subtitle;
+            subtitle.translate = false;
+            subtitle.classList.add('notranslate');
             applyCSS(subtitle, {
                 fontWeight: "500",
                 fontSize: "16px",
@@ -466,6 +470,8 @@ class Article {
                     let buttonText = document.createElement("span");
                     button.appendChild(buttonText);
                     buttonText.innerText = action.name;
+                    buttonText.classList.add('notranslate');
+                    buttonText.translate = false;
                 }
 
                 let article = this;

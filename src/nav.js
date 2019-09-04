@@ -16,6 +16,7 @@ function buildSidebar() {
     let headingTitle = document.createElement("div");
     sidebar.appendChild(headingTitle);
     headingTitle.innerText = info.title;
+    headingTitle.translate = false;
     applyCSS(headingTitle, {
         margin: "0",
         fontFamily: "Kameron, serif",
@@ -112,11 +113,13 @@ function buildButton(action, icon = false, accent = false) {
     };
     button.onmouseleave = function () {
         button.classList.remove("hover");
-        applyCSS(button, {
-            backgroundColor: "transparent",
-            border: "1px solid " + color.primary,
-            color: color.primary,
-        });
+        if (!button.classList.contains("active")) {
+            applyCSS(button, {
+                backgroundColor: "transparent",
+                border: "1px solid " + color.primary,
+                color: color.primary,
+            });
+        }
     };
     return button;
 }
@@ -412,6 +415,7 @@ function buildHeadbar() {
     let headingTitle = document.createElement("div");
     headbar.appendChild(headingTitle);
     headingTitle.innerText = info.title;
+    headingTitle.translate = false;
     applyCSS(headingTitle, {
         position: "fixed",
         top: size.spacing / 2 + "px",
