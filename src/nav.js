@@ -27,7 +27,12 @@ function buildSidebar() {
         letterSpacing: "1px",
         textTransform: "uppercase",
         marginBottom: "1rem",
+        cursor: 'pointer',
     });
+    headingTitle.onclick = function() {
+        clearAll();
+        window.scrollTo(0, 0);
+    };
 
     sidebar.appendChild(buildSocialActions());
     sidebar.appendChild(buildSearch());
@@ -77,7 +82,7 @@ function buildButton(action, icon = false, accent = false) {
         marginRight: size.isMobile ? size.radius + "px" : "0",
         padding: size.radius / 2 + "px " + (size.radius * 3) / 2 + "px",
         borderRadius: size.radius / 2 + "px",
-        border: "1px solid " + color.primary,
+        border: size.isMobile ? "1px solid " + color.primary : '',
         color: color.primary,
         transition: "background-color 0.2s ease",
         cursor: "pointer",
@@ -101,13 +106,14 @@ function buildButton(action, icon = false, accent = false) {
             let buttonText = document.createElement("span");
             button.appendChild(buttonText);
             buttonText.innerText = action.name;
+            applyCSS(buttonText, {fontWeight: 500});
         }
     }
     button.onmouseover = function () {
         button.classList.add("hover");
         applyCSS(button, {
             backgroundColor: accent ? matchColor([action.name]) : buttonCustomColor === '' ? color.primary : buttonCustomColor,
-            border: "1px solid " + color.primary,
+            border: size.isMobile ? "1px solid " + color.primary : '',
             color: accent ? "#FFFFFF" : buttonCustomColor === '' ? color.highlight : invertColor(buttonCustomColor),
         });
     };
@@ -116,7 +122,7 @@ function buildButton(action, icon = false, accent = false) {
         if (!button.classList.contains("active")) {
             applyCSS(button, {
                 backgroundColor: "transparent",
-                border: "1px solid " + color.primary,
+                border: size.isMobile ? "1px solid " + color.primary : '',
                 color: color.primary,
             });
         }
@@ -126,8 +132,8 @@ function buildButton(action, icon = false, accent = false) {
 
 function buildSearch() {
     let searchHeight = 36;
-    let searchWidthInit = size.isMobile ? size.widthBody - 60 : 140;
-    let searchWidthFinal = size.isMobile ? size.widthBody - 60 : 180;
+    let searchWidthInit = size.isMobile ? size.widthBody - 60 : 180;
+    let searchWidthFinal = size.isMobile ? size.widthBody - 60 : 200;
     let sInputPaddingLeftInit = size.isMobile ? 40 : 25;
     let sInputPaddingLeftFinal = 40;
     let sIconLeftInit = size.isMobile ? 10 : 4;
@@ -270,13 +276,14 @@ function buildNavigation() {
     clearButton.innerHTML = '<i class="far fa-times-circle"></i> Clear All';
     applyCSS(clearButton, {
         position: "absolute",
-        top: size.spacing * allTags.length + "px",
+        top: size.spacing * allTags.length + 20 + "px",
         right: 0,
         width: "140px",
         marginBottom: "0.5rem",
         opacity: "0.7",
         cursor: "pointer",
-        display: searchText !== `` ? "block" : "none",
+        display: 'none'
+        // display: searchText !== `` ? "block" : "none",//
     });
     clearButton.onclick = function () {
         applyCSS(clearButton, {display: 'none'});
@@ -288,7 +295,7 @@ function buildNavigation() {
 
     allTags.forEach(tag => {
         let name = tag.charAt(0).toUpperCase() + tag.slice(1);
-        let button = buildButton({name: name}, false, true);
+        let button = buildButton({name: name.toUpperCase()}, false, true);
         nav.appendChild(button);
         applyCSS(button, {
             position: size.isMobile ? "initial" : "absolute",
@@ -307,7 +314,19 @@ function buildNavigation() {
                 border: "1px solid " + matchColor([tag]),
                 color: "#FFFFFF", //color.highlight
             });
-            applyCSS(clearButton, {display: 'block'});
+            // applyCSS(clearButton, {display: 'block'});
+        }
+
+        if (button.classList.contains("active")) {
+            let clearIcon = document.createElement('i');
+            button.appendChild(clearIcon);
+            clearIcon.className = 'fas fa-times-circle';
+            applyCSS(clearIcon, {
+                position: 'absolute',
+                left: '8px',
+                top: "8px",
+                color: `#FFFFFF`
+            });
         }
 
         button.onclick = function () {
@@ -338,7 +357,6 @@ function buildNavigation() {
                 });
                 navigation.subNav = false;
                 navFilter = tag;
-                applyCSS(clearButton, {display: 'block'});
                 button.onmouseleave = function () {
                 };
             }

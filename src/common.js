@@ -140,7 +140,6 @@ function clearAll() {
     searchInput.value = ``;
     setUrlParameter('search', "");
     setURL("", true);
-    console.log('clear');
     initiate();
 }
 
