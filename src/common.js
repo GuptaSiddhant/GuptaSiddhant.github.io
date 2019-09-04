@@ -100,7 +100,7 @@ function keyboardInput(e) {
             window.scrollTo(0, 0);
             e.stopPropagation();
             break;
-        case 'KeyL':
+        case 'KeyB':
             window.scrollTo(0, document.body.scrollHeight);
             e.stopPropagation();
             break;
