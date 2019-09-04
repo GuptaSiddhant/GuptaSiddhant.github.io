@@ -1,31 +1,3 @@
-// Global Variables
-let requestInfo = new XMLHttpRequest();
-requestInfo.open("GET", "db/database.json", false);
-requestInfo.send(null);
-let info = JSON.parse(requestInfo.responseText);
-let articles = info.articles;
-
-let darkMode = matchMedia("(prefers-color-scheme: dark)").matches || false;
-let navFilter = "";
-let mobileBreakPoint = 1000;
-let scrollPosition = 0;
-let allTags = [];
-info.tags.forEach(tag => {
-    tag.name !== "other" ? allTags.push(tag.name) : null;
-});
-let searchText = ``;
-let size, color;
-let navigation = {
-    subNav: false,
-    subFilter: "",
-    subURL: ""
-};
-let shortcutDrawerOpen;
-let shortcutDrawerButton = document.createElement('div');
-let shortcutDrawerViewer = document.createElement('div');
-let shortcutDrawerHeight = 180;
-
-
 // On DOM Loaded -> Initialise
 document.addEventListener("DOMContentLoaded", initiate);
 
@@ -54,13 +26,6 @@ function initiate() {
 function router() {
     let query = parseQuery(window.location.search);
     if (query) {
-        if (query.color) {
-            if (query.color === "dark") {
-                darkMode = true;
-            } else if (query.color === "light") {
-                darkMode = false;
-            }
-        }
         if (query.search) {
             searchText = query.search.toLowerCase();
         }
@@ -80,20 +45,12 @@ function router() {
         if (hash.includes("#404/")) {
             notFound = true;
             errorText = hash.split("/")[0];
-
-            if (errorText && errorText !== '') {
-                if (errorText.includes('?color=')) {
-                    let colorQuery = errorText.split('=')[1];
-                    colorQuery = colorQuery.split('#')[0];
-                    colorQuery = colorQuery.split('/')[0];
-                    darkMode = colorQuery === 'dark';
-                }
-            }
             let otherHash = hash;
             hash = '#' + otherHash.split('/')[1];
             if (otherHash.split('/')[2] && otherHash.split('/')[2] !== '') {
                 hash += '/' + otherHash.split('/')[2];
             }
+            console.log(errorText);
         }
 
         // Main Nav
@@ -123,12 +80,6 @@ function router() {
                 2. Explore the website by using the navigation or scrolling downwards <i class="fas fa-arrow-down"></i>.<br>
                 3. Contact me and reach your preferred destination as a VIP.`
         });
-    } else if (errorText.includes('?color=')) {
-        if (darkMode === true) {
-            setUrlParameter('color', 'dark');
-        } else {
-            setUrlParameter('color', 'light');
-        }
     } else {
         setURL();
     }
@@ -179,6 +130,7 @@ function buildDOM() {
         background: darkMode ? "#000000" : "#F2F2F2",
         card: darkMode ? "#222222" : "#FFFFFF"
     };
+
     let BODY = document.getElementById("app");
     applyCSS(BODY, {
         height: "100vh",

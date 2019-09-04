@@ -1,3 +1,38 @@
+// Global Variables
+let requestInfo = new XMLHttpRequest();
+requestInfo.open("GET", "db/database.json", false);
+requestInfo.send(null);
+let info = JSON.parse(requestInfo.responseText);
+let articles = info.articles;
+
+let darkMode = false;
+if (getStorage('darkMode') !== null) {
+    if (getStorage('darkMode') === 'true') {
+        darkMode = true;
+    }
+} else {
+    darkMode = matchMedia("(prefers-color-scheme: dark)").matches || false;
+}
+
+let navFilter = "";
+let mobileBreakPoint = 1000;
+let scrollPosition = 0;
+let allTags = [];
+info.tags.forEach(tag => {
+    tag.name !== "other" ? allTags.push(tag.name) : null;
+});
+let searchText = ``;
+let size, color;
+let navigation = {
+    subNav: false,
+    subFilter: "",
+    subURL: ""
+};
+let shortcutDrawerOpen;
+let shortcutDrawerButton = document.createElement('div');
+let shortcutDrawerViewer = document.createElement('div');
+let shortcutDrawerHeight = 180;
+
 let acData = [];
 articles.forEach((article) => {
     if (!article.tags.includes('testimonial') && !article.tags.includes('recommendation')) {
@@ -23,6 +58,8 @@ articles.forEach((article) => {
     acData = acData.filter(onlyUnique);
 });
 
+// Supporting functions
+
 function applyCSS(el, styles = {}, setProp = false) {
     for (let property in styles) {
         if (setProp) {
@@ -37,7 +74,6 @@ function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
 
-// Supporting functions
 function keyboardInput(e) {
     // console.log(e);
     let code = e.code;
@@ -100,12 +136,26 @@ function clearAll() {
 
 function switchDarkMode() {
     darkMode = !darkMode;
-    if (darkMode) {
-        setUrlParameter("color", "dark");
-    } else {
-        setUrlParameter("color", "light");
-    }
+    darkMode ? setStorage('darkMode', 'true') : setStorage('darkMode', 'false');
     initiate();
+}
+
+function setStorage(key, value, session = false) {
+    session ? sessionStorage.setItem(key, value) : localStorage.setItem(key, value);
+}
+
+function removeStorage(key, session = false) {
+    session ? sessionStorage.removeItem(key) : localStorage.removeItem(key);
+}
+
+function getStorage(key, session = false) {
+    return session
+        ? sessionStorage.length > 0 ? sessionStorage.getItem(key) : false
+        : localStorage.length > 0 ? localStorage.getItem(key) : false;
+}
+
+function clearStorage(session = false) {
+    return session ? sessionStorage.clear() : localStorage.clear();
 }
 
 function toggleShortcutDrawer() {
