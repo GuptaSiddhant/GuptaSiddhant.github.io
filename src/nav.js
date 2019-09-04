@@ -29,7 +29,7 @@ function buildSidebar() {
         marginBottom: "1rem",
         cursor: 'pointer',
     });
-    headingTitle.onclick = function() {
+    headingTitle.onclick = function () {
         clearAll();
         window.scrollTo(0, 0);
     };
@@ -311,7 +311,7 @@ function buildNavigation() {
             button.classList.add("active");
             applyCSS(button, {
                 backgroundColor: matchColor([tag]),
-                border: "1px solid " + matchColor([tag]),
+                border: size.isMobile ?"1px solid " + matchColor([tag]) :'',
                 color: "#FFFFFF", //color.highlight
             });
             // applyCSS(clearButton, {display: 'block'});
@@ -334,7 +334,7 @@ function buildNavigation() {
                 button.classList.remove("active");
                 applyCSS(button, {
                     backgroundColor: "transparent",
-                    border: "1px solid " + color.primary,
+                    border: size.isMobile ? "1px solid " + color.primary : '',
                     color: color.primary,
                 });
                 applyCSS(clearButton, {display: 'none'});
@@ -344,7 +344,7 @@ function buildNavigation() {
                     button.classList.remove("hover");
                     applyCSS(button, {
                         backgroundColor: "transparent",
-                        border: "1px solid " + color.primary,
+                        border: size.isMobile ? "1px solid " + color.primary : '',
                         color: color.primary,
                     });
                 };
@@ -352,7 +352,7 @@ function buildNavigation() {
                 button.classList.add("active");
                 applyCSS(button, {
                     backgroundColor: matchColor([tag]),
-                    border: "1px solid " + matchColor([tag]),
+                    border: size.isMobile ? "1px solid " + matchColor([tag]) : '',
                     color: "#FFFFFF",
                 });
                 navigation.subNav = false;
