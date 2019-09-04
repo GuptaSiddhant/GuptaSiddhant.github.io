@@ -213,8 +213,17 @@ function buildLifeline() {
     }
 
     if (emptyLine) {
+        let errorReason = '';
+        if (searchText !== '') {
+            errorReason += 'For \"' + searchText + '\"';
+        }
+        if (navFilter !== '') {
+            console.log(navFilter);
+            errorReason += ' in \"' + navFilter + '\"';
+        }
         let article = new Article({
             title: "No results found!",
+            subtitle: errorReason,
             icon: 'fas fa-exclamation-circle',
             pinned: true,
             tags: ["error"],
@@ -260,22 +269,24 @@ function buildShortcutViewer() {
         paddingTop: `${2 * size.spacing}px`,
     });
     content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts </h3>
-     
-     <b>A</b> - Navigate to About <br>
-     <b>P</b> - Navigate to Projects <br>
-     <b>X</b> - Navigate to Experience <br>
-     <b>E</b> - Navigate to Education <br>
-     <b>B</b> - Navigate to Blog <br>
-     <b>F</b> - Navigate to Favourite <br>
-     <br>
-     <b>S</b> - Search Website <br>
-     <b>C</b> - Clear Selection <br>
-     <b>T</b> - Goto Top <br>
-     <b>L</b> - Goto Last Item <br>
-     <br>
-     <b>D</b> - Toggle Dark Mode <br>
-     <b>K</b> - Show/Hide Shortcuts <br>
-    `;
+    <hr>
+     <table translate="no">
+        <tr><th>1</th><td>Navigate to About</td></tr>
+        <tr><th>2</th><td>Navigate to Projects</td></tr>
+        <tr><th>3</th><td>Navigate to Experience</td></tr>
+        <tr><th>4</th><td>Navigate to Education</td></tr>
+        <tr><th>5</th><td>Navigate to Blog</td></tr>
+        <tr><th>6</th><td>Navigate to Favourite</td></tr>
+        <tr><th><hr></th></tr>
+        <tr><th>S</th><td>Search Website</td></tr>
+        <tr><th>C</th><td>Clear All Selections</td></tr>
+        <tr><th><hr></th></tr>
+        <tr><th>T</th><td>Jump to Top</td></tr>
+        <tr><th>B</th><td>Jump to Bottom</td></tr>
+        <tr><th><hr></th></tr>
+        <tr><th>D</th><td>Toggle Dark Mode</td></tr>
+        <tr><th>K</th><td>Show/Hide Shortcuts</td></tr>
+     </table>`;
 
 
     container.appendChild(shortcutDrawerButton);

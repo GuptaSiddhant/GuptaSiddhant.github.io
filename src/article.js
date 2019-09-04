@@ -66,7 +66,7 @@ class Article {
         applyCSS(card, {
             position: 'absolute',
             backgroundColor: this.colorCard,
-            margin: this.isMobile ? "60px 0 0 0" : this.spacing + "px",
+            margin: this.isMobile ? "60px 0 0 0" : `0px ${this.spacing}px`,
             borderRadius: this.isMobile ? 0 : 2 * this.radius + "px",
             boxShadow: `0 0 ${this.spacing}px 0 rgba(0,0,0,0.1)`,
             width: this.isMobile
@@ -75,7 +75,7 @@ class Article {
             zIndex: "75",
             height: this.isMobile
                 ? "auto"
-                : `calc(100vh - ${size.spacing * 3}px)`,
+                : `calc(100vh - ${size.spacing * 2}px)`,
         });
         if (size.isMobile) {
             applyCSS(card, {
@@ -382,7 +382,7 @@ class Article {
             let field = document.createElement("span");
             role.appendChild(field);
             field.innerText = "Role: ";
-            applyCSS(field, {fontWeight: 'bold'});
+            applyCSS(field, {fontWeight: '500', textTransform: 'uppercase'});
 
             let value = document.createElement("span");
             role.appendChild(value);
@@ -398,7 +398,7 @@ class Article {
             let field = document.createElement("span");
             tech.appendChild(field);
             field.innerText = "Tech: ";
-            applyCSS(field, {fontWeight: 'bold'});
+            applyCSS(field, {fontWeight: '500', textTransform: 'uppercase'});
 
             let value = document.createElement("span");
             tech.appendChild(value);

@@ -15,19 +15,20 @@ if (getStorage('darkMode') !== null) {
 }
 
 let navFilter = "";
-let mobileBreakPoint = 1000;
-let scrollPosition = 0;
 let allTags = [];
 info.tags.forEach(tag => {
     tag.name !== "other" ? allTags.push(tag.name) : null;
 });
 let searchText = ``;
-let size, color;
 let navigation = {
     subNav: false,
     subFilter: "",
     subURL: ""
 };
+
+let mobileBreakPoint = 1000;
+let scrollPosition = 0;
+let size, color;
 let shortcutDrawerOpen;
 let shortcutDrawerButton = document.createElement('div');
 let shortcutDrawerViewer = document.createElement('div');
@@ -75,7 +76,7 @@ function onlyUnique(value, index, self) {
 }
 
 function keyboardInput(e) {
-    // console.log(e);
+    console.log(e);
     let code = e.code;
     switch (code) {
         case 'KeyD':
@@ -83,6 +84,7 @@ function keyboardInput(e) {
             e.stopPropagation();
             break;
         case 'KeyC':
+        case 'Digit0':
             clearAll();
             e.stopPropagation();
             break;
@@ -92,6 +94,14 @@ function keyboardInput(e) {
             break;
         case 'KeyS':
             activateSearch();
+            e.stopPropagation();
+            break;
+        case 'KeyT':
+            window.scrollTo(0, 0);
+            e.stopPropagation();
+            break;
+        case 'KeyL':
+            window.scrollTo(0, document.body.scrollHeight);
             e.stopPropagation();
             break;
         default:

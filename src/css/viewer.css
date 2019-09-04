@@ -8,10 +8,6 @@ root {
 
 @media (prefers-color-scheme: dark) {
   root {
-    --colorAccent: #017aff;
-    --colorPrimary: #e6e6e6;
-    --colorSecondary: #b3b3b3;
-    --colorCard: #222222;
     --colorInverse: #ffffff;
   }
 }
