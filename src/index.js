@@ -148,6 +148,7 @@ function buildDOM() {
         BODY.appendChild(buildHeadbar());
     } else {
         BODY.appendChild(buildSidebar());
+        shortcutDrawerOpen = false;
         BODY.appendChild(buildShortcutViewer());
     }
 
@@ -234,65 +235,66 @@ function buildShortcutViewer() {
     let container = document.createElement('div');
     applyCSS(container, {
         position: 'fixed',
+        left: 0,
+        top: 0,
         bottom: 0,
-        width: '100%',
+        height: '100%',
         zIndex: 100,
         boxShadow: `0 0 ${size.spacing}px 0 rgba(0,0,0,${darkMode ? 0.5 : 0.2})`,
-    });
-
-    container.appendChild(shortcutDrawerButton);
-    shortcutDrawerButton.innerHTML += shortcutDrawerOpen ? `<i class="fas fa-times-circle"></i>` : `<i class="fas fa-arrow-up"></i>`;
-    shortcutDrawerButton.innerHTML = `Shortcuts `;
-    applyCSS(shortcutDrawerButton, {
-        backgroundColor: color.card,
-        color: color.primary,
-        width: '140px',
-        borderRadius: `${size.radius}px ${size.radius}px 0 0`,
-        height: `${size.spacing}px`,
-        lineHeight: `${size.spacing}px`,
-        textAlign: 'center',
-        position: `absolute`,
-        top: `-${size.spacing}px`,
-        left: (size.widthWindow - size.widthBody) / 2 + 120 + "px",
-        cursor: `pointer`,
     });
 
     container.appendChild(shortcutDrawerViewer);
     shortcutDrawerViewer.innerHTML = ``;
     applyCSS(shortcutDrawerViewer, {
-        width: `100%`,
-        height: shortcutDrawerOpen ? `${shortcutDrawerHeight}px` : 0,
+        height: `100%`,
+        width: shortcutDrawerOpen ? `${shortcutDrawerWidth}px` : 0,
         backgroundColor: color.card,
         position: 'relative',
+        opacity: 0
     });
 
     let content = document.createElement('div');
     shortcutDrawerViewer.appendChild(content);
     applyCSS(content, {
-        position: 'absolute',
-        top: `${size.spacing - 10}px`,
-        left: `${(size.widthWindow - size.widthBody) / 2 + 3 * size.spacing}px`,
-        right: `${(size.widthWindow - size.widthBody) / 2}px`,
-        height: `${shortcutDrawerHeight - 2 * size.spacing}px`,
+        padding: `${size.spacing}px`,
+        paddingTop: `${2 * size.spacing}px`,
     });
-    content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts 
-    <span style="font-size: 0.8rem; font-weight: normal; text-transform: capitalize">
-    (Press <b>K</b> to show/hide this panel)</span></h3>
-     <div style="column-count: 3">
+    content.innerHTML = `<h3 style="margin-bottom: 10px">Keyboard Shortcuts </h3>
+     
      <b>A</b> - Navigate to About <br>
      <b>P</b> - Navigate to Projects <br>
      <b>X</b> - Navigate to Experience <br>
-     
      <b>E</b> - Navigate to Education <br>
      <b>B</b> - Navigate to Blog <br>
      <b>F</b> - Navigate to Favourite <br>
-     
+     <br>
      <b>S</b> - Search Website <br>
      <b>C</b> - Clear Selection <br>
+     <b>T</b> - Goto Top <br>
+     <b>L</b> - Goto Last Item <br>
+     <br>
      <b>D</b> - Toggle Dark Mode <br>
-     <!--<b>Alt+K</b> - Show/Hide Shortcuts <br>-->
-    </div>`;
+     <b>K</b> - Show/Hide Shortcuts <br>
+    `;
 
+
+    container.appendChild(shortcutDrawerButton);
+    shortcutDrawerButton.innerHTML = `Shortcuts `;
+    shortcutDrawerButton.innerHTML += shortcutDrawerOpen ? `<i class="fas fa-times-circle"></i>` : `<i class="fas fa-arrow-up"></i>`;
+    applyCSS(shortcutDrawerButton, {
+        backgroundColor: color.card,
+        color: color.primary,
+        width: 3 * size.spacing + 'px',
+        borderRadius: `${size.radius}px ${size.radius}px 0 0`,
+        height: `${size.spacing}px`,
+        lineHeight: `${size.spacing}px`,
+        textAlign: 'center',
+        position: `absolute`,
+        bottom: `${2 * size.spacing}px`,
+        left: -1 * size.spacing + 'px',
+        cursor: `pointer`,
+        transform: `rotate(90deg)`,
+    });
     shortcutDrawerButton.onclick = toggleShortcutDrawer;
 
     return container;

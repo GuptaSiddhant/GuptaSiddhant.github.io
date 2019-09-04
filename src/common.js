@@ -31,7 +31,7 @@ let navigation = {
 let shortcutDrawerOpen;
 let shortcutDrawerButton = document.createElement('div');
 let shortcutDrawerViewer = document.createElement('div');
-let shortcutDrawerHeight = 180;
+let shortcutDrawerWidth = 300;
 
 let acData = [];
 articles.forEach((article) => {
@@ -162,21 +162,27 @@ function toggleShortcutDrawer() {
     if (!shortcutDrawerOpen) {
         shortcutDrawerOpen = true;
         shortcutDrawerButton.innerHTML = `Shortcuts <i class="fas fa-times-circle"></i>`;
-        animateSize(shortcutDrawerViewer, 'height', 0, shortcutDrawerHeight, 20);
+        animateSize(shortcutDrawerViewer, 'width', 0, shortcutDrawerWidth, 20);
+        animateSize(shortcutDrawerViewer, 'opacity', 0, 1, 0.2, false);
+        animateSize(shortcutDrawerButton, 'left', -1 * size.spacing, shortcutDrawerWidth - size.spacing, 20);
     } else {
         shortcutDrawerOpen = false;
         shortcutDrawerButton.innerHTML = `Shortcuts <i class="fas fa-arrow-up"></i>`;
-        animateSize(shortcutDrawerViewer, 'height', shortcutDrawerHeight, 0, -20);
+        animateSize(shortcutDrawerViewer, 'width', shortcutDrawerWidth, 0, -20);
+        animateSize(shortcutDrawerViewer, 'opacity', 1, 0, -0.2, false);
+        animateSize(shortcutDrawerButton, 'left', shortcutDrawerWidth - size.spacing, -1 * size.spacing, -20);
     }
 }
 
-function animateSize(elem, prop, init, final, step = 10) {
+function animateSize(elem, prop, init, final, step = 10, pixel = true) {
     let x = init;
 
     function frame() {
         x += step;
-        elem.style[prop] = x + 'px';
-        if (x === final) clearInterval(id);
+        elem.style[prop] = pixel ? x + 'px' : `${x}`;
+        init < final
+            ? x >= final ? clearInterval(id) : ''
+            : x <= final ? clearInterval(id) : '';
     }
 
     let id = setInterval(frame, 10);
