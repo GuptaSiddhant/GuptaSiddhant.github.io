@@ -119,7 +119,7 @@
         "startup",
         "design"
       ],
-      "logo": "assets/logos/kalpik-logo.png",
+      "logo": "db/kalpik/kalpik-logo.png",
       "summary": "Projects: Business Espoo - Visual Identity",
       "role": "Started a private firm to do different and interesting projects in the field of of branding, UI design, and app/web development.",
       "actions": [
@@ -137,7 +137,7 @@
         "experience",
         "design"
       ],
-      "logo": "assets/logos/fa-logo.png",
+      "logo": "db/fasolutions/fa-logo.png",
       "summary": "- Designing the product features.<br>- Supporting UI/UX development of core product and articles team <br>- Generating graphic design for marketing team",
       "actions": [
         {
@@ -218,7 +218,7 @@
         "styling",
         "favourite"
       ],
-      "logo": "assets/logos/be-logo.png",
+      "logo": "db/businessespoo/be-logo.png",
       "summary": "Business Espoo supports the vitality of businesses by offering the best, continuously developing services in one place.",
       "role": "Solely designed the Brand Identity and Style Guidelines",
       "tech": [
@@ -250,6 +250,7 @@
       "title": "Arcadia - Web Game Store",
       "subtitle": "Aalto University",
       "date": "February 2019",
+      "logo": "db/arcadia/arcadia-logo.png",
       "tags": [
         "projects",
         "back-end",
@@ -291,7 +292,7 @@
         "branding",
         "User interface"
       ],
-      "logo": "assets/logos/pi-logo.png",
+      "logo": "db/pocketinc/pi-logo.png",
       "summary": "With PocketInc service you can create, sign, archive, browse and register minutes of all mandatory corporate resolutions made by shareholders and board of directors.",
       "role": "Solely designed the App's user interface and Brand Identity.",
       "tech": [
@@ -421,7 +422,7 @@
         "design",
         "management"
       ],
-      "logo": "assets/logos/qb-logo.png",
+      "logo": "db/quickbytz/qb-logo.png",
       "summary": "- Designing UI for web and mobile app. <br>- Service Design and customer journey design. <br>- Managing team of developers and designer.",
       "actions": [
         {
@@ -433,7 +434,7 @@
     {
       "title": "Design Executive",
       "subtitle": "Sprint Middle East LLC, Dubai, U.A.E.",
-      "logo": "assets/logos/sprint-logo.png",
+      "logo": "db/sprintme/sprint-logo.png",
       "date": "February 2016 - April 2017",
       "tags": [
         "experience",
@@ -461,7 +462,7 @@
       "actions": [
         {
           "name": "Degree Certificate",
-          "link": "assets/BITSDegree.jpg",
+          "link": "db/bitspilani/BITSDegree.jpg",
           "icon": "fas fa-image"
         },
         {
@@ -472,7 +473,7 @@
       "attachments": [
         {
           "name": "Degree",
-          "image": "assets/BITSDegree.jpg"
+          "image": "db/bitspilani/BITSDegree.jpg"
         }
       ]
     },
@@ -497,7 +498,7 @@
     {
       "title": "Graphic Designer",
       "subtitle": "Birla Institute of Technology and Science, Pilani",
-      "logo": "assets/logos/bits-logo.png",
+      "logo": "db/bitspilani/bits-logo.png",
       "date": "September 2014 - December 2015",
       "tags": [
         "experience",

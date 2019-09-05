@@ -231,12 +231,13 @@ class Article {
         if (this.logo && this.logo !== "") {
             let logoImage = document.createElement("img");
             cardIcon.appendChild(logoImage);
+            logoImage.src = this.logo;
             applyCSS(logoImage, {
                 margin: '5px 0',
                 height: iconSize * 1.5 + "px",
                 width: iconSize * 1.5 + "px",
+                borderRadius: 0
             });
-            logoImage.src = this.logo;
         } else if (this.icon && this.icon !== "") {
             cardIcon.className = this.icon;
         } else if (this.quotation) {

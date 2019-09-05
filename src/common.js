@@ -36,18 +36,18 @@ let shortcutDrawerWidth = 300;
 
 let acData = [];
 articles.forEach((article) => {
-    if (!article.tags.includes('testimonial') && !article.tags.includes('recommendation')) {
-        let splits = article.title.split(' ');
-        splits.forEach((text) => {
-            acData.push(text.toLowerCase());
-        });
-    }
-    if (article.subtitle) {
-        let splits = article.subtitle.split(' ');
-        splits.forEach((text) => {
-            acData.push(text.toLowerCase());
-        });
-    }
+    // if (!article.tags.includes('testimonial') && !article.tags.includes('recommendation')) {
+    //     let splits = article.title.split(' ');
+    //     splits.forEach((text) => {
+    //         acData.push(text.toLowerCase());
+    //     });
+    // }
+    // if (article.subtitle) {
+    //     let splits = article.subtitle.split(' ');
+    //     splits.forEach((text) => {
+    //         acData.push(text.toLowerCase());
+    //     });
+    // }
     article.tags.forEach((tag) => {
         acData.push(tag);
     });
