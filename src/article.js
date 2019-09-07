@@ -236,6 +236,7 @@ class Article {
                 margin: '5px 0',
                 height: iconSize * 1.5 + "px",
                 width: iconSize * 1.5 + "px",
+                objectFit: 'contain',
                 borderRadius: 0
             });
         } else if (this.icon && this.icon !== "") {
