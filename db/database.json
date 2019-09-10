@@ -398,6 +398,41 @@
         ]
       },
       {
+        "title": "QuickBytz App & Website",
+        "subtitle": "@ QB Middle East",
+        "date": "January 2017 - June 2017",
+        "timestamp": 20170501,
+        "logo": "db/quickbytz/quickbytz-logo.png",
+        "tags": [
+          "projects",
+          "UI", "mobile", "desktop"
+        ],
+        "summary": "QuickBytz gives customer the power to the pre-order food from the vendor in a foodcourt without waiting in long queues. <br> Hence, FAST FOOD FASTER.",
+        "role": "Designed the UI for the QuickBytz mobile app as well as client/outlet portal.",
+        "tech": [
+          "Sketch",
+          "InVision"
+        ],
+        "attachments": [
+          {
+            "name": "QuickBytz App",
+            "image": "db/quickbytz/qb-ss-1.png"
+          },{
+            "name": "QuickBytz App",
+            "image": "db/quickbytz/qb-ss-2.png"
+          },{
+            "name": "QuickBytz App",
+            "image": "db/quickbytz/qb-ss-3.png"
+          }
+        ],
+        "actions": [
+          {
+            "name": "Prototype Video",
+            "link": "db/quickbytz/qb-demo.mp4"
+          }
+        ]
+      },
+      {
         "title": "Like A Dish",
         "subtitle": "@ Sprint Middle East",
         "date": "March 2017",
@@ -425,8 +460,8 @@
         ],
         "actions": [
           {
-            "name": "Prototype",
-            "link": "https://invis.io/6QA683WW7"
+            "name": "Mobile Website",
+            "link": "http://m.likeadish.com/"
           }
         ]
       },
@@ -547,7 +582,7 @@
           "management"
         ],
         "logo": "db/quickbytz/qb-logo.png",
-        "summary": "- Designing UI for web and mobile app. <br>- Service Design and customer journey design. <br>- Managing team of developers and designer.",
+        "summary": "Lanuched QuickBytz app <br>- Designing UI for web and mobile app. <br>- Service Design and customer journey design. <br>- Managing team of developers and designer.",
         "actions": [
           {
             "name": "QuickBytz",
