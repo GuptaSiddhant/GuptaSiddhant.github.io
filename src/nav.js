@@ -8,7 +8,7 @@ function buildSidebar() {
         position: "fixed",
         top: size.spacing * 1 + "px",
         // height: 200 + allTags.length * 40 + 60 + "px",
-        height: window.innerHeight - 4*size.spacing + 'px',
+        height: window.innerHeight - 4 * size.spacing + 'px',
         left: (size.widthWindow - size.widthBody) / 2 + "px",
         padding: size.spacing + "px",
         textAlign: "right",
@@ -312,7 +312,7 @@ function buildNavigation() {
             button.classList.add("active");
             applyCSS(button, {
                 backgroundColor: matchColor([tag]),
-                border: size.isMobile ?"1px solid " + matchColor([tag]) :'',
+                border: size.isMobile ? "1px solid " + matchColor([tag]) : '',
                 color: "#FFFFFF", //color.highlight
             });
             // applyCSS(clearButton, {display: 'block'});
@@ -322,12 +322,19 @@ function buildNavigation() {
             let clearIcon = document.createElement('i');
             button.appendChild(clearIcon);
             clearIcon.className = 'fas fa-times-circle';
-            applyCSS(clearIcon, {
-                position: 'absolute',
-                left: '8px',
-                top: "8px",
-                color: `#FFFFFF`
-            });
+            size.isMobile
+                ? applyCSS(clearIcon, {
+                    position: 'absolute',
+                    right: '8px',
+                    top: "8px",
+                    color: darkMode ? `#FFFFFF` : '#000000',
+                })
+                : applyCSS(clearIcon, {
+                    position: 'absolute',
+                    left: '8px',
+                    top: "8px",
+                    color: `#FFFFFF`
+                });
         }
 
         button.onclick = function () {
