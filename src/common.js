@@ -3,7 +3,14 @@ let requestInfo = new XMLHttpRequest();
 requestInfo.open("GET", "db/database.json", false);
 requestInfo.send(null);
 let info = JSON.parse(requestInfo.responseText);
-let articles = info.articles;
+let articles = [];
+for (let [key, value] of Object.entries(info.articles)) {
+    articles.push(...value);
+}
+articles = articles.sort((a, b) => {
+    return b.timestamp - a.timestamp;
+});
+
 
 let darkMode = false;
 if (getStorage('darkMode') !== null) {

@@ -6,6 +6,7 @@ class Article {
         this.icon = article.icon;
         this.logo = article.logo;
         this.date = article.date;
+        this.timestamp = article.timestamp;
         this.tags = article.tags;
         this.summary = article.summary;
         this.role = article.role;
@@ -175,7 +176,7 @@ class Article {
         let closeButton = document.createElement("i");
 
         let card = document.createElement("article");
-        card.id = "article-card";
+        card.id = "article-card-" + this.timestamp;
         applyCSS(card, {
             fontSize: '1rem',
             backgroundColor: this.colorCard,
@@ -236,6 +237,7 @@ class Article {
                 margin: '5px 0',
                 height: iconSize * 1.5 + "px",
                 width: iconSize * 1.5 + "px",
+                objectFit: 'contain',
                 borderRadius: 0
             });
         } else if (this.icon && this.icon !== "") {
