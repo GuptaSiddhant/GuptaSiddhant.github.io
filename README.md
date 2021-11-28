@@ -1,42 +1,34 @@
-# ![GS](https://guptasiddhant.com/favicon/favicon-32x32.png) GS LifeLine
+# Welcome to Remix!
 
----
+- [Remix Docs](https://remix.run/docs)
 
-To modify the data in the web-app, pay attention to 2 sub-directories `db` and `articles`.
+## Deployment
 
-Directory `db` contains 2 files >
+After having run the `create-remix` command and selected "Vercel" as a deployment target, you only need to [import your Git repository](https://vercel.com/new) into Vercel, and it will be deployed.
 
-- `info.js` : Contains basic information like **app-title**, navigational tags (name, color, icon) and some social links
-- `lineline.js` : Contains a list of all articles to be displayed in the app. The order in array is maintained in the app. Each article contains following properties (keys): - Primary keys [title, tags] are important to create the article card and hence and mandatory. The tags is a list of string and first string in the list determines the category/nav for the article. - Secondary keys [subtitle, icon, date, summary, role, tech, attachments, actions] are additional information that can be provided as per requirement. - Viewer keys [url, file, filetype] are only required if there is a FullView Article or Viewer attached or linked.
+If you'd like to avoid using a Git repository, you can also deploy the directory by running [Vercel CLI](https://vercel.com/cli):
 
-```
-[  //Array of articles
-  {  //Object representing single article
-    title: "Title",  //String - Required
-    subtitle: "SubTitle",  //String
-    date: "15 Aug. 2019",  //String
-    tags: ["blog", "about"],  //Array of Strings  - Required at least 1
-    summary: "Description",  //String
-    role: "Your Role",  //String
-    tech: ["Sketch", "MS-Word], //Array of Strings
-    attachments: [. //Array of image objects
-      {  //Image Object
-        name: "Image name",  //String
-        image: "Image URL"  //String
-      },
-    ],
-    actions: [  //Array of Link Objects
-      {  //Link Object
-        name: "Read More",  //String
-        link: "#blog/art01",  //String - URL
-        target: "_self"  //String
-      }
-    ],
-    url: "art01",  //String - Viewer's URL
-    file: "articles/01.md",  //String - MD File location
-    filetype: "md"  //String - File extenstion
-  },
-]
+```sh
+npm i -g vercel
+vercel
 ```
 
-In `articles` directory add Markdown files as mentioned in `file` (MD file location).
+It is generally recommended to use a Git repository, because future commits will then automatically be deployed by Vercel, through its [Git Integration](https://vercel.com/docs/concepts/git).
+
+## Development
+
+To run your Remix app locally, make sure your project's local dependencies are installed:
+
+```sh
+npm install
+```
+
+Afterwards, start the Remix development server like so:
+
+```sh
+npm run dev
+```
+
+Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
+
+If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
