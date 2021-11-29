@@ -1,0 +1,112 @@
+:root {
+  /* Color palette */
+  --theme-color-white: #ffffff;
+  --theme-color-gray-050: #eff1f3;
+  --theme-color-gray-100: #dfe3e7;
+  --theme-color-gray-200: #c1c7d0;
+  --theme-color-gray-300: #a3acba;
+  --theme-color-gray-400: #8592a4;
+  --theme-color-gray-500: #69788f;
+  --theme-color-gray-600: #535f71;
+  --theme-color-gray-700: #3e4755;
+  --theme-color-gray-800: #2b313a;
+  --theme-color-gray-900: #181c21;
+  --theme-color-black: #000000;
+  --theme-color-red-300: #fe8a7b;
+  --theme-color-red-600: #9a4338;
+  --theme-color-blue-300: #60b5df;
+  --theme-color-blue-400: #269ad3;
+  --theme-color-blue-600: #006495;
+  --theme-color-green-300: #4fc254;
+  --theme-color-green-600: #2c6b2e;
+  --theme-color-purple-300: #d98cff;
+  --theme-color-purple-600: #9200db;
+
+  /* Fonts */
+  --font-body: "Nunito", -apple-system, "Segoe UI", Helvetica Neue, Helvetica,
+    Roboto, Arial, sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Light mode */
+:root {
+  --color-accent: var(--theme-color-green-600);
+  --color-links: var(--theme-color-gray-900);
+  --color-background: var(--theme-color-gray-050);
+  --color-links: var(--theme-color-gray-800);
+  --color-links-hover: var(--theme-color-gray-900);
+  --color-border: var(--theme-color-gray-500);
+}
+
+/* Dark mode */
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --color-accent: var(--theme-color-green-300);
+    --color-foreground: var(--theme-color-gray-050);
+    --color-background: var(--theme-color-gray-900);
+    --color-links: var(--theme-color-gray-100);
+    --color-links-hover: var(--theme-color-white);
+    --color-border: var(--theme-color-gray-500);
+  }
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.5;
+  font-style: normal;
+  margin: 1rem 0;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+h5 {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+h6 {
+  font-size: 2rem;
+}
+
+p,
+span {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+small {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+[data-caption] {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-align: start;
+  color: var(--color-accent);
+  width: 100%;
+}

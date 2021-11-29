@@ -1,12 +1,13 @@
 {
   "private": true,
-  "name": "remix-app-template",
-  "description": "",
+  "name": "guptasiddhant-com",
+  "description": "Personal website of Siddhant Gupta, build with Remix.",
   "license": "",
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "postinstall": "remix setup node"
+    "postinstall": "remix setup node",
+    "clear": "rm -rf api/build; rm -rf public/build; rm -rf .cache"
   },
   "dependencies": {
     "@remix-run/react": "^1.0.6",
@@ -21,7 +22,7 @@
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "prettier": "^2.5.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.5.0"
   },
   "engines": {
     "node": ">=14"
