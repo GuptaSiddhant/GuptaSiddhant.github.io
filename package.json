@@ -4,8 +4,10 @@
   "description": "Personal website of Siddhant Gupta, build with Remix.",
   "license": "",
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev",
+    "build": "npm run build:css && remix build",
+    "build:css": "tailwindcss -i ./styles/tailwind.css -o ./app/styles/styles.css",
+    "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
+    "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./app/styles/styles.css --watch",
     "postinstall": "remix setup node",
     "clear": "rm -rf api/build; rm -rf public/build; rm -rf .cache"
   },
@@ -21,7 +23,12 @@
     "@remix-run/dev": "^1.0.6",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
+    "@types/tailwindcss": "^2.2.4",
+    "concurrently": "^6.4.0",
+    "eslint": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "prettier": "^2.5.0",
+    "tailwindcss": "^2.2.19",
     "typescript": "^4.5.0"
   },
   "engines": {

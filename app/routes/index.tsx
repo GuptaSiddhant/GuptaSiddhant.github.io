@@ -1,29 +1,35 @@
-import {
-  // useLoaderData,
-  // json,
-  // Link,
-  type MetaFunction,
-  // type LoaderFunction,
-} from "remix";
+import { type MetaFunction } from "remix"
 
-// https://remix.run/api/conventions#meta
 export let meta: MetaFunction = () => {
   return {
     title: "Siddhant Gupta",
     description: "Home of Siddhant Gupta!",
-  };
-};
+  }
+}
 
-// https://remix.run/guides/routing#index-routes
+const sectionItemClassName = "w-full md:w-4/6 xl:w-1/2"
+
 export default function Index() {
-  // let data = useLoaderData<IndexData>();
-
   return (
-    <div className="remix__page">
-      <main>
-        <p data-caption>{"Frontend & ui developer"}</p>
-        <h1>I bring designs to life on your screen.</h1>
-      </main>
-    </div>
-  );
+    <main>
+      <section className="my-10">
+        <h1 className={sectionItemClassName}>
+          I bring designs to life on your screen.
+        </h1>
+        <p className={sectionItemClassName}>
+          I am a <em>full-stack developer</em> with a drive for creating
+          beautiful web and mobile applications.
+          <br />
+          Stack: React, React Native, TypeScript, Node.js and Figma.
+        </p>
+        <p className={sectionItemClassName}>
+          Currently applying my skills at{" "}
+          <a href="https://www.accenture.com/fi-en" target="_blank">
+            Accenture Finland
+          </a>
+          .
+        </p>
+      </section>
+    </main>
+  )
 }
