@@ -18,6 +18,7 @@ import styles from "./styles/styles.css"
 // https://remix.run/api/app#links
 export const links: LinksFunction = () => {
   return [
+    { rel: "preconnect", href: "https://cdn.sanity.io/" },
     {
       rel: "preload",
       as: "font",
@@ -54,7 +55,6 @@ export const meta: MetaFunction = () => {
     "apple-mobile-web-app-title": title,
     "application-name": title,
     "msapplication-TileColor": "#603cba",
-    "theme-color": "#ffffff",
   }
 }
 
@@ -115,7 +115,7 @@ export function CatchBoundary() {
 
 function Document({
   children,
-  title,
+  title = "Siddhant Gupta",
   name = "Siddhant Gupta",
 }: {
   children: React.ReactNode
@@ -127,7 +127,17 @@ function Document({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {title ? <title>{title}</title> : null}
+        <meta
+          name="theme-color"
+          content="#F9FAFB"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#111827"
+          media="(prefers-color-scheme: dark)"
+        />
+        <title>{title}</title>
         <Meta />
         <Links />
       </head>

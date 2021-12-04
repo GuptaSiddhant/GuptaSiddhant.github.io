@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { Link, NavLink } from "remix"
 
 import Icon from "~/components/Icon"
@@ -8,27 +9,22 @@ interface HeaderProps extends RootData {}
 const navLinks = [
   // {
   //   to: "/about",
-  //   className: navLinkClassName,
   //   children: "About",
   // },
   {
+    to: "/projects",
+    children: "Projects",
+  },
+  {
     to: "/career",
-    className: navLinkClassName,
     children: "Career",
   },
   {
     to: "/education",
-    className: navLinkClassName,
     children: "Education",
   },
   {
-    to: "/projects",
-    className: navLinkClassName,
-    children: "Projects",
-  },
-  {
     to: "/blog",
-    className: navLinkClassName,
     children: "Blog",
   },
 ]
@@ -46,22 +42,38 @@ const socialLinks = [
 
 export default function Header({ name }: HeaderProps): JSX.Element {
   return (
-    <header className="x-container flex flex-row justify-between items-center">
+    <header className="x-container flex flex-row justify-between items-baseline">
       <Link
         to="/"
         title={name}
-        className="hover:no-underline font-bold text-3xl leading-normal text-gray-900 dark:text-white my-5 border-0"
+        data-customColor
+        data-customBorder
+        className="font-bold text-xl leading-normal text-gray-900 dark:text-white my-5 border-0 select-none"
       >
         {name}
       </Link>
 
       <nav aria-label="Main navigation">
         <ul className="flex text-lg font-normal gap-8 items-center justify-end">
-          {navLinks.map((link) => (
-            <li key={link.to} className="hidden lg:block">
-              <NavLink {...link} />
-            </li>
-          ))}
+          {navLinks.map(({ to, children }) => {
+            return (
+              <li key={to} className="hidden lg:block select-none">
+                <NavLink
+                  to={to}
+                  className={({ isActive }) =>
+                    clsx(
+                      isActive
+                        ? "text-blue-900 dark:text-blue-50"
+                        : "text-blue-700 dark:text-blue-300",
+                    )
+                  }
+                  data-customColor
+                >
+                  {children}
+                </NavLink>
+              </li>
+            )
+          })}
           {socialLinks.map((link) => (
             <li key={link.href}>
               <a target="_blank" {...link} />
@@ -71,8 +83,4 @@ export default function Header({ name }: HeaderProps): JSX.Element {
       </nav>
     </header>
   )
-}
-
-function navLinkClassName({ isActive }: { isActive: boolean }) {
-  return [isActive ? "text-white" : ""].join(" ")
 }

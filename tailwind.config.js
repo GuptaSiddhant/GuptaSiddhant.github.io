@@ -1,4 +1,4 @@
-const defaultTheme = require("tailwindcss/defaultTheme")
+const colors = require("tailwindcss/colors")
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
@@ -11,12 +11,14 @@ module.exports = {
       serif: ["Nunito", "serif"],
       monospace: ["Fira Code", "Menlo", "monospace"],
     },
-    screens: {
-      none: "0px",
-      ...defaultTheme.screens,
-    },
     extend: {
-      colors: { transparent: "transparent", current: "currentColor" },
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        gray: colors.coolGray,
+        blue: colors.sky,
+        red: colors.rose,
+      },
     },
   },
   variants: {},
