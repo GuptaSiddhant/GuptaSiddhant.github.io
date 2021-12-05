@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { Link, NavLink } from "remix"
+import { Link, NavLink, type NavLinkProps } from "remix"
 
 import Icon from "~/components/Icon"
 import type { RootData } from "~/types"
@@ -7,26 +7,11 @@ import type { RootData } from "~/types"
 interface HeaderProps extends RootData {}
 
 const navLinks = [
-  // {
-  //   to: "/about",
-  //   children: "About",
-  // },
-  {
-    to: "/projects",
-    children: "Projects",
-  },
-  {
-    to: "/career",
-    children: "Career",
-  },
-  {
-    to: "/education",
-    children: "Education",
-  },
-  {
-    to: "/blog",
-    children: "Blog",
-  },
+  { to: "/about", children: "About" },
+  { to: "/projects", children: "Projects" },
+  // { to: "/career", children: "Career" },
+  // { to: "/education", children: "Education" },
+  { to: "/blog", children: "Blog" },
 ]
 
 const socialLinks = [
@@ -42,35 +27,15 @@ const socialLinks = [
 
 export default function Header({ name }: HeaderProps): JSX.Element {
   return (
-    <header className="x-container flex flex-row justify-between items-baseline">
-      <Link
-        to="/"
-        title={name}
-        data-customColor
-        data-customBorder
-        className="font-bold text-xl leading-normal text-gray-900 dark:text-white my-5 border-0 select-none"
-      >
-        {name}
-      </Link>
+    <header className="x-container flex flex-row justify-between items-center sticky top-0 bg-gray-50 dark:bg-gray-900 z-50">
+      <Logo name={name} />
 
       <nav aria-label="Main navigation">
         <ul className="flex text-lg font-normal gap-8 items-center justify-end">
-          {navLinks.map(({ to, children }) => {
+          {navLinks.map((link) => {
             return (
-              <li key={to} className="hidden lg:block select-none">
-                <NavLink
-                  to={to}
-                  className={({ isActive }) =>
-                    clsx(
-                      isActive
-                        ? "text-blue-900 dark:text-blue-50"
-                        : "text-blue-700 dark:text-blue-300",
-                    )
-                  }
-                  data-customColor
-                >
-                  {children}
-                </NavLink>
+              <li key={link.to} className="hidden sm:block select-none">
+                <RouteLink {...link} />
               </li>
             )
           })}
@@ -82,5 +47,38 @@ export default function Header({ name }: HeaderProps): JSX.Element {
         </ul>
       </nav>
     </header>
+  )
+}
+
+function Logo({ name }: HeaderProps): JSX.Element {
+  return (
+    <Link
+      to="/"
+      title={name}
+      data-custom-color
+      data-custom-border
+      className="font-bold text-xl leading-normal text-gray-900 dark:text-white my-5 border-0 select-none"
+    >
+      {name}
+    </Link>
+  )
+}
+
+function RouteLink({ to, children }: NavLinkProps): JSX.Element {
+  return (
+    <NavLink
+      to={to}
+      prefetch="intent"
+      data-custom-color
+      className={({ isActive }) =>
+        clsx(
+          isActive
+            ? "text-blue-900 dark:text-blue-50"
+            : "text-blue-700 dark:text-blue-300",
+        )
+      }
+    >
+      {children}
+    </NavLink>
   )
 }

@@ -12,7 +12,7 @@ export let meta: MetaFunction = () => {
 export default function Index() {
   return (
     <main>
-      <section className="flex my-10 items-center gap-10">
+      <section className="flex items-center gap-10">
         <div className="w-full md:w-2/3 xl:w-1/2">
           <h1 className="mb-10">I bring designs to life on your screen...</h1>
           <p>

@@ -50,11 +50,11 @@
     @apply text-base;
   }
 
-  a:not([data-customColor]) {
+  a:not([data-custom-color]) {
     @apply text-blue-700 dark:text-blue-300;
     @apply hover:text-blue-800 dark:hover:text-blue-200;
   }
-  a:not([data-customBorder]) {
+  a:not([data-custom-border]) {
     @apply border-b-2 border-transparent;
     @apply hover:border-current;
   }
@@ -69,7 +69,7 @@
 /* Layout */
 @layer base {
   .x-container {
-    @apply mx-8 md:mx-12 lg:mx-16 xl:mx-20;
+    @apply px-8 md:px-12 lg:px-16 xl:px-20;
   }
 
   main {

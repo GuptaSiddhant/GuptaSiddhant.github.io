@@ -3,6 +3,7 @@ export interface RootData {
 }
 
 export interface ProjectType extends Common, DateTime {
+  _id: string
   title: string
   association: string
   logoUrl?: string
