@@ -12,25 +12,35 @@
     "clear": "rm -rf api/build; rm -rf public/build; rm -rf .cache"
   },
   "dependencies": {
+    "@mdx-js/mdx": "^2.0.0-rc.2",
     "@react-aria/interactions": "^3.7.0",
     "@remix-run/react": "^1.0.6",
     "@remix-run/serve": "^1.0.6",
     "@remix-run/vercel": "^1.0.6",
-    "@sanity/block-content-to-react": "^3.0.0",
     "clsx": "^1.1.1",
+    "dompurify": "^2.3.3",
+    "gray-matter": "^4.0.3",
+    "marked": "^4.0.6",
+    "marked-react": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix": "^1.0.6"
+    "react-markdown": "^7.1.1",
+    "remix": "^1.0.6",
+    "sanitize-html": "^2.6.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.0.6",
+    "@types/dompurify": "^2.3.1",
+    "@types/marked": "^4.0.1",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
+    "@types/sanitize-html": "^2.6.0",
     "@types/tailwindcss": "^2.2.4",
     "concurrently": "^6.4.0",
     "eslint": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "prettier": "^2.5.0",
+    "prettier-plugin-groq": "^0.2.5",
     "tailwindcss": "^2.2.19",
     "typescript": "^4.5.0"
   },

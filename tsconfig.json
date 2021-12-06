@@ -8,8 +8,10 @@
     "resolveJsonModule": true,
     "target": "ES2019",
     "strict": true,
+    "module": "esnext",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "contents/*": ["./contents/*"]
     },
 
     // Remix takes care of building everything in `remix build`.

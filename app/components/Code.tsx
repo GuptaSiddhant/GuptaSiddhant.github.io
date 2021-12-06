@@ -20,11 +20,10 @@ export default function Code({
     <pre
       className={clsx(
         className,
-        "bg-gray-200 dark:bg-black",
-        "text-gray-800 dark:text-gray-200",
-
+        "bg-depth",
+        "text-secondary",
         "p-4",
-        "-m-4",
+        "-mx-4",
         "rounded-xl",
         "whitespace-pre-wrap",
         ".w-full-plus-2rem",
@@ -38,7 +37,7 @@ export default function Code({
               .map((line, i) => (
                 <Line
                   noSpace={noSpace}
-                  hideLineNumber={!hideLineNumbers}
+                  hideLineNumber={hideLineNumbers}
                   key={i}
                   children={line}
                 />
@@ -58,15 +57,11 @@ function Comment({ children }: { children: string }) {
     <div
       data-content="#"
       className={clsx(
+        "code-line",
         "select-none",
         "whitespace-normal",
-        "text-gray-500",
-        "before:content-[attr(data-content)]",
-        "before:select-none",
-        "before:mr-2",
-        "ml-5",
+        "text-disabled",
       )}
-      style={{ textIndent: "-1.25rem" }}
     >
       {children}
     </div>
@@ -75,19 +70,7 @@ function Comment({ children }: { children: string }) {
 
 function Command({ children }: { children: string }) {
   return (
-    <code
-      data-content="$"
-      className={clsx(
-        "block",
-        "ml-5",
-        "break-all",
-        "before:content-[attr(data-content)]",
-        "before:text-gray-500",
-        "before:select-none",
-        "before:mr-2",
-      )}
-      style={{ textIndent: "-1.25rem" }}
-    >
+    <code className={clsx("code-line", "break-all")} data-content="$">
       {children}
     </code>
   )
@@ -97,23 +80,22 @@ function Line({
   children,
   hideLineNumber,
   noSpace,
+  className,
 }: {
   children: string
   hideLineNumber?: boolean
   noSpace?: boolean
+  className?: string
 }) {
   return (
     <span
       className={clsx(
-        "block",
-        noSpace ? "" : "ml-5",
-        hideLineNumber && "before:content-[counter(line)]",
-        hideLineNumber && "before:text-gray-500",
-        hideLineNumber && "before:mr-2",
-        hideLineNumber && "before:select-none",
+        !hideLineNumber && "code-line",
+        !hideLineNumber && "before:content-[counter(line)]",
+        noSpace && "ml-0",
+        className,
       )}
       style={{
-        textIndent: hideLineNumber ? "-1.25rem" : "",
         counterIncrement: "line",
       }}
     >

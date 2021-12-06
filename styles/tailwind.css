@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme */
+@layer utilities {
+  .text-primary {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+  .text-secondary {
+    @apply text-gray-800 dark:text-gray-200;
+  }
+  .text-tertiary {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+  .text-disabled {
+    @apply text-gray-500;
+  }
+  .text-link {
+    @apply text-blue-700 dark:text-blue-300;
+  }
+  .text-link:hover {
+    @apply text-blue-800 dark:text-blue-200;
+  }
+  .text-link-active {
+    @apply text-blue-900 dark:text-blue-50;
+  }
+  .bg-base {
+    @apply bg-gray-50 dark:bg-gray-900;
+  }
+  .bg-hover {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  .bg-depth {
+    @apply bg-gray-200 dark:bg-black;
+  }
+}
+
 /* Typography */
 @layer base {
   html {
@@ -19,40 +53,39 @@
   }
 
   body {
-    @apply bg-gray-50 dark:bg-gray-900;
-    @apply text-gray-800 dark:text-gray-200;
+    @apply bg-base;
+    @apply text-secondary;
     @apply min-h-screen w-screen;
     @apply flex flex-col;
   }
 
   h1 {
-    @apply font-bold text-7xl leading-tight my-4 text-gray-900 dark:text-gray-100;
+    @apply font-bold text-6xl leading-tight my-4 text-primary;
   }
   h2 {
-    @apply font-bold text-6xl leading-tight my-4;
+    @apply font-bold text-5xl leading-tight my-4;
   }
   h3 {
-    @apply font-bold text-5xl leading-snug my-4;
-  }
-  h4 {
     @apply font-bold text-4xl leading-snug my-4;
   }
-  h5 {
-    @apply font-bold text-3xl leading-normal my-4;
+  h4 {
+    @apply font-bold text-3xl leading-snug my-4;
   }
-  h6 {
+  h5 {
     @apply font-bold text-2xl leading-normal my-4;
   }
+  h6 {
+    @apply font-bold text-xl leading-normal my-4;
+  }
   p {
-    @apply text-lg leading-normal my-4 text-gray-700 dark:text-gray-300;
+    @apply text-lg leading-normal my-4 text-tertiary;
   }
   small {
     @apply text-base;
   }
 
   a:not([data-custom-color]) {
-    @apply text-blue-700 dark:text-blue-300;
-    @apply hover:text-blue-800 dark:hover:text-blue-200;
+    @apply text-link;
   }
   a:not([data-custom-border]) {
     @apply border-b-2 border-transparent;
@@ -67,7 +100,7 @@
 }
 
 /* Layout */
-@layer base {
+@layer utilities {
   .x-container {
     @apply px-8 md:px-12 lg:px-16 xl:px-20;
   }
@@ -78,6 +111,12 @@
 
   .h-screen-50 {
     height: 50vh;
+  }
+  .max-h-screen-50 {
+    max-height: 50vh;
+  }
+  .min-h-card {
+    min-height: 25rem;
   }
   .h-screen-60 {
     height: 60vh;
@@ -90,5 +129,35 @@
   }
   .w-full-plus-2rem {
     width: calc(100% + 2rem);
+  }
+  .brightness-1000 {
+    --tw-brightness: brightness(1000);
+    filter: var(--tw-filter);
+  }
+  .white {
+    @apply brightness-0;
+  }
+  .black {
+    @apply brightness-1000;
+  }
+  .left-1-6 {
+    left: calc(1 / 6 * 100% - 1px);
+  }
+  .scale-102 {
+    transform: scale(1.025);
+  }
+}
+
+@layer components {
+  .code-line {
+    text-indent: -1.25rem;
+    @apply block ml-5;
+  }
+
+  .code-line::before {
+    @apply text-disabled;
+    @apply mr-2;
+    @apply select-none;
+    content: attr(data-content);
   }
 }

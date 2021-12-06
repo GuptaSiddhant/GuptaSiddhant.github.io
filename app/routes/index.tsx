@@ -1,6 +1,7 @@
 import { type MetaFunction } from "remix"
 import heroImage from "~/assets/images/hero.png"
 import Code from "~/components/Code"
+import Section from "~/layouts/Section"
 
 export let meta: MetaFunction = () => {
   return {
@@ -12,7 +13,7 @@ export let meta: MetaFunction = () => {
 export default function Index() {
   return (
     <main>
-      <section className="flex items-center gap-10">
+      <Section>
         <div className="w-full md:w-2/3 xl:w-1/2">
           <h1 className="mb-10">I bring designs to life on your screen...</h1>
           <p>
@@ -48,7 +49,7 @@ export default function Index() {
             className="object-fill"
           />
         </div>
-      </section>
+      </Section>
     </main>
   )
 }

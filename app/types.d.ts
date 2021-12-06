@@ -2,28 +2,28 @@ export interface RootData {
   name: string
 }
 
-export interface ProjectType extends Common, DateTime {
-  _id: string
+export type ProjectContent = Content<ProjectData>
+
+export interface Content<T extends object> {
+  id: string
+  path: string
+  data: T
+  content: string
+}
+
+export interface ContentCommon {
   title: string
-  association: string
-  logoUrl?: string
-  description?: any[]
-  gallery?: { url: string; caption: string }[]
+  dateStart: Date
+  dateEnd?: Date
+  draft?: boolean
+  featured?: boolean
 }
 
-export interface Common {
-  slug: { current: string }
-  tags: string[]
-  link?: string
-}
-
-export interface DateTime {
-  startDate: string
-  endDate?: string
-  isCurrent: boolean
-}
-
-export interface Location {
-  city: string
-  country: string
+export interface ProjectData extends ContentCommon {
+  subtitle?: string
+  description?: string
+  association?: string
+  tags?: string[]
+  icon?: { url: string; variant?: "light" | "dark" | "mixed" }
+  gallery?: { url: string; alt: string }[]
 }

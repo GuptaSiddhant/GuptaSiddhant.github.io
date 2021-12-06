@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { capitalize } from "~/helpers/utils"
 
 export default function Tag({ children }: { children: string }): JSX.Element {
   return (
@@ -10,7 +11,7 @@ export default function Tag({ children }: { children: string }): JSX.Element {
         "text-sm",
       )}
     >
-      {children}
+      {capitalize(children)}
     </div>
   )
 }
