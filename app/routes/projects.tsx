@@ -18,6 +18,7 @@ export default function Projects(): JSX.Element {
           "mx-auto my-4",
           "transition-all",
           "duration-500",
+          "x-container",
         )}
       >
         <NavLink

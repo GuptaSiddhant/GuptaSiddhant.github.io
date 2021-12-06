@@ -13,7 +13,7 @@ import {
 import Header from "~/layouts/Header"
 import Footer from "~/layouts/Footer"
 import fontStyles from "./styles/font.css"
-import styles from "./styles/styles.css"
+import tailwindStyles from "./styles/tailwind.css"
 
 // https://remix.run/api/app#links
 export const links: LinksFunction = () => {
@@ -26,7 +26,7 @@ export const links: LinksFunction = () => {
       crossOrigin: "anonymous",
     },
     { rel: "stylesheet", href: fontStyles },
-    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: tailwindStyles },
     {
       rel: "apple-touch-icon",
       sizes: "180x180",
@@ -75,7 +75,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Document title="Error!">
-      <main>
+      <main className="x-container">
         <h1>{"There was an error"}</h1>
         <p>{error.message}</p>
       </main>
@@ -97,7 +97,6 @@ export function CatchBoundary() {
       message =
         "Oops! Looks like you tried to visit a page that does not exist."
       break
-
     default:
       throw new Error(caught.data || caught.statusText)
   }
@@ -106,7 +105,7 @@ export function CatchBoundary() {
 
   return (
     <Document title={heading}>
-      <main>
+      <main className="x-container">
         <h1>{heading}</h1>
         <p>{message}</p>
       </main>

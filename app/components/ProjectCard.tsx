@@ -24,13 +24,13 @@ export default function Article({
       {...hoverProps}
       className={clsx(
         "relative",
-        "bg-hover hover:scale-102 hover:shadow-xl",
+        "bg-hover hover:shadow-xl",
         "rounded-2xl",
         "h-full overflow-hidden",
         "p-8",
         "flex flex-col justify-between",
         "transition-transform duration-300",
-        // "max-h-screen-50 min-h-card",
+        "hover:scale-102",
       )}
     >
       <div>
@@ -50,14 +50,21 @@ export default function Article({
       {showcaseImage ? (
         <div
           className={clsx(
-            "flex-1 rounded-lg bg-depth w-full overflow-hidden translate-y-10 shadow-sm dark:shadow-md",
+            "flex-1",
+            "rounded-lg",
+            "bg-depth",
+            "w-full",
+            "overflow-hidden",
+            "translate-y-10",
+            "shadow-sm",
+            "dark:shadow-md",
             "max-h-80",
           )}
         >
           <img
             src={showcaseImage}
             alt={showcaseImageCaption}
-            className="rounded-sm object-cover w-full h-full"
+            className={clsx("rounded-sm object-cover w-full h-full")}
           />
         </div>
       ) : null}

@@ -7,11 +7,11 @@ import type { RootData } from "~/types"
 interface HeaderProps extends RootData {}
 
 const navLinks = [
-  { to: "/about", children: "About" },
+  // { to: "/about", children: "About" },
   { to: "/projects", children: "Projects" },
   // { to: "/career", children: "Career" },
   // { to: "/education", children: "Education" },
-  { to: "/blog", children: "Blog" },
+  // { to: "/blog", children: "Blog" },
 ]
 
 const socialLinks = [

@@ -1,7 +1,16 @@
-import { type MetaFunction } from "remix"
+import {
+  Link,
+  useLoaderData,
+  type LoaderFunction,
+  type MetaFunction,
+} from "remix"
+
 import heroImage from "~/assets/images/hero.png"
-import Code from "~/components/Code"
 import Section from "~/layouts/Section"
+import Code from "~/components/Code"
+import { getAllProjects } from "~/helpers/projects"
+import type { ProjectContent } from "~/types"
+import ProjectGrid from "~/components/ProjectGrid"
 
 export let meta: MetaFunction = () => {
   return {
@@ -10,10 +19,20 @@ export let meta: MetaFunction = () => {
   }
 }
 
+export const loader: LoaderFunction = async () => {
+  const projects = (await getAllProjects()).filter(
+    (project) => project.data.featured,
+  )
+
+  return { projects }
+}
+
 export default function Index() {
+  const { projects } = useLoaderData<{ projects: ProjectContent[] }>()
+
   return (
     <main>
-      <Section>
+      <Section className="items-center py-16">
         <div className="w-full md:w-2/3 xl:w-1/2">
           <h1 className="mb-10">I bring designs to life on your screen...</h1>
           <p>
@@ -49,6 +68,13 @@ export default function Index() {
             className="object-fill"
           />
         </div>
+      </Section>
+      <Section className="flex-col bg-depth py-16">
+        <div className="flex gap-12 items-baseline">
+          <h2>Featured projects</h2>
+          <Link to="projects">View all projects</Link>
+        </div>
+        <ProjectGrid projects={projects} disabledFeatured />
       </Section>
     </main>
   )
