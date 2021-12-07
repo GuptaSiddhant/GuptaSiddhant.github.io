@@ -1,7 +1,7 @@
-import fs from "fs/promises"
 import { join } from "path"
 import matter from "gray-matter"
 import { ContentCommon } from "~/types"
+import { downloadDirList, downloadFile } from "./github.server"
 
 const CONTENT_PATH = "content"
 
@@ -26,31 +26,17 @@ export async function getMdxPagesInDirectory<T extends ContentCommon>(
 }
 
 export async function getMdxDirList(contentDir: string) {
-  const fullContentDirPath = join(CONTENT_PATH, contentDir)
-  return await readDirList(fullContentDirPath)
-}
+  const dirPath = join(CONTENT_PATH, contentDir)
+  const dirList = await downloadDirList(dirPath)
 
-async function readDirList(
-  dirPath: string,
-): Promise<{ id: string; path: string }[]> {
-  const dirContents = await fs.readdir(dirPath, {
-    withFileTypes: true,
-  })
-
-  return dirContents
-    .filter(({ name }) => name !== "README.md")
-    .map((file) => {
-      const path = `${dirPath}/${file.name}`
-
-      return {
-        id: path.replace(`${dirPath}/`, "").replace(/\.mdx$/, ""),
-        path: file.isFile() ? path : join(path, "index.mdx"),
-      }
-    })
+  return dirList.map(({ name, path }) => ({
+    id: name.replace(/\.mdx$/, ""),
+    path,
+  }))
 }
 
 async function readMdxFile(path: string): Promise<string> {
-  return await fs.readFile(path, "utf8")
+  return await downloadFile(path)
 }
 
 async function compileMdxPage<FM extends ContentCommon>(

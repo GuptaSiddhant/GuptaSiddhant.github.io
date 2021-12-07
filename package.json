@@ -8,13 +8,14 @@
     "build:remix": "remix build",
     "build:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:remix\"",
-    "dev:remix": "remix dev",
+    "dev:remix": "node -r dotenv/config node_modules/.bin/remix dev",
     "dev:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --watch",
     "postinstall": "remix setup node",
     "clear": "rm -rf api/build; rm -rf public/build; rm -rf .cache"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.0.0-rc.2",
+    "@octokit/plugin-throttling": "^3.5.2",
     "@octokit/rest": "^18.12.0",
     "@react-aria/interactions": "^3.7.0",
     "@remix-run/react": "^1.0.6",
@@ -22,6 +23,7 @@
     "@remix-run/vercel": "^1.0.6",
     "clsx": "^1.1.1",
     "dompurify": "^2.3.3",
+    "dotenv": "^10.0.0",
     "gray-matter": "^4.0.3",
     "marked": "^4.0.6",
     "marked-react": "^1.0.0",
