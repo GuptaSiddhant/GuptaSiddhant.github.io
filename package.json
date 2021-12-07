@@ -8,7 +8,7 @@
     "build:remix": "remix build",
     "build:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:remix\"",
-    "dev:remix": "NODE_ENV=production remix dev",
+    "dev:remix": "remix dev",
     "dev:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --watch",
     "postinstall": "remix setup node",
     "clear": "rm -rf api/build; rm -rf public/build; rm -rf .cache"

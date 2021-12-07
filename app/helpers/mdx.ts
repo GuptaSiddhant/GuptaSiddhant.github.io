@@ -9,11 +9,6 @@ export async function getMdxPage<T extends ContentCommon>(
   path: string,
   id: string,
 ) {
-  try {
-    const mod = await import(path)
-    console.log(mod)
-  } catch (error: unknown) {}
-
   const page = await readMdxFile(path)
 
   return { ...(await compileMdxPage<T>(page, id)), path }
@@ -32,8 +27,9 @@ export async function getMdxPagesInDirectory<T extends ContentCommon>(
 
 export async function getMdxDirList(contentDir: string) {
   const fullContentDirPath = join(
-    process.cwd(),
-    "app",
+    __dirname,
+    "..",
+    "..",
     CONTENT_PATH,
     contentDir,
   )
