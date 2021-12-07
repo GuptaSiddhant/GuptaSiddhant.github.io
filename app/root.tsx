@@ -18,7 +18,7 @@ import tailwindStyles from "./styles/tailwind.css"
 // https://remix.run/api/app#links
 export const links: LinksFunction = () => {
   return [
-    { rel: "preconnect", href: "https://cdn.sanity.io/" },
+    // { rel: "preconnect", href: "https://cdn.sanity.io/" },
     {
       rel: "preload",
       as: "font",
