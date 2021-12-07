@@ -16,6 +16,7 @@ export default function ProjectGrid({
   return (
     <ul
       className={clsx(
+        "h-full",
         "grid gap-8 grid-flow-row-dense",
         "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
         className,

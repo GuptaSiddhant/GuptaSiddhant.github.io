@@ -9,6 +9,7 @@ export default function Tag({ children }: { children: string }): JSX.Element {
         "border-2 border-blue-300 dark:border-blue-700",
         "hover:bg-blue-200 dark:hover:bg-blue-900",
         "text-sm",
+        "select-none cursor-default",
       )}
     >
       {capitalize(children)}

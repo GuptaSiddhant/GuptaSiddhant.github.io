@@ -1,5 +1,10 @@
 import { Children, type ReactNode } from "react"
+import { usePress } from "@react-aria/interactions"
 import clsx from "clsx"
+import useCopy from "use-copy"
+
+import Icon from "./Icon"
+import Tooltip, { useTooltip } from "./Tooltip"
 
 export interface CodeProps {
   className?: string
@@ -69,9 +74,38 @@ function Comment({ children }: { children: string }) {
 }
 
 function Command({ children }: { children: string }) {
+  const [copied, copy, setCopied] = useCopy(children)
+  const { triggerProps, tooltipProps, ref } = useTooltip<HTMLDivElement>({
+    delay: 0,
+  })
+
+  const handleCopy = () => {
+    copy()
+    setTimeout(() => setCopied(false), 3000)
+  }
+  const { pressProps } = usePress({ onPress: handleCopy })
+
   return (
-    <code className={clsx("code-line", "break-all")} data-content="$">
+    <code
+      className={clsx("code-line", "break-all", "relative")}
+      data-content="$"
+    >
       {children}
+
+      <div
+        className={clsx(
+          "absolute right-0 bottom-0",
+          "cursor-pointer",
+          tooltipProps.state.isOpen ? "opacity-100" : "opacity-50",
+        )}
+        ref={ref}
+        {...triggerProps}
+        {...pressProps}
+        tabIndex={0}
+      >
+        <Icon title="Copy" name={copied ? "check" : "copy"} />
+        <Tooltip {...tooltipProps}>{copied ? "Copied!" : "Copy"}</Tooltip>
+      </div>
     </code>
   )
 }

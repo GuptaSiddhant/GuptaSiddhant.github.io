@@ -74,7 +74,9 @@ export default function Index() {
           <h2>Featured projects</h2>
           <Link to="projects">View all projects</Link>
         </div>
-        <ProjectGrid projects={projects} disabledFeatured />
+        <div>
+          <ProjectGrid projects={projects} disabledFeatured />
+        </div>
       </Section>
     </main>
   )

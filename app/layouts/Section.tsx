@@ -5,5 +5,7 @@ export default function Section({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>): JSX.Element {
-  return <section {...props} className={clsx("flex gap-10 ", className)} />
+  return (
+    <section {...props} className={clsx("flex gap-10 relative", className)} />
+  )
 }
