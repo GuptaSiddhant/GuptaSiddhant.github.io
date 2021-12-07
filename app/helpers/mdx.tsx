@@ -26,7 +26,7 @@ export async function getMdxPagesInDirectory<T extends ContentCommon>(
 }
 
 export async function getMdxDirList(contentDir: string) {
-  const fullContentDirPath = join(CONTENT_PATH, contentDir)
+  const fullContentDirPath = join(process.cwd(), CONTENT_PATH, contentDir)
   return await readDirList(fullContentDirPath)
 }
 
