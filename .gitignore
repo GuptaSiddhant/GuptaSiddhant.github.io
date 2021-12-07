@@ -18,3 +18,5 @@ public/build
 api/build
 
 /app/styles/tailwind.css
+
+.env

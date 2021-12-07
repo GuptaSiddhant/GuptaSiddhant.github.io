@@ -1,9 +1,12 @@
 import { getMdxPagesInDirectory, getMdxPage, getMdxDirList } from "./mdx"
 import type { ProjectContent, ProjectData } from "~/types"
 import { sortByDate } from "./utils"
+import { downloadDirList } from "./github.server"
 
 export async function getAllProjects(): Promise<ProjectContent[]> {
   const projects = await getMdxPagesInDirectory<ProjectData>("projects")
+
+  console.log(await downloadDirList("content/projects"))
 
   return projects.sort((a, b) => sortByDate(a.data.dateEnd, b.data.dateEnd))
 }
