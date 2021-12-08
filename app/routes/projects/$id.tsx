@@ -3,6 +3,7 @@ import { useLoaderData, type LoaderFunction, type MetaFunction } from "remix"
 import { getProjectById } from "~/helpers/projects"
 import Markdown from "~/components/Markdown"
 import type { ProjectContent } from "~/types"
+import clsx from "clsx"
 
 export const meta: MetaFunction = () => {
   return {
@@ -27,15 +28,21 @@ export default function Projects(): JSX.Element {
 
   return (
     <section>
-      <h1 className="xl:w-2/3 mx-auto">{title}</h1>
-      <div className="rounded-lg bg-depth p-2 h-screen-50 overflow-hidden xl:w-10/12 mx-auto">
-        <img
-          src={showcaseImage}
-          alt={title}
-          className="rounded-sm object-cover w-full h-full"
-        />
+      <h1 className="content">{title}</h1>
+      <div
+        className={clsx(
+          "rounded-xl",
+          "bg-depth",
+          "border-8 border-depth",
+          "min-h-screen-50",
+          "overflow-hidden",
+          "xl:w-10/12",
+          "mx-auto",
+        )}
+      >
+        <img src={showcaseImage} alt={title} className="img-cover" />
       </div>
-      <div className="xl:w-2/3 mx-auto">
+      <div className="content">
         <Markdown value={content} />
       </div>
     </section>

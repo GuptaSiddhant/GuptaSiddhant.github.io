@@ -34,6 +34,9 @@
   .bg-depth {
     @apply bg-gray-200 dark:bg-black;
   }
+  .border-depth {
+    @apply border-gray-200 dark:border-black;
+  }
 }
 
 /* Typography */
@@ -101,20 +104,24 @@
 
 /* Layout */
 @layer utilities {
-  .x-container {
+  .container-mx {
     @apply px-8 md:px-12 lg:px-16 xl:px-20;
   }
-
   main {
     @apply flex-1;
   }
-
   section {
-    @apply x-container;
+    @apply container-mx;
+  }
+  .content {
+    @apply xl:w-2/3 mx-auto;
   }
 
   .h-screen-50 {
     height: 50vh;
+  }
+  .min-h-screen-50 {
+    min-height: 50vh;
   }
   .max-h-screen-50 {
     max-height: 50vh;
@@ -145,7 +152,8 @@
     @apply brightness-1000;
   }
   .left-1-6 {
-    left: calc(1 / 6 * 100% - 1px);
+    /* subtract container-mx width */
+    left: calc((100vw - 10rem) / 6);
   }
   .scale-102 {
     transform: scale(1.025);
@@ -163,5 +171,9 @@
     @apply mr-2;
     @apply select-none;
     content: attr(data-content);
+  }
+
+  .img-cover {
+    @apply object-cover w-full h-full;
   }
 }

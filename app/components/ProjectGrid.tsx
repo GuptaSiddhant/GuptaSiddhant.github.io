@@ -35,7 +35,11 @@ export default function ProjectGrid({
             className={clsx("h-full", featured && "sm:col-span-2")}
           >
             {project.content ? (
-              <Link data-custom-color prefetch="intent" to={project.id}>
+              <Link
+                data-custom-color
+                prefetch="intent"
+                to={`/projects/${project.id}`}
+              >
                 {card}
               </Link>
             ) : (

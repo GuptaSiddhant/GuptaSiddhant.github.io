@@ -2,8 +2,9 @@ import { Children, type ReactNode } from "react"
 import { usePress } from "@react-aria/interactions"
 import clsx from "clsx"
 import useCopy from "use-copy"
+import CopyIcon from "remixicon-react/FileCopyLineIcon"
+import CheckIcon from "remixicon-react/CheckLineIcon"
 
-import Icon from "./Icon"
 import Tooltip, { useTooltip } from "./Tooltip"
 
 export interface CodeProps {
@@ -103,7 +104,12 @@ function Command({ children }: { children: string }) {
         {...pressProps}
         tabIndex={0}
       >
-        <Icon title="Copy" name={copied ? "check" : "copy"} />
+        {copied ? (
+          <CheckIcon aria-label="Copied" />
+        ) : (
+          <CopyIcon aria-label="Copy" />
+        )}
+
         <Tooltip {...tooltipProps}>{copied ? "Copied!" : "Copy"}</Tooltip>
       </div>
     </code>

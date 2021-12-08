@@ -1,7 +1,8 @@
 import clsx from "clsx"
 import { Link, NavLink, type NavLinkProps } from "remix"
+import GithubIcon from "remixicon-react/GithubFillIcon"
+import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 
-import Icon from "~/components/Icon"
 import type { RootData } from "~/types"
 
 interface HeaderProps extends RootData {}
@@ -17,17 +18,17 @@ const navLinks = [
 const socialLinks = [
   {
     href: "https://www.linkedin.com/in/guptasiddhant9",
-    children: <Icon name="linkedin" />,
+    children: <LinkedinIcon aria-label="LinkedIn" />,
   },
   {
     href: "https://github.com/guptasiddhant",
-    children: <Icon name="github" />,
+    children: <GithubIcon aria-label="GitHub" />,
   },
 ]
 
 export default function Header({ name }: HeaderProps): JSX.Element {
   return (
-    <header className="x-container flex flex-row justify-between items-center  top-0 bg-base z-50">
+    <header className="container-mx flex flex-row justify-between items-center  top-0 bg-base z-50">
       <Logo name={name} />
 
       <nav aria-label="Main navigation">

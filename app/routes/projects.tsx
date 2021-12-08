@@ -1,7 +1,6 @@
 import clsx from "clsx"
 import { NavLink, Outlet, useLocation } from "remix"
-
-import Icon from "~/components/Icon"
+import BackIcon from "remixicon-react/ArrowLeftLineIcon"
 
 export default function Projects(): JSX.Element {
   const { pathname } = useLocation()
@@ -18,7 +17,7 @@ export default function Projects(): JSX.Element {
           "mx-auto my-4",
           "transition-all",
           "duration-500",
-          "x-container",
+          "container-mx",
         )}
       >
         <NavLink
@@ -29,7 +28,11 @@ export default function Projects(): JSX.Element {
           className={clsx("font-bold", "flex items-center")}
         >
           {nested ? (
-            <Icon name="back" className="inline-block mr-4 scale-150" />
+            <BackIcon
+              aria-label="Back to all projects."
+              size="1em"
+              className="mr-4"
+            />
           ) : null}
           {title}
         </NavLink>

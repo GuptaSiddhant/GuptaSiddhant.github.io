@@ -51,7 +51,7 @@ export default function Article({
         <div
           className={clsx(
             "flex-1",
-            "rounded-lg",
+            "rounded",
             "bg-depth",
             "w-full",
             "overflow-hidden",
@@ -64,7 +64,7 @@ export default function Article({
           <img
             src={showcaseImage}
             alt={showcaseImageCaption}
-            className={clsx("rounded-sm object-cover w-full h-full")}
+            className={"img-cover"}
           />
         </div>
       ) : null}

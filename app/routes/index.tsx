@@ -69,7 +69,7 @@ export default function Index() {
           />
         </div>
       </Section>
-      <Section className="flex-col bg-depth py-16">
+      <Section className="flex-col bg-depth p-16">
         <div className="flex gap-12 items-baseline">
           <h2>Featured projects</h2>
           <Link to="projects">View all projects</Link>
