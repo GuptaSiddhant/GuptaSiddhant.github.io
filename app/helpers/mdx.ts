@@ -1,17 +1,36 @@
 import { join } from "path"
 import matter from "gray-matter"
-import { ContentCommon } from "~/types"
+
 import { downloadDirList, downloadFile } from "./github.server"
+import { readDirList, readFile } from "./content.local"
+import { getIdFromPath } from "./utils"
+import type { ContentCommon, PageContent } from "~/types"
+
+const __IS_DEV__ = process.env.NODE_ENV === "development"
 
 const CONTENT_PATH = "content"
+
+export async function getMdxDirList(contentDir: string) {
+  const dirPath = join(CONTENT_PATH, contentDir)
+  console.log(dirPath)
+  const dirList = __IS_DEV__
+    ? readDirList(dirPath)
+    : await downloadDirList(dirPath)
+
+  return dirList.map(({ name, path }) => ({
+    id: getIdFromPath(name),
+    path,
+  }))
+}
 
 export async function getMdxPage<T extends ContentCommon>(
   path: string,
   id: string,
-) {
-  const page = await readMdxFile(path)
+): Promise<PageContent<T>> {
+  const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
+  const { content, data } = matter(page)
 
-  return { ...(await compileMdxPage<T>(page, id)), path }
+  return { id, path, content, data: data as T }
 }
 
 export async function getMdxPagesInDirectory<T extends ContentCommon>(
@@ -22,37 +41,5 @@ export async function getMdxPagesInDirectory<T extends ContentCommon>(
     dirList.map(({ id, path }) => getMdxPage<T>(path, id)),
   )
 
-  return pages.filter((page) => !page.data.draft)
-}
-
-export async function getMdxDirList(contentDir: string) {
-  const dirPath = join(CONTENT_PATH, contentDir)
-  const dirList = await downloadDirList(dirPath)
-
-  return dirList.map(({ name, path }) => ({
-    id: name.replace(/\.mdx$/, ""),
-    path,
-  }))
-}
-
-async function readMdxFile(path: string): Promise<string> {
-  return await downloadFile(path)
-}
-
-async function compileMdxPage<FM extends ContentCommon>(
-  page: string,
-  id: string,
-) {
-  try {
-    const { data, content } = matter(page)
-
-    return {
-      id,
-      data: data as FM,
-      content,
-    }
-  } catch (error: unknown) {
-    console.error(`Compilation error for id: `, id)
-    throw error
-  }
+  return pages
 }

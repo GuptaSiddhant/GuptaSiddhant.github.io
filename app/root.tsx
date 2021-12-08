@@ -9,6 +9,7 @@ import {
   type LinksFunction,
   type MetaFunction,
 } from "remix"
+import { SSRProvider } from "@react-aria/ssr"
 
 import Header from "~/layouts/Header"
 import Footer from "~/layouts/Footer"
@@ -123,32 +124,34 @@ function Document({
   name?: string
 }) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta
-          name="theme-color"
-          content="#F9FAFB"
-          media="(prefers-color-scheme: light)"
-        />
-        <meta
-          name="theme-color"
-          content="#111827"
-          media="(prefers-color-scheme: dark)"
-        />
-        <title>{title}</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Header name={name} />
-        {children}
-        <Footer name={name} />
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
-      </body>
-    </html>
+    <SSRProvider>
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta
+            name="theme-color"
+            content="#F9FAFB"
+            media="(prefers-color-scheme: light)"
+          />
+          <meta
+            name="theme-color"
+            content="#111827"
+            media="(prefers-color-scheme: dark)"
+          />
+          <title>{title}</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <Header name={name} />
+          {children}
+          <Footer name={name} />
+          <ScrollRestoration />
+          <Scripts />
+          {process.env.NODE_ENV === "development" && <LiveReload />}
+        </body>
+      </html>
+    </SSRProvider>
   )
 }

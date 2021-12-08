@@ -1,6 +1,6 @@
 import { useLoaderData, type LoaderFunction, type MetaFunction } from "remix"
 
-import { getProject } from "~/helpers/projects"
+import { getProjectById } from "~/helpers/projects"
 import Markdown from "~/components/Markdown"
 import type { ProjectContent } from "~/types"
 
@@ -15,7 +15,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   const id = params.id
   if (!id) throw new Error("Project id is required.")
 
-  const project = await getProject(id)
+  const project = await getProjectById(id)
 
   return project
 }

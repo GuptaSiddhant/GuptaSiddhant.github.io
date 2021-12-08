@@ -84,21 +84,20 @@ function Icon({
   isHovered: boolean
 }): JSX.Element {
   return (
-    <img
-      style={{ height: "40px" }}
+    <div
       className={clsx(
-        "object-fit mb-4",
-        isHovered
-          ? variant === "light"
-            ? "black dark:filter-none"
-            : variant === "dark"
-            ? "dark:black"
-            : "filter-none"
-          : "white dark:black",
+        "w-10 h-10 rounded",
+        "mb-4",
+        "bg-base",
+        "overflow-hidden",
       )}
-      src={url}
-      alt={`${title}-icon`}
-    />
+    >
+      <img
+        className={clsx("h-full w-full object-fit")}
+        src={url}
+        alt={`${title}-icon`}
+      />
+    </div>
   )
 }
 
@@ -118,6 +117,7 @@ function Tape({
         "flex justify-center items-center",
         "font-bold",
         "shadow-md",
+        "select-none",
         variant === "yellow" && "bg-yellow-400 text-yellow-900",
         variant === "purple" && "bg-purple-300 text-purple-900",
         variant === "green" && "bg-green-300 text-green-900",

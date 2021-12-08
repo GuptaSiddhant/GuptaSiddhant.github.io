@@ -2,9 +2,9 @@ export interface RootData {
   name: string
 }
 
-export type ProjectContent = Content<ProjectData>
+export type ProjectContent = PageContent<ProjectData>
 
-export interface Content<T extends object> {
+export interface PageContent<T extends ContentCommon = ContentCommon> {
   id: string
   path: string
   data: T
