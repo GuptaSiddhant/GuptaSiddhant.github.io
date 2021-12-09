@@ -176,4 +176,8 @@
   .img-cover {
     @apply object-cover w-full h-full;
   }
+
+  hr {
+    @apply opacity-50;
+  }
 }

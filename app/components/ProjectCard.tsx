@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { useHover } from "@react-aria/interactions"
 import { type ReactNode } from "react"
 
-import Tag from "~/components/Tag"
+import Tag, { TagList } from "~/components/Tag"
 import type { ProjectData } from "~/types"
 
 export default function Article({
@@ -21,6 +21,7 @@ export default function Article({
 
   return (
     <article
+      tabIndex={0}
       {...hoverProps}
       className={clsx(
         "relative",
@@ -40,11 +41,13 @@ export default function Article({
           @ {association?.replace("-", " ")}
         </div>
         {tags.length ? (
-          <div className="flex flex-wrap gap-2 mt-4 mb-1">
+          <TagList aria-label="Tags">
             {tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
+              <Tag key={tag} value={tag} isDisabled>
+                {tag}
+              </Tag>
             ))}
-          </div>
+          </TagList>
         ) : null}
       </div>
       {showcaseImage ? (

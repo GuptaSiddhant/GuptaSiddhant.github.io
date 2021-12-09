@@ -13,7 +13,7 @@ export default function ProjectGrid({
   disabledFeatured?: boolean
   className?: string
 }) {
-  return (
+  return projects.length > 0 ? (
     <ul
       className={clsx(
         "h-full",
@@ -49,5 +49,10 @@ export default function ProjectGrid({
         )
       })}
     </ul>
+  ) : (
+    <div className="opacity-50">
+      <h1>No projects found.</h1>
+      <p>Maybe clearing filters might help.</p>
+    </div>
   )
 }
