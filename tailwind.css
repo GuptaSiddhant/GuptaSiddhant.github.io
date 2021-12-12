@@ -113,7 +113,7 @@
   section {
     @apply container-mx;
   }
-  .content {
+  .prose {
     @apply xl:w-2/3 mx-auto;
   }
 
@@ -164,19 +164,22 @@
 }
 
 @layer components {
-  .code-line {
-    text-indent: -1.25rem;
-    @apply block ml-5;
-  }
-
-  .code-line::before {
-    @apply text-disabled;
-    @apply mr-2;
-    @apply select-none;
-    content: attr(data-content);
-  }
-
   hr {
     @apply opacity-50;
+  }
+
+  dl {
+    @apply m-4;
+    @apply flex flex-wrap;
+    @apply gap-x-8 gap-y-4;
+    @apply justify-between;
+  }
+
+  dt {
+    @apply font-bold text-sm block;
+  }
+
+  dd {
+    @apply text-xl block;
   }
 }

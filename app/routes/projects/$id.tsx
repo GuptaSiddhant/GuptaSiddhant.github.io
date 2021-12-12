@@ -1,9 +1,16 @@
-import { useLoaderData, type LoaderFunction, type MetaFunction } from "remix"
+import {
+  redirect,
+  useLoaderData,
+  type LoaderFunction,
+  type MetaFunction,
+} from "remix"
+import clsx from "clsx"
 
 import { getProjectById } from "~/helpers/projects"
 import Markdown from "~/components/Markdown"
+import Image from "~/components/Image"
+import InfoBanner from "~/components/Info"
 import type { ProjectContent } from "~/types"
-import clsx from "clsx"
 
 export const meta: MetaFunction = () => {
   return {
@@ -18,6 +25,10 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const project = await getProjectById(id)
 
+  if (project.data.draft) {
+    return redirect(`..`)
+  }
+
   return project
 }
 
@@ -28,21 +39,22 @@ export default function Project(): JSX.Element {
 
   return (
     <section>
-      <h1 className="content">{title}</h1>
-      <div
-        className={clsx(
-          "rounded-xl",
-          "bg-depth",
-          "border-8 border-depth",
-          "min-h-screen-50",
-          "overflow-hidden",
-          "xl:w-10/12",
-          "mx-auto",
-        )}
-      >
-        <img src={showcaseImage} alt={title} className="img-cover" />
-      </div>
-      <div className="content">
+      <h1 className="prose">{title}</h1>
+      <InfoBanner data={data} className="prose" />
+      {showcaseImage ? (
+        <Image
+          src={showcaseImage}
+          alt={title}
+          className={clsx(
+            "rounded-xl",
+            "border-8 border-depth",
+            "-mx-4",
+            "aspect-w-16 aspect-h-9",
+          )}
+        />
+      ) : null}
+
+      <div className="prose">
         <Markdown value={content} />
       </div>
     </section>
@@ -54,7 +66,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <section>
-      <h1>{"There was an error"}</h1>
+      <h1>{"Error with the project"}</h1>
       <p>{error.message}</p>
     </section>
   )

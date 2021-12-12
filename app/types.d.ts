@@ -24,6 +24,6 @@ export interface ProjectData extends ContentCommon {
   description?: string
   association?: string
   tags?: string[]
-  icon?: { url: string; variant?: "light" | "dark" | "mixed" }
+  icon?: string
   gallery?: { url: string; alt: string }[]
 }

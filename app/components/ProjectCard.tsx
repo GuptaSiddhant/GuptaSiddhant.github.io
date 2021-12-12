@@ -25,7 +25,7 @@ export default function Article(project: ProjectData): JSX.Element {
       )}
     >
       <div>
-        {icon ? <Icon url={icon.url} title={title} /> : null}
+        {icon ? <Icon url={icon} title={title} /> : null}
         <div className="text-3xl font-bold">{title}</div>
         <div className="text-yellow-500 font-black uppercase">
           @ {association?.replace("-", " ")}

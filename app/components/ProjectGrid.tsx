@@ -24,21 +24,16 @@ export default function ProjectGrid({
     >
       {projects.map((project) => {
         const featured = !disabledFeatured && !!project.data.featured
-        const card = <ProjectCard {...project.data} featured={featured} />
 
         return (
           <li key={project.id} style={{ height: "500px" }}>
-            {project.content ? (
-              <Link
-                data-custom-color
-                prefetch="intent"
-                to={`/projects/${project.id}`}
-              >
-                {card}
-              </Link>
-            ) : (
-              card
-            )}
+            <Link
+              data-custom-color
+              prefetch="intent"
+              to={`/projects/${project.id}`}
+            >
+              <ProjectCard {...project.data} featured={featured} />
+            </Link>
           </li>
         )
       })}
