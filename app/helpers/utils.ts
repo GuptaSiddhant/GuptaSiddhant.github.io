@@ -23,5 +23,17 @@ export function sortPagesByDate(a: PageContent, b: PageContent) {
 }
 
 export function createDebugger(prefix: string) {
-  return (...args: any[]) => console.log(`[${prefix}]`, ...args)
+  const formattedPrefix = `[${prefix}]`
+  const log = (...args: any[]) => console.log(formattedPrefix, ...args)
+  const warn = (...args: any[]) => console.warn(formattedPrefix, ...args)
+  const error = (...args: any[]) => console.error(formattedPrefix, ...args)
+
+  function newDebugger(...args: any[]) {
+    log(...args)
+  }
+  newDebugger.log = log
+  newDebugger.warn = warn
+  newDebugger.error = error
+
+  return newDebugger
 }

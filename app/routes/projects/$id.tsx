@@ -21,7 +21,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   return project
 }
 
-export default function Projects(): JSX.Element {
+export default function Project(): JSX.Element {
   const { data, content } = useLoaderData<ProjectContent>()
   const { title, gallery = [] } = data
   const showcaseImage = gallery[0]?.url
@@ -45,6 +45,17 @@ export default function Projects(): JSX.Element {
       <div className="content">
         <Markdown value={content} />
       </div>
+    </section>
+  )
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error)
+
+  return (
+    <section>
+      <h1>{"There was an error"}</h1>
+      <p>{error.message}</p>
     </section>
   )
 }

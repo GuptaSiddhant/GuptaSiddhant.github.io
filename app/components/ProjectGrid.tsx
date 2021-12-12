@@ -23,17 +23,11 @@ export default function ProjectGrid({
       )}
     >
       {projects.map((project) => {
-        const featured =
-          !disabledFeatured &&
-          (!!project.data.featured || !project.data.dateEnd)
-
+        const featured = !disabledFeatured && !!project.data.featured
         const card = <ProjectCard {...project.data} featured={featured} />
 
         return (
-          <li
-            key={project.id}
-            className={clsx("h-full", featured && "sm:col-span-2")}
-          >
+          <li key={project.id} style={{ height: "500px" }}>
             {project.content ? (
               <Link
                 data-custom-color

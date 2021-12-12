@@ -7,7 +7,7 @@ import {
 
 import heroImage from "~/assets/images/hero.png"
 import Section from "~/layouts/Section"
-import Code from "~/components/Code"
+import CodeBlock from "~/components/CodeBlock"
 import { getAllProjects } from "~/helpers/projects"
 import type { ProjectContent } from "~/types"
 import ProjectGrid from "~/components/ProjectGrid"
@@ -26,6 +26,9 @@ export const loader: LoaderFunction = async () => {
 
   return { projects }
 }
+
+const code = `# An interactive resume for your terminal, made with React and ink. Run:
+npx guptasiddhant`
 
 export default function Index() {
   const { projects } = useLoaderData<{ projects: ProjectContent[] }>()
@@ -52,13 +55,7 @@ export default function Index() {
             ).
           </p>
           <div className="flex-auto my-12">
-            <Code>
-              <Code.Comment>
-                An interactive resume for your terminal, made with React and
-                ink. Run:
-              </Code.Comment>
-              <Code.Command>npx guptasiddhant</Code.Command>
-            </Code>
+            <CodeBlock lang="bash">{code}</CodeBlock>
           </div>
         </div>
         <div className="hidden xl:block">

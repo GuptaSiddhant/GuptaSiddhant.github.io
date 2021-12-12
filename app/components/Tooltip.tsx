@@ -24,16 +24,25 @@ export function useTooltip<T extends HTMLElement>(
   return { triggerProps, tooltipProps: { ...tooltipProps, state }, ref }
 }
 
-interface TooltipProps extends AriaTooltipProps {
+export interface TooltipProps extends AriaTooltipProps {
   children: ReactNode
   state: TooltipTriggerState
+  position?: "top" | "bottom" | "left" | "right"
 }
 
 export default function Tooltip({
   state,
+  position = "right",
   ...props
 }: TooltipProps): JSX.Element | null {
   const { tooltipProps } = useAriaTooltip(props, state)
+
+  const positionClassName = clsx(
+    position === "right" && "top-0 left-full",
+    position === "left" && "top-0 right-full",
+    position === "top" && "bottom-full left-0",
+    position === "bottom" && "top-full left-0",
+  )
 
   return state.isOpen ? (
     <div
@@ -42,8 +51,9 @@ export default function Tooltip({
         "bg-hover",
         "text-secondary",
         "py-1 px-2 rounded-md ml-2",
-        "absolute top-0 left-full",
+        "absolute",
         "min-w-max",
+        positionClassName,
       )}
       style={{ textIndent: 0 }}
     >

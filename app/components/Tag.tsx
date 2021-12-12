@@ -66,9 +66,14 @@ export default function Tag(
         "block",
         "py-1 px-2 rounded-lg",
         "border-2 border-blue-300 dark:border-blue-700",
-        "hover:bg-blue-200 dark:hover:bg-blue-900",
         "text-sm",
-        isDisabled ? "select-none cursor-default" : "cursor-pointer",
+        isDisabled
+          ? "cursor-default outline-none"
+          : clsx(
+              "hover:bg-blue-200 dark:hover:bg-blue-900",
+              "cursor-pointer",
+              "select-none",
+            ),
         isSelected && "bg-blue-300 dark:bg-blue-700",
       )}
       tabIndex={isDisabled ? -1 : 0}

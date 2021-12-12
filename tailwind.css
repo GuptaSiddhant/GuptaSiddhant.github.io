@@ -158,6 +158,9 @@
   .scale-102 {
     transform: scale(1.025);
   }
+  .bg-transparent-important {
+    @apply bg-transparent !important;
+  }
 }
 
 @layer components {
@@ -171,10 +174,6 @@
     @apply mr-2;
     @apply select-none;
     content: attr(data-content);
-  }
-
-  .img-cover {
-    @apply object-cover w-full h-full;
   }
 
   hr {

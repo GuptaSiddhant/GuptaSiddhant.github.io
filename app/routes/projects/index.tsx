@@ -46,13 +46,8 @@ export const loader: LoaderFunction = async ({ request }) => {
     : filteredProjects
 
   const allTags = [
-    ...new Set(
-      allProjects
-        .map((project) => project.data.tags || [])
-        .flat()
-        .sort(),
-    ),
-  ]
+    ...new Set(allProjects.map(({ data }) => data.tags || []).flat()),
+  ].slice(0, 10)
 
   return { tags: allTags, projects, selectedTags }
 }
@@ -65,32 +60,25 @@ export default function Projects(): JSX.Element {
     selectedTags: string[]
   }>()
 
-  // function handleSearchChange(event: FormEvent<HTMLFormElement>) {
-  //   submit(event.currentTarget, { replace: true })
-  // }
-
   function handleTagsChange(tags: string[]) {
     submit({ tags: tags.join(",") }, { replace: true })
   }
 
   return (
     <Section className="flex-col">
-      <Form>
-        {/* <input name="q" type="search" onChange={handleSearchChange} /> */}
-        {tags.length ? (
-          <TagList
-            label="Filter tags:"
-            onChange={handleTagsChange}
-            // value={selectedTags}
-          >
-            {tags.map((tag) => (
-              <Tag key={tag} value={tag}>
-                {tag}
-              </Tag>
-            ))}
-          </TagList>
-        ) : null}
-      </Form>
+      {tags.length ? (
+        <TagList
+          label="Filter tags:"
+          onChange={handleTagsChange}
+          value={selectedTags}
+        >
+          {tags.map((tag) => (
+            <Tag key={tag} value={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </TagList>
+      ) : null}
 
       <ProjectGrid projects={projects} />
     </Section>

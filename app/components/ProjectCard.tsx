@@ -1,107 +1,86 @@
 import clsx from "clsx"
-import { useHover } from "@react-aria/interactions"
 import { type ReactNode } from "react"
 
 import Tag, { TagList } from "~/components/Tag"
+import Image from "./Image"
 import type { ProjectData } from "~/types"
 
-export default function Article({
-  icon,
-  title,
-  association,
-  gallery = [],
-  tags = [],
-  dateEnd,
-  featured,
-}: ProjectData): JSX.Element {
-  const { isHovered, hoverProps } = useHover({})
-  const showcaseImage = gallery[0]?.url
-  const showcaseImageCaption = gallery[0]?.alt || title
+export default function Article(project: ProjectData): JSX.Element {
+  const { icon, title, association, tags, dateEnd, featured } = project
   const isCurrent = !dateEnd
 
   return (
     <article
       tabIndex={0}
-      {...hoverProps}
       className={clsx(
         "relative",
         "bg-hover hover:shadow-xl",
         "rounded-2xl",
-        "h-full overflow-hidden",
-        "p-8",
+        "overflow-hidden",
+        "h-full p-8",
         "flex flex-col justify-between",
         "transition-transform duration-300",
         "hover:scale-102",
+        "group",
       )}
     >
       <div>
-        {icon ? <Icon {...icon} isHovered={isHovered} title={title} /> : null}
+        {icon ? <Icon url={icon.url} title={title} /> : null}
         <div className="text-3xl font-bold">{title}</div>
         <div className="text-yellow-500 font-black uppercase">
           @ {association?.replace("-", " ")}
         </div>
-        {tags.length ? (
-          <TagList aria-label="Tags">
-            {tags.map((tag) => (
-              <Tag key={tag} value={tag} isDisabled>
-                {tag}
-              </Tag>
-            ))}
-          </TagList>
-        ) : null}
+        <Tags tags={tags} />
       </div>
-      {showcaseImage ? (
-        <div
-          className={clsx(
-            "flex-1",
-            "rounded",
-            "bg-depth",
-            "w-full",
-            "overflow-hidden",
-            "translate-y-10",
-            "shadow-sm",
-            "dark:shadow-md",
-            "max-h-80",
-          )}
-        >
-          <img
-            src={showcaseImage}
-            alt={showcaseImageCaption}
-            className={"img-cover"}
-          />
-        </div>
-      ) : null}
+      <ShowcaseImage {...project} />
       {featured ? <Tape variant="purple">Featured</Tape> : null}
       {isCurrent ? <Tape variant="green">Current</Tape> : null}
     </article>
   )
 }
 
-function Icon({
-  url,
-  title,
-  isHovered,
-  variant = "mixed",
-}: NonNullable<ProjectData["icon"]> & {
-  title: string
-  isHovered: boolean
-}): JSX.Element {
+function Tags({ tags = [] }: { tags?: string[] }): JSX.Element | null {
+  return tags.length ? (
+    <TagList aria-label="Tags">
+      {tags.sort().map((tag) => (
+        <Tag key={tag} value={tag} isDisabled>
+          {tag}
+        </Tag>
+      ))}
+    </TagList>
+  ) : null
+}
+
+function Icon({ url, title }: { url: string; title: string }): JSX.Element {
   return (
-    <div
-      className={clsx(
-        "w-10 h-10 rounded",
-        "mb-4",
-        "bg-base",
-        "overflow-hidden",
-      )}
-    >
-      <img
-        className={clsx("h-full w-full object-fit")}
-        src={url}
-        alt={`${title}-icon`}
-      />
-    </div>
+    <Image
+      src={url}
+      alt={`${title}-icon`}
+      className={"w-10 h-10 rounded mb-4"}
+    />
   )
+}
+
+function ShowcaseImage({
+  gallery = [],
+  title,
+}: ProjectData): JSX.Element | null {
+  const imageSrc = gallery[0]?.url
+  const imageAlt = gallery[0]?.alt || title
+  const className = clsx(
+    "flex-1",
+    "rounded",
+    "w-full",
+    "translate-y-10",
+    "shadow-sm",
+    "dark:shadow-md",
+    "max-h-80",
+    "bg-depth",
+  )
+
+  return imageSrc ? (
+    <Image src={imageSrc} alt={imageAlt} className={className} />
+  ) : null
 }
 
 function Tape({

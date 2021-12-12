@@ -28,6 +28,7 @@ export const links: LinksFunction = () => {
     },
     { rel: "stylesheet", href: fontStyles },
     { rel: "stylesheet", href: tailwindStyles },
+
     {
       rel: "apple-touch-icon",
       sizes: "180x180",
