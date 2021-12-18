@@ -4,7 +4,7 @@ import matter from "gray-matter"
 import { downloadDirList, downloadFile } from "./github.server"
 import { readDirList, readFile } from "./content.local"
 import { getIdFromPath } from "./utils"
-import type { ContentCommon, PageContent } from "~/types"
+import type { ContentCommonData, PageContent } from "~/types"
 
 const __IS_DEV__ = process.env.NODE_ENV === "development"
 
@@ -23,7 +23,7 @@ export async function getMdxDirList(contentDir: string) {
   }))
 }
 
-export async function getMdxPage<T extends ContentCommon>(
+export async function getMdxPage<T extends ContentCommonData>(
   path: string,
   id: string,
 ): Promise<PageContent<T>> {
@@ -33,7 +33,7 @@ export async function getMdxPage<T extends ContentCommon>(
   return { id, path, data: data as T, content }
 }
 
-export async function getMdxPagesInDirectory<T extends ContentCommon>(
+export async function getMdxPagesInDirectory<T extends ContentCommonData>(
   contentDir: string,
 ) {
   const dirList = await getMdxDirList(contentDir)

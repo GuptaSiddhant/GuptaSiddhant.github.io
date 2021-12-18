@@ -110,7 +110,12 @@ function BlogInfo({
         <Link to={linkedInShareUrl} data-custom-border>
           <LinkedinIcon aria-label={"Share to LinkedIn"} />
         </Link>
-        <CopyButton content={pageUrl} position="bottom" label="Copy link" />
+        <CopyButton
+          className="relative"
+          content={pageUrl}
+          position="bottom"
+          label="Copy link"
+        />
       </div>
     </InfoList>
   )

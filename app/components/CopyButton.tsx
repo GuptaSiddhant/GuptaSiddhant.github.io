@@ -33,7 +33,6 @@ export default function CopyButton({
   return (
     <div
       className={clsx(
-        "relative",
         "cursor-pointer",
         className,
         tooltipProps.state.isOpen ? "opacity-100" : "opacity-50",

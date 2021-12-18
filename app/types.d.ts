@@ -4,17 +4,18 @@ export interface RootData {
   name: string
 }
 
+export type CommonContent = PageContent<ContentCommonData>
 export type ProjectContent = PageContent<ProjectData>
 export type BlogPostContent = PageContent<BlogPostData>
 
-export interface PageContent<T extends ContentCommon = ContentCommon> {
+export interface PageContent<T extends ContentCommonData = ContentCommonData> {
   id: string
   path: string
   data: T
   content: string
 }
 
-export interface ContentCommon {
+export interface ContentCommonData {
   title: string
   draft?: boolean
   featured?: boolean
@@ -24,7 +25,7 @@ export interface ContentCommon {
   description?: string
 }
 
-export interface ProjectData extends ContentCommon {
+export interface ProjectData extends ContentCommonData {
   association?: string
   dateStart: string
   dateEnd?: string
@@ -32,7 +33,7 @@ export interface ProjectData extends ContentCommon {
   externalLink?: string
 }
 
-export interface BlogPostData extends ContentCommon {
+export interface BlogPostData extends ContentCommonData {
   date: string
   author: string
 }

@@ -1,11 +1,13 @@
 import clsx from "clsx"
-import React from "react"
+import type { ImgHTMLAttributes } from "react"
+
+export type ImageProps = ImgHTMLAttributes<HTMLImageElement>
 
 export default function Image({
   className,
   title,
   ...props
-}: React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
+}: ImageProps): JSX.Element {
   const imageClassName = clsx("h-full w-full rounded object-cover")
 
   return (

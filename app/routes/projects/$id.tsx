@@ -1,16 +1,17 @@
+import clsx from "clsx"
 import {
   redirect,
   useLoaderData,
   type LoaderFunction,
   type MetaFunction,
 } from "remix"
-import clsx from "clsx"
 
-import { getProjectById } from "~/helpers/projects"
-import Markdown from "~/components/Markdown"
 import Image from "~/components/Image"
-import ProjectInfo from "~/components/project/ProjectInfo"
-import type { ProjectContent } from "~/types"
+import { InfoBox, InfoList } from "~/components/Info"
+import Markdown from "~/components/Markdown"
+import { getProjectById, getProjectStatus } from "~/helpers/projects"
+import { capitalize } from "~/helpers/utils"
+import type { ProjectContent, ProjectData } from "~/types"
 
 export const meta: MetaFunction = () => {
   return {
@@ -69,5 +70,27 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <h1>{"Error with the project"}</h1>
       <p>{error.message}</p>
     </section>
+  )
+}
+
+function ProjectInfo({
+  className,
+  data: { association, description, dateStart, dateEnd },
+}: {
+  data: ProjectData
+  className?: string
+}) {
+  return (
+    <InfoList className={className}>
+      {association ? (
+        <InfoBox field="Client">
+          {capitalize(association.replace("-", " "))}
+        </InfoBox>
+      ) : null}
+      <InfoBox field="Status">{getProjectStatus(dateStart, dateEnd)}</InfoBox>
+      {description ? (
+        <InfoBox field="Description">{description}</InfoBox>
+      ) : null}
+    </InfoList>
   )
 }

@@ -1,17 +1,17 @@
-import { type FormEvent } from "react"
 import {
-  Form,
   useLoaderData,
   useSubmit,
   type LoaderFunction,
   type MetaFunction,
 } from "remix"
 
-import Section from "~/layouts/Section"
-import ProjectGrid from "~/components/project/ProjectGrid"
-import { getAllProjects } from "~/helpers/projects"
-import type { ProjectContent } from "~/types"
+import Article from "~/components/Article"
+import Grid from "~/components/Grid"
+import Image from "~/components/Image"
 import Tag, { TagList } from "~/components/Tag"
+import { getAllProjects } from "~/helpers/projects"
+import Section from "~/layouts/Section"
+import type { ProjectContent, ProjectData } from "~/types"
 
 export const meta: MetaFunction = () => {
   return {
@@ -80,5 +80,76 @@ export default function Projects(): JSX.Element {
 
       <ProjectGrid projects={projects} />
     </Section>
+  )
+}
+
+function ProjectGrid({ projects }: { projects: ProjectContent[] }) {
+  const checkIfFeatured = (project: ProjectContent) => !project.data.dateEnd
+
+  const renderItem = (project: ProjectContent) => (
+    <ProjectCard
+      project={project.data}
+      imagePosition={checkIfFeatured(project) ? "right" : "bottom"}
+    />
+  )
+
+  return (
+    <Grid
+      items={projects}
+      renderItem={renderItem}
+      checkIfFeatured={checkIfFeatured}
+      fallback={
+        <div className="opacity-50">
+          <h1>No projects found.</h1>
+          <p>Maybe clearing filters might help.</p>
+        </div>
+      }
+    />
+  )
+}
+
+export function ProjectCard({
+  project,
+  className,
+  imagePosition = "bottom",
+}: {
+  project: ProjectData
+  className?: string
+  imagePosition?: "bottom" | "right"
+}): JSX.Element {
+  const { icon, title, association, tags, description } = project
+  const imageSrc = project.gallery?.[0]?.url
+  const imageAlt = project.gallery?.[0]?.alt || title
+
+  return (
+    <Article
+      imageProps={{ src: imageSrc, alt: imageAlt }}
+      imagePosition={imagePosition}
+      className={className}
+    >
+      {icon ? <ProjectIcon url={icon} title={title} /> : null}
+      <div className="text-3xl font-bold">{title}</div>
+      <div className="text-yellow-500 font-black uppercase">
+        @ {association?.replace("-", " ")}
+      </div>
+      <Article.Tags tags={tags} />
+      {imagePosition === "right" && description ? <p>{description}</p> : null}
+    </Article>
+  )
+}
+
+function ProjectIcon({
+  url,
+  title,
+}: {
+  url: string
+  title: string
+}): JSX.Element {
+  return (
+    <Image
+      src={url}
+      alt={`${title}-icon`}
+      className={"w-10 h-10 rounded mb-4"}
+    />
   )
 }

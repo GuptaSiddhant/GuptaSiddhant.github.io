@@ -20,3 +20,7 @@ export async function getBlogPostById(id: string): Promise<BlogPostContent> {
 
   return getMdxPage<BlogPostData>(path, id)
 }
+
+export function isBlogPost(item: any): item is BlogPostContent {
+  return (item as BlogPostContent).data.author !== undefined
+}
