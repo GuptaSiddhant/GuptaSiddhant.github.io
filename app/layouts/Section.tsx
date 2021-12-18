@@ -6,9 +6,6 @@ export default function Section({
   ...props
 }: HTMLAttributes<HTMLDivElement>): JSX.Element {
   return (
-    <section
-      {...props}
-      className={clsx("flex gap-10 relative rounded-lg", className)}
-    />
+    <section {...props} className={clsx("flex gap-10 relative", className)} />
   )
 }

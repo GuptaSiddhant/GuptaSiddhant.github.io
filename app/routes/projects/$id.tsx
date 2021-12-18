@@ -9,7 +9,7 @@ import clsx from "clsx"
 import { getProjectById } from "~/helpers/projects"
 import Markdown from "~/components/Markdown"
 import Image from "~/components/Image"
-import InfoBanner from "~/components/Info"
+import ProjectInfo from "~/components/project/ProjectInfo"
 import type { ProjectContent } from "~/types"
 
 export const meta: MetaFunction = () => {
@@ -40,7 +40,7 @@ export default function Project(): JSX.Element {
   return (
     <section>
       <h1 className="prose">{title}</h1>
-      <InfoBanner data={data} className="prose" />
+      <ProjectInfo data={data} className="prose" />
       {showcaseImage ? (
         <Image
           src={showcaseImage}

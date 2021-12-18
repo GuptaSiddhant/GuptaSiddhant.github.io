@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { Link } from "remix"
 
-import ProjectCard from "~/components/ProjectCard"
+import ProjectCard from "~/components/project/ProjectCard"
 import type { ProjectContent } from "~/types"
 
 export default function ProjectGrid({

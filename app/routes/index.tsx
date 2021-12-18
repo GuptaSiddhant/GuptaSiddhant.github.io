@@ -4,18 +4,19 @@ import {
   type LoaderFunction,
   type MetaFunction,
 } from "remix"
+import TextTransition from "react-text-transition"
 
-import heroImage from "~/assets/images/hero.png"
 import Section from "~/layouts/Section"
 import CodeBlock from "~/components/CodeBlock"
 import { getAllProjects } from "~/helpers/projects"
+import ProjectGrid from "~/components/project/ProjectGrid"
+import useTextTransition from "~/helpers/useTextTransition"
 import type { ProjectContent } from "~/types"
-import ProjectGrid from "~/components/ProjectGrid"
 
 export let meta: MetaFunction = () => {
   return {
     title: "Siddhant Gupta",
-    description: "Home of Siddhant Gupta!",
+    description: "Home of Siddhant Gupta.",
   }
 }
 
@@ -32,18 +33,27 @@ npx guptasiddhant`
 
 export default function Index() {
   const { projects } = useLoaderData<{ projects: ProjectContent[] }>()
+  const textTransitionProps = useTextTransition(
+    "Accessibly",
+    "Beautifully",
+    "Responsibly",
+    "Sensibly",
+    "Efficiently",
+  )
 
   return (
     <main>
       <Section className="items-center py-16">
-        <div className="w-full md:w-2/3 xl:w-1/2">
-          <h1 className="mb-10">I bring designs to life on your screen...</h1>
+        <div className="w-full md:w-2/3">
+          <h1 className="mb-12">
+            I bring designs to life on your screen...{" "}
+            <TextTransition {...textTransitionProps} />.
+          </h1>
           <p>
-            I am a <em>full-stack developer</em> with a drive for creating
+            I am a <em>front-end developer</em> with a drive for creating
             beautiful web and mobile applications.
-            <br />
-            Stack: React, React Native, TypeScript, Node.js and Figma.
           </p>
+          <Stack />
           <p>
             Currently applying my skills at <strong>Accenture Finland</strong> (
             <a
@@ -58,13 +68,6 @@ export default function Index() {
             <CodeBlock lang="bash">{code}</CodeBlock>
           </div>
         </div>
-        <div className="hidden xl:block">
-          <img
-            src={heroImage}
-            alt={"Screen with design"}
-            className="object-fill"
-          />
-        </div>
       </Section>
       <Section className="flex-col bg-depth p-16">
         <div className="flex gap-12 items-baseline">
@@ -76,5 +79,27 @@ export default function Index() {
         </div>
       </Section>
     </main>
+  )
+}
+
+function Stack() {
+  const stack = [
+    "React",
+    "React Native",
+    "TypeScript",
+    "GraphQL",
+    "Node.js",
+    "Figma",
+  ]
+  return (
+    <p>
+      Stack:{" "}
+      {stack.map((text, i, a) => (
+        <>
+          <code key={text}>{text}</code>
+          {i === a.length - 1 ? "" : i === a.length - 2 ? " and " : ", "}
+        </>
+      ))}
+    </p>
   )
 }

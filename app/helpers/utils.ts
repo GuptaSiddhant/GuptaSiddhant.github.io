@@ -4,8 +4,23 @@ export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function sortByDate(a?: Date, b?: Date): number {
-  return (b || new Date()).getTime() - (a || new Date()).getTime()
+export function formatDate(
+  date: Date | string,
+  options: Intl.DateTimeFormatOptions = {},
+): string {
+  return new Date(date).toLocaleDateString(undefined, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    ...options,
+  })
+}
+
+export function sortByDate(a?: Date | string, b?: Date | string): number {
+  const dateA = a ? new Date(a) : new Date()
+  const dateB = b ? new Date(b) : new Date()
+
+  return dateB.getTime() - dateA.getTime()
 }
 
 export function getIdFromPath(path: string): string {
@@ -16,10 +31,6 @@ export function getIdFromPath(path: string): string {
 
 export function filterPageDrafts(page: PageContent): boolean {
   return !page.data.draft
-}
-
-export function sortPagesByDate(a: PageContent, b: PageContent) {
-  return sortByDate(a.data.dateEnd, b.data.dateEnd)
 }
 
 export function createDebugger(prefix: string) {

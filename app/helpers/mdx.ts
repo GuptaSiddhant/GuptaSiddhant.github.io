@@ -30,7 +30,7 @@ export async function getMdxPage<T extends ContentCommon>(
   const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
   const { content, data } = matter(page)
 
-  return { id, path, content, data: data as T }
+  return { id, path, data: data as T, content }
 }
 
 export async function getMdxPagesInDirectory<T extends ContentCommon>(

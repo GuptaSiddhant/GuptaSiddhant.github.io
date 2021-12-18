@@ -5,22 +5,25 @@ import CopyIcon from "remixicon-react/FileCopyLineIcon"
 import CheckIcon from "remixicon-react/CheckLineIcon"
 
 import Tooltip, { useTooltip, type TooltipProps } from "./Tooltip"
+import type { BaseComponentProps } from "~/types"
 
-export interface CopyButtonProps {
-  children: string
-  className?: string
+export interface CopyButtonProps extends BaseComponentProps {
+  content: string
   position?: TooltipProps["position"]
+  label?: string
 }
 
 export default function CopyButton({
-  children,
+  content,
   className,
   position = "right",
+  label = "Copy",
+  children,
 }: CopyButtonProps) {
   const { triggerProps, tooltipProps, ref } = useTooltip<HTMLDivElement>({
     delay: 0,
   })
-  const [copied, copy, setCopied] = useCopy(children)
+  const [copied, copy, setCopied] = useCopy(content)
   const handleCopy = () => {
     copy()
     setTimeout(() => setCopied(false), 3000)
@@ -30,6 +33,7 @@ export default function CopyButton({
   return (
     <div
       className={clsx(
+        "relative",
         "cursor-pointer",
         className,
         tooltipProps.state.isOpen ? "opacity-100" : "opacity-50",
@@ -42,11 +46,11 @@ export default function CopyButton({
       {copied ? (
         <CheckIcon aria-label="Copied" />
       ) : (
-        <CopyIcon aria-label="Copy" />
+        children || <CopyIcon aria-label={label} />
       )}
 
       <Tooltip {...tooltipProps} position={position}>
-        {copied ? "Copied!" : "Copy"}
+        {copied ? "Copied!" : label}
       </Tooltip>
     </div>
   )

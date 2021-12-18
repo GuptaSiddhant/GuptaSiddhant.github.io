@@ -8,7 +8,7 @@ import {
 } from "remix"
 
 import Section from "~/layouts/Section"
-import ProjectGrid from "~/components/ProjectGrid"
+import ProjectGrid from "~/components/project/ProjectGrid"
 import { getAllProjects } from "~/helpers/projects"
 import type { ProjectContent } from "~/types"
 import Tag, { TagList } from "~/components/Tag"
@@ -32,10 +32,8 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const filteredProjects =
     selectedTags.length > 0
-      ? allProjects.filter(
-          (project) =>
-            (project.data.tags || []).some((tag) => selectedTags.includes(tag)),
-          // selectedTags.some((tag) => (project.data.tags || []).includes(tag)),
+      ? allProjects.filter((project) =>
+          (project.data.tags || []).some((tag) => selectedTags.includes(tag)),
         )
       : allProjects
 

@@ -2,10 +2,10 @@ import clsx from "clsx"
 import { type ReactNode } from "react"
 
 import Tag, { TagList } from "~/components/Tag"
-import Image from "./Image"
+import Image from "../Image"
 import type { ProjectData } from "~/types"
 
-export default function Article(project: ProjectData): JSX.Element {
+export default function ProjectCard(project: ProjectData): JSX.Element {
   const { icon, title, association, tags, dateEnd, featured } = project
   const isCurrent = !dateEnd
 
@@ -17,8 +17,8 @@ export default function Article(project: ProjectData): JSX.Element {
         "bg-hover hover:shadow-xl",
         "rounded-2xl",
         "overflow-hidden",
-        "h-full p-8",
-        "flex flex-col justify-between",
+        "h-full p-8 pb-0",
+        "flex flex-col justify-between gap-4",
         "transition-transform duration-300",
         "hover:scale-102",
         "group",
@@ -71,7 +71,7 @@ function ShowcaseImage({
     "flex-1",
     "rounded",
     "w-full",
-    "translate-y-10",
+    "translate-y-1",
     "shadow-sm",
     "dark:shadow-md",
     "max-h-80",

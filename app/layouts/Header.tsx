@@ -12,7 +12,7 @@ const navLinks = [
   { to: "/projects", children: "Projects" },
   // { to: "/career", children: "Career" },
   // { to: "/education", children: "Education" },
-  // { to: "/blog", children: "Blog" },
+  { to: "/blog", children: "Blog" },
 ]
 
 const socialLinks = [

@@ -1,8 +1,11 @@
+import type { ReactNode } from "react"
+
 export interface RootData {
   name: string
 }
 
 export type ProjectContent = PageContent<ProjectData>
+export type BlogPostContent = PageContent<BlogPostData>
 
 export interface PageContent<T extends ContentCommon = ContentCommon> {
   id: string
@@ -13,17 +16,28 @@ export interface PageContent<T extends ContentCommon = ContentCommon> {
 
 export interface ContentCommon {
   title: string
-  dateStart: Date
-  dateEnd?: Date
   draft?: boolean
   featured?: boolean
+  gallery?: { url: string; alt: string }[]
+  tags?: string[]
+  subtitle?: string
+  description?: string
 }
 
 export interface ProjectData extends ContentCommon {
-  subtitle?: string
-  description?: string
   association?: string
-  tags?: string[]
+  dateStart: string
+  dateEnd?: string
   icon?: string
-  gallery?: { url: string; alt: string }[]
+  externalLink?: string
+}
+
+export interface BlogPostData extends ContentCommon {
+  date: string
+  author: string
+}
+
+export interface BaseComponentProps {
+  children?: ReactNode
+  className?: string
 }

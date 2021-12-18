@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["Nunito", "sans-serif"],
-      serif: ["Nunito", "serif"],
+      serif: ["monospace", "serif"],
       monospace: ["Fira Code", "Menlo", "monospace"],
     },
     extend: {

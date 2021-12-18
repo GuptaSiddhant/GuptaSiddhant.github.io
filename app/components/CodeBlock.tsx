@@ -1,9 +1,9 @@
-import { type ReactNode } from "react"
 import clsx from "clsx"
 import Highlight, { defaultProps, type Language } from "prism-react-renderer"
 import dracula from "prism-react-renderer/themes/dracula"
 
 import CopyButton from "~/components/CopyButton"
+import type { BaseComponentProps } from "~/types"
 
 export interface CodeProps {
   className?: string
@@ -40,7 +40,7 @@ export default function CodeBlock({
       theme={dracula}
     >
       {({ className, tokens, getLineProps, getTokenProps }) => (
-        <Pre className={clsx(className, externalClassName)}>
+        <Pre className={clsx("pt-8", className, externalClassName)}>
           {tokens.map((line, i) => (
             // Line
             <div {...getLineProps({ line, key: i })} className="table-row">
@@ -62,9 +62,11 @@ export default function CodeBlock({
             </div>
           ) : null}
           {!disableCopy ? (
-            <CopyButton className="absolute right-2 top-2" position="left">
-              {copyContent}
-            </CopyButton>
+            <CopyButton
+              className="absolute right-2 top-2"
+              position="left"
+              content={copyContent}
+            />
           ) : null}
         </Pre>
       )}
@@ -72,20 +74,13 @@ export default function CodeBlock({
   )
 }
 
-export function Pre({
-  children,
-  className,
-}: {
-  children: ReactNode
-  className?: string
-}): JSX.Element {
+export function Pre({ children, className }: BaseComponentProps): JSX.Element {
   return (
     <pre
       className={clsx(
         "bg-depth",
         "text-secondary",
-        "p-4 pt-8",
-        "-mx-4 my-4",
+        "p-4 -mx-4 my-4",
         "rounded-xl",
         "whitespace-pre-wrap",
         ".w-full-plus-2rem",

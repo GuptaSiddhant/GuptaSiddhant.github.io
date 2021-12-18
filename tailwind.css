@@ -72,19 +72,27 @@
     @apply font-bold text-4xl leading-snug my-4;
   }
   h4 {
-    @apply font-bold text-3xl leading-snug my-4;
+    @apply font-normal text-3xl leading-snug my-4;
   }
   h5 {
-    @apply font-bold text-2xl leading-normal my-4;
+    @apply font-normal text-2xl leading-normal my-4;
   }
   h6 {
-    @apply font-bold text-xl leading-normal my-4;
+    @apply font-normal text-xl leading-normal my-4;
   }
   p {
     @apply text-lg leading-normal my-4 text-tertiary;
   }
   small {
     @apply text-base;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 1em;
   }
 
   a:not([data-custom-color]) {
@@ -98,7 +106,10 @@
     @apply font-bold;
   }
   em {
-    @apply italic underline;
+    @apply not-italic font-serif text-base;
+  }
+  code {
+    @apply font-monospace text-base bg-depth px-2 py-1 align-baseline rounded;
   }
 }
 
