@@ -1,17 +1,20 @@
-import {
-  useLoaderData,
-  useSubmit,
-  type LoaderFunction,
-  type MetaFunction,
-} from "remix"
+import clsx from "clsx"
+import { type ChangeEvent } from "react"
+import { useLoaderData, useSubmit, type MetaFunction } from "remix"
 
 import Article from "~/components/Article"
 import Grid from "~/components/Grid"
 import Image from "~/components/Image"
+import { SearchField } from "~/components/Input"
 import Tag, { TagList } from "~/components/Tag"
-import { getAllProjects } from "~/helpers/projects"
+import {
+  getAllProjects,
+  filterProjectsByTags,
+  filterProjectsByQuery,
+  generateUniqueTags,
+} from "~/helpers/projects"
 import Section from "~/layouts/Section"
-import type { ProjectContent, ProjectData } from "~/types"
+import type { LoaderFunctionProps, ProjectContent, ProjectData } from "~/types"
 
 export const meta: MetaFunction = () => {
   return {
@@ -20,70 +23,101 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url)
-  const querySearchParam = url.searchParams.get("q")
-  const tagsSearchParam = url.searchParams.get("tags")
+interface LoaderData {
+  projects: ProjectContent[]
+  tags: string[]
+  searchQuery: string | null
+  selectedTags: string[]
+}
+
+export async function loader({
+  request,
+}: LoaderFunctionProps): Promise<LoaderData> {
+  const { searchParams } = new URL(request.url)
+  const querySearchParam = searchParams.get("q")
+  const tagsSearchParam = searchParams.get("tags")
+
+  const projects = await getAllProjects()
+  const tags = generateUniqueTags(projects)
   const selectedTags = tagsSearchParam
     ? decodeURIComponent(tagsSearchParam)?.split(",")
     : []
 
-  const allProjects = await getAllProjects()
+  const filteredProjectsBySelectedTags = filterProjectsByTags(
+    projects,
+    selectedTags,
+  )
 
-  const filteredProjects =
-    selectedTags.length > 0
-      ? allProjects.filter((project) =>
-          (project.data.tags || []).some((tag) => selectedTags.includes(tag)),
-        )
-      : allProjects
+  const filteredProjectsByQuery = filterProjectsByQuery(
+    filteredProjectsBySelectedTags,
+    querySearchParam,
+  )
 
-  const projects = querySearchParam
-    ? filteredProjects.filter((project) =>
-        project.id.includes(querySearchParam),
-      )
-    : filteredProjects
-
-  const allTags = [
-    ...new Set(allProjects.map(({ data }) => data.tags || []).flat()),
-  ].slice(0, 10)
-
-  return { tags: allTags, projects, selectedTags }
+  return {
+    tags,
+    selectedTags,
+    searchQuery: querySearchParam,
+    projects: filteredProjectsByQuery,
+  }
 }
 
 export default function Projects(): JSX.Element {
-  const submit = useSubmit()
-  const { projects, tags, selectedTags } = useLoaderData<{
-    projects: ProjectContent[]
-    tags: string[]
-    selectedTags: string[]
-  }>()
-
-  function handleTagsChange(tags: string[]) {
-    submit({ tags: tags.join(",") }, { replace: true })
-  }
-
   return (
     <Section className="flex-col">
-      {tags.length ? (
-        <TagList
-          label="Filter tags:"
-          onChange={handleTagsChange}
-          value={selectedTags}
-        >
-          {tags.map((tag) => (
-            <Tag key={tag} value={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </TagList>
-      ) : null}
+      <div className="flex flex-row flex-wrap items-center gap-4">
+        <Search />
+        <TagFilter />
+      </div>
 
-      <ProjectGrid projects={projects} />
+      <ProjectGrid />
     </Section>
   )
 }
 
-function ProjectGrid({ projects }: { projects: ProjectContent[] }) {
+function Search(): JSX.Element {
+  const submit = useSubmit()
+  const { selectedTags, searchQuery } = useLoaderData<LoaderData>()
+
+  function handleChange(query: string) {
+    submit({ q: query, tags: selectedTags.join(",") }, { replace: true })
+  }
+
+  return (
+    <SearchField
+      placeholder="Search in projects..."
+      value={searchQuery || ""}
+      onChange={handleChange}
+      aria-label="Search"
+    />
+  )
+}
+
+function TagFilter(): JSX.Element | null {
+  const submit = useSubmit()
+  const { tags, selectedTags, searchQuery } = useLoaderData<LoaderData>()
+
+  function handleTagsChange(tags: string[]) {
+    submit({ tags: tags.join(","), q: searchQuery || "" }, { replace: true })
+  }
+
+  return tags.length ? (
+    <TagList
+      onChange={handleTagsChange}
+      value={selectedTags}
+      aria-label="Filter by tags"
+      reset
+    >
+      {tags.map((tag) => (
+        <Tag key={tag} value={tag}>
+          {tag}
+        </Tag>
+      ))}
+    </TagList>
+  ) : null
+}
+
+function ProjectGrid() {
+  const { projects } = useLoaderData<LoaderData>()
   const checkIfFeatured = (project: ProjectContent) => !project.data.dateEnd
 
   const renderItem = (project: ProjectContent) => (
@@ -100,7 +134,7 @@ function ProjectGrid({ projects }: { projects: ProjectContent[] }) {
       checkIfFeatured={checkIfFeatured}
       fallback={
         <div className="opacity-50">
-          <h1>No projects found.</h1>
+          <h2>No projects found.</h2>
           <p>Maybe clearing filters might help.</p>
         </div>
       }

@@ -82,7 +82,7 @@ function ArticleTape({
 
 function ArticleTags({ tags = [] }: { tags?: string[] }): JSX.Element | null {
   return tags.length ? (
-    <TagList aria-label="Tags">
+    <TagList aria-label="Tags" className="mt-4">
       {tags.map((tag) => (
         <Tag key={tag} value={tag} isDisabled>
           {tag}

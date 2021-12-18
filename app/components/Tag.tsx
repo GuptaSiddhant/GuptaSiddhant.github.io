@@ -16,6 +16,9 @@ import type {
   CheckboxGroupProps,
   AriaCheckboxGroupItemProps,
 } from "@react-types/checkbox"
+import { VisuallyHidden } from "@react-aria/visually-hidden"
+import { useFocusRing } from "@react-aria/focus"
+import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
 import { capitalize } from "~/helpers/utils"
 
@@ -23,40 +26,13 @@ const TagListContext = createContext<CheckboxGroupState>(
   {} as CheckboxGroupState,
 )
 
-export function TagList({
-  reset,
-  ...props
-}: CheckboxGroupProps & {
-  children: ReactNode[]
-  reset?: boolean
-}): JSX.Element {
-  const state = useCheckboxGroupState(props)
-  const { groupProps, labelProps } = useCheckboxGroup(props, state)
-  const resetState = useCallback(() => {
-    state.value.forEach(state.removeValue)
-  }, [state])
-  const { pressProps } = usePress({ onPress: resetState })
-
-  return (
-    <div
-      {...groupProps}
-      className="flex flex-wrap gap-2 mt-4 mb-2 items-center"
-    >
-      {props.label ? <label {...labelProps}>{props.label}</label> : null}
-      <TagListContext.Provider value={state}>
-        {props.children}
-      </TagListContext.Provider>
-      {reset ? <button {...pressProps}>{"Reset"}</button> : null}
-    </div>
-  )
-}
-
 export default function Tag(
   props: { children: string } & AriaCheckboxGroupItemProps,
 ): JSX.Element {
   const state = useContext(TagListContext)
   const ref = useRef<HTMLInputElement>(null)
   const { inputProps } = useCheckboxGroupItem(props, state, ref)
+  let { isFocusVisible, focusProps } = useFocusRing()
   const isSelected = state.isSelected(props.value)
   const isDisabled = state.isDisabled || props.isDisabled
 
@@ -75,11 +51,51 @@ export default function Tag(
               "select-none",
             ),
         isSelected && "bg-blue-300 dark:bg-blue-700",
+        isFocusVisible && "outline-none outline-blue-300 dark:outline-blue-700",
       )}
-      tabIndex={isDisabled ? -1 : 0}
     >
+      <VisuallyHidden>
+        <input {...inputProps} {...focusProps} ref={ref} />
+      </VisuallyHidden>
       {capitalize(props.children)}
-      <input {...inputProps} ref={ref} className="hidden" />
     </label>
+  )
+}
+
+export function TagList({
+  reset,
+  className,
+  children,
+  ...props
+}: CheckboxGroupProps & {
+  children: ReactNode[]
+  className?: string
+  reset?: boolean
+}): JSX.Element {
+  const state = useCheckboxGroupState(props)
+  const { groupProps, labelProps } = useCheckboxGroup(props, state)
+  const resetState = useCallback(() => state.setValue([]), [state])
+  const { pressProps } = usePress({ onPress: resetState })
+
+  return (
+    <fieldset
+      {...groupProps}
+      className={clsx("flex flex-wrap flex-row gap-2 items-center", className)}
+    >
+      {props.label ? <label {...labelProps}>{props.label}</label> : null}
+
+      <TagListContext.Provider value={state}>
+        {children}
+      </TagListContext.Provider>
+
+      {reset && state.value.length > 0 ? (
+        <button
+          {...pressProps}
+          className="flex items-center gap-1 text-red-700 dark:text-red-300"
+        >
+          <CloseIcon className="inline" /> Reset
+        </button>
+      ) : null}
+    </fieldset>
   )
 }

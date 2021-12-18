@@ -1,11 +1,18 @@
-import { useLoaderData, type LoaderFunction, type MetaFunction } from "remix"
+import { useLoaderData, useSubmit, type MetaFunction } from "remix"
 
 import Article from "~/components/Article"
 import Grid from "~/components/Grid"
-import { getBlog } from "~/helpers/blog"
+import { SearchField } from "~/components/Input"
+import Tag, { TagList } from "~/components/Tag"
+import {
+  getBlog,
+  filterBlogByQuery,
+  filterBlogByTags,
+  generateUniqueTags,
+} from "~/helpers/blog"
 import { formatDate } from "~/helpers/utils"
 import Section from "~/layouts/Section"
-import { BlogPostContent, BlogPostData } from "~/types"
+import { BlogPostContent, BlogPostData, LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {
   return {
@@ -14,23 +21,98 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({}) => {
-  const blog = await getBlog()
+interface LoaderData {
+  blog: BlogPostContent[]
+  tags: string[]
+  searchQuery: string | null
+  selectedTags: string[]
+}
 
-  return { blog }
+export async function loader({
+  request,
+}: LoaderFunctionProps): Promise<LoaderData> {
+  const { searchParams } = new URL(request.url)
+  const querySearchParam = searchParams.get("q")
+  const tagsSearchParam = searchParams.get("tags")
+
+  const blog = await getBlog()
+  const tags = generateUniqueTags(blog)
+  const selectedTags = tagsSearchParam
+    ? decodeURIComponent(tagsSearchParam)?.split(",")
+    : []
+
+  const filteredBlogBySelectedTags = filterBlogByTags(blog, selectedTags)
+
+  const filteredBlogByQuery = filterBlogByQuery(
+    filteredBlogBySelectedTags,
+    querySearchParam,
+  )
+
+  return {
+    tags,
+    selectedTags,
+    searchQuery: querySearchParam,
+    blog: filteredBlogByQuery,
+  }
 }
 
 export default function Projects(): JSX.Element {
-  const { blog } = useLoaderData<{ blog: BlogPostContent[] }>()
+  const { blog } = useLoaderData<LoaderData>()
 
   return (
     <Section className="flex-col">
+      <div className="flex flex-row flex-wrap items-center gap-4">
+        <Search />
+        <TagFilter />
+      </div>
+
       <BlogGrid posts={blog} />
     </Section>
   )
 }
 
-/** index component */
+function Search(): JSX.Element {
+  const submit = useSubmit()
+  const { selectedTags, searchQuery } = useLoaderData<LoaderData>()
+
+  function handleChange(query: string) {
+    submit({ q: query, tags: selectedTags.join(",") }, { replace: true })
+  }
+
+  return (
+    <SearchField
+      placeholder="Search in blog..."
+      value={searchQuery || ""}
+      onChange={handleChange}
+      aria-label="Search"
+    />
+  )
+}
+
+function TagFilter(): JSX.Element | null {
+  const submit = useSubmit()
+  const { tags, selectedTags, searchQuery } = useLoaderData<LoaderData>()
+
+  function handleTagsChange(tags: string[]) {
+    submit({ tags: tags.join(","), q: searchQuery || "" }, { replace: true })
+  }
+
+  return tags.length > 1 ? (
+    <TagList
+      onChange={handleTagsChange}
+      value={selectedTags}
+      aria-label="Filter by tags"
+      reset
+    >
+      {tags.map((tag) => (
+        <Tag key={tag} value={tag}>
+          {tag}
+        </Tag>
+      ))}
+    </TagList>
+  ) : null
+}
+
 function BlogGrid({ posts }: { posts: BlogPostContent[] }): JSX.Element | null {
   const checkIfFeatured = (post: BlogPostContent) => !!post.data.featured
 
@@ -44,13 +126,12 @@ function BlogGrid({ posts }: { posts: BlogPostContent[] }): JSX.Element | null {
   return (
     <Grid
       items={posts}
-      className="mt-12"
       renderItem={renderItem}
       checkIfFeatured={checkIfFeatured}
       generateLink={(project) => `/blog/${project.id}`}
       fallback={
         <div className="opacity-50">
-          <h1>No blog posts found.</h1>
+          <h2>No blog posts found.</h2>
         </div>
       }
     />
