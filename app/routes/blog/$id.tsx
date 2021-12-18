@@ -71,8 +71,9 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <section>
-      <h1>{"Error with the project"}</h1>
-      <p>{error.message}</p>
+      <h1 className="prose">{"Error with the project"}</h1>
+      <p className="prose">{error.message}</p>
+      <p>Go back</p>
     </section>
   )
 }

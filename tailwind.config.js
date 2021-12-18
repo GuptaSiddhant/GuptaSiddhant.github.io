@@ -3,8 +3,7 @@ const colors = require("tailwindcss/colors")
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   mode: "jit",
-  purge: ["./app/**/*.{ts,tsx}"],
-  darkMode: "media", // or 'media' or 'class'
+  content: ["./app/**/*.{ts,tsx}"],
   theme: {
     fontFamily: {
       sans: ["Nunito", "sans-serif"],
@@ -15,12 +14,13 @@ module.exports = {
       colors: {
         transparent: "transparent",
         current: "currentColor",
-        gray: colors.coolGray,
         blue: colors.sky,
         red: colors.rose,
       },
     },
   },
-  variants: {},
-  plugins: [require("@tailwindcss/aspect-ratio")],
+  plugins: [
+    require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/forms"),
+  ],
 }
