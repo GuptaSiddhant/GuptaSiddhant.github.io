@@ -17,7 +17,8 @@ export default function AnimatedTitle({
 }: TitleProps): JSX.Element {
   const preferReducedMotion = useReducedMotion()
   const { pathname } = useLocation()
-  const nested = pathname.split("/").length > 2
+  const pathNameArray = pathname.split("/")
+  const nested = pathNameArray.length > 2 && pathNameArray[2] !== ""
 
   return (
     <div
