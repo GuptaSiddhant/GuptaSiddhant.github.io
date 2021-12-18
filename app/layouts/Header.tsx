@@ -72,7 +72,7 @@ function RouteLink({ to, children }: NavLinkProps): JSX.Element {
       prefetch="intent"
       data-custom-color
       className={({ isActive }) =>
-        clsx(isActive ? "text-link-active" : "text-link")
+        clsx(isActive ? "text-link-active font-bold" : "text-link")
       }
     >
       {children}

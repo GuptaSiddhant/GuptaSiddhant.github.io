@@ -17,20 +17,20 @@ export default function Article({
   imagePosition = "bottom",
   imageProps,
 }: ArticleProps): JSX.Element | null {
-  const isImageRight = imagePosition === "right"
+  const featured = imagePosition === "right"
 
   return (
     <Card
       as="article"
       tabIndex={0}
       className={clsx(
-        "justify-between",
-        isImageRight ? "flex-row" : "flex-col",
-        isImageRight ? "pr-0" : "pb-0",
+        "justify-between flex-col",
+        featured && "sm:flex-row",
+        featured ? "pb-0 sm:pr-0" : "pb-0",
         className,
       )}
     >
-      <div>{children}</div>
+      <div className={clsx(featured && "flex-1")}>{children}</div>
       {imageProps?.src ? (
         <Image
           {...imageProps}
@@ -38,7 +38,8 @@ export default function Article({
             "flex-1 w-full rounded",
             "shadow-sm dark:shadow-md",
             "bg-depth",
-            isImageRight ? "translate-x-1 h-full" : "translate-y-1 max-h-80",
+            "translate-y-1 max-h-80",
+            featured && "sm:translate-x-1 sm:max-h-full",
             imageProps.className,
           )}
         />

@@ -95,10 +95,10 @@ export default function Index() {
         </div>
       </Section>
       <Section className="flex-col bg-depth p-16">
-        <div className="flex justify-between items-baseline">
+        <div className="flex justify-between items-baseline flex-wrap">
           <h2>Featured work</h2>
           <div className="flex gap-12 ">
-            <Link to="projects">View all projects</Link>
+            <Link to="projects">View projects</Link>
             <Link to="blog">View blog</Link>
           </div>
         </div>
