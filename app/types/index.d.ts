@@ -7,8 +7,6 @@ export interface RootData {
 }
 
 export type CommonContent = PageContent<ContentCommonData>
-export type ProjectContent = PageContent<ProjectData>
-export type BlogPostContent = PageContent<BlogPostData>
 
 export interface PageContent<T extends ContentCommonData = ContentCommonData> {
   id: string
@@ -27,22 +25,7 @@ export interface ContentCommonData {
   description?: string
 }
 
-export interface ProjectData extends ContentCommonData {
-  association?: string
-  dateStart: string
-  dateEnd?: string
-  icon?: string
-  externalLink?: string
-}
-
-export interface BlogPostData extends ContentCommonData {
-  date: string
-  author: string
-}
-
 export interface BaseComponentProps {
   children?: ReactNode
   className?: string
 }
-
-// Remix

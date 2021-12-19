@@ -2,7 +2,7 @@ import clsx from "clsx"
 
 import Card from "~/components/Card"
 import Image, { type ImageProps } from "~/components/Image"
-import Tag, { TagList } from "~/components/Tag"
+import { TagList } from "~/components/Tag"
 import type { BaseComponentProps } from "~/types"
 
 export interface ArticleProps extends BaseComponentProps {
@@ -81,13 +81,12 @@ function ArticleTape({
 }
 
 function ArticleTags({ tags = [] }: { tags?: string[] }): JSX.Element | null {
-  return tags.length ? (
-    <TagList aria-label="Tags" className="mt-4">
-      {tags.map((tag) => (
-        <Tag key={tag} value={tag} isDisabled>
-          {tag}
-        </Tag>
-      ))}
-    </TagList>
-  ) : null
+  return (
+    <TagList
+      aria-label="Tags"
+      className="mt-4"
+      tags={tags}
+      checkIsTagDisabled={() => true}
+    />
+  )
 }

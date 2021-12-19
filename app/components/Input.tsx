@@ -7,12 +7,17 @@ import type { AriaSearchFieldProps } from "@react-types/searchfield"
 /** Input component */
 export function Input({
   className,
+  _ref,
   ...props
 }: InputHTMLAttributes<HTMLInputElement> & {
-  ref?: ForwardedRef<HTMLInputElement>
+  _ref?: ForwardedRef<HTMLInputElement>
 }): JSX.Element | null {
   return (
-    <input {...props} className={clsx("rounded", "dark:bg-depth", className)} />
+    <input
+      {...props}
+      className={clsx("rounded", "dark:bg-depth", className)}
+      ref={_ref}
+    />
   )
 }
 
@@ -22,7 +27,7 @@ export function SearchField(props: AriaSearchFieldProps): JSX.Element | null {
   const { labelProps, inputProps } = useSearchField(props, state, ref)
   const { label } = props
 
-  const inputElement = <Input {...inputProps} ref={ref} />
+  const inputElement = <Input {...inputProps} _ref={ref} />
 
   if (!label) return inputElement
 

@@ -7,11 +7,12 @@ import {
 } from "remix"
 
 import Image from "~/components/Image"
-import { InfoBox, InfoList } from "~/components/Info"
 import Markdown from "~/components/Markdown"
-import { getProjectById, getProjectStatus } from "~/helpers/projects"
-import { capitalize } from "~/helpers/utils"
-import type { ProjectContent, ProjectData } from "~/types"
+import {
+  getProjectById,
+  ProjectInfo,
+  type ProjectContent,
+} from "~/features/projects"
 
 export const meta: MetaFunction = () => {
   return {
@@ -70,27 +71,5 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <h1 className="prose">{"Error with the project"}</h1>
       <p className="prose">{error.message}</p>
     </section>
-  )
-}
-
-function ProjectInfo({
-  className,
-  data: { association, description, dateStart, dateEnd },
-}: {
-  data: ProjectData
-  className?: string
-}) {
-  return (
-    <InfoList className={className}>
-      {association ? (
-        <InfoBox field="Client">
-          {capitalize(association.replace("-", " "))}
-        </InfoBox>
-      ) : null}
-      <InfoBox field="Status">{getProjectStatus(dateStart, dateEnd)}</InfoBox>
-      {description ? (
-        <InfoBox field="Description">{description}</InfoBox>
-      ) : null}
-    </InfoList>
   )
 }

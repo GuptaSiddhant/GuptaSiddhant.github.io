@@ -1,15 +1,8 @@
-import { json } from "remix"
+import { generateResponseForBlog } from "~/features/blog"
+import type { LoaderFunctionProps } from "~/types"
 
-import { generateResponseForPages } from "~/helpers/api"
-import { getBlog } from "~/helpers/blog"
-import type { LoaderFunctionProps, LoaderFunctionReturn } from "~/types"
-
-export async function loader({
-  request,
-}: LoaderFunctionProps): LoaderFunctionReturn {
-  const blog = await getBlog()
-
-  return json(generateResponseForPages(request, blog))
+export async function loader({ request }: LoaderFunctionProps) {
+  return generateResponseForBlog(request)
 }
 
 export function CatchBoundary() {}

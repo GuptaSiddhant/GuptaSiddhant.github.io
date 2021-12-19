@@ -1,15 +1,8 @@
-import { json } from "remix"
+import { generateResponseForProjects } from "~/features/projects"
+import type { LoaderFunctionProps } from "~/types"
 
-import { generateResponseForPages } from "~/helpers/api"
-import { getAllProjects } from "~/helpers/projects"
-import type { LoaderFunctionProps, LoaderFunctionReturn } from "~/types"
-
-export async function loader({
-  request,
-}: LoaderFunctionProps): LoaderFunctionReturn {
-  const projects = await getAllProjects()
-
-  return json(generateResponseForPages(request, projects))
+export async function loader({ request }: LoaderFunctionProps) {
+  return generateResponseForProjects(request)
 }
 
 export function CatchBoundary() {}
