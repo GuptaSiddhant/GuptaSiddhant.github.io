@@ -6,13 +6,14 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Image from "~/components/Image"
+import Image from "~/components/atoms/Image"
 import Markdown from "~/components/Markdown"
 import {
   getProjectById,
   ProjectInfo,
   type ProjectContent,
 } from "~/features/projects"
+import Prose from "~/components/layouts/Prose"
 
 export const meta: MetaFunction = () => {
   return {
@@ -35,14 +36,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 }
 
 export default function Project(): JSX.Element {
-  const { data, content } = useLoaderData<ProjectContent>()
+  const { data, code } = useLoaderData<ProjectContent>()
   const { title, gallery = [] } = data
   const showcaseImage = gallery[0]?.url
 
   return (
-    <section>
-      <h1 className="prose">{title}</h1>
-      <ProjectInfo data={data} className="prose" />
+    <Prose>
+      <h1>{title}</h1>
+      <ProjectInfo data={data} />
       {showcaseImage ? (
         <Image
           src={showcaseImage}
@@ -56,10 +57,8 @@ export default function Project(): JSX.Element {
         />
       ) : null}
 
-      <div className="prose">
-        <Markdown value={content} />
-      </div>
-    </section>
+      <Markdown code={code} />
+    </Prose>
   )
 }
 
@@ -67,9 +66,9 @@ export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
 
   return (
-    <section>
+    <Prose>
       <h1 className="prose">{"Error with the project"}</h1>
       <p className="prose">{error.message}</p>
-    </section>
+    </Prose>
   )
 }

@@ -45,7 +45,12 @@ export default function CodeBlock({
             // Line
             <div {...getLineProps({ line, key: i })} className="table-row">
               {showLineNumbers ? (
-                <span className="table-cell text-right text-sm text-disabled pr-4 select-none">
+                <span
+                  className={clsx(
+                    "table-cell text-right text-sm pr-4 select-none",
+                    "text-disabled",
+                  )}
+                >
                   {(i + 1).toString()}
                 </span>
               ) : null}
@@ -56,7 +61,11 @@ export default function CodeBlock({
           ))}
           {language ? (
             <div
-              className={clsx("absolute top-2 left-4", "text-sm text-disabled")}
+              className={clsx(
+                "absolute top-2 left-4",
+                "text-sm",
+                "text-disabled",
+              )}
             >
               [{language}] {filename ? <span>{filename}</span> : null}
             </div>
@@ -64,7 +73,6 @@ export default function CodeBlock({
           {!disableCopy ? (
             <CopyButton
               className="absolute right-2 top-2"
-              position="left"
               content={copyContent}
             />
           ) : null}
@@ -78,12 +86,11 @@ export function Pre({ children, className }: BaseComponentProps): JSX.Element {
   return (
     <pre
       className={clsx(
-        "bg-depth",
+        "bg-gray-900 dark:bg-black",
         "text-secondary",
         "p-4 -mx-4 my-4",
         "rounded-xl",
         "whitespace-pre-wrap",
-        ".w-full-plus-2rem",
         "relative",
         className,
       )}

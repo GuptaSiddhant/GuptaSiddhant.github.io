@@ -1,6 +1,7 @@
-import type { ReactNode } from "react"
+import type { DataFunctionArgs } from "@remix-run/server-runtime"
 
-export * from "./remix"
+export type LoaderFunctionProps = DataFunctionArgs
+export type LoaderFunctionReturn = Promise<Response>
 
 export interface RootData {
   name: string
@@ -12,7 +13,7 @@ export interface PageContent<T extends ContentCommonData = ContentCommonData> {
   id: string
   path: string
   data: T
-  content: string
+  code: string
 }
 
 export interface ContentCommonData {
@@ -26,6 +27,6 @@ export interface ContentCommonData {
 }
 
 export interface BaseComponentProps {
-  children?: ReactNode
+  children?: React.ReactNode
   className?: string
 }

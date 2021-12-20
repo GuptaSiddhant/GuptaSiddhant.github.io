@@ -1,13 +1,15 @@
 import { Link } from "remix"
+
 import Grid from "~/components/Grid"
+import Heading from "~/components/Heading"
 import { isBlogPost, BlogPostCard, type BlogPostContent } from "~/features/blog"
 import {
   isProject,
   ProjectCard,
   type ProjectContent,
 } from "~/features/projects"
-import { sortByDate } from "~/helpers/utils"
-import Section from "~/layouts/Section"
+import { sortByDate } from "~/helpers"
+import Section from "~/components/layouts/Section"
 import type { CommonContent } from "~/types"
 
 export interface FeaturedGridProps {
@@ -20,15 +22,14 @@ export function FeaturedSection(props: FeaturedGridProps): JSX.Element | null {
   return (
     <Section className="flex-col bg-depth sm:p-16">
       <div className="flex justify-between items-baseline flex-wrap">
-        <h2>Featured work</h2>
+        <Heading value={2}>Featured work</Heading>
         <div className="flex gap-12 ">
           <Link to="projects">View projects</Link>
           <Link to="blog">View blog</Link>
         </div>
       </div>
-      <div>
-        <FeaturedGrid {...props} />
-      </div>
+
+      <FeaturedGrid {...props} />
     </Section>
   )
 }

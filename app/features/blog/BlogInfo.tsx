@@ -3,7 +3,7 @@ import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 
 import CopyButton from "~/components/CopyButton"
 import { InfoBox, InfoList } from "~/components/Info"
-import { formatDate } from "~/helpers/utils"
+import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
 
 export function BlogInfo({
@@ -30,7 +30,7 @@ export function BlogInfo({
           <small className="text-yellow-500">{author}</small>
         </InfoBox>
         <InfoBox field="Date" hideField>
-          <small className="text-tertiary">
+          <small className={"text-tertiary"}>
             {formatDate(date, { day: "numeric" })}
           </small>
         </InfoBox>
@@ -39,12 +39,7 @@ export function BlogInfo({
         <a href={linkedInShareUrl} data-custom-border target="_blank">
           <LinkedinIcon aria-label={"Share to LinkedIn"} />
         </a>
-        <CopyButton
-          className="relative"
-          content={pageUrl}
-          position="bottom"
-          label="Copy link"
-        />
+        <CopyButton className="relative" content={pageUrl} label="Copy link" />
       </div>
     </InfoList>
   )

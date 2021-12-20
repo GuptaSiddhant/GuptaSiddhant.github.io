@@ -1,9 +1,9 @@
 import { join } from "path"
-import matter from "gray-matter"
+import { bundleMDX } from "mdx-bundler"
 
-import { downloadDirList, downloadFile } from "./github.server"
 import { readDirList, readFile } from "./content.local"
-import { getIdFromPath } from "./utils"
+import { downloadDirList, downloadFile } from "./github.server"
+import { getIdFromPath } from "~/helpers"
 import type { ContentCommonData, PageContent } from "~/types"
 
 const __IS_DEV__ = process.env.NODE_ENV === "development"
@@ -12,7 +12,6 @@ const CONTENT_PATH = "content"
 
 export async function getMdxDirList(contentDir: string) {
   const dirPath = join(CONTENT_PATH, contentDir)
-  console.log(dirPath)
   const dirList = __IS_DEV__
     ? readDirList(dirPath)
     : await downloadDirList(dirPath)
@@ -28,9 +27,11 @@ export async function getMdxPage<T extends ContentCommonData>(
   id: string,
 ): Promise<PageContent<T>> {
   const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
-  const { content, data } = matter(page)
+  const { code, frontmatter } = await bundleMDX<T>({
+    source: page,
+  })
 
-  return { id, path, data: data as T, content }
+  return { id, path, data: frontmatter, code }
 }
 
 export async function getMdxPagesInDirectory<T extends ContentCommonData>(

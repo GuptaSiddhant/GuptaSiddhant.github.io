@@ -28,7 +28,12 @@ const socialLinks = [
 
 export default function Header({ name }: HeaderProps): JSX.Element {
   return (
-    <header className="container-mx flex flex-row justify-between items-center  top-0 bg-base z-50">
+    <header
+      className={clsx(
+        "bg-base",
+        "container-mx flex flex-row justify-between items-baseline top-0 z-50",
+      )}
+    >
       <Logo name={name} />
 
       <nav aria-label="Main navigation">

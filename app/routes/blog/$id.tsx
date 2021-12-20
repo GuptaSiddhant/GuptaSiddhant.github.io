@@ -6,13 +6,14 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Image from "~/components/Image"
+import Image from "~/components/atoms/Image"
 import Markdown from "~/components/Markdown"
 import {
   getBlogPostById,
   BlogInfo,
   type BlogPostContent,
 } from "~/features/blog"
+import Prose from "~/components/layouts/Prose"
 
 export const meta: MetaFunction = () => {
   return {
@@ -35,14 +36,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 }
 
 export default function BlogPost(): JSX.Element {
-  const { data, content } = useLoaderData<BlogPostContent>()
+  const { data, code } = useLoaderData<BlogPostContent>()
   const { title, gallery = [] } = data
   const showcaseImage = gallery[0]?.url
 
   return (
-    <section>
-      <h1 className="prose">{title}</h1>
-      <BlogInfo data={data} className="prose" />
+    <Prose>
+      <h1>{title}</h1>
+      <BlogInfo data={data} />
       {showcaseImage ? (
         <Image
           src={showcaseImage}
@@ -56,10 +57,8 @@ export default function BlogPost(): JSX.Element {
         />
       ) : null}
 
-      <div className="prose">
-        <Markdown value={content} />
-      </div>
-    </section>
+      <Markdown code={code} />
+    </Prose>
   )
 }
 
@@ -67,10 +66,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
 
   return (
-    <section>
-      <h1 className="prose">{"Error with the project"}</h1>
-      <p className="prose">{error.message}</p>
+    <Prose>
+      <h1>{"Error with the project"}</h1>
+      <p>{error.message}</p>
       <p>Go back</p>
-    </section>
+    </Prose>
   )
 }

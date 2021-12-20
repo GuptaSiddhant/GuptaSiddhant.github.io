@@ -2,7 +2,6 @@ const colors = require("tailwindcss/colors")
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
-  mode: "jit",
   content: ["./app/**/*.{ts,tsx}"],
   theme: {
     fontFamily: {
@@ -19,8 +18,10 @@ module.exports = {
       },
     },
   },
+
   plugins: [
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
   ],
 }

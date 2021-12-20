@@ -1,5 +1,5 @@
 import { InfoBox, InfoList } from "~/components/Info"
-import { capitalize, formatDate } from "~/helpers/utils"
+import { capitalize, formatDate } from "~/helpers"
 import type { ProjectData } from "./types"
 
 export function ProjectInfo({

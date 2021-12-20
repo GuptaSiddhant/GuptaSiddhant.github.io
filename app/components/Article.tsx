@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
-import Card from "~/components/Card"
-import Image, { type ImageProps } from "~/components/Image"
+import Card from "~/components/atoms/Card"
+import Image, { type ImageProps } from "~/components/atoms/Image"
 import { TagList } from "~/components/Tag"
 import type { BaseComponentProps } from "~/types"
 
@@ -25,8 +25,9 @@ export default function Article({
       tabIndex={0}
       className={clsx(
         "justify-between flex-col",
+        "pb-0 ",
         featured && "sm:flex-row",
-        featured ? "pb-0 sm:pr-0" : "pb-0",
+        featured && "sm:pr-0",
         className,
       )}
     >

@@ -1,14 +1,18 @@
-import { type ReactNode } from "react"
-import { VisuallyHidden } from "@react-aria/visually-hidden"
+import clsx from "clsx"
+import { BaseComponentProps } from "~/types"
 
-export function InfoList({
-  children,
-  className,
-}: {
-  children: ReactNode
-  className?: string
-}) {
-  return <dl className={className}>{children}</dl>
+export function InfoList({ children, className }: BaseComponentProps) {
+  return (
+    <dl
+      className={clsx(
+        "flex flex-wrap justify-between",
+        "gap-x-8 gap-y-4",
+        className,
+      )}
+    >
+      {children}
+    </dl>
+  )
 }
 
 export function InfoBox({
@@ -16,16 +20,16 @@ export function InfoBox({
   children,
   className,
   hideField,
-}: {
-  className?: string
+}: BaseComponentProps & {
   field: string
-  children: ReactNode
   hideField?: boolean
 }) {
   return (
     <div className={className}>
-      <dt>{hideField ? <VisuallyHidden>{field}</VisuallyHidden> : field}</dt>
-      <dd>{children}</dd>
+      <dt className={clsx("font-bold text-sm block", hideField && "sr-only")}>
+        {field}
+      </dt>
+      <dd className={"text-xl block"}>{children}</dd>
     </div>
   )
 }

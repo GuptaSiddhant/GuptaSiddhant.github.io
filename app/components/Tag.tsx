@@ -1,10 +1,9 @@
 import { useLabel } from "@react-aria/label"
-import { VisuallyHidden } from "@react-aria/visually-hidden"
 import { useFocusRing } from "@react-aria/focus"
 import clsx from "clsx"
 import { type ForwardedRef } from "react"
 
-import { capitalize } from "~/helpers/utils"
+import { capitalize } from "~/helpers"
 
 export function Tag({
   children,
@@ -40,16 +39,15 @@ export function Tag({
       {...labelProps}
     >
       {isDisabled ? null : (
-        <VisuallyHidden>
-          <input
-            ref={_ref}
-            name={"tags"}
-            type="checkbox"
-            value={children}
-            {...focusProps}
-            {...fieldProps}
-          />
-        </VisuallyHidden>
+        <input
+          ref={_ref}
+          name={"tags"}
+          type="checkbox"
+          value={children}
+          className="sr-only"
+          {...focusProps}
+          {...fieldProps}
+        />
       )}
       {capitalize(children)}
     </label>

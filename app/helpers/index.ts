@@ -33,11 +33,14 @@ export function filterPageDrafts(page: PageContent): boolean {
   return !page.data.draft
 }
 
-export function createDebugger(prefix: string) {
+export function createDebugger(prefix: string, silent?: boolean) {
   const formattedPrefix = `[${prefix}]`
-  const log = (...args: any[]) => console.log(formattedPrefix, ...args)
-  const warn = (...args: any[]) => console.warn(formattedPrefix, ...args)
-  const error = (...args: any[]) => console.error(formattedPrefix, ...args)
+  const log = (...args: any[]) =>
+    !silent && console.log(formattedPrefix, ...args)
+  const warn = (...args: any[]) =>
+    !silent && console.warn(formattedPrefix, ...args)
+  const error = (...args: any[]) =>
+    !silent && console.error(formattedPrefix, ...args)
 
   function newDebugger(...args: any[]) {
     log(...args)

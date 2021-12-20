@@ -1,7 +1,7 @@
 import { Octokit as createOctokit } from "@octokit/rest"
 import { throttling } from "@octokit/plugin-throttling"
 
-import { createDebugger } from "./utils"
+import { createDebugger } from "~/helpers"
 
 const githubDebug = createDebugger("GITHUB")
 

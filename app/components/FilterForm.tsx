@@ -1,9 +1,9 @@
-import { usePress } from "@react-aria/interactions"
 import { type FormEvent } from "react"
 import { Form, useSubmit } from "remix"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
-import { Input } from "~/components/Input"
+import Button from "~/components/atoms/Button"
+import Input from "~/components/atoms/Input"
 import { TagList } from "~/components/Tag"
 
 export default function FilterForm({
@@ -56,19 +56,17 @@ function ResetFormButton({
 }): JSX.Element | null {
   const submit = useSubmit()
 
-  const { pressProps: pressResetProps } = usePress({
-    onPress: () => submit({}, { replace: true }),
-  })
+  const handleClick = () => submit({}, { replace: true })
 
   if (isDisabled) return null
 
   return (
-    <button
-      {...pressResetProps}
+    <Button
+      onClick={handleClick}
       type="reset"
       className="flex items-center gap-1 text-red-700 dark:text-red-300"
     >
       <CloseIcon className="inline" /> Reset filters
-    </button>
+    </Button>
   )
 }

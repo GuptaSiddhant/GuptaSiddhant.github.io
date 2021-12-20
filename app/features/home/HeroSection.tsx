@@ -1,9 +1,10 @@
-import { useIsSSR } from "@react-aria/ssr"
 import { Fragment } from "react"
-import TextTransition from "react-text-transition"
+
+import AnimatedText from "~/components/AnimatedText"
 import CodeBlock from "~/components/CodeBlock"
-import useTextTransition from "~/helpers/useTextTransition"
-import Section from "~/layouts/Section"
+import Heading from "~/components/Heading"
+import { Paragraph, Emphasis, Code } from "~/components/Text"
+import Section from "~/components/layouts/Section"
 
 /** Hero component */
 export function HeroSection(): JSX.Element | null {
@@ -29,23 +30,20 @@ function Title() {
     "Efficiently",
   ]
 
-  const textTransitionProps = useTextTransition(...ADJECTIVES)
-  const isSSR = useIsSSR()
-
   return (
-    <h1 className="mb-12">
+    <Heading value={1} className="mb-12">
       I bring designs to life on your screen...{" "}
-      {isSSR ? ADJECTIVES[0] : <TextTransition {...textTransitionProps} />}.
-    </h1>
+      <AnimatedText texts={ADJECTIVES} />.
+    </Heading>
   )
 }
 
 function Description() {
   return (
-    <p>
-      I am a <em>front-end developer</em> with a drive for creating beautiful
-      web and mobile applications.
-    </p>
+    <Paragraph>
+      I am a <Emphasis>front-end developer</Emphasis> with a drive for creating
+      beautiful web and mobile applications.
+    </Paragraph>
   )
 }
 
@@ -59,15 +57,15 @@ function TechStack() {
     "Figma",
   ]
   return (
-    <p>
+    <Paragraph>
       Stack:{" "}
       {stack.map((text, i, a) => (
         <Fragment key={text}>
-          <code key={text}>{text}</code>
+          <Code>{text}</Code>
           {i === a.length - 1 ? "" : i === a.length - 2 ? " and " : ", "}
         </Fragment>
       ))}
-    </p>
+    </Paragraph>
   )
 }
 
@@ -76,23 +74,21 @@ function CurrentStatus() {
     "https://www.accenture.com/fi-en/careers/jobdetails?id=R00008034_en&title=Senior+React+Developer"
 
   return (
-    <p>
+    <Paragraph>
       Currently applying my skills at <strong>Accenture Finland</strong> (
       <a href={jobLink} target="_blank">
         we are hiring
       </a>
       ).
-    </p>
+    </Paragraph>
   )
 }
 
 function TerminalCode() {
-  const NPX_CODE = `# An interactive resume for your terminal, made with React and ink. Run:
-npx guptasiddhant`
-
   return (
-    <div className="flex-auto my-12">
-      <CodeBlock lang="bash">{NPX_CODE}</CodeBlock>
-    </div>
+    <CodeBlock lang="bash" className="my-12">
+      {`# An interactive resume for your terminal, made with React and ink. Run:
+npx guptasiddhant`}
+    </CodeBlock>
   )
 }

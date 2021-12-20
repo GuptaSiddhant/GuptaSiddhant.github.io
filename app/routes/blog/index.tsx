@@ -10,7 +10,7 @@ import {
   type BlogPostContent,
 } from "~/features/blog"
 
-import Section from "~/layouts/Section"
+import Section from "~/components/layouts/Section"
 import { LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {

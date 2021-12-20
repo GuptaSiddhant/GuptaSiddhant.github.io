@@ -10,16 +10,16 @@ import {
   type MetaFunction,
 } from "remix"
 import { SSRProvider } from "@react-aria/ssr"
+import clsx from "clsx"
 
-import Header from "~/layouts/Header"
-import Footer from "~/layouts/Footer"
+import Header from "~/components/layouts/Header"
+import Footer from "~/components/layouts/Footer"
 import fontStyles from "./styles/font.css"
 import tailwindStyles from "./styles/tailwind.css"
 
 // https://remix.run/api/app#links
 export const links: LinksFunction = () => {
   return [
-    // { rel: "preconnect", href: "https://cdn.sanity.io/" },
     {
       rel: "preload",
       as: "font",
@@ -126,7 +126,11 @@ function Document({
 }) {
   return (
     <SSRProvider>
-      <html lang="en">
+      <html
+        lang="en"
+        dir="ltr"
+        className="text-[14px] sm:text-[16px] lg:text-[18px]"
+      >
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -144,7 +148,12 @@ function Document({
           <Meta />
           <Links />
         </head>
-        <body>
+        <body
+          className={clsx(
+            "min-h-screen w-screen flex flex-col",
+            "bg-base text-secondary",
+          )}
+        >
           <Header name={name} />
           {children}
           <Footer name={name} />

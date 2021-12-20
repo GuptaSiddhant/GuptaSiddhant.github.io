@@ -9,7 +9,7 @@ import {
   ProjectGrid,
   type ProjectContent,
 } from "~/features/projects"
-import Section from "~/layouts/Section"
+import Section from "~/components/layouts/Section"
 import type { LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {

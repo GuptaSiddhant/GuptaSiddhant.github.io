@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { NavLink, useLocation } from "remix"
 import BackIcon from "remixicon-react/ArrowLeftLineIcon"
 
-import useReducedMotion from "~/helpers/useReducedMotion"
+import { getHeadingClassName } from "~/components/Heading"
 
 export interface TitleProps {
   className?: string
@@ -15,22 +15,18 @@ export default function AnimatedTitle({
   className,
   backAriaLabel = "Go back",
 }: TitleProps): JSX.Element {
-  const preferReducedMotion = useReducedMotion()
   const { pathname } = useLocation()
   const pathNameArray = pathname.split("/")
   const nested = pathNameArray.length > 2 && pathNameArray[2] !== ""
 
+  const headingClassName = getHeadingClassName(nested ? 6 : 1)
+
   return (
     <div
       className={clsx(
-        "relative",
-        "mx-auto my-4",
-        "duration-500",
-        "container-mx",
-        "font-bold",
-        nested ? "xl:left-1-6" : "left-0",
-        nested ? "text-3xl" : "text-6xl",
-        !preferReducedMotion && "transition-all",
+        "relative container-mx my-4",
+        "motion-safe:transition-all motion-safe:duration-500",
+        headingClassName,
         className,
       )}
     >

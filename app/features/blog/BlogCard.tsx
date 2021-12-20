@@ -1,5 +1,5 @@
 import Article from "~/components/Article"
-import { formatDate } from "~/helpers/utils"
+import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
 
 export function BlogPostCard({

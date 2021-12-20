@@ -1,12 +1,12 @@
 import { json } from "remix"
 
-import { generateResponseForPages } from "~/helpers/api"
+import { generateResponseForPages } from "~/service/api"
 import {
   getMdxPagesInDirectory,
   getMdxPage,
   getMdxDirList,
-} from "~/helpers/mdx"
-import { filterPageDrafts, sortByDate } from "~/helpers/utils"
+} from "~/service/mdx.server"
+import { filterPageDrafts, sortByDate } from "~/helpers"
 import type { LoaderFunctionProps } from "~/types"
 import type { BlogPostContent, BlogPostData } from "./types"
 

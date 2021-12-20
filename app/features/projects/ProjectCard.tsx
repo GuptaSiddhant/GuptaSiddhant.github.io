@@ -1,5 +1,5 @@
 import Article from "~/components/Article"
-import Image from "~/components/Image"
+import Image from "~/components/atoms/Image"
 import type { ProjectData } from "./types"
 
 export function ProjectCard({
