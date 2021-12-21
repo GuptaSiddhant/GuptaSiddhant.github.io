@@ -1,7 +1,8 @@
+import copyToClipboard from "copy-to-clipboard"
 import clsx from "clsx"
 import CopyIcon from "remixicon-react/FileCopyLineIcon"
 import CheckIcon from "remixicon-react/CheckLineIcon"
-import useCopy from "use-copy"
+import { useState, useRef, useEffect, useCallback } from "react"
 
 import Button from "~/components/atoms/Button"
 import Tooltip from "~/components/atoms/Tooltip"
@@ -35,4 +36,19 @@ export default function CopyButton({
       </Button>
     </Tooltip>
   )
+}
+
+function useCopy(str: string): [boolean, () => void, (value: boolean) => void] {
+  const copyableString = useRef(str)
+  const [copied, setCopied] = useState(false)
+  const copyAction = useCallback(() => {
+    const copiedString = copyToClipboard(copyableString.current)
+    setCopied(copiedString)
+  }, [copyableString])
+
+  useEffect(() => {
+    copyableString.current = str
+  }, [str])
+
+  return [copied, copyAction, setCopied]
 }
