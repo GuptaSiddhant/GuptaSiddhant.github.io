@@ -65,3 +65,5 @@ export default function Projects(): JSX.Element {
     </Section>
   )
 }
+
+export { ErrorBoundary } from "~/components/ErrorBoundary"

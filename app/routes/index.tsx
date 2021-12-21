@@ -36,3 +36,5 @@ export default function Index() {
     </main>
   )
 }
+
+export { ErrorBoundary } from "~/components/ErrorBoundary"
