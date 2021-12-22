@@ -87,6 +87,13 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@netlify/functions@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-0.10.0.tgz#3856b609df1c1d1c7c21773650d1e5b4f81cfaf2"
+  integrity sha512-NNFADTPnokuoMY1OUhaXlE/Jrzk5lHOl1uB4L/8pw1UJ/CaectZJACMExijbJnqaKIhOQG0WmbBQUh1lgnK/Qg==
+  dependencies:
+    is-promise "^4.0.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -522,6 +529,14 @@
     "@remix-run/node" "1.1.1"
     "@remix-run/server-runtime" "1.1.1"
 
+"@remix-run/netlify@1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/netlify/-/netlify-1.1.1.tgz#15eb20f6021a763426f2d790e463c216df39d2ac"
+  integrity sha512-6eUw36ynCpisQbtf5UFMIVTuSX6HzK5bto/fq+Spp+pXDchM+3JEZKEiZfdWT3QCkc0QGCeC2VsLuBhyC5w35g==
+  dependencies:
+    "@remix-run/node" "1.1.1"
+    "@remix-run/server-runtime" "1.1.1"
+
 "@remix-run/node@1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.1.1.tgz#c31bee7c75a2e42b04a9e06cd4a94b016737a842"
@@ -567,14 +582,6 @@
     react-router-dom "^6.2.1"
     set-cookie-parser "^2.4.8"
     source-map "^0.7.3"
-
-"@remix-run/vercel@1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/vercel/-/vercel-1.1.1.tgz#ce286a2c526f31418868a87a10c00cf1cac7d31e"
-  integrity sha512-I7YgUIQJFjJmTiSK5gPE4t0LZRF0iwL7kXQRi05u5znPnOQDmpV/uUFaeET2tHD94B4t4FLI5VDQVF4q7/LLKw==
-  dependencies:
-    "@remix-run/node" "1.1.1"
-    "@remix-run/server-runtime" "1.1.1"
 
 "@rollup/pluginutils@^4.0.0":
   version "4.1.2"
@@ -2655,6 +2662,11 @@ is-plain-object@^5.0.0:
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
   integrity sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==
 
+is-promise@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-4.0.0.tgz#42ff9f84206c1991d26debf520dd5c01042dd2f3"
+  integrity sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==
+
 is-reference@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/is-reference/-/is-reference-3.0.0.tgz#b1380c03d96ddf7089709781e3208fceb0c92cd6"
@@ -3863,9 +3875,9 @@ postcss-nested@5.0.6:
     postcss-selector-parser "^6.0.6"
 
 postcss-selector-parser@^6.0.6, postcss-selector-parser@^6.0.7:
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.7.tgz#48404830a635113a71fd79397de8209ed05a66fc"
-  integrity sha512-U+b/Deoi4I/UmE6KOVPpnhS7I7AYdKbhGcat+qTQ27gycvaACvNEw11ba6RrkwVmDVRW7sigWgLj4/KbbJjeDA==
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.8.tgz#f023ed7a9ea736cd7ef70342996e8e78645a7914"
+  integrity sha512-D5PG53d209Z1Uhcc0qAZ5U3t5HagH3cxu+WLZ22jt3gLUpXM4eXXfiO14jiDWST3NNooX/E8wISfOhZ9eIjGTQ==
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
