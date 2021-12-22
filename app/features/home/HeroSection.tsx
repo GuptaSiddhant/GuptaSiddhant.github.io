@@ -76,7 +76,7 @@ function CurrentStatus() {
   return (
     <Paragraph>
       Currently applying my skills at <strong>Accenture Finland</strong> (
-      <a href={jobLink} target="_blank">
+      <a href={jobLink} target="_blank" rel="noopener">
         we are hiring
       </a>
       ).

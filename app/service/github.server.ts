@@ -10,7 +10,7 @@ const Octokit = createOctokit.plugin(throttling)
 const repo = {
   owner: "GuptaSiddhant",
   repo: "GuptaSiddhant.github.io",
-  ref: "remix",
+  ref: process.env.BRANCH || "netlify",
 }
 
 type ThrottleOptions = {
@@ -43,6 +43,7 @@ const octokit = new Octokit({
  */
 export async function downloadDirList(path: string) {
   githubDebug("Getting list of files in", path)
+  githubDebug("env", process.env)
 
   const { data } = await octokit.repos.getContent({ ...repo, path })
 

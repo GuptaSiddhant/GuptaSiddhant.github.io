@@ -4,15 +4,15 @@
   "description": "Personal website of Siddhant Gupta, build with Remix.",
   "license": "",
   "scripts": {
-    "build": "npm run build:css && npm run build:remix",
-    "build:remix": "remix build",
+    "build": "netlify build",
     "build:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --minify",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:remix\"",
-    "dev:remix": "node -r dotenv/config netlify dev",
+    "dev:remix": "netlify dev",
     "dev:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --watch",
     "deploy": "netlify deploy",
+    "deploy:prod": "netlify deploy --prod",
     "postinstall": "remix setup node",
-    "clear": "rm -rf api/build; rm -rf public/build; rm -rf .cache; rm app/styles/tailwind.css"
+    "clear": "rm -rf netlify/build; rm -rf public/build; rm -rf .cache; rm app/styles/tailwind.css"
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",
@@ -28,7 +28,6 @@
     "@remix-run/serve": "1",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
-    "dotenv": "^10.0.0",
     "mdx-bundler": "^8.0.1",
     "octokit": "^1.7.1",
     "prism-react-renderer": "^1.2.1",
@@ -51,7 +50,6 @@
     "eslint": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "prettier": "^2.5.0",
-    "prettier-plugin-groq": "^0.2.5",
     "tailwindcss": "^3.0.0",
     "typescript": "^4.5.0"
   },

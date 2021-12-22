@@ -47,7 +47,7 @@ export default function Header({ name }: HeaderProps): JSX.Element {
           })}
           {socialLinks.map((link) => (
             <li key={link.href}>
-              <a target="_blank" {...link} />
+              <a target="_blank" rel="noopener" {...link} />
             </li>
           ))}
         </ul>
