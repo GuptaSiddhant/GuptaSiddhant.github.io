@@ -16,3 +16,12 @@
   for = "/build/*"
   [headers.values]
     "Cache-Control" = "public, max-age=31536000, s-maxage=31536000"
+
+[[plugins]]
+package = "netlify-plugin-image-optim"
+
+[[plugins]] 
+package = "netlify-plugin-use-env-in-runtime"    
+ [plugins.inputs]    
+  prefix = ""    
+  def = ["BRANCH"]  

@@ -23,8 +23,8 @@
     "@react-aria/focus": "^3.5.0",
     "@react-aria/label": "^3.2.1",
     "@react-aria/ssr": "^3.1.0",
-    "@remix-run/react": "1",
     "@remix-run/netlify": "1",
+    "@remix-run/react": "1",
     "@remix-run/serve": "1",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
@@ -49,6 +49,8 @@
     "concurrently": "^6.4.0",
     "eslint": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
+    "netlify-plugin-image-optim": "^0.4.0",
+    "netlify-plugin-use-env-in-runtime": "^1.2.2",
     "prettier": "^2.5.0",
     "tailwindcss": "^3.0.0",
     "typescript": "^4.5.0"
