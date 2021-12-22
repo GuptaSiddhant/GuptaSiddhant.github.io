@@ -42,6 +42,5 @@ export async function getMdxPagesInDirectory<T extends ContentCommonData>(
     dirList.map(({ id, path }) => getMdxPage<T>(path, id)),
   )
 
-  console.log(process.env)
   return pages
 }

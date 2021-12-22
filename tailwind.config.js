@@ -16,6 +16,10 @@ module.exports = {
         blue: colors.sky,
         red: colors.rose,
       },
+      screens: {
+        "2xl": "1700px",
+        "3xl": "2200px",
+      },
     },
   },
 

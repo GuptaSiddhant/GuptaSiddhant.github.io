@@ -1,4 +1,4 @@
-import { PageContent } from "~/types"
+import { CommonContent, PageContent } from "~/types"
 
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
@@ -50,4 +50,21 @@ export function createDebugger(prefix: string, silent?: boolean) {
   newDebugger.error = error
 
   return newDebugger
+}
+
+export function generateUniqueTags(items: CommonContent[]) {
+  const allTags = items.flatMap((item) => item.data.tags || [])
+
+  const tagMap: { [key: string]: number } = {}
+  allTags.forEach((tag) => {
+    if (tagMap[tag]) tagMap[tag]++
+    else tagMap[tag] = 1
+  })
+
+  const sortedTags = Object.entries(tagMap)
+    .sort((a, b) => b[1] - a[1])
+    .map((a) => a[0])
+    .slice(0, 10)
+
+  return sortedTags
 }

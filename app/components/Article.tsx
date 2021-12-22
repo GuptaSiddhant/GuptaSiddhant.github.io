@@ -24,10 +24,8 @@ export default function Article({
       as="article"
       tabIndex={0}
       className={clsx(
-        "justify-between flex-col",
-        "pb-0 ",
-        featured && "sm:flex-row",
-        featured && "sm:pr-0",
+        "justify-between flex-col gap-8 pb-0",
+        featured && "sm:flex-row sm:pr-0",
         className,
       )}
     >

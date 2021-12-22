@@ -67,7 +67,7 @@ export function TagList({
   checkIsTagSelected?: (tag: string) => boolean
   checkIsTagDisabled?: (tag: string) => boolean
 }): JSX.Element | null {
-  if (tags.length <= 1) return null
+  if (tags.length < 1) return null
 
   return (
     <fieldset

@@ -22,6 +22,5 @@ package = "netlify-plugin-image-optim"
 
 [[plugins]] 
 package = "netlify-plugin-use-env-in-runtime"    
- [plugins.inputs]    
-  prefix = ""    
-  def = ["BRANCH"]  
+ [plugins.inputs]  
+  def = ["BRANCH"]

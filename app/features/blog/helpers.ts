@@ -24,10 +24,6 @@ export function filterBlogByQuery(
   )
 }
 
-export function generateUniqueTags(items: BlogPostContent[]) {
-  return [...new Set(items.map((item) => item.data.tags || []).flat())]
-}
-
 export function checkIfFeaturedBlogPost(post: BlogPostContent) {
   return !!post.data.featured
 }

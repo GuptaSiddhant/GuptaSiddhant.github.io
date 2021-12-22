@@ -5,11 +5,10 @@ import {
   getBlog,
   filterBlogByQuery,
   filterBlogByTags,
-  generateUniqueTags,
   BlogGrid,
   type BlogPostContent,
 } from "~/features/blog"
-
+import { generateUniqueTags } from "~/helpers"
 import Section from "~/components/layouts/Section"
 import { LoaderFunctionProps } from "~/types"
 

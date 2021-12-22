@@ -27,10 +27,6 @@ export function filterProjectsByQuery(
   )
 }
 
-export function generateUniqueTags(items: ProjectContent[]) {
-  return [...new Set(items.map((item) => item.data.tags || []).flat())]
-}
-
 export function checkIfFeaturedProject(project: ProjectContent) {
   return !!project.data.featured
 }

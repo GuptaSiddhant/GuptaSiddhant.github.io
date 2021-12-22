@@ -5,10 +5,10 @@ import {
   getAllProjects,
   filterProjectsByTags,
   filterProjectsByQuery,
-  generateUniqueTags,
   ProjectGrid,
   type ProjectContent,
 } from "~/features/projects"
+import { generateUniqueTags } from "~/helpers"
 import Section from "~/components/layouts/Section"
 import type { LoaderFunctionProps } from "~/types"
 

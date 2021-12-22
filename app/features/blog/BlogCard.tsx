@@ -1,4 +1,5 @@
 import Article from "~/components/Article"
+import { Paragraph } from "~/components/Text"
 import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
 
@@ -26,7 +27,7 @@ export function BlogPostCard({
         {formatDate(date)}
       </div>
       <Article.Tags tags={tags} />
-      <p>{subtitle}</p>
+      <Paragraph>{subtitle}</Paragraph>
     </Article>
   )
 }

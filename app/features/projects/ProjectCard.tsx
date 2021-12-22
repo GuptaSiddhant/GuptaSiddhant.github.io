@@ -1,5 +1,6 @@
 import Article from "~/components/Article"
 import Image from "~/components/atoms/Image"
+import { Paragraph } from "~/components/Text"
 import type { ProjectData } from "./types"
 
 export function ProjectCard({
@@ -21,13 +22,19 @@ export function ProjectCard({
       imagePosition={imagePosition}
       className={className}
     >
-      {icon ? <ProjectIcon url={icon} title={title} /> : null}
-      <div className="text-3xl font-bold">{title}</div>
-      <div className="text-yellow-500 font-black uppercase">
-        @ {association?.replace("-", " ")}
+      <div className="flex gap-4 items-center">
+        {icon ? <ProjectIcon url={icon} title={title} /> : null}
+        <div>
+          <div className="text-3xl font-bold">{title}</div>
+          <div className="text-yellow-500 font-black uppercase">
+            @ {association?.replace("-", " ")}
+          </div>
+        </div>
       </div>
       <Article.Tags tags={tags} />
-      {imagePosition === "right" && description ? <p>{description}</p> : null}
+      {imagePosition === "right" && description ? (
+        <Paragraph>{description}</Paragraph>
+      ) : null}
     </Article>
   )
 }
@@ -40,10 +47,6 @@ export function ProjectIcon({
   title: string
 }): JSX.Element {
   return (
-    <Image
-      src={url}
-      alt={`${title}-icon`}
-      className={"w-10 h-10 rounded mb-4"}
-    />
+    <Image src={url} alt={`${title}-icon`} className={"w-10 h-10 rounded"} />
   )
 }

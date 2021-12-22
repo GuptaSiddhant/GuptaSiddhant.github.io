@@ -25,7 +25,7 @@ export default function Grid<T extends ContentCommonData = ContentCommonData>({
       className={clsx(
         "h-full",
         "grid gap-8 grid-flow-row-dense",
-        "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+        "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5",
         className,
       )}
     >
@@ -36,7 +36,7 @@ export default function Grid<T extends ContentCommonData = ContentCommonData>({
           <li
             key={item.id}
             style={{ height: "500px" }}
-            className={isFeatured ? "col-span-full" : undefined}
+            className={isFeatured ? "col-span-full lg:col-span-2" : undefined}
           >
             <Link
               data-custom-color

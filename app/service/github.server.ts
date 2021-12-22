@@ -43,7 +43,6 @@ const octokit = new Octokit({
  */
 export async function downloadDirList(path: string) {
   githubDebug("Getting list of files in", path)
-  githubDebug("env", process.env)
 
   const { data } = await octokit.repos.getContent({ ...repo, path })
 
