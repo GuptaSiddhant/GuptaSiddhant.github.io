@@ -56,8 +56,5 @@
   "engines": {
     "node": ">=14"
   },
-  "sideEffects": false,
-  "optionalDependencies": {
-    "esbuild-linux-64": "*"
-  }
+  "sideEffects": false
 }
