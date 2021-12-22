@@ -10,7 +10,7 @@ const Octokit = createOctokit.plugin(throttling)
 const repo = {
   owner: "GuptaSiddhant",
   repo: "GuptaSiddhant.github.io",
-  ref: process.env.BRANCH || "netlify",
+  ref: process.env.BRANCH || "master",
 }
 
 type ThrottleOptions = {
