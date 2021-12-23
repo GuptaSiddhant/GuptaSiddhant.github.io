@@ -27,8 +27,6 @@ export async function getMdxDirList(contentDir: string) {
     ? readDirList(dirPath)
     : await downloadDirList(dirPath)
 
-  console.log(dirList)
-
   return dirList.map(({ name, path }) => ({
     id: getIdFromPath(name),
     path,

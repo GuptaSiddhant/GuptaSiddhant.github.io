@@ -52,7 +52,10 @@ export async function downloadDirList(path: string) {
     )
   }
 
-  return data as GithubContent[]
+  return (data as GithubContent[]).map((content) => ({
+    name: content.name,
+    path: content.type === "file" ? content.path : `${content.path}/index.mdx`,
+  }))
 }
 
 export async function downloadFile(path: string) {
@@ -77,7 +80,7 @@ export async function downloadFile(path: string) {
 interface GithubContent {
   name: string
   path: string
-  type: string
+  type: "dir" | "file"
   size: number
   content?: string | undefined
   sha: string
