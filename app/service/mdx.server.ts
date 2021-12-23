@@ -10,11 +10,24 @@ const __IS_DEV__ = process.env.NODE_ENV === "development"
 
 const CONTENT_PATH = "content"
 
+export async function getMdxPagesInDirectory<T extends ContentCommonData>(
+  contentDir: string,
+) {
+  const dirList = await getMdxDirList(contentDir)
+  const pages = await Promise.all(
+    dirList.map(({ id, path }) => getMdxPage<T>(path, id)),
+  )
+
+  return pages
+}
+
 export async function getMdxDirList(contentDir: string) {
   const dirPath = join(CONTENT_PATH, contentDir)
   const dirList = __IS_DEV__
     ? readDirList(dirPath)
     : await downloadDirList(dirPath)
+
+  console.log(dirList)
 
   return dirList.map(({ name, path }) => ({
     id: getIdFromPath(name),
@@ -27,20 +40,17 @@ export async function getMdxPage<T extends ContentCommonData>(
   id: string,
 ): Promise<PageContent<T>> {
   const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
-  const { code, frontmatter } = await bundleMDX<T>({
-    source: page,
-  })
+  const source = replaceFilePathsInPage(page, path)
+  const { code, frontmatter } = await bundleMDX<T>({ source })
 
   return { id, path, data: frontmatter, code }
 }
 
-export async function getMdxPagesInDirectory<T extends ContentCommonData>(
-  contentDir: string,
-) {
-  const dirList = await getMdxDirList(contentDir)
-  const pages = await Promise.all(
-    dirList.map(({ id, path }) => getMdxPage<T>(path, id)),
-  )
-
-  return pages
+function replaceFilePathsInPage(page: string, path: string) {
+  const newPath = path
+    .replace(CONTENT_PATH, "")
+    .split("/")
+    .slice(0, 3)
+    .join("/")
+  return page.replace(/\B(\.\/)/g, `${newPath}/`)
 }

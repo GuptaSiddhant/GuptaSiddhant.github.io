@@ -26,8 +26,8 @@ export function ProjectCard({
     >
       <div
         className={clsx(
+          isBig ? "flex-col-reverse" : "flex-row justify-between items-center",
           "flex gap-4",
-          isBig ? "flex-col-reverse" : "justify-between items-center",
         )}
       >
         <div>

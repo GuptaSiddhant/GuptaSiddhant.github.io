@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build:css; remix build"
+  command = "npm run build:css; npm run build:content; remix build"
   functions = "netlify/functions"
   publish = "public"
 
@@ -19,8 +19,3 @@
 
 [[plugins]]
 package = "netlify-plugin-image-optim"
-
-[[plugins]] 
-package = "netlify-plugin-use-env-in-runtime"    
- [plugins.inputs]  
-  def = ["BRANCH"]
