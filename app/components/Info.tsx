@@ -5,7 +5,7 @@ export function InfoList({ children, className }: BaseComponentProps) {
   return (
     <dl
       className={clsx(
-        "flex flex-wrap justify-between",
+        "flex flex-wrap justify-between items-center",
         "gap-x-8 gap-y-4",
         className,
       )}

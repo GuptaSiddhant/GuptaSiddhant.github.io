@@ -2,6 +2,7 @@ import { useIsSSR } from "@react-aria/ssr"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 
 import CopyButton from "~/components/CopyButton"
+import ExternalLink from "~/components/ExternalLink"
 import { InfoBox, InfoList } from "~/components/Info"
 import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
@@ -36,9 +37,13 @@ export function BlogInfo({
         </InfoBox>
       </div>
       <div className="flex self-center gap-4">
-        <a href={linkedInShareUrl} data-custom-border target="_blank">
-          <LinkedinIcon aria-label={"Share to LinkedIn"} />
-        </a>
+        <ExternalLink
+          href={linkedInShareUrl}
+          tooltipLabel="Share on LinkedIn"
+          customBorder
+        >
+          <LinkedinIcon aria-label="LinkedIn" />
+        </ExternalLink>
         <CopyButton className="relative" content={pageUrl} label="Copy link" />
       </div>
     </InfoList>

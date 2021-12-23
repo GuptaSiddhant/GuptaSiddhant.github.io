@@ -8,4 +8,21 @@ export interface ProjectData extends ContentCommonData {
   dateEnd?: string
   icon?: string
   externalLink?: string
+  github?: string
+  links?: ProjectLink[]
 }
+
+export interface ProjectLink {
+  url: string
+  title?: string
+  type?: ProjectLinkType
+}
+
+export type ProjectLinkType =
+  | "github"
+  | "demo"
+  | "blog"
+  | "homepage"
+  | "npm"
+  | "prototype"
+  | "design"

@@ -1,14 +1,19 @@
+import { useIsSSR } from "@react-aria/ssr"
+
 import { InfoBox, InfoList } from "~/components/Info"
 import { capitalize, formatDate } from "~/helpers"
-import type { ProjectData } from "./types"
+import ProjectLinks from "./ProjectLinks"
+import type { ProjectData, ProjectLink as IProjectLink } from "./types"
 
 export function ProjectInfo({
   className,
-  data: { association, description, dateStart, dateEnd },
+  data: { association, description, dateStart, dateEnd, links = [] },
 }: {
   data: ProjectData
   className?: string
 }) {
+  const pageUrl = useIsSSR() ? "" : window.location.href
+
   return (
     <InfoList className={className}>
       {association ? (
@@ -17,6 +22,8 @@ export function ProjectInfo({
         </InfoBox>
       ) : null}
       <InfoBox field="Status">{getProjectStatus(dateStart, dateEnd)}</InfoBox>
+      <ProjectLinks links={links} />
+
       {description ? (
         <InfoBox field="Description">{description}</InfoBox>
       ) : null}
