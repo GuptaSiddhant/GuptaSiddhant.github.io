@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { getMDXComponent, type MDXContentProps } from "mdx-bundler/client"
 
-import { Pre } from "./CodeBlock"
+import Pre from "~/components/atoms/Pre"
 import { H1, H2, H3, H4, H5, H6 } from "~/components/Heading"
 import Image from "~/components/atoms/Image"
 import { Paragraph, Emphasis, Code, Strong } from "~/components/Text"

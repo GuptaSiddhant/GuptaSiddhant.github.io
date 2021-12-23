@@ -25,8 +25,8 @@ export default function ContentCard({
       as="article"
       tabIndex={0}
       className={clsx(
-        "p-0 justify-between flex-col gap-0",
-        featured && "sm:flex-row sm:pr-0",
+        "!p-0 justify-between flex-col gap-0",
+        featured && "sm:flex-row",
         className,
       )}
     >
@@ -125,7 +125,7 @@ function ContentCardImage({
 }): JSX.Element | null {
   return imageProps?.src ? (
     <Image
-      imageClassName="rounded-none"
+      imageClassName="!rounded-none"
       {...imageProps}
       className={clsx(
         "flex-1 w-full bg-depth",

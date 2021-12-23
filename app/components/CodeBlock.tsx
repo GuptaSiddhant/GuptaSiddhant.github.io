@@ -2,8 +2,8 @@ import clsx from "clsx"
 import Highlight, { defaultProps, type Language } from "prism-react-renderer"
 import dracula from "prism-react-renderer/themes/dracula"
 
+import Pre from "~/components/atoms/Pre"
 import CopyButton from "~/components/CopyButton"
-import type { BaseComponentProps } from "~/types"
 
 export interface CodeProps {
   className?: string
@@ -79,23 +79,5 @@ export default function CodeBlock({
         </Pre>
       )}
     </Highlight>
-  )
-}
-
-export function Pre({ children, className }: BaseComponentProps): JSX.Element {
-  return (
-    <pre
-      className={clsx(
-        "bg-gray-900 dark:bg-black",
-        "text-secondary",
-        "p-4 -mx-4 my-4",
-        "rounded-xl",
-        "whitespace-pre-wrap",
-        "relative",
-        className,
-      )}
-    >
-      {children}
-    </pre>
   )
 }
