@@ -2,21 +2,21 @@ import clsx from "clsx"
 
 import Card from "~/components/atoms/Card"
 import Image, { type ImageProps } from "~/components/atoms/Image"
-import { TagList } from "~/components/Tag"
+import TagList from "~/components/TagList"
 import type { BaseComponentProps } from "~/types"
 
-export interface ArticleProps extends BaseComponentProps {
+export interface ContentCardProps extends BaseComponentProps {
   imagePosition?: "bottom" | "right"
   imageProps?: ImageProps
 }
 
-/** Article card component */
-export default function Article({
+/** ContentCard card component */
+export default function ContentCard({
   className,
   children,
   imagePosition = "bottom",
   imageProps,
-}: ArticleProps): JSX.Element | null {
+}: ContentCardProps): JSX.Element | null {
   const featured = imagePosition === "right"
 
   return (
@@ -47,10 +47,10 @@ export default function Article({
   )
 }
 
-Article.Tape = ArticleTape
-Article.Tags = ArticleTags
+ContentCard.Tape = ContentCardTape
+ContentCard.Tags = ContentCardTags
 
-function ArticleTape({
+function ContentCardTape({
   children,
   className,
   variant,
@@ -79,13 +79,18 @@ function ArticleTape({
   )
 }
 
-function ArticleTags({ tags = [] }: { tags?: string[] }): JSX.Element | null {
+function ContentCardTags({
+  tags = [],
+}: {
+  tags?: string[]
+}): JSX.Element | null {
   return (
     <TagList
       aria-label="Tags"
       className="mt-4"
       tags={tags}
       checkIsTagDisabled={() => true}
+      size="sm"
     />
   )
 }

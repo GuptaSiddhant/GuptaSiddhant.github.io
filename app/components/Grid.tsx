@@ -25,7 +25,7 @@ export default function Grid<T extends ContentCommonData = ContentCommonData>({
       className={clsx(
         "h-full",
         "grid gap-8 grid-flow-row-dense",
-        "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5",
+        "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5",
         className,
       )}
     >

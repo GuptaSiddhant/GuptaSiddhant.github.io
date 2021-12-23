@@ -1,4 +1,4 @@
-import Article from "~/components/Article"
+import ContentCard from "~/components/ContentCard"
 import Image from "~/components/atoms/Image"
 import { Paragraph } from "~/components/Text"
 import type { ProjectData } from "./types"
@@ -17,7 +17,7 @@ export function ProjectCard({
   const imageAlt = project.gallery?.[0]?.alt || title
 
   return (
-    <Article
+    <ContentCard
       imageProps={{ src: imageSrc, alt: imageAlt }}
       imagePosition={imagePosition}
       className={className}
@@ -31,11 +31,11 @@ export function ProjectCard({
           </div>
         </div>
       </div>
-      <Article.Tags tags={tags} />
+      <ContentCard.Tags tags={tags} />
       {imagePosition === "right" && description ? (
         <Paragraph>{description}</Paragraph>
       ) : null}
-    </Article>
+    </ContentCard>
   )
 }
 

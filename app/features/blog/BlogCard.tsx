@@ -1,4 +1,4 @@
-import Article from "~/components/Article"
+import ContentCard from "~/components/ContentCard"
 import { Paragraph } from "~/components/Text"
 import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
@@ -17,7 +17,7 @@ export function BlogPostCard({
   const imageAlt = post.gallery?.[0]?.alt || title
 
   return (
-    <Article
+    <ContentCard
       imageProps={{ src: imageSrc, alt: imageAlt }}
       imagePosition={imagePosition}
       className={className}
@@ -26,8 +26,8 @@ export function BlogPostCard({
       <div className="text-yellow-500 font-black uppercase">
         {formatDate(date)}
       </div>
-      <Article.Tags tags={tags} />
+      <ContentCard.Tags tags={tags} />
       <Paragraph>{subtitle}</Paragraph>
-    </Article>
+    </ContentCard>
   )
 }
