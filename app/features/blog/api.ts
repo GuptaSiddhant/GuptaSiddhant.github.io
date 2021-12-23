@@ -6,7 +6,7 @@ import {
   getMdxPage,
   getMdxDirList,
 } from "~/service/mdx.server"
-import { filterPageDrafts, sortByDate } from "~/helpers"
+import { filterPageDraft, sortByDate } from "~/helpers"
 import type { LoaderFunctionProps } from "~/types"
 import type { BlogPostContent, BlogPostData } from "./types"
 
@@ -16,7 +16,7 @@ export async function getBlog(): Promise<BlogPostContent[]> {
   const projects = await getMdxPagesInDirectory<BlogPostData>(CONTENT_DIR)
 
   return projects
-    .filter(filterPageDrafts)
+    .filter(filterPageDraft)
     .sort((a, b) => sortByDate(a.data.date, b.data.date))
 }
 

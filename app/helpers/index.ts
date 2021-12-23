@@ -29,8 +29,10 @@ export function getIdFromPath(path: string): string {
   return filename.replace(/\.mdx$/, "")
 }
 
-export function filterPageDrafts(page: PageContent): boolean {
-  return !page.data.draft
+export function filterPageDraft(page: PageContent): boolean {
+  const isDev = process.env.NODE_ENV === "development"
+  const isDraft = page.data.draft
+  return isDev || !isDraft
 }
 
 export function createDebugger(prefix: string, silent?: boolean) {

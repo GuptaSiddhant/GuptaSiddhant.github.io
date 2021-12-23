@@ -6,7 +6,7 @@ import {
   getMdxPage,
   getMdxDirList,
 } from "~/service/mdx.server"
-import { filterPageDrafts, sortByDate } from "~/helpers"
+import { filterPageDraft, sortByDate } from "~/helpers"
 import { LoaderFunctionProps } from "~/types"
 import type { ProjectContent, ProjectData } from "./types"
 
@@ -16,7 +16,7 @@ export async function getAllProjects(): Promise<ProjectContent[]> {
   const projects = await getMdxPagesInDirectory<ProjectData>(CONTENT_DIR)
 
   return projects
-    .filter(filterPageDrafts)
+    .filter(filterPageDraft)
     .sort((a, b) => sortByDate(a.data.dateEnd, b.data.dateEnd))
 }
 

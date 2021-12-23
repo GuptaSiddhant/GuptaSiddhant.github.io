@@ -48,6 +48,10 @@
     @apply border-b-2 border-transparent;
     @apply hover:border-current;
   }
+
+  pre code {
+    padding: 0 !important;
+  }
 }
 
 /* Layout */

@@ -14,6 +14,7 @@ import {
   type BlogPostContent,
 } from "~/features/blog"
 import Prose from "~/components/layouts/Prose"
+import { filterPageDraft } from "~/helpers"
 
 export const meta: MetaFunction = () => {
   return {
@@ -28,9 +29,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const blogPost = await getBlogPostById(id)
 
-  if (blogPost.data.draft) {
-    return redirect(`..`)
-  }
+  if (!filterPageDraft(blogPost)) return redirect(`..`)
 
   return blogPost
 }

@@ -1,5 +1,4 @@
 import ContentCard from "~/components/ContentCard"
-import { Paragraph } from "~/components/Text"
 import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
 
@@ -12,7 +11,7 @@ export function BlogPostCard({
   className?: string
   imagePosition?: "bottom" | "right"
 }): JSX.Element {
-  const { title, subtitle, date, tags } = post
+  const { date, draft, subtitle, tags, title } = post
   const imageSrc = post.gallery?.[0]?.url
   const imageAlt = post.gallery?.[0]?.alt || title
 
@@ -22,12 +21,13 @@ export function BlogPostCard({
       imagePosition={imagePosition}
       className={className}
     >
-      <div className="text-3xl font-bold">{title}</div>
-      <div className="text-yellow-500 font-black uppercase">
-        {formatDate(date)}
-      </div>
+      <ContentCard.Title>{title}</ContentCard.Title>
+      <ContentCard.Subtitle>{formatDate(date)}</ContentCard.Subtitle>
       <ContentCard.Tags tags={tags} />
-      <Paragraph>{subtitle}</Paragraph>
+      <ContentCard.Description>{subtitle}</ContentCard.Description>
+      {draft ? (
+        <ContentCard.Tape variant="green">Draft</ContentCard.Tape>
+      ) : null}
     </ContentCard>
   )
 }

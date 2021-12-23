@@ -1,8 +1,9 @@
 import clsx from "clsx"
-import { NavLink, useLocation } from "remix"
+import { NavLink } from "remix"
 import BackIcon from "remixicon-react/ArrowLeftLineIcon"
 
 import { getHeadingClassName } from "~/components/Heading"
+import useNestedRoute from "~/helpers/useNestedRoute"
 
 export interface TitleProps {
   className?: string
@@ -15,10 +16,7 @@ export default function AnimatedTitle({
   className,
   backAriaLabel = "Go back",
 }: TitleProps): JSX.Element {
-  const { pathname } = useLocation()
-  const pathNameArray = pathname.split("/")
-  const nested = pathNameArray.length > 2 && pathNameArray[2] !== ""
-
+  const nested = useNestedRoute()
   const headingClassName = getHeadingClassName(nested ? 6 : 1)
 
   return (

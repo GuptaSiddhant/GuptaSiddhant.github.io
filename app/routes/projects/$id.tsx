@@ -14,6 +14,7 @@ import {
   type ProjectContent,
 } from "~/features/projects"
 import Prose from "~/components/layouts/Prose"
+import { filterPageDraft } from "~/helpers"
 
 export const meta: MetaFunction = () => {
   return {
@@ -28,9 +29,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const project = await getProjectById(id)
 
-  if (project.data.draft) {
-    return redirect(`..`)
-  }
+  if (!filterPageDraft(project)) return redirect(`..`)
 
   return project
 }

@@ -1,6 +1,7 @@
+import clsx from "clsx"
+
 import ContentCard from "~/components/ContentCard"
 import Image from "~/components/atoms/Image"
-import { Paragraph } from "~/components/Text"
 import type { ProjectData } from "./types"
 
 export function ProjectCard({
@@ -12,9 +13,10 @@ export function ProjectCard({
   className?: string
   imagePosition?: "bottom" | "right"
 }): JSX.Element {
-  const { icon, title, association, tags, description } = project
+  const { association, description, draft, icon, tags, title } = project
   const imageSrc = project.gallery?.[0]?.url
   const imageAlt = project.gallery?.[0]?.alt || title
+  const isBig = imagePosition === "right"
 
   return (
     <ContentCard
@@ -22,31 +24,27 @@ export function ProjectCard({
       imagePosition={imagePosition}
       className={className}
     >
-      <div className="flex gap-4 items-center">
-        {icon ? <ProjectIcon url={icon} title={title} /> : null}
+      <div
+        className={clsx(
+          "flex gap-4",
+          isBig ? "flex-col-reverse" : "justify-between items-center",
+        )}
+      >
         <div>
-          <div className="text-3xl font-bold">{title}</div>
-          <div className="text-yellow-500 font-black uppercase">
+          <ContentCard.Title>{title}</ContentCard.Title>
+          <ContentCard.Subtitle>
             @ {association?.replace("-", " ")}
-          </div>
+          </ContentCard.Subtitle>
         </div>
+        <ContentCard.Icon url={icon} title={title} />
       </div>
       <ContentCard.Tags tags={tags} />
-      {imagePosition === "right" && description ? (
-        <Paragraph>{description}</Paragraph>
+      {isBig ? (
+        <ContentCard.Description>{description}</ContentCard.Description>
+      ) : null}
+      {draft ? (
+        <ContentCard.Tape variant="green">Draft</ContentCard.Tape>
       ) : null}
     </ContentCard>
-  )
-}
-
-export function ProjectIcon({
-  url,
-  title,
-}: {
-  url: string
-  title: string
-}): JSX.Element {
-  return (
-    <Image src={url} alt={`${title}-icon`} className={"w-10 h-10 rounded"} />
   )
 }

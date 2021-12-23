@@ -1,0 +1,179 @@
+---
+title: React Table UI
+subtitle: Table component for React.
+association: kalpik-studio
+dateStart: 2021-04-01
+dateEnd: 2021-06-08
+description: Out-of-the-box React component build around headless React-Table library.
+tags:
+  - react
+  - typescript
+  - design
+  - code
+  - figma
+icon:
+gallery:
+  - url: /images/react-table-ui/react-table-ui-cover.png
+    alt: React Table UI cover
+externalLink: https://react-table-ui.js.org/
+github: https://github.com/GuptaSiddhant/react-table-ui/
+draft: false
+featured: false
+---
+
+I have extensively used React-Table at work and was amazed by the sheer amount of options provided by the library to build a functional table/grid in React applications. With an introduction of Hooks in React, the library moved to a headless approach where the logic was provided via hooks and plugins, allowing consumers/users could build their UI around it.
+
+The headless approach with plugins is great for experienced developers and companies with ample resources to figure out what they need and how everything fits into the puzzle. This approach gets problematic for novice users or developers with limited resources. The learning curve could be high as integrating all plugins and features in an accessible and usable interface is a big challenge. Furthermore, it does not help that the library does not provide type-declarations and community-driven types need careful composition.
+
+So, I took it as a challenge to make a helper library for those developers who want to utilise the power of React-Table without putting in the work needed to get the first functional render.
+
+> The project is dedicated to the amazing work done at [React-Table](http://react-table.tanstack.com/) by [Tanner Linsley](https://twitter.com/tannerlinsley) as it would not have been possible without his great library. I have personally used the library and wanted to contribute back to it somehow.
+
+## Overview
+
+![Table overview](/images/react-table-ui/react-table-ui-overview.jpg "Default setup of React-Table-UI with server-fetched data.")
+
+React-Table-UI is a library that provides a pre-developed UI integrated with (almost) all the plugins provided by React-Table and adopts some sensible defaults for most use-cases. The React component is
+
+- **Feature-packed** — The table natively supports features which can be disabled if needed — sorting, column-filtering, global-search, sub-rows, sub-components, table & row actions, sticky headers and columns, pagination (client-side & server-side), multi-row select, column-resize, etc.
+- **Customisable** — Style, theme, actions, enabling/disabling features, locale & translations, custom components and behaviours are customisable.
+- **Sensible defaults** — It is good to have customisations, though it is great to have useful and sensible defaults. The library works out-of-the-box with just a dataset by leveraging the default settings.
+- **Extensible** — The UI should support all plugins and extensions supported by the parent library. (WIP)
+- **Type-safe** — The library is built with TypeScript and provides a nice and safe developer experience with in-line documentation for all options. The API documentation is also available online for an overview.
+- **Accessible** — The table component rendered tries to follow accessibility guidelines for the web and provide an option for keyboard navigation (WIP).
+- **Responsive** — The component resizes and rearranges itself when used on mobile or desktop.
+- **Beautiful** — Beauty is subjective, but I hope the base table provided is soothing to the eyes and usable without any customisations. Nevertheless, the style is completely customisable.
+  Custom components can be provided to override default components like InputField, Button, Checkbox and more. (WIP)
+- **Localised** — Numbers and dates can be localised by just providing the locale option, though browser locale acts as the default. The default text (English) is easily translatable to your choosing by providing translated values for specific word keys.
+- **Transparent** — The library makes it easier to access the inner-workings and state changes with simple callbacks or refs, so everything is transparent and can be connected to outside triggers and actions.
+
+Many things are still _work-in-progress_. More and more developers can join and improve the developer experience.
+
+## Get started
+
+The package size for production usage (with styles and without types) is ~36 KB (unzipped). The ~200 KB size of the complete package contains helpful TypeScript typings that makes using React-Table-UI bliss.
+
+### Install package
+
+First, the package/library must be installed locally as a dependency. It will install a copy of `react-table`, `@types/react-table`, and `react-table-sticky` as dependencies. It requires `react@16.8 || react@17` or above for Hooks support.
+
+```bash
+# NPM
+npm install react-table-ui
+# Yarn
+yarn add react-table-ui
+```
+
+Optional packages like `@reach/menu-button` can be installed to use dropdown menus for actions if you don't have your implementation.
+
+### Setup types
+
+This step is for TypeScript users only. Since React-Table depends on community-driven types, it is imperative to configure and compose types correctly for the features used in the table. React-Table-UI provides a precomposed type-declaration that can be duplicated to your source (`src`) directory.
+
+If the installation goes well, there must be a `react-table-config.d.ts` file in your source (src) directory, but if it isn't, do one of the following to get it:
+
+- [**Preferred**] Copy the file from your project's node*modules (*./node*modules/react-table-ui/dist/react-table-config.d.ts*) to your source folder.
+- [Fallback] Get the file from GitHub. It may not match the exact version of the library that you are using. So you may have to look to the correct version git-tag before copying the file.
+
+The whole appeal of React-Table-UI is enriched with its TypeScript core. So all tutorials and examples will use TypeScript, but converting them to JavaScript shouldn't be too much trouble.
+
+### Import the package
+
+The package exports a single component as `default`. You can import it as `ReactTableUI`, `Table`, or any name that suits you.
+
+```tsx
+import ReactTableUI from "react-table-ui"
+import type { DataType, TableInstance, ... } from 'react-table-ui';
+```
+
+All other exports of the package are TypeScript types which will be useful in various scenarios. Import them separately as per requirement.
+
+A list of exported types is available on [API documentation](https://react-table-ui.js.org/).
+
+### DataType setup
+
+Since we are dealing with TypeScript and types, it is necessary to know the interface of data that will be processed and displayed. The library provides a base type called `DataType` for extending.
+
+For example: Creating a table of users will require a dataset of users, where each user (or row) is represented by User type/interface.
+
+```tsx
+import type { DataType } from "react-table-ui"
+
+interface User extends DataType {
+  name: string
+  age: number
+}
+```
+
+The newly created `User` type interface must be used whenever the component expects a type parameter. It allows the library to provide better tooling and error handling when composing actions and behaviours.
+
+### Procuring dataset
+
+A dataset is the only required piece of information for React-Table-UI to work. Depending on the use case, the dataset could be static or dynamic. 99% of the time, it will be dynamic data fetched from an API or read from a file/database.
+
+- Example for static data (it can be defined in global or local scope)
+
+  ```tsx
+  const data: User[] = [
+    { name: "Abc Xyx", age: 20 },
+    { name: "Def Uvw", age: 25 },
+    { name: "Ghi Rst", age: 23 },
+    { name: "Jklm Nopq", age: 30 },
+  ]
+  ```
+
+- Example for dynamic data (needs to be in local scope as it needs to be memo-ised by React). The data is fetched by using hooks provided from `react-query`, `apollo-react`, or other libraries. It still might need manipulation to fit the defined type interface. Furthermore, the dynamic data can be server-side paginated (later).
+
+  ```tsx
+  import useFetchData from '...'
+
+  export default function App (): JSX.Element {
+    ...
+    const data: User[] = useFetchData<User>()
+    ...
+  }
+  ```
+
+### Compose — Basic/Static example
+
+To begin with, compose a basic table with minimum input and customisations. The component will create column headers from data keys.
+
+```tsx
+import { useMemo } from "react"
+import { render } from "react-dom"
+import ReactTableUI, { type DataType } from "react-table-ui"
+
+interface User extends DataType {
+  name: string
+  age: number
+}
+
+function App(): JSX.Element {
+  const data: User[] = useMemo(
+    () => [
+      { name: "Abc Xyx", age: 20 },
+      { name: "Def Uvw", age: 25 },
+      { name: "Ghi Rst", age: 23 },
+      { name: "Jklm Nopq", age: 30 },
+    ],
+    [],
+  )
+
+  return <ReactTableUI data={data} title="Users" />
+}
+
+render(<App />, document.body)
+```
+
+---
+
+## Examples
+
+- Server pagination — [codesandbox.io](https://codesandbox.io/s/react-table-ui-basic-8ukxd)
+- More coming soon.
+
+---
+
+> React Table UI is a library under development. Kindly use the library and test it.
+> Raise some issues, recommend some ideas and contribute if possible.
+> Looking forward to your input.
