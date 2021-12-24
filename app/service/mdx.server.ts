@@ -23,9 +23,9 @@ export async function getMdxPagesInDirectory<T extends ContentCommonData>(
 
 export async function getMdxDirList(contentDir: string) {
   const dirPath = join(CONTENT_PATH, contentDir)
-  const dirList = __IS_DEV__
+  const dirList = !__IS_DEV__
     ? readDirList(dirPath)
-    : await downloadDirList(dirPath.replace(CONTENT_PATH, ""))
+    : await downloadDirList(dirPath)
 
   return dirList.map(({ name, path }) => ({
     id: getIdFromPath(name),
@@ -37,7 +37,7 @@ export async function getMdxPage<T extends ContentCommonData>(
   path: string,
   id: string,
 ): Promise<PageContent<T>> {
-  const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
+  const page = !__IS_DEV__ ? readFile(path) : await downloadFile(path)
   const source = replaceFilePathsInPage(page, path)
   const { code, frontmatter } = await bundleMDX<T>({ source })
 

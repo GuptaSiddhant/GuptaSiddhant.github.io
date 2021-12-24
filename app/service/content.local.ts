@@ -1,20 +1,33 @@
 import fs from "fs"
+import { join } from "path"
 import { createDebugger } from "~/helpers"
 
 const localDebug = createDebugger("LOCAL", true)
 
 export function readDirList(dirPath: string) {
   localDebug("Getting list of files in", dirPath)
+  const extension = ".mdx"
 
-  const list: string[] = JSON.parse(
-    fs.readFileSync(`${dirPath}/index.json`, "utf8"),
-  )
-  const dirList = list.map((name: string) => ({
-    name,
-    path: `${dirPath}/${name}/index.mdx`,
-  }))
+  const dirList = fs
+    .readdirSync(dirPath, { withFileTypes: true })
+    .map((file) => {
+      if (file.isFile()) {
+        if (file.name.endsWith(extension))
+          return {
+            name: file.name.replace(extension, ""),
+            path: join(dirPath, file.name),
+          }
+        else return undefined
+      }
+      // Directory
+      return {
+        name: file.name,
+        path: join(dirPath, file.name, "index" + extension),
+      }
+    })
+    .filter(Boolean)
 
-  return dirList
+  return dirList as Array<{ name: string; path: string }>
 }
 
 export function readFile(filePath: string) {

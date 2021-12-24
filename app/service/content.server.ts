@@ -44,40 +44,40 @@ const octokit = new Octokit({
 export async function downloadDirList(path: string) {
   githubDebug("Getting list of files in", path)
 
-  const list: string[] = JSON.parse(await downloadFile(`${path}/index.json`))
-  const dirList = list.map((name: string) => ({
-    name,
-    path: `${path}/${name}/index.mdx`,
-  }))
-  // const { data } = await octokit.repos.getContent({ ...repo, path })
+  const { data } = await octokit.repos.getContent({ ...repo, path })
 
-  // if (!Array.isArray(data)) {
-  //   throw new Error(
-  //     `Tried to download content from ${path}. GitHub did not return an array of files. This should never happen...`,
-  //   )
-  // }
+  if (!Array.isArray(data)) {
+    throw new Error(
+      `Tried to download content from ${path}. GitHub did not return an array of files. This should never happen...`,
+    )
+  }
 
-  return dirList
+  return (data as GithubContent[])
+    .map((content) => ({
+      name: content.name,
+      path:
+        content.type === "file" ? content.path : `${content.path}/index.mdx`,
+    }))
+    .filter(Boolean)
 }
 
 export async function downloadFile(path: string) {
   githubDebug("Downloading file:", path)
 
-  return await (await fetch(path)).text()
+  const { data } = (await octokit.request(
+    "GET /repos/{owner}/{repo}/contents/{path}",
+    { ...repo, path },
+  )) as { data: { content?: string; encoding?: string } }
 
-  // const { data } = (await octokit.request(
-  //   "GET /repos/{owner}/{repo}/contents/{path}",
-  //   { ...repo, path },
-  // )) as { data: { content?: string; encoding?: string } }
+  if (!data.content || !data.encoding) {
+    console.error(data)
+    throw new Error(
+      `Tried to get ${path} but got back something that was unexpected. It doesn't have a content or encoding property`,
+    )
+  }
 
-  // if (!content) {
-  //   console.error(content)
-  //   throw new Error(
-  //     `Tried to get ${path} but got back something that was unexpected. It doesn't have a content or encoding property`,
-  //   )
-  // }
-
-  // return Buffer.from(data.content, encoding).toString()
+  const encoding = data.encoding as Parameters<typeof Buffer.from>["1"]
+  return Buffer.from(data.content, encoding).toString()
 }
 
 interface GithubContent {
