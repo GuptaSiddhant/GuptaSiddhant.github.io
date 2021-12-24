@@ -2,13 +2,13 @@ import { join } from "path"
 import { bundleMDX } from "mdx-bundler"
 
 import { readDirList, readFile } from "./content.local"
-import { downloadDirList, downloadFile } from "./github.server"
+import { downloadDirList, downloadFile } from "./content.server"
 import { getIdFromPath } from "~/helpers"
 import type { ContentCommonData, PageContent } from "~/types"
 
 const __IS_DEV__ = process.env.NODE_ENV === "development"
 
-const CONTENT_PATH = "content"
+const CONTENT_PATH = "public"
 
 export async function getMdxPagesInDirectory<T extends ContentCommonData>(
   contentDir: string,
@@ -25,7 +25,7 @@ export async function getMdxDirList(contentDir: string) {
   const dirPath = join(CONTENT_PATH, contentDir)
   const dirList = __IS_DEV__
     ? readDirList(dirPath)
-    : await downloadDirList(dirPath)
+    : await downloadDirList(dirPath.replace(CONTENT_PATH, ""))
 
   return dirList.map(({ name, path }) => ({
     id: getIdFromPath(name),
