@@ -9,9 +9,9 @@ export function Paragraph({
   return (
     <p
       className={clsx(
+        className,
         "text-lg leading-normal my-4",
         "text-tertiary",
-        className,
       )}
       {...props}
     >

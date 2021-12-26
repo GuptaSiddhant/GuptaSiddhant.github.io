@@ -44,7 +44,6 @@ export default function Markdown({
 function Table(
   props: React.TableHTMLAttributes<HTMLTableElement>,
 ): JSX.Element {
-  console.log(props)
   return <table {...props} />
 }
 

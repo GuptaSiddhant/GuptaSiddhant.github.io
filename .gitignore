@@ -27,5 +27,4 @@ node_modules
 /public/build
 /.netlify
 
-# /public/projects
-# /public/blog
+.cache.remix

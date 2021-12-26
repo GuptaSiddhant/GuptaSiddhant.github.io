@@ -33,7 +33,7 @@ function Title() {
   return (
     <Heading value={1} className="mb-12">
       I bring designs to life on your screen...{" "}
-      <AnimatedText texts={ADJECTIVES} />.
+      <AnimatedText texts={ADJECTIVES} />
     </Heading>
   )
 }

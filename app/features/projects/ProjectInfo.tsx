@@ -3,11 +3,11 @@ import { useIsSSR } from "@react-aria/ssr"
 import { InfoBox, InfoList } from "~/components/Info"
 import { capitalize, formatDate } from "~/helpers"
 import ProjectLinks from "./ProjectLinks"
-import type { ProjectData, ProjectLink as IProjectLink } from "./types"
+import type { ProjectData } from "./types"
 
 export function ProjectInfo({
   className,
-  data: { association, description, dateStart, dateEnd, links = [] },
+  data: { association, dateStart, dateEnd, links = [] },
 }: {
   data: ProjectData
   className?: string
@@ -23,10 +23,6 @@ export function ProjectInfo({
       ) : null}
       <InfoBox field="Status">{getProjectStatus(dateStart, dateEnd)}</InfoBox>
       <ProjectLinks links={links} />
-
-      {description ? (
-        <InfoBox field="Description">{description}</InfoBox>
-      ) : null}
     </InfoList>
   )
 }

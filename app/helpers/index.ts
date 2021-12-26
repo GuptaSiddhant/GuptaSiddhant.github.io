@@ -1,5 +1,7 @@
 import { CommonContent, PageContent } from "~/types"
 
+export const __IS_DEV__ = process.env.NODE_ENV === "development"
+
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }

@@ -1,6 +1,6 @@
 import { json } from "remix"
 
-import { generateResponseForPages } from "~/service/api"
+import { generateResponseForPages } from "~/service/response"
 import {
   getMdxPagesInDirectory,
   getMdxPage,

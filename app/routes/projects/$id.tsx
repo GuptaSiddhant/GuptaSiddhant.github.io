@@ -8,6 +8,8 @@ import {
 
 import Image from "~/components/atoms/Image"
 import Markdown from "~/components/Markdown"
+import Heading from "~/components/Heading"
+import { Paragraph } from "~/components/Text"
 import {
   getProjectById,
   ProjectInfo,
@@ -36,13 +38,20 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Project(): JSX.Element {
   const { data, code } = useLoaderData<ProjectContent>()
-  const { title, gallery = [] } = data
+  const { title, subtitle, description, gallery = [] } = data
   const showcaseImage = gallery[0]?.url
 
   return (
     <Prose>
-      <h1>{title}</h1>
+      <div className="mb-8">
+        <Heading as="h1" className="!m-0">
+          {title}
+        </Heading>
+        <blockquote>{subtitle || description}</blockquote>
+      </div>
+
       <ProjectInfo data={data} />
+
       {showcaseImage ? (
         <Image
           src={showcaseImage}

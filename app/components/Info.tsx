@@ -29,7 +29,7 @@ export function InfoBox({
       <dt className={clsx("font-bold text-sm block", hideField && "sr-only")}>
         {field}
       </dt>
-      <dd className={"text-xl block"}>{children}</dd>
+      <dd className={"text-lg block"}>{children}</dd>
     </div>
   )
 }
