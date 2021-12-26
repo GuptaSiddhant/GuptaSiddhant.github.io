@@ -3,7 +3,6 @@ import { bundleMDX } from "mdx-bundler"
 
 import { readDirList, readFile } from "./content.local"
 import { downloadDirList, downloadFile } from "./content.server"
-import FileCache from "./FileCache.server"
 import { __IS_DEV__, getIdFromPath } from "~/helpers"
 import type { ContentCommonData, PageContent } from "~/types"
 
@@ -36,22 +35,11 @@ export async function getMdxPage<T extends ContentCommonData>(
   path: string,
   id: string,
 ): Promise<PageContent<T>> {
-  const page = await getPathFromSource(path)
+  const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
   const source = replaceFilePathsInPage(page, path)
   const { code, frontmatter } = await bundleMDX<T>({ source })
 
   return { id, path, data: frontmatter, code }
-}
-
-async function getPathFromSource(path: string): Promise<string> {
-  const cache = new FileCache()
-
-  if (cache.get(path)) return cache.get(path)
-
-  const page = __IS_DEV__ ? readFile(path) : await downloadFile(path)
-  cache.set(path, page)
-
-  return page
 }
 
 function replaceFilePathsInPage(page: string, path: string) {
