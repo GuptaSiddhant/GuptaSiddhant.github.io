@@ -18,13 +18,14 @@
     "description": "Create a new react function component",
     "body": [
       "import clsx from 'clsx'",
+      "",
       "import type { BaseComponentProps } from '~/types'",
       "",
       "export interface ${TM_FILENAME_BASE}Props extends BaseComponentProps {}",
       "",
       "/** ${TM_FILENAME_BASE} component */",
-      "export default function ${TM_FILENAME_BASE}(props: ${TM_FILENAME_BASE}Props): JSX.Element | null {",
-      "  return <div className={clsx(props.className)}>{props.children}</div>;",
+      "export default function ${TM_FILENAME_BASE}({className, children}: ${TM_FILENAME_BASE}Props): JSX.Element | null {",
+      "  return <div className={clsx(className)}>{children}</div>;",
       "}",
       ""
     ]

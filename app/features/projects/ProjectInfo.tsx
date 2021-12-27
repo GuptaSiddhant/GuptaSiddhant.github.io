@@ -17,11 +17,13 @@ export function ProjectInfo({
   return (
     <InfoList className={className}>
       {association ? (
-        <InfoBox field="Client">
-          {capitalize(association.replace("-", " "))}
+        <InfoBox field="Client" hideField>
+          @ {capitalize(association.replace("-", " "))}
         </InfoBox>
       ) : null}
-      <InfoBox field="Status">{getProjectStatus(dateStart, dateEnd)}</InfoBox>
+      <InfoBox field="Status" hideField>
+        {getProjectStatus(dateStart, dateEnd)}
+      </InfoBox>
       <ProjectLinks links={links} />
     </InfoList>
   )

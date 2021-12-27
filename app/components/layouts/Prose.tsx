@@ -12,6 +12,7 @@ export default function Section({
         "prose",
         "sm:prose-sm md:prose-md lg:prose-lg xl:prose-xl",
         "dark:prose-invert mx-auto px-8 sm:px-0",
+        "prose-a:no-underline",
         className,
       )}
     />

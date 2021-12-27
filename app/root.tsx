@@ -15,6 +15,8 @@ import clsx from "clsx"
 import Header from "~/components/layouts/Header"
 import Footer from "~/components/layouts/Footer"
 import fontStyles from "./styles/font.css"
+import reachDialogStyles from "@reach/dialog/styles.css"
+import reachTooltipStyles from "@reach/tooltip/styles.css"
 import tailwindStyles from "./styles/tailwind.css"
 
 // https://remix.run/api/app#links
@@ -27,6 +29,8 @@ export const links: LinksFunction = () => {
       crossOrigin: "anonymous",
     },
     { rel: "stylesheet", href: fontStyles },
+    { rel: "stylesheet", href: reachDialogStyles },
+    { rel: "stylesheet", href: reachTooltipStyles },
     { rel: "stylesheet", href: tailwindStyles },
     {
       rel: "apple-touch-icon",

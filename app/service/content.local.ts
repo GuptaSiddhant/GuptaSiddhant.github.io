@@ -2,7 +2,7 @@ import fs from "fs"
 import { join } from "path"
 import { createDebugger } from "~/helpers"
 
-const localDebug = createDebugger("LOCAL", true)
+const localDebug = createDebugger("LOCAL", false)
 
 export function readDirList(dirPath: string) {
   localDebug("Getting list of files in", dirPath)

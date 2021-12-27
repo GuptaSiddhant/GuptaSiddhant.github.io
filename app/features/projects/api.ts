@@ -20,13 +20,18 @@ export async function getAllProjects(): Promise<ProjectContent[]> {
     .sort((a, b) => sortByDate(a.data.dateEnd, b.data.dateEnd))
 }
 
-export async function getProjectById(id: string): Promise<ProjectContent> {
+export async function getProjectById(
+  id: string,
+): Promise<{ project: ProjectContent; nextProject: ProjectContent | null }> {
   const dirList = await getMdxDirList(CONTENT_DIR)
   const path = dirList.find((item) => item.id === id)?.path
 
   if (!path) throw new Error("Project not found for id: " + id)
 
-  return getMdxPage<ProjectData>(path, id)
+  const project = await getMdxPage<ProjectData>(path, id)
+  const nextProject = await getNextProject(dirList, id)
+
+  return { project, nextProject }
 }
 
 export async function generateResponseForProjects(
@@ -34,4 +39,18 @@ export async function generateResponseForProjects(
 ) {
   const projects = await getAllProjects()
   return json(generateResponseForPages(request, projects))
+}
+
+export async function getNextProject(
+  dirList: { id: string; path: string }[],
+  id: string,
+): Promise<ProjectContent | null> {
+  const otherProjects = dirList.filter((project) => project.id !== id)
+
+  if (otherProjects.length === 0) return null
+
+  const randomIndex = Math.floor(Math.random() * otherProjects.length)
+  const nextProject = otherProjects[randomIndex]
+
+  return getMdxPage<ProjectData>(nextProject.path, nextProject.id)
 }

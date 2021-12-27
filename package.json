@@ -19,6 +19,7 @@
     "@octokit/core": "^3.5.1",
     "@octokit/plugin-throttling": "^3.5.2",
     "@octokit/rest": "^18.12.0",
+    "@reach/dialog": "^0.16.2",
     "@reach/tooltip": "^0.16.2",
     "@react-aria/focus": "^3.5.0",
     "@react-aria/label": "^3.2.1",

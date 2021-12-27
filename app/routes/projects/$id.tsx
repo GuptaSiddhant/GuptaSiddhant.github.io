@@ -6,13 +6,14 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Image from "~/components/atoms/Image"
+import ShowcaseImage from "~/components/ShowcaseImage"
 import Markdown from "~/components/Markdown"
-import Heading from "~/components/Heading"
-import { Paragraph } from "~/components/Text"
 import {
   getProjectById,
+  getNextProject,
+  ProjectTitle,
   ProjectInfo,
+  ProjectFooter,
   type ProjectContent,
 } from "~/features/projects"
 import Prose from "~/components/layouts/Prose"
@@ -25,47 +26,37 @@ export const meta: MetaFunction = () => {
   }
 }
 
+interface LoaderData {
+  project: ProjectContent
+  nextProject: ProjectContent | null
+}
+
 export const loader: LoaderFunction = async ({ params }) => {
   const id = params.id
   if (!id) throw new Error("Project id is required.")
 
-  const project = await getProjectById(id)
+  const { project, nextProject } = await getProjectById(id)
 
   if (!filterPageDraft(project)) return redirect(`..`)
 
-  return project
+  return { project, nextProject }
 }
 
 export default function Project(): JSX.Element {
-  const { data, code } = useLoaderData<ProjectContent>()
+  const {
+    project: { data, code },
+    nextProject,
+  } = useLoaderData<LoaderData>()
   const { title, subtitle, description, gallery = [] } = data
   const showcaseImage = gallery[0]?.url
 
   return (
     <Prose>
-      <div className="mb-8">
-        <Heading as="h1" className="!m-0">
-          {title}
-        </Heading>
-        <blockquote>{subtitle || description}</blockquote>
-      </div>
-
+      <ProjectTitle {...data} />
       <ProjectInfo data={data} />
-
-      {showcaseImage ? (
-        <Image
-          src={showcaseImage}
-          alt={title}
-          className={clsx(
-            "rounded-xl",
-            "border-8 border-depth",
-            "-mx-4",
-            "aspect-w-16 aspect-h-9",
-          )}
-        />
-      ) : null}
-
+      <ShowcaseImage src={showcaseImage} alt={title} />
       <Markdown code={code} />
+      <ProjectFooter project={nextProject} />
     </Prose>
   )
 }

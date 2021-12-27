@@ -6,7 +6,7 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Image from "~/components/atoms/Image"
+import Figure from "~/components/Figure"
 import Markdown from "~/components/Markdown"
 import {
   getBlogPostById,
@@ -44,7 +44,7 @@ export default function BlogPost(): JSX.Element {
       <h1>{title}</h1>
       <BlogInfo data={data} />
       {showcaseImage ? (
-        <Image
+        <Figure
           src={showcaseImage}
           alt={title}
           className={clsx(

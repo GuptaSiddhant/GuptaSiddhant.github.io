@@ -31,7 +31,7 @@ export default function Header({ name }: HeaderProps): JSX.Element {
     <header
       className={clsx(
         "bg-base",
-        "container-mx flex flex-row justify-between items-baseline top-0 z-50",
+        "container-mx flex flex-row justify-between items-baseline top-0 z-10",
       )}
     >
       <Logo name={name} />

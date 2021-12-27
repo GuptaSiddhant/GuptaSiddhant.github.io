@@ -1,14 +1,14 @@
 import clsx from "clsx"
 
 import Card from "~/components/atoms/Card"
-import Image, { type ImageProps } from "~/components/atoms/Image"
+import Figure, { type FigureProps } from "~/components/Figure"
 import TagList from "~/components/TagList"
 import type { BaseComponentProps } from "~/types"
 import { Paragraph } from "./Text"
 
 export interface ContentCardProps extends BaseComponentProps {
   imagePosition?: "bottom" | "right"
-  imageProps?: ImageProps
+  imageProps?: FigureProps
 }
 
 /** ContentCard card component */
@@ -120,11 +120,11 @@ function ContentCardTape({
 function ContentCardImage({
   featured,
   ...imageProps
-}: ImageProps & {
+}: FigureProps & {
   featured?: boolean
 }): JSX.Element | null {
   return imageProps?.src ? (
-    <Image
+    <Figure
       imageClassName="!rounded-none"
       {...imageProps}
       className={clsx(
@@ -146,6 +146,6 @@ function ContentCardIcon({
   title?: string
 }): JSX.Element | null {
   return url ? (
-    <Image src={url} alt={`${title}-icon`} className={"w-10 h-10 rounded"} />
+    <Figure src={url} alt={`${title}-icon`} className={"w-10 h-10 rounded"} />
   ) : null
 }
