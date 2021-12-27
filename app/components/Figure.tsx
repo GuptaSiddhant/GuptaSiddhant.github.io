@@ -1,6 +1,7 @@
 import clsx from "clsx"
 
 import Img, { ImgProps } from "~/components/atoms/Img"
+import { useModal, Modal } from "~/components/layouts/Modal"
 
 export interface FigureProps extends ImgProps {
   imageClassName?: string
@@ -16,27 +17,31 @@ export default function Figure({
   _imageRef,
   ...props
 }: FigureProps) {
+  const { modalProps, openModal } = useModal()
+
   return (
     <figure
+      onClick={openModal}
       className={clsx("overflow-hidden", "bg-base", "relative", className)}
       ref={_ref}
     >
-      <Img
-        className={clsx("h-full w-full rounded object-cover", imageClassName)}
-        {...props}
-        ref={_imageRef}
-      />
+      <Img className={imageClassName} {...props} ref={_imageRef} />
       {title ? (
         <figcaption
-          className={clsx(
-            "text-sm text-center",
-            "italic mt-2",
-            "text-tertiary",
-          )}
+          className={clsx("text-sm text-center", "italic", "text-tertiary")}
         >
           {title}
         </figcaption>
       ) : null}
+
+      <Modal {...modalProps} aria-label="Showcase">
+        <Img {...props} />
+        {title ? (
+          <figcaption className={clsx("text-center", "mt-1", "text-primary")}>
+            {title}
+          </figcaption>
+        ) : null}
+      </Modal>
     </figure>
   )
 }

@@ -1,13 +1,15 @@
 import { json } from "remix"
 
-import { generateResponseForPages } from "~/service/response"
+import { filterPageDraft, sortByDate } from "~/helpers"
 import {
   getMdxPagesInDirectory,
   getMdxPage,
   getMdxDirList,
 } from "~/service/mdx.server"
-import { filterPageDraft, sortByDate } from "~/helpers"
-import { LoaderFunctionProps } from "~/types"
+import { generateResponseForPages } from "~/service/response"
+import type { LoaderFunctionProps } from "~/types"
+
+import { getNextProject } from "./helpers"
 import type { ProjectContent, ProjectData } from "./types"
 
 const CONTENT_DIR = "projects"
@@ -39,18 +41,4 @@ export async function generateResponseForProjects(
 ) {
   const projects = await getAllProjects()
   return json(generateResponseForPages(request, projects))
-}
-
-export async function getNextProject(
-  dirList: { id: string; path: string }[],
-  id: string,
-): Promise<ProjectContent | null> {
-  const otherProjects = dirList.filter((project) => project.id !== id)
-
-  if (otherProjects.length === 0) return null
-
-  const randomIndex = Math.floor(Math.random() * otherProjects.length)
-  const nextProject = otherProjects[randomIndex]
-
-  return getMdxPage<ProjectData>(nextProject.path, nextProject.id)
 }

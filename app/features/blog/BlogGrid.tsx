@@ -9,10 +9,7 @@ export function BlogGrid({
   posts: BlogPostContent[]
 }): JSX.Element | null {
   const renderItem = (post: BlogPostContent) => (
-    <BlogPostCard
-      post={post.data}
-      imagePosition={checkIfFeaturedBlogPost(post) ? "right" : "bottom"}
-    />
+    <BlogPostCard post={post.data} featured={checkIfFeaturedBlogPost(post)} />
   )
 
   return (

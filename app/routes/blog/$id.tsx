@@ -1,4 +1,3 @@
-import clsx from "clsx"
 import {
   redirect,
   useLoaderData,
@@ -6,8 +5,9 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Figure from "~/components/Figure"
+import Heading from "~/components/Heading"
 import Markdown from "~/components/Markdown"
+import ShowcaseImage from "~/components/ShowcaseImage"
 import {
   getBlogPostById,
   BlogInfo,
@@ -15,11 +15,15 @@ import {
 } from "~/features/blog"
 import Prose from "~/components/layouts/Prose"
 import { filterPageDraft } from "~/helpers"
+import { Paragraph } from "~/components/Text"
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = (props) => {
+  const {
+    data: { title, description = "" },
+  }: BlogPostContent = props.data
   return {
-    title: "Blog",
-    description: "Blog of Siddhant Gupta.",
+    title,
+    description,
   }
 }
 
@@ -41,21 +45,9 @@ export default function BlogPost(): JSX.Element {
 
   return (
     <Prose>
-      <h1>{title}</h1>
+      <Heading as="h1">{title}</Heading>
       <BlogInfo data={data} />
-      {showcaseImage ? (
-        <Figure
-          src={showcaseImage}
-          alt={title}
-          className={clsx(
-            "rounded-xl",
-            "border-8 border-depth",
-            "-mx-4",
-            "aspect-w-16 aspect-h-9",
-          )}
-        />
-      ) : null}
-
+      {showcaseImage ? <ShowcaseImage src={showcaseImage} alt={title} /> : null}
       <Markdown code={code} />
     </Prose>
   )
@@ -66,9 +58,8 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Prose>
-      <h1>{"Error with the project"}</h1>
-      <p>{error.message}</p>
-      <p>Go back</p>
+      <Heading as="h1">{"Error with the blog post"}</Heading>
+      <Paragraph>{error.message}</Paragraph>
     </Prose>
   )
 }

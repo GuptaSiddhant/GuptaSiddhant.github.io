@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { Link } from "remix"
 import BackIcon from "remixicon-react/ArrowLeftLineIcon"
 import ForwardIcon from "remixicon-react/ArrowRightLineIcon"
-import Figure from "~/components/Figure"
+import Img from "~/components/atoms/Img"
 
 import type { ProjectContent } from "./types"
 
@@ -41,7 +41,11 @@ export function ProjectFooter({
           className="flex items-center gap-2 text-base"
           data-custom-border
         >
-          {icon ? <Figure src={icon} className="w-8 h-8 !m-0" /> : null}
+          {icon ? (
+            <div className="w-8 h-8">
+              <Img src={icon} className="!m-0" />
+            </div>
+          ) : null}
           {title}
           <ForwardIcon />
         </Link>

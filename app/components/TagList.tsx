@@ -9,6 +9,7 @@ export interface TagListProps {
   checkIsTagSelected?: (tag: string) => boolean
   checkIsTagDisabled?: (tag: string) => boolean
   size?: TagProps["size"]
+  tagClassName?: string
 }
 
 export default function TagList({
@@ -16,6 +17,7 @@ export default function TagList({
   tags,
   size,
   label = "Filter by tags",
+  tagClassName,
   checkIsTagSelected,
   checkIsTagDisabled,
 }: TagListProps): JSX.Element | null {
@@ -32,6 +34,7 @@ export default function TagList({
           isSelected={checkIsTagSelected?.(tag)}
           isDisabled={checkIsTagDisabled?.(tag)}
           size={size}
+          className={tagClassName}
         >
           {tag}
         </Tag>

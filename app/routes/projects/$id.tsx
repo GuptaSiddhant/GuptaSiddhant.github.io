@@ -1,4 +1,3 @@
-import clsx from "clsx"
 import {
   redirect,
   useLoaderData,
@@ -6,23 +5,28 @@ import {
   type MetaFunction,
 } from "remix"
 
-import ShowcaseImage from "~/components/ShowcaseImage"
 import Markdown from "~/components/Markdown"
+import ShowcaseImage from "~/components/ShowcaseImage"
 import {
   getProjectById,
-  getNextProject,
   ProjectTitle,
   ProjectInfo,
   ProjectFooter,
   type ProjectContent,
+  type ProjectData,
 } from "~/features/projects"
 import Prose from "~/components/layouts/Prose"
 import { filterPageDraft } from "~/helpers"
+import Heading from "~/components/Heading"
+import { Paragraph } from "~/components/Text"
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = (props) => {
+  const data: ProjectData = props.data.project.data
+  const { title, description = "" } = data
+
   return {
-    title: "Projects",
-    description: "Projects of Siddhant Gupta.",
+    title,
+    description,
   }
 }
 
@@ -47,14 +51,13 @@ export default function Project(): JSX.Element {
     project: { data, code },
     nextProject,
   } = useLoaderData<LoaderData>()
-  const { title, subtitle, description, gallery = [] } = data
-  const showcaseImage = gallery[0]?.url
+  const { title, gallery } = data
 
   return (
     <Prose>
       <ProjectTitle {...data} />
       <ProjectInfo data={data} />
-      <ShowcaseImage src={showcaseImage} alt={title} />
+      <ShowcaseImage src={gallery?.[0]?.url} alt={title} />
       <Markdown code={code} />
       <ProjectFooter project={nextProject} />
     </Prose>
@@ -66,8 +69,8 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Prose>
-      <h1 className="prose">{"Error with the project"}</h1>
-      <p className="prose">{error.message}</p>
+      <Heading as="h1">{"Error with the project"}</Heading>
+      <Paragraph>{error.message}</Paragraph>
     </Prose>
   )
 }

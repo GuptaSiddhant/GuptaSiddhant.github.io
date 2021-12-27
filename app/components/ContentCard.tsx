@@ -1,36 +1,39 @@
 import clsx from "clsx"
 
 import Card from "~/components/atoms/Card"
-import Figure, { type FigureProps } from "~/components/Figure"
+import Img, { type ImgProps } from "~/components/atoms/Img"
 import TagList from "~/components/TagList"
 import type { BaseComponentProps } from "~/types"
 import { Paragraph } from "./Text"
 
 export interface ContentCardProps extends BaseComponentProps {
-  imagePosition?: "bottom" | "right"
-  imageProps?: FigureProps
+  featured?: boolean
+  imageProps?: ImgProps
 }
 
 /** ContentCard card component */
 export default function ContentCard({
   className,
   children,
-  imagePosition = "bottom",
+  featured,
   imageProps,
 }: ContentCardProps): JSX.Element | null {
-  const featured = imagePosition === "right"
-
   return (
     <Card
       as="article"
       tabIndex={0}
       className={clsx(
-        "!p-0 justify-between flex-col gap-0",
+        "!p-0 justify-between flex-col",
         featured && "sm:flex-row",
         className,
       )}
     >
-      <div className={clsx("m-8 flex flex-col gap-4", featured && "flex-1")}>
+      <div
+        className={clsx(
+          "m-8 flex flex-col gap-4",
+          featured && "sm:w-2/5 lg:w-1/3",
+        )}
+      >
         {children}
       </div>
       <ContentCardImage {...imageProps} featured={featured} />
@@ -38,13 +41,13 @@ export default function ContentCard({
   )
 }
 
+ContentCard.Description = ContentCardDescription
 ContentCard.Icon = ContentCardIcon
 ContentCard.Image = ContentCardImage
 ContentCard.Subtitle = ContentCardSubtitle
 ContentCard.Tags = ContentCardTags
 ContentCard.Tape = ContentCardTape
 ContentCard.Title = ContentCardTitle
-ContentCard.Description = ContentCardDescription
 
 function ContentCardTitle({
   children,
@@ -75,15 +78,23 @@ function ContentCardDescription({
 
 function ContentCardTags({
   tags = [],
+  featured,
 }: {
   tags?: string[]
+  featured?: boolean
 }): JSX.Element | null {
+  const className = clsx(
+    !featured && "absolute left-7 right-7 bottom-7 z-10 flex-wrap-reverse",
+  )
+
   return (
     <TagList
       aria-label="Tags"
       tags={tags}
       checkIsTagDisabled={() => true}
       size="sm"
+      className={className}
+      tagClassName="bg-blue-100 dark:bg-blue-900"
     />
   )
 }
@@ -120,21 +131,19 @@ function ContentCardTape({
 function ContentCardImage({
   featured,
   ...imageProps
-}: FigureProps & {
+}: ImgProps & {
   featured?: boolean
 }): JSX.Element | null {
   return imageProps?.src ? (
-    <Figure
-      imageClassName="!rounded-none"
-      {...imageProps}
+    <div
       className={clsx(
         "flex-1 w-full bg-depth",
         "shadow-sm dark:shadow-md",
-        "max-h-80",
-        featured && "sm:max-h-full",
         imageProps.className,
       )}
-    />
+    >
+      <Img {...imageProps} className="!rounded-none" />
+    </div>
   ) : null
 }
 
@@ -146,6 +155,8 @@ function ContentCardIcon({
   title?: string
 }): JSX.Element | null {
   return url ? (
-    <Figure src={url} alt={`${title}-icon`} className={"w-10 h-10 rounded"} />
+    <div className="w-10 h-10 rounded bg-black">
+      <Img src={url} alt={`${title}-icon`} />
+    </div>
   ) : null
 }

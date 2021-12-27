@@ -5,11 +5,11 @@ import type { BlogPostData } from "./types"
 export function BlogPostCard({
   post,
   className,
-  imagePosition = "bottom",
+  featured,
 }: {
   post: BlogPostData
   className?: string
-  imagePosition?: "bottom" | "right"
+  featured?: boolean
 }): JSX.Element {
   const { date, draft, subtitle, tags, title } = post
   const imageSrc = post.gallery?.[0]?.url
@@ -18,13 +18,13 @@ export function BlogPostCard({
   return (
     <ContentCard
       imageProps={{ src: imageSrc, alt: imageAlt }}
-      imagePosition={imagePosition}
+      featured={featured}
       className={className}
     >
       <ContentCard.Title>{title}</ContentCard.Title>
       <ContentCard.Subtitle>{formatDate(date)}</ContentCard.Subtitle>
-      <ContentCard.Tags tags={tags} />
       <ContentCard.Description>{subtitle}</ContentCard.Description>
+      <ContentCard.Tags tags={tags} featured={featured} />
       {draft ? (
         <ContentCard.Tape variant="green">Draft</ContentCard.Tape>
       ) : null}

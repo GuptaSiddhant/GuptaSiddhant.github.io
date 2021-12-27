@@ -6,6 +6,7 @@ import { forwardRef } from "react"
 import { capitalize } from "~/helpers"
 
 export interface TagProps {
+  className?: string
   children: string
   isSelected?: boolean
   isDisabled?: boolean
@@ -13,7 +14,7 @@ export interface TagProps {
 }
 
 const Tag = forwardRef<HTMLInputElement, TagProps>(
-  ({ children, isSelected, isDisabled, size = "md" }, ref) => {
+  ({ children, className, isSelected, isDisabled, size = "md" }, ref) => {
     const { isFocusVisible, focusProps } = useFocusRing()
     const { labelProps, fieldProps } = useLabel({ "aria-label": children })
 
@@ -37,6 +38,7 @@ const Tag = forwardRef<HTMLInputElement, TagProps>(
             ),
           isFocusVisible &&
             "outline-none outline-blue-300 dark:outline-blue-700",
+          className,
         )}
         {...labelProps}
       >

@@ -30,7 +30,13 @@ export default function ShowcaseImage({
       ref={ref}
       onClick={openModal}
     >
-      <Img {...props} ref={imageRef} src={src} alt={alt} className="!m-0" />
+      <Img
+        {...props}
+        ref={imageRef}
+        src={src}
+        alt={alt}
+        className="not-prose !m-0"
+      />
       <Modal {...modalProps} aria-label="Showcase">
         <Img {...props} src={src} alt={alt} className="!m-0" />
       </Modal>
