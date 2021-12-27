@@ -21,8 +21,10 @@ export function BlogPostCard({
       featured={featured}
       className={className}
     >
-      <ContentCard.Title>{title}</ContentCard.Title>
-      <ContentCard.Subtitle>{formatDate(date)}</ContentCard.Subtitle>
+      <div>
+        <ContentCard.Title>{title}</ContentCard.Title>
+        <ContentCard.Subtitle>{formatDate(date)}</ContentCard.Subtitle>
+      </div>
       <ContentCard.Description>{subtitle}</ContentCard.Description>
       <ContentCard.Tags tags={tags} featured={featured} />
       {draft ? (

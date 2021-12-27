@@ -24,7 +24,6 @@ export default function ContentCard({
   return (
     <Card
       as="article"
-      tabIndex={0}
       className={clsx(
         "!p-0 justify-between flex-col",
         featured && "sm:flex-row",
@@ -134,6 +133,7 @@ function ContentCardTape({
 
 function ContentCardImage({
   featured,
+  className,
   ...imageProps
 }: ImgProps & {
   featured?: boolean
@@ -143,7 +143,8 @@ function ContentCardImage({
       className={clsx(
         "flex-1 w-full bg-depth",
         "shadow-sm dark:shadow-md",
-        imageProps.className,
+        "overflow-hidden",
+        className,
       )}
     >
       <Img {...imageProps} className="!rounded-none" />

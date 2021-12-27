@@ -20,7 +20,7 @@ export interface FeaturedGridProps {
 /** FeaturedSection component */
 export function FeaturedSection(props: FeaturedGridProps): JSX.Element | null {
   return (
-    <Section className="flex-col bg-depth sm:p-16">
+    <Section id="featured" className="flex-col bg-depth sm:p-16">
       <div className="flex justify-between items-baseline flex-wrap">
         <Heading value={2}>Featured work</Heading>
         <div className="flex gap-12 ">

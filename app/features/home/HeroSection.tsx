@@ -9,7 +9,7 @@ import Section from "~/components/layouts/Section"
 /** Hero component */
 export function HeroSection(): JSX.Element | null {
   return (
-    <Section className="items-center py-16">
+    <Section id="hero" className="items-center py-16">
       <div className="w-full lg:w-2/3">
         <Title />
         <Description />

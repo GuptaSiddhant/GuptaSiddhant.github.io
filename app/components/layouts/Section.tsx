@@ -4,7 +4,7 @@ import clsx from "clsx"
 export default function Section({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: HTMLAttributes<HTMLDivElement> & { id: string }): JSX.Element {
   return (
     <section
       {...props}
