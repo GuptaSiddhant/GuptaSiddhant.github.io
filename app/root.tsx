@@ -12,11 +12,12 @@ import {
 import { SSRProvider } from "@react-aria/ssr"
 import clsx from "clsx"
 
-import Header from "~/components/layouts/Header"
-import Footer from "~/components/layouts/Footer"
+import Footer from "~/features/Footer"
+import Header from "~/features/Header"
 import fontStyles from "./styles/font.css"
 import reachDialogStyles from "@reach/dialog/styles.css"
 import reachTooltipStyles from "@reach/tooltip/styles.css"
+import reachMenuStyles from "@reach/menu-button/styles.css"
 import tailwindStyles from "./styles/tailwind.css"
 
 // https://remix.run/api/app#links
@@ -31,6 +32,7 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: fontStyles },
     { rel: "stylesheet", href: reachDialogStyles },
     { rel: "stylesheet", href: reachTooltipStyles },
+    { rel: "stylesheet", href: reachMenuStyles },
     { rel: "stylesheet", href: tailwindStyles },
     {
       rel: "apple-touch-icon",
@@ -153,7 +155,7 @@ function Document({
             "bg-base text-secondary",
           )}
         >
-          <Header name={name} />
+          <Header />
           {children}
           <Footer name={name} />
           <ScrollRestoration />

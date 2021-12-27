@@ -18,9 +18,8 @@
   }
   .text-link {
     @apply text-blue-700 dark:text-blue-300;
-  }
-  .text-link:hover {
-    @apply text-blue-800 dark:text-blue-200;
+    @apply hover:text-blue-800 dark:hover:text-blue-200;
+    @apply active:text-blue-900 dark:active:text-blue-50;
   }
   .text-link-active {
     @apply text-blue-900 dark:text-blue-50;
@@ -54,7 +53,7 @@
   }
 
   pre code {
-    padding: 0 !important;
+    @apply !p-0;
   }
 }
 
@@ -67,19 +66,22 @@
 
 @layer components {
   [data-reach-dialog-overlay] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 40;
-    overflow: hidden;
+    @apply flex items-center justify-center z-40 overflow-hidden;
   }
   [data-reach-dialog-content] {
-    width: auto;
+    @apply w-full;
     height: 90vh;
   }
   [data-reach-dialog-content] img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    @apply h-full w-full object-contain;
+  }
+  [data-reach-menu-popover] {
+    @apply z-40;
+  }
+  [data-reach-menu-list] {
+    @apply rounded-lg bg-hover shadow-xl text-link;
+  }
+  [data-reach-menu-item][data-selected] {
+    @apply bg-depth;
   }
 }

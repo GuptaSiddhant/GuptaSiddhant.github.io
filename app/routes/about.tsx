@@ -1,4 +1,7 @@
-import { type MetaFunction } from "remix"
+import { Outlet, type MetaFunction } from "remix"
+
+import AnimatedTitle from "~/components/AnimatedTitle"
+import { Paragraph } from "~/components/Text"
 
 export let meta: MetaFunction = ({}) => {
   return {
@@ -9,17 +12,22 @@ export let meta: MetaFunction = ({}) => {
 
 export default function About(): JSX.Element {
   return (
-    <main>
-      <h1>About</h1>
-      <p>Hi, I am Siddhant and I am a ...</p>
-      <ul className="list-disc">
-        <li>Frontend developer</li>
-        <li>Backend developer</li>
-        <li>UI Designer</li>
-        <li>Entrepreneur (wannabe)</li>
-        <li>Student (of somethings...)</li>
-        <li>enjoyer of binging TV and racing games</li>
-      </ul>
+    <main className="flex-1">
+      <AnimatedTitle backAriaLabel="Back to about.">About [WIP]</AnimatedTitle>
+
+      <div className="container-mx">
+        <Paragraph>Hi, I am Siddhant and </Paragraph>
+        <ul className="list-disc">
+          <li>a Frontend developer</li>
+          <li>a Backend developer</li>
+          <li>a UI Designer</li>
+          <li>an Entrepreneur (wannabe)</li>
+          <li>a Student (of somethings...)</li>
+          <li>an enjoyer of binging TV and racing games</li>
+        </ul>
+      </div>
+
+      <Outlet />
     </main>
   )
 }
