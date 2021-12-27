@@ -1,5 +1,5 @@
 import Heading from "~/components/Heading"
-import { Paragraph } from "~/components/Text"
+import { Paragraph } from "~/components/atoms/Text"
 import { ProjectData } from "."
 
 /** ProjectTitle component */

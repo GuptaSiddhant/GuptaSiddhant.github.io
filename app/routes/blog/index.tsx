@@ -59,7 +59,7 @@ export default function Projects(): JSX.Element {
 
   return (
     <Section className="flex-col">
-      <FilterForm {...filterData} searchPlaceholder="Search in blog..." />
+      <FilterForm {...filterData} searchPlaceholder="Search the blog..." />
       <BlogGrid posts={blog} />
     </Section>
   )

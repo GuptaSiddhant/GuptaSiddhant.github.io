@@ -4,7 +4,7 @@ import { getMDXComponent, type MDXContentProps } from "mdx-bundler/client"
 import Pre from "~/components/atoms/Pre"
 import { H1, H2, H3, H4, H5, H6 } from "~/components/Heading"
 import Figure from "~/components/Figure"
-import { Paragraph, Emphasis, Code, Strong } from "~/components/Text"
+import { Paragraph, Emphasis, Code, Strong } from "~/components/atoms/Text"
 
 /** Markdown component */
 export default function Markdown({

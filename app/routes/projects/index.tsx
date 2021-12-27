@@ -60,7 +60,7 @@ export default function Projects(): JSX.Element {
 
   return (
     <Section className="flex-col">
-      <FilterForm {...data} searchPlaceholder="Search in projects..." />
+      <FilterForm {...data} searchPlaceholder="Search the projects..." />
       <ProjectGrid projects={projects} />
     </Section>
   )

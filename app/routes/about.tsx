@@ -1,7 +1,7 @@
 import { Outlet, type MetaFunction } from "remix"
 
 import AnimatedTitle from "~/components/AnimatedTitle"
-import { Paragraph } from "~/components/Text"
+import { Paragraph } from "~/components/atoms/Text"
 
 export let meta: MetaFunction = ({}) => {
   return {

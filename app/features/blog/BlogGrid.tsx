@@ -1,4 +1,4 @@
-import Grid from "~/components/Grid"
+import Grid from "~/components/layouts/Grid"
 import { BlogPostCard } from "./BlogCard"
 import { checkIfFeaturedBlogPost } from "./helpers"
 import { BlogPostContent } from "./types"

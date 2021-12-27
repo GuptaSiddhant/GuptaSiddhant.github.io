@@ -3,7 +3,7 @@ import { Fragment } from "react"
 import AnimatedText from "~/components/AnimatedText"
 import CodeBlock from "~/components/CodeBlock"
 import Heading from "~/components/Heading"
-import { Paragraph, Emphasis, Code } from "~/components/Text"
+import { Paragraph, Emphasis, Code } from "~/components/atoms/Text"
 import Section from "~/components/layouts/Section"
 
 /** Hero component */

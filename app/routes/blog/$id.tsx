@@ -15,7 +15,7 @@ import {
 } from "~/features/blog"
 import Prose from "~/components/layouts/Prose"
 import { filterPageDraft } from "~/helpers"
-import { Paragraph } from "~/components/Text"
+import { Paragraph } from "~/components/atoms/Text"
 
 export const meta: MetaFunction = (props) => {
   const {

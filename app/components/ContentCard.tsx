@@ -4,11 +4,14 @@ import Card from "~/components/atoms/Card"
 import Img, { type ImgProps } from "~/components/atoms/Img"
 import TagList from "~/components/TagList"
 import type { BaseComponentProps } from "~/types"
-import { Paragraph } from "./Text"
+import { Paragraph } from "./atoms/Text"
 
-export interface ContentCardProps extends BaseComponentProps {
-  featured?: boolean
+export interface ContentCardProps extends ContentCardChildProps {
   imageProps?: ImgProps
+}
+
+export interface ContentCardChildProps extends BaseComponentProps {
+  featured?: boolean
 }
 
 /** ContentCard card component */
@@ -52,14 +55,14 @@ ContentCard.Title = ContentCardTitle
 function ContentCardTitle({
   children,
   className,
-}: BaseComponentProps): JSX.Element | null {
+}: ContentCardChildProps): JSX.Element | null {
   return <div className={clsx("text-3xl font-bold", className)}>{children}</div>
 }
 
 function ContentCardSubtitle({
   children,
   className,
-}: BaseComponentProps): JSX.Element | null {
+}: ContentCardChildProps): JSX.Element | null {
   return (
     <div className={clsx("text-yellow-500 font-black uppercase", className)}>
       {children}
@@ -70,7 +73,7 @@ function ContentCardSubtitle({
 function ContentCardDescription({
   children,
   className,
-}: BaseComponentProps): JSX.Element | null {
+}: ContentCardChildProps): JSX.Element | null {
   return children ? (
     <Paragraph className={clsx("my-0", className)}>{children}</Paragraph>
   ) : null
@@ -84,7 +87,8 @@ function ContentCardTags({
   featured?: boolean
 }): JSX.Element | null {
   const className = clsx(
-    !featured && "absolute left-7 right-7 bottom-7 z-10 flex-wrap-reverse",
+    "absolute left-7 right-7 bottom-7 z-10 flex-wrap-reverse",
+    featured && "sm:static sm:flex-wrap sm:z-auto",
   )
 
   return (
@@ -103,7 +107,7 @@ function ContentCardTape({
   children,
   className,
   variant,
-}: BaseComponentProps & {
+}: ContentCardChildProps & {
   variant: "yellow" | "green" | "purple"
 }): JSX.Element {
   return (

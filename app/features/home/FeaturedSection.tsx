@@ -1,6 +1,6 @@
 import { Link } from "remix"
 
-import Grid from "~/components/Grid"
+import Grid from "~/components/layouts/Grid"
 import Heading from "~/components/Heading"
 import { isBlogPost, BlogPostCard, type BlogPostContent } from "~/features/blog"
 import {

@@ -1,4 +1,4 @@
-import Grid from "~/components/Grid"
+import Grid from "~/components/layouts/Grid"
 import { ProjectCard } from "./ProjectCard"
 import { checkIfFeaturedProject } from "./helpers"
 import type { ProjectContent } from "./types"

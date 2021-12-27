@@ -24,10 +24,8 @@ export function ProjectCard({
     >
       <div
         className={clsx(
-          featured
-            ? "flex-col-reverse"
-            : "flex-row justify-between items-center",
-          "flex gap-4",
+          "flex gap-4 flex-row justify-between items-center",
+          featured && "sm:flex-col-reverse sm:items-start",
         )}
       >
         <div>
