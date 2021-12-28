@@ -2,9 +2,9 @@ import clsx from "clsx"
 import { useEffect, useRef } from "react"
 
 import Img, { type ImgProps } from "~/components/atoms/Img"
-import { useModal, Modal } from "~/components/layouts/Modal"
+import { useModal, Modal } from "~/components/templates/Modal"
 
-export interface ShowcaseImageProps extends ImgProps {}
+export interface ShowcaseImageProps extends Omit<ImgProps, "ref"> {}
 
 /** ShowcaseImage component */
 export default function ShowcaseImage({
@@ -13,7 +13,7 @@ export default function ShowcaseImage({
   alt,
   ...props
 }: ShowcaseImageProps): JSX.Element | null {
-  const { ref, imageRef } = useMouse()
+  const { containerRef, imageRef } = useMouse()
   const { modalProps, openModal } = useModal()
 
   if (!src) return null
@@ -27,15 +27,15 @@ export default function ShowcaseImage({
         "cursor-pointer",
         className,
       )}
-      ref={ref}
+      ref={containerRef}
       onClick={openModal}
     >
       <Img
         {...props}
-        ref={imageRef}
         src={src}
         alt={alt}
         className="not-prose !m-0"
+        ref={imageRef}
       />
       <Modal {...modalProps} aria-label="Showcase">
         <Img {...props} src={src} alt={alt} className="!m-0" />
@@ -45,11 +45,11 @@ export default function ShowcaseImage({
 }
 
 function useMouse() {
-  const ref = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
-    const el = ref.current
+    const el = containerRef.current
     const image = imageRef.current
     if (!el || !image) return
 
@@ -76,5 +76,5 @@ function useMouse() {
     }
   }, [])
 
-  return { ref, imageRef }
+  return { containerRef, imageRef }
 }

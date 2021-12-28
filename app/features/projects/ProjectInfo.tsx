@@ -1,6 +1,6 @@
 import { useIsSSR } from "@react-aria/ssr"
 
-import { InfoBox, InfoList } from "~/components/Info"
+import { InfoBox, InfoList } from "~/components/atoms/Info"
 import { capitalize, formatDate } from "~/helpers"
 import ProjectLinks from "./ProjectLinks"
 import type { ProjectData } from "./types"

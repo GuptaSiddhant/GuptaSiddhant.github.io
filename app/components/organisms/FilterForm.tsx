@@ -4,7 +4,7 @@ import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
 import Button from "~/components/atoms/Button"
 import Input from "~/components/atoms/Input"
-import TagList from "~/components/TagList"
+import TagList from "~/components/molecules/TagList"
 
 export default function FilterForm({
   tags,

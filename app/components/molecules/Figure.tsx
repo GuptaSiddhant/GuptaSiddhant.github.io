@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
 import Img, { ImgProps } from "~/components/atoms/Img"
-import { useModal, Modal } from "~/components/layouts/Modal"
+import { useModal, Modal } from "~/components/templates/Modal"
 
 export interface FigureProps extends ImgProps {
   imageClassName?: string
@@ -35,7 +35,7 @@ export default function Figure({
       ) : null}
 
       <Modal {...modalProps} aria-label="Showcase">
-        <Img {...props} />
+        <Img {...props} ref={null} />
         {title ? (
           <figcaption className={clsx("text-center", "mt-1", "text-primary")}>
             {title}

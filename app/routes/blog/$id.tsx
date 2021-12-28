@@ -5,15 +5,15 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Heading from "~/components/Heading"
-import Markdown from "~/components/Markdown"
-import ShowcaseImage from "~/components/ShowcaseImage"
+import { H1 } from "~/components/atoms/Heading"
+import Markdown from "~/components/templates/Markdown"
+import ShowcaseImage from "~/components/molecules/ShowcaseImage"
 import {
   getBlogPostById,
   BlogInfo,
   type BlogPostContent,
 } from "~/features/blog"
-import Prose from "~/components/layouts/Prose"
+import Prose from "~/components/templates/Prose"
 import { filterPageDraft } from "~/helpers"
 import { Paragraph } from "~/components/atoms/Text"
 
@@ -45,7 +45,7 @@ export default function BlogPost(): JSX.Element {
 
   return (
     <Prose>
-      <Heading as="h1">{title}</Heading>
+      <H1>{title}</H1>
       <BlogInfo data={data} />
       {showcaseImage ? <ShowcaseImage src={showcaseImage} alt={title} /> : null}
       <Markdown code={code} />
@@ -58,7 +58,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Prose>
-      <Heading as="h1">{"Error with the blog post"}</Heading>
+      <H1>{"Error with the blog post"}</H1>
       <Paragraph>{error.message}</Paragraph>
     </Prose>
   )

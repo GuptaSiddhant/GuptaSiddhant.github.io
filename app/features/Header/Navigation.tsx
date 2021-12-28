@@ -1,11 +1,11 @@
 import { Menu, MenuList, MenuButton, MenuLink } from "@reach/menu-button"
-import { useWindowSize } from "@reach/window-size"
 import clsx from "clsx"
 import { NavLink, type NavLinkProps } from "remix"
-
-import ExternalLink from "~/components/ExternalLink"
 import MenuIcon from "remixicon-react/MenuLineIcon"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
+
+import ExternalLink from "~/components/atoms/ExternalLink"
+import useBreakpoints from "~/helpers/useBreakpoints"
 
 export interface NavigationProps {
   navLinks: NavLinkProps[]
@@ -21,10 +21,9 @@ export default function Navigation({
   navLinks,
   socialLinks,
 }: NavigationProps): JSX.Element {
-  const { width } = useWindowSize()
+  const { isMobile } = useBreakpoints()
 
-  // https://tailwindcss.com/docs/screens
-  if (width <= 640) {
+  if (isMobile) {
     return (
       <Menu>
         {({ isExpanded }) => (

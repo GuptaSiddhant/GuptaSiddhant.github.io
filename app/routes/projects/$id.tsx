@@ -5,8 +5,8 @@ import {
   type MetaFunction,
 } from "remix"
 
-import Markdown from "~/components/Markdown"
-import ShowcaseImage from "~/components/ShowcaseImage"
+import Markdown from "~/components/templates/Markdown"
+import ShowcaseImage from "~/components/molecules/ShowcaseImage"
 import {
   getProjectById,
   ProjectTitle,
@@ -15,9 +15,9 @@ import {
   type ProjectContent,
   type ProjectData,
 } from "~/features/projects"
-import Prose from "~/components/layouts/Prose"
+import Prose from "~/components/templates/Prose"
 import { filterPageDraft } from "~/helpers"
-import Heading from "~/components/Heading"
+import { H1 } from "~/components/atoms/Heading"
 import { Paragraph } from "~/components/atoms/Text"
 
 export const meta: MetaFunction = (props) => {
@@ -69,7 +69,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Prose>
-      <Heading as="h1">{"Error with the project"}</Heading>
+      <H1>{"Error with the project"}</H1>
       <Paragraph>{error.message}</Paragraph>
     </Prose>
   )

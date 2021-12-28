@@ -1,6 +1,6 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
-import FilterForm from "~/components/FilterForm"
+import FilterForm from "~/components/organisms/FilterForm"
 import {
   getBlog,
   filterBlogByQuery,
@@ -9,7 +9,7 @@ import {
   type BlogPostContent,
 } from "~/features/blog"
 import { generateUniqueTags } from "~/helpers"
-import Section from "~/components/layouts/Section"
+import Section from "~/components/templates/Section"
 import { LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {
@@ -58,7 +58,7 @@ export default function Projects(): JSX.Element {
   const { blog, ...filterData } = useLoaderData<LoaderData>()
 
   return (
-    <Section className="flex-col">
+    <Section id="filter" className="flex-col">
       <FilterForm {...filterData} searchPlaceholder="Search the blog..." />
       <BlogGrid posts={blog} />
     </Section>

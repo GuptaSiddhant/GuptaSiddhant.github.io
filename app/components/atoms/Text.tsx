@@ -1,11 +1,25 @@
 import clsx from "clsx"
+import withRef from "~/helpers/withRef"
+
+/** Text component */
+export default withRef(function Text({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<"span">) {
+  return (
+    <span className={clsx(className)} {...props}>
+      {children}
+    </span>
+  )
+})
 
 /** Paragraph component */
 export function Paragraph({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLParagraphElement>): JSX.Element {
+}: React.ComponentProps<"p">) {
   return (
     <p
       className={clsx(
@@ -25,7 +39,7 @@ export function Emphasis({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLElement>): JSX.Element {
+}: React.ComponentProps<"em">) {
   return (
     <em
       className={clsx("not-italic font-serif text-base", className)}
@@ -41,7 +55,7 @@ export function Strong({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLElement>): JSX.Element {
+}: React.ComponentProps<"strong">) {
   return (
     <strong className={clsx("font-bold", className)} {...props}>
       {children}
@@ -54,7 +68,7 @@ export function Code({
   children,
   className,
   ...props
-}: React.HTMLAttributes<HTMLElement>): JSX.Element {
+}: React.ComponentProps<"code">) {
   return (
     <code
       className={clsx(
@@ -65,18 +79,5 @@ export function Code({
     >
       {children}
     </code>
-  )
-}
-
-/** Text component */
-export function Text({
-  children,
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLSpanElement>): JSX.Element {
-  return (
-    <span className={clsx(className)} {...props}>
-      {children}
-    </span>
   )
 }

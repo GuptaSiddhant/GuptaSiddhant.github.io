@@ -1,16 +1,16 @@
 import clsx from "clsx"
-import { forwardRef } from "react"
 
-export type ImgProps = React.ImgHTMLAttributes<HTMLImageElement>
+import withRef from "~/helpers/withRef"
 
-const Img = forwardRef<HTMLImageElement, ImgProps>(
-  ({ className, ...props }, ref) => (
+export type ImgProps = React.ComponentProps<"img">
+
+function Img({ className, ...props }: ImgProps) {
+  return (
     <img
       className={clsx("h-full w-full rounded object-cover", className)}
       {...props}
-      ref={ref}
     />
-  ),
-)
+  )
+}
 
-export default Img
+export default withRef(Img)

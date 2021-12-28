@@ -1,17 +1,15 @@
 import clsx from "clsx"
-import { forwardRef } from "react"
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+import withRef from "~/helpers/withRef"
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, className, ...props }, ref) => {
-    return (
-      <button {...props} ref={ref} className={clsx(className)}>
-        {children}
-      </button>
-    )
-  },
-)
+export interface ButtonProps extends React.ComponentProps<"button"> {}
 
-export default Button
+function Button({ children, className, ...props }: ButtonProps) {
+  return (
+    <button {...props} className={clsx(className)}>
+      {children}
+    </button>
+  )
+}
+
+export default withRef(Button)

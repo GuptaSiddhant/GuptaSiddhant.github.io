@@ -9,9 +9,9 @@ import BlogIcon from "remixicon-react/QuillPenLineIcon"
 import PrototypeIcon from "remixicon-react/PlayCircleLineIcon"
 import DesignIcon from "remixicon-react/ArtboardLineIcon"
 
-import { InfoBox } from "~/components/Info"
-import CopyButton from "~/components/CopyButton"
-import ExternalLink from "~/components/ExternalLink"
+import { InfoBox } from "~/components/atoms/Info"
+import CopyButton from "~/components/molecules/CopyButton"
+import ExternalLink from "~/components/atoms/ExternalLink"
 import Tooltip from "~/components/atoms/Tooltip"
 import type { ProjectLink } from "./types"
 

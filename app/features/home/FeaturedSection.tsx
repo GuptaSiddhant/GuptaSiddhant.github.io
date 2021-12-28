@@ -1,7 +1,7 @@
 import { Link } from "remix"
 
-import Grid from "~/components/layouts/Grid"
-import Heading from "~/components/Heading"
+import Grid from "~/components/templates/Grid"
+import Heading from "~/components/atoms/Heading"
 import { isBlogPost, BlogPostCard, type BlogPostContent } from "~/features/blog"
 import {
   isProject,
@@ -9,7 +9,7 @@ import {
   type ProjectContent,
 } from "~/features/projects"
 import { sortByDate } from "~/helpers"
-import Section from "~/components/layouts/Section"
+import Section from "~/components/templates/Section"
 import type { CommonContent } from "~/types"
 
 export interface FeaturedGridProps {

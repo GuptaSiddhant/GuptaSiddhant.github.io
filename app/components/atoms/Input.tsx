@@ -1,18 +1,14 @@
 import clsx from "clsx"
 
+import withRef from "~/helpers/withRef"
+
+export interface InputProps extends React.ComponentProps<"input"> {}
+
 /** Input component */
-export default function Input({
-  className,
-  _ref,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
-  _ref?: React.ForwardedRef<HTMLInputElement>
-}): JSX.Element | null {
+function Input({ className, ...props }: InputProps): JSX.Element | null {
   return (
-    <input
-      {...props}
-      className={clsx("rounded", "dark:bg-depth", className)}
-      ref={_ref}
-    />
+    <input {...props} className={clsx("rounded", "dark:bg-depth", className)} />
   )
 }
+
+export default withRef(Input)

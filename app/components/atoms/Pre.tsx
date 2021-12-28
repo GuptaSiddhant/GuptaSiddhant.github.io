@@ -1,14 +1,9 @@
 import clsx from "clsx"
+import withRef from "~/helpers/withRef"
 
-export interface PreProps extends React.HTMLAttributes<HTMLPreElement> {
-  _ref?: React.ForwardedRef<HTMLPreElement>
-}
+export interface PreProps extends React.ComponentProps<"pre"> {}
 
-export default function Pre({
-  children,
-  className,
-  ...props
-}: PreProps): JSX.Element {
+export function Pre({ children, className, ...props }: PreProps): JSX.Element {
   return (
     <pre
       className={clsx(
@@ -26,3 +21,5 @@ export default function Pre({
     </pre>
   )
 }
+
+export default withRef(Pre)

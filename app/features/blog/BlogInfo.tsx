@@ -1,9 +1,9 @@
 import { useIsSSR } from "@react-aria/ssr"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 
-import CopyButton from "~/components/CopyButton"
-import ExternalLink from "~/components/ExternalLink"
-import { InfoBox, InfoList } from "~/components/Info"
+import CopyButton from "~/components/molecules/CopyButton"
+import ExternalLink from "~/components/atoms/ExternalLink"
+import { InfoBox, InfoList } from "~/components/atoms/Info"
 import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
 

@@ -2,7 +2,9 @@ import { useIsSSR } from "@react-aria/ssr"
 import { useState, useEffect } from "react"
 import TextTransition, { presets } from "react-text-transition"
 
-const INTERVAL_TIME = 3_000
+import Text from "~/components/atoms/Text"
+
+const INTERVAL_TIME = 3_000 // 3 seconds
 
 /** AnimatedText component */
 export default function AnimatedText({
@@ -17,24 +19,24 @@ export default function AnimatedText({
     <>{texts[0]}</>
   ) : (
     <>
-      <span className="motion-safe:hidden">{text}</span>
-      <span className="motion-reduce:hidden">
+      <Text className="motion-safe:hidden">{text}</Text>
+      <Text className="motion-reduce:hidden">
         <TextTransition text={text} springConfig={presets.gentle} inline />
-      </span>
+      </Text>
     </>
   )
 }
 
 function useTextTransition(...texts: string[]): string {
   const TEXTS = texts.sort()
-
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
     const intervalId = setInterval(
       () => setIndex((index) => index + 1),
-      INTERVAL_TIME, // every 3 seconds
+      INTERVAL_TIME,
     )
+
     return () => clearTimeout(intervalId)
   }, [])
 

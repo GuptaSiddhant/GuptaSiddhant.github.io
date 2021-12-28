@@ -3,7 +3,7 @@ import Highlight, { defaultProps, type Language } from "prism-react-renderer"
 import dracula from "prism-react-renderer/themes/dracula"
 
 import Pre from "~/components/atoms/Pre"
-import CopyButton from "~/components/CopyButton"
+import CopyButton from "~/components/molecules/CopyButton"
 
 export interface CodeProps {
   className?: string

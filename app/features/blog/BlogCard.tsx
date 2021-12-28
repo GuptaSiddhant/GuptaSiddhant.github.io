@@ -1,4 +1,4 @@
-import ContentCard from "~/components/ContentCard"
+import ContentCard from "~/components/organisms/ContentCard"
 import { formatDate } from "~/helpers"
 import type { BlogPostData } from "./types"
 

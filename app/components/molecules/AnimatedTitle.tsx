@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { NavLink } from "remix"
 import BackIcon from "remixicon-react/ArrowLeftLineIcon"
 
-import { getHeadingClassName } from "~/components/Heading"
+import { getHeadingClassName } from "~/components/atoms/Heading"
 import useNestedRoute from "~/helpers/useNestedRoute"
 
 export interface TitleProps {

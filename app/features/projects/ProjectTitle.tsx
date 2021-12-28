@@ -1,4 +1,4 @@
-import Heading from "~/components/Heading"
+import { H1 } from "~/components/atoms/Heading"
 import { Paragraph } from "~/components/atoms/Text"
 import { ProjectData } from "."
 
@@ -8,9 +8,7 @@ export function ProjectTitle(data: ProjectData): JSX.Element | null {
 
   return (
     <div className="mb-8">
-      <Heading as="h1" className="!m-0">
-        {title}
-      </Heading>
+      <H1 className="!m-0">{title}</H1>
       <Paragraph className="font-bold">{subtitle || description}</Paragraph>
     </div>
   )

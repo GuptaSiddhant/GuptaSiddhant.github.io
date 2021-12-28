@@ -1,10 +1,10 @@
 import { Fragment } from "react"
 
-import AnimatedText from "~/components/AnimatedText"
-import CodeBlock from "~/components/CodeBlock"
-import Heading from "~/components/Heading"
+import AnimatedText from "~/components/molecules/AnimatedText"
+import CodeBlock from "~/components/organisms/CodeBlock"
+import Heading from "~/components/atoms/Heading"
 import { Paragraph, Emphasis, Code } from "~/components/atoms/Text"
-import Section from "~/components/layouts/Section"
+import Section from "~/components/templates/Section"
 
 /** Hero component */
 export function HeroSection(): JSX.Element | null {

@@ -1,6 +1,7 @@
 import clsx from "clsx"
+import withRef from "~/helpers/withRef"
 
-type HTMLHeadingProps = React.HTMLAttributes<HTMLHeadingElement>
+type HTMLHeadingProps = React.ComponentProps<"h1">
 
 export interface HeadingProps extends HTMLHeadingProps {
   as?: HeadingElement
@@ -10,7 +11,7 @@ export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 export type HeadingValue = 1 | 2 | 3 | 4 | 5 | 6
 
 /** Heading component (h1-h6) */
-export default function Heading({
+function Heading({
   as,
   children,
   className,
@@ -33,6 +34,32 @@ export default function Heading({
   )
 }
 
+export default withRef(Heading)
+
+export function H1(props: HTMLHeadingProps) {
+  return <Heading {...props} as="h1" />
+}
+
+export function H2(props: HTMLHeadingProps) {
+  return <Heading {...props} as="h2" />
+}
+
+export function H3(props: HTMLHeadingProps) {
+  return <Heading {...props} as="h3" />
+}
+
+export function H4(props: HTMLHeadingProps) {
+  return <Heading {...props} as="h4" />
+}
+
+export function H5(props: HTMLHeadingProps) {
+  return <Heading {...props} as="h5" />
+}
+
+export function H6(props: HTMLHeadingProps) {
+  return <Heading {...props} as="h6" />
+}
+
 export function getHeadingClassName(value: HeadingValue): string {
   switch (value) {
     case 1:
@@ -50,23 +77,4 @@ export function getHeadingClassName(value: HeadingValue): string {
     default:
       return ""
   }
-}
-
-export function H1(props: HTMLHeadingProps) {
-  return <Heading as="h1" {...props} />
-}
-export function H2(props: HTMLHeadingProps) {
-  return <Heading as="h2" {...props} />
-}
-export function H3(props: HTMLHeadingProps) {
-  return <Heading as="h3" {...props} />
-}
-export function H4(props: HTMLHeadingProps) {
-  return <Heading as="h4" {...props} />
-}
-export function H5(props: HTMLHeadingProps) {
-  return <Heading as="h5" {...props} />
-}
-export function H6(props: HTMLHeadingProps) {
-  return <Heading as="h6" {...props} />
 }

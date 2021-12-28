@@ -1,6 +1,6 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
-import FilterForm from "~/components/FilterForm"
+import FilterForm from "~/components/organisms/FilterForm"
 import {
   getAllProjects,
   filterProjectsByTags,
@@ -9,7 +9,7 @@ import {
   type ProjectContent,
 } from "~/features/projects"
 import { generateUniqueTags } from "~/helpers"
-import Section from "~/components/layouts/Section"
+import Section from "~/components/templates/Section"
 import type { LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {
@@ -59,7 +59,7 @@ export default function Projects(): JSX.Element {
   const { projects, ...data } = useLoaderData<LoaderData>()
 
   return (
-    <Section className="flex-col">
+    <Section id="filter" className="flex-col">
       <FilterForm {...data} searchPlaceholder="Search the projects..." />
       <ProjectGrid projects={projects} />
     </Section>

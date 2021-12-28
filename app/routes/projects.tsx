@@ -1,6 +1,6 @@
 import { Outlet } from "remix"
 
-import AnimatedTitle from "~/components/AnimatedTitle"
+import AnimatedTitle from "~/components/molecules/AnimatedTitle"
 
 export default function Projects(): JSX.Element {
   return (

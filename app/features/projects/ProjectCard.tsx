@@ -1,6 +1,6 @@
 import clsx from "clsx"
 
-import ContentCard from "~/components/ContentCard"
+import ContentCard from "~/components/organisms/ContentCard"
 import type { ProjectData } from "./types"
 
 export function ProjectCard({

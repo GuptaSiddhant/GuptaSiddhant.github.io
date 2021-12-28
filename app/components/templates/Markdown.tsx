@@ -1,9 +1,9 @@
 import { useMemo } from "react"
 import { getMDXComponent, type MDXContentProps } from "mdx-bundler/client"
 
-import Pre from "~/components/atoms/Pre"
-import { H1, H2, H3, H4, H5, H6 } from "~/components/Heading"
-import Figure from "~/components/Figure"
+import { Pre } from "~/components/atoms/Pre"
+import { H1, H2, H3, H4, H5, H6 } from "~/components/atoms/Heading"
+import Figure from "~/components/molecules/Figure"
 import { Paragraph, Emphasis, Code, Strong } from "~/components/atoms/Text"
 
 /** Markdown component */
@@ -34,7 +34,7 @@ export default function Markdown({
         // ul: List,
         // a
         // hr
-        table: Table,
+        // table: Table,
         ...props.components,
       }}
     />

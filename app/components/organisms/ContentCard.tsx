@@ -2,9 +2,9 @@ import clsx from "clsx"
 
 import Card from "~/components/atoms/Card"
 import Img, { type ImgProps } from "~/components/atoms/Img"
-import TagList from "~/components/TagList"
+import TagList from "~/components/molecules/TagList"
 import type { BaseComponentProps } from "~/types"
-import { Paragraph } from "./atoms/Text"
+import { Paragraph } from "../atoms/Text"
 
 export interface ContentCardProps extends ContentCardChildProps {
   imageProps?: ImgProps
@@ -135,7 +135,7 @@ function ContentCardImage({
   featured,
   className,
   ...imageProps
-}: ImgProps & {
+}: Omit<ImgProps, "ref"> & {
   featured?: boolean
 }): JSX.Element | null {
   return imageProps?.src ? (
