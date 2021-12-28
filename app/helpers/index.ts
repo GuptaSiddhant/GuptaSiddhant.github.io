@@ -1,4 +1,4 @@
-import { CommonContent, PageContent } from "~/types"
+import { CommonContent, LoaderFunctionProps, PageContent } from "~/types"
 
 export const __IS_DEV__ = process.env.NODE_ENV === "development"
 

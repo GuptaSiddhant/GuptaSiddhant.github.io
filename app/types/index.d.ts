@@ -2,6 +2,10 @@ import type { DataFunctionArgs } from "@remix-run/server-runtime"
 
 export type LoaderFunctionProps = DataFunctionArgs
 
+export type AwaitedReturn<T extends (...args: any) => any> = Awaited<
+  ReturnType<T>
+>
+
 export type CommonContent = PageContent<ContentCommonData>
 
 export interface PageContent<T extends ContentCommonData = ContentCommonData> {

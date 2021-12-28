@@ -1,16 +1,14 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
 import FilterForm from "~/components/organisms/FilterForm"
+import Section from "~/components/templates/Section"
 import {
   getAllProjects,
-  filterProjectsByTags,
-  filterProjectsByQuery,
+  filterProjectsByRequest,
   ProjectGrid,
-  type ProjectContent,
 } from "~/features/projects"
 import { generateUniqueTags } from "~/helpers"
-import Section from "~/components/templates/Section"
-import type { LoaderFunctionProps } from "~/types"
+import type { AwaitedReturn, LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {
   return {
@@ -19,48 +17,27 @@ export const meta: MetaFunction = () => {
   }
 }
 
-interface LoaderData {
-  projects: ProjectContent[]
-  tags: string[]
-  searchQuery?: string
-  selectedTags: string[]
-}
-
-export async function loader({
-  request,
-}: LoaderFunctionProps): Promise<LoaderData> {
-  const { searchParams } = new URL(request.url)
-  const querySearchParam = searchParams.get("q")
-  const tagsSearchParams = searchParams.getAll("tags")
-
+export async function loader({ request }: LoaderFunctionProps) {
   const projects = await getAllProjects()
   const tags = generateUniqueTags(projects)
-  const selectedTags = tagsSearchParams || []
-
-  const filteredProjectsBySelectedTags = filterProjectsByTags(
-    projects,
-    selectedTags,
-  )
-
-  const filteredProjectsByQuery = filterProjectsByQuery(
-    filteredProjectsBySelectedTags,
-    querySearchParam,
-  )
+  const { searchQuery, selectedTags, filteredProjects } =
+    filterProjectsByRequest(projects, request)
 
   return {
     tags,
     selectedTags,
-    searchQuery: querySearchParam ?? undefined,
-    projects: filteredProjectsByQuery,
+    searchQuery,
+    projects: filteredProjects,
   }
 }
 
 export default function Projects(): JSX.Element {
-  const { projects, ...data } = useLoaderData<LoaderData>()
+  const { projects, ...filterData } =
+    useLoaderData<AwaitedReturn<typeof loader>>()
 
   return (
     <Section id="filter" className="flex-col">
-      <FilterForm {...data} searchPlaceholder="Search the projects..." />
+      <FilterForm {...filterData} searchPlaceholder="Search the projects..." />
       <ProjectGrid projects={projects} />
     </Section>
   )

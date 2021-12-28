@@ -1,16 +1,10 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
 import FilterForm from "~/components/organisms/FilterForm"
-import {
-  getBlog,
-  filterBlogByQuery,
-  filterBlogByTags,
-  BlogGrid,
-  type BlogPostContent,
-} from "~/features/blog"
-import { generateUniqueTags } from "~/helpers"
 import Section from "~/components/templates/Section"
-import { LoaderFunctionProps } from "~/types"
+import { BlogGrid, getBlog, filterBlogByRequest } from "~/features/blog"
+import { generateUniqueTags } from "~/helpers"
+import { LoaderFunctionProps, AwaitedReturn } from "~/types"
 
 export const meta: MetaFunction = () => {
   return {
@@ -19,43 +13,25 @@ export const meta: MetaFunction = () => {
   }
 }
 
-interface LoaderData {
-  blog: BlogPostContent[]
-  tags: string[]
-  searchQuery?: string
-  selectedTags: string[]
-}
-
-export async function loader({
-  request,
-}: LoaderFunctionProps): Promise<LoaderData> {
-  const { searchParams } = new URL(request.url)
-  const querySearchParam = searchParams.get("q")
-  const tagsSearchParam = searchParams.get("tags")
-
+export async function loader({ request }: LoaderFunctionProps) {
   const blog = await getBlog()
   const tags = generateUniqueTags(blog)
-  const selectedTags = tagsSearchParam
-    ? decodeURIComponent(tagsSearchParam)?.split(",")
-    : []
 
-  const filteredBlogBySelectedTags = filterBlogByTags(blog, selectedTags)
-
-  const filteredBlogByQuery = filterBlogByQuery(
-    filteredBlogBySelectedTags,
-    querySearchParam,
+  const { selectedTags, searchQuery, filteredBlog } = filterBlogByRequest(
+    blog,
+    request,
   )
 
   return {
     tags,
     selectedTags,
-    searchQuery: querySearchParam ?? undefined,
-    blog: filteredBlogByQuery,
+    searchQuery,
+    blog: filteredBlog,
   }
 }
 
-export default function Projects(): JSX.Element {
-  const { blog, ...filterData } = useLoaderData<LoaderData>()
+export default function Blog(): JSX.Element {
+  const { blog, ...filterData } = useLoaderData<AwaitedReturn<typeof loader>>()
 
   return (
     <Section id="filter" className="flex-col">
