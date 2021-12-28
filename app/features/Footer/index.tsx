@@ -1,11 +1,11 @@
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 import Button from "~/components/atoms/Button"
 
-import type { RootData } from "~/types"
+interface FooterProps {
+  name: string
+}
 
-interface HeaderProps extends RootData {}
-
-export default function Footer({ name }: HeaderProps): JSX.Element {
+export default function Footer({ name }: FooterProps): JSX.Element {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
