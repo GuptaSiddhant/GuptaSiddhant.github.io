@@ -4,7 +4,8 @@
   "description": "Personal website of Siddhant Gupta, build with Remix.",
   "license": "",
   "scripts": {
-    "build": "netlify build",
+    "build": "npm run build:css; npm run build:remix",
+    "build:remix": "remix build",
     "build:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --minify",
     "dev": "concurrently \"npm run dev:remix\" \"npm run dev:css\"",
     "dev:remix": "netlify dev",
