@@ -4,7 +4,7 @@ import { createDebugger } from "~/helpers"
 
 const localDebug = createDebugger("LOCAL", false)
 
-export function readDirList(dirPath: string) {
+export async function readDirList(dirPath: string) {
   localDebug("Getting list of files in", dirPath)
   const extension = ".mdx"
 
@@ -30,7 +30,7 @@ export function readDirList(dirPath: string) {
   return dirList as Array<{ name: string; path: string }>
 }
 
-export function readFile(filePath: string) {
+export async function readFile(filePath: string) {
   localDebug("Reading file:", filePath)
   return fs.readFileSync(filePath, "utf8")
 }

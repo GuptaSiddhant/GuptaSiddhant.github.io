@@ -33,6 +33,9 @@
   .bg-depth {
     @apply bg-gray-200 dark:bg-black;
   }
+  .bg-inverse {
+    @apply bg-black dark:bg-white;
+  }
 
   .border-base {
     @apply border-gray-500;
