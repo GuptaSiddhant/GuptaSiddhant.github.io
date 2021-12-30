@@ -1,0 +1,115 @@
+{
+  "title": "Education",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": { "$ref": "#/definitions/education" },
+
+  "definitions": {
+    "education": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "school", "degree", "startDate"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the education",
+          "uniqueItems": true
+        },
+        "degree": {
+          "description": "The degree of the education.",
+          "type": "string"
+        },
+        "school": {
+          "description": "The name of the school.",
+          "type": "string"
+        },
+        "field": {
+          "description": "The field of study.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The start date of the education.",
+          "format": "date",
+          "type": "string"
+        },
+        "endDate": {
+          "description": "The end date of the education.",
+          "format": "date",
+          "type": "string"
+        },
+        "draft": {
+          "description": "Work in progress?",
+          "type": "boolean",
+          "default": false
+        },
+        "featured": {
+          "description": "Best of the best?",
+          "type": "boolean",
+          "default": false
+        },
+        "location": {
+          "description": "The location of the school.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the education.",
+          "type": "string"
+        },
+        "icon": {
+          "description": "The icon/logo of the school.",
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/tag" }
+        },
+        "gallery": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/image" }
+        },
+        "links": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/link" }
+        }
+      }
+    },
+    "image": {
+      "title": "Image",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "description": "The url of the image.",
+          "type": "string"
+        },
+        "alt": {
+          "description": "The alt text of the image.",
+          "type": "string"
+        }
+      }
+    },
+    "tag": { "title": "Tag", "type": "string" },
+    "link": {
+      "title": "Link",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "description": "The url of the link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "description": "The title of the link.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["homepage", "github", "linkedin", "other"]
+        }
+      }
+    }
+  }
+}

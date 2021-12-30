@@ -3,5 +3,18 @@
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "cSpell.words": ["remixicon"],
-  "grammarly.dialect": "british"
+  "grammarly.dialect": "british",
+
+  // JSON Schemas
+  "json.schemaDownload.enable": true,
+  "json.schemas": [
+    {
+      "fileMatch": ["**/education/index.json"],
+      "url": "./.vscode/education.schema.json"
+    },
+    {
+      "fileMatch": ["**/career/index.json"],
+      "url": "./.vscode/career.schema.json"
+    }
+  ]
 }

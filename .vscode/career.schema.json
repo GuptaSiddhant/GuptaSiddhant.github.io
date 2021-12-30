@@ -1,0 +1,126 @@
+{
+  "title": "Career",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": { "$ref": "#/definitions/career" },
+
+  "definitions": {
+    "career": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "position", "company", "startDate"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the education",
+          "uniqueItems": true
+        },
+        "position": {
+          "description": "Job position.",
+          "type": "string"
+        },
+        "company": {
+          "description": "The name of the company.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of job",
+          "type": "string",
+          "oneOf": [
+            { "const": "full-time" },
+            { "const": "part-time" },
+            { "const": "contract" },
+            { "const": "internship" },
+            { "const": "temporary" },
+            { "const": "volunteer" },
+            { "const": "self-employed" },
+            { "const": "other" }
+          ]
+        },
+        "startDate": {
+          "description": "The start date of the education.",
+          "format": "date",
+          "type": "string"
+        },
+        "endDate": {
+          "description": "The end date of the education.",
+          "format": "date",
+          "type": "string"
+        },
+        "draft": {
+          "description": "Work in progress?",
+          "type": "boolean",
+          "default": false
+        },
+        "featured": {
+          "description": "Best of the best?",
+          "type": "boolean",
+          "default": false
+        },
+        "location": {
+          "description": "The location of the school.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the education.",
+          "type": "string"
+        },
+        "icon": {
+          "description": "The icon/log of the school.",
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/tag" }
+        },
+        "gallery": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/image" }
+        },
+        "links": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/link" }
+        }
+      }
+    },
+    "image": {
+      "title": "Image",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "description": "The url of the image.",
+          "type": "string",
+          "format": "uri"
+        },
+        "alt": {
+          "description": "The alt text of the image.",
+          "type": "string"
+        }
+      }
+    },
+    "tag": { "title": "Tag", "type": "string" },
+    "link": {
+      "title": "Link",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "description": "The url of the link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "description": "The title of the link.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["homepage", "linkedin", "github", "other"]
+        }
+      }
+    }
+  }
+}
