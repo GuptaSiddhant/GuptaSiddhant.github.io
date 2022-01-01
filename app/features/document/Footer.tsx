@@ -1,6 +1,6 @@
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 import Button from "~/components/atoms/Button"
-import { name } from "../about"
+import { fullName } from "~/helpers/about"
 
 export default function Footer(): JSX.Element {
   const handleScrollToTop = () => {
@@ -13,7 +13,7 @@ export default function Footer(): JSX.Element {
       className="container-mx flex justify-between items-center border-t border-opacity-20 mt-10 "
     >
       <div className="text-center my-4 text-gray-500">
-        <small className="text-sm">&copy; {name}</small>
+        <small className="text-sm">&copy; {fullName}</small>
       </div>
       <Button
         className="flex text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer items-center"

@@ -1,6 +1,4 @@
-import type { GalleryItem, Skills, Testimony } from "."
-
-export const name = "Siddhant Gupta"
+export const fullName = "Siddhant Gupta"
 
 export const title = "Frontend Developer"
 
@@ -11,7 +9,7 @@ export const socialLinks = {
   homepage: "https://guptasiddhant.com",
 }
 
-export const gallery: Array<GalleryItem> = [
+export const gallery = [
   {
     url: "/favicon/android-chrome-384x384.png",
     alt: "Siddhant Gupta's profile",
@@ -119,3 +117,26 @@ export const testimonies: Testimony[] = [
       "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
   },
 ]
+
+export interface Testimony {
+  title: string
+  subtitle?: string
+  date: string
+  association?: string
+  link?: string
+  content: string
+  draft?: boolean
+}
+
+export interface Skills extends Record<SkillCategory, string[]> {
+  languages: { name: string; level: string }[]
+}
+
+export type SkillCategory =
+  | "soft"
+  | "frontend"
+  | "backend"
+  | "core"
+  | "tools"
+  | "design"
+  | "other"

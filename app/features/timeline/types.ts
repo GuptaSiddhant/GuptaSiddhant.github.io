@@ -23,19 +23,6 @@ interface CommonCE {
   gallery: Array<GalleryItem>
   links?: Array<LinkItem>
 }
-export interface Skills extends Record<SkillCategory, string[]> {
-  languages: { name: string; level: string }[]
-}
-
-export interface Testimony {
-  title: string
-  subtitle?: string
-  date: string
-  association?: string
-  link?: string
-  content: string
-  draft?: boolean
-}
 
 export type CareerType =
   | "full-time"
@@ -52,15 +39,6 @@ export type LinkItem = {
   title?: string
   type?: "homepage" | "github" | "linkedin" | "other"
 }
-
-export type SkillCategory =
-  | "soft"
-  | "frontend"
-  | "backend"
-  | "core"
-  | "tools"
-  | "design"
-  | "other"
 
 export interface GalleryItem {
   url: string

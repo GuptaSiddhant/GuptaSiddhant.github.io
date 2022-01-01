@@ -2,7 +2,7 @@ import clsx from "clsx"
 import GithubIcon from "remixicon-react/GithubFillIcon"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 
-import { socialLinks } from "../about"
+import { socialLinks } from "~/helpers/about"
 import Logo from "./Logo"
 import Navigation, { type NavigationProps } from "./Navigation"
 

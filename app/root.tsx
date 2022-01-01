@@ -3,7 +3,7 @@ import reachTooltipStyles from "@reach/tooltip/styles.css"
 import reachMenuStyles from "@reach/menu-button/styles.css"
 import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
 
-import { name } from "./features/about"
+import { fullName } from "./helpers/about"
 import Document from "./features/document"
 import fontStyles from "./styles/font.css"
 import tailwindStyles from "./styles/tailwind.css"
@@ -47,13 +47,13 @@ export function links(): LinkDescriptor[] {
 
 export const meta: MetaFunction = () => {
   return {
-    title: name,
+    title: fullName,
     description: "Webfolio of a developer/designer.",
     charset: "utf-8",
     viewport: "width=device-width,initial-scale=1",
     "theme-color": "#F9FAFB",
-    "apple-mobile-web-app-title": name,
-    "application-name": name,
+    "apple-mobile-web-app-title": fullName,
+    "application-name": fullName,
     "msapplication-TileColor": "#603cba",
   }
 }

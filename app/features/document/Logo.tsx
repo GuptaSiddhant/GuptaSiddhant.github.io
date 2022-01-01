@@ -1,17 +1,17 @@
 import { Link } from "remix"
 
-import { name } from "../about"
+import { fullName } from "~/helpers/about"
 
 export default function Logo(): JSX.Element {
   return (
     <Link
       to="/"
-      title={name}
+      title={fullName}
       data-custom-color
       data-custom-border
       className="font-bold text-2xl leading-normal text-black dark:text-white my-5 border-0 select-none"
     >
-      {name}
+      {fullName}
     </Link>
   )
 }

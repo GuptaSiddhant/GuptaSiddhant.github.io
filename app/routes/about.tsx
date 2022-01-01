@@ -1,14 +1,12 @@
 import { Outlet, useLoaderData, type MetaFunction } from "remix"
 
-// import AnimatedTitle from "~/components/molecules/AnimatedTitle"
-// import { Paragraph } from "~/components/atoms/Text"
 import {
   CareerItem,
   EducationItem,
   getCareer,
   getEducation,
   isCareerItem,
-} from "~/features/about"
+} from "~/features/timeline"
 import { AwaitedReturn } from "~/types"
 import { H1 } from "~/components/atoms/Heading"
 import { Paragraph } from "~/components/atoms/Text"
