@@ -2,59 +2,82 @@ import { Outlet, useLoaderData, type MetaFunction } from "remix"
 
 // import AnimatedTitle from "~/components/molecules/AnimatedTitle"
 // import { Paragraph } from "~/components/atoms/Text"
-import { getAbout, getCareer, getEducation } from "~/features/about/api"
+import {
+  CareerItem,
+  EducationItem,
+  getCareer,
+  getEducation,
+  isCareerItem,
+} from "~/features/about"
 import { AwaitedReturn } from "~/types"
-import { H1, H2, H3 } from "~/components/atoms/Heading"
+import { H1 } from "~/components/atoms/Heading"
+import { Paragraph } from "~/components/atoms/Text"
 import Img from "~/components/atoms/Img"
+import { sortByDate } from "~/helpers"
 
-export let meta: MetaFunction = ({}) => {
+export const meta: MetaFunction = ({}) => {
   return {
     title: "About",
-    description: "Home of Siddhant Gupta!",
+    description: "Timeline of Siddhant Gupta!",
   }
 }
 
 export async function loader() {
-  const about = await getAbout()
   const career = await getCareer()
   const education = await getEducation()
 
-  return { about, career, education }
+  const timeline = [...career, ...education].sort((a, b) =>
+    sortByDate(a.endDate, b.endDate),
+  )
+
+  return { timeline }
 }
 
 export default function About(): JSX.Element {
-  const { about, career, education } =
-    useLoaderData<AwaitedReturn<typeof loader>>()
+  const { timeline } = useLoaderData<AwaitedReturn<typeof loader>>()
 
   return (
     <main className="flex-1 container-mx">
       <H1>About me</H1>
 
-      <H2>Career</H2>
       <ul className="flex gap-8 flex-col">
-        {career.map((item: any) => (
-          <li key={item.id} className="flex gap-4 items-center">
-            <div className="w-10 h-10 overflow-hidden rounded-lg">
-              <Img src={item.icon} />
-            </div>
-            <H3 className="!m-0"> {item.company}</H3>
-          </li>
-        ))}
-      </ul>
-
-      <H2>Education</H2>
-      <ul className="flex gap-8 flex-col">
-        {education.map((item: any) => (
-          <li key={item.id} className="flex gap-4 items-center">
-            <div className="w-10 h-10 overflow-hidden rounded-lg">
-              <Img src={item.icon} />
-            </div>
-            <H3 className="!m-0"> {item.school}</H3>
-          </li>
-        ))}
+        {timeline.map((item) =>
+          isCareerItem(item) ? (
+            <CareerCard key={item.id} {...item} />
+          ) : (
+            <EducationCard key={item.id} {...item} />
+          ),
+        )}
       </ul>
 
       <Outlet />
     </main>
+  )
+}
+
+/** Education component */
+export function EducationCard({
+  icon,
+  school,
+}: EducationItem): JSX.Element | null {
+  return (
+    <li className="flex gap-4 items-center">
+      <div className="w-10 h-10 overflow-hidden rounded-lg">
+        <Img src={icon} />
+      </div>
+      <Paragraph className="!m-0"> {school}</Paragraph>
+    </li>
+  )
+}
+
+/** Career component */
+export function CareerCard({ icon, company }: CareerItem): JSX.Element | null {
+  return (
+    <li className="flex gap-4 items-center">
+      <div className="w-10 h-10 overflow-hidden rounded-lg">
+        <Img src={icon} />
+      </div>
+      <Paragraph className="!m-0"> {company}</Paragraph>
+    </li>
   )
 }

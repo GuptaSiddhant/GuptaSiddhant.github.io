@@ -1,6 +1,6 @@
 import Grid from "~/components/templates/Grid"
 import { BlogPostCard } from "./BlogCard"
-import { checkIfFeaturedBlogPost } from "./helpers"
+import { checkIfFeaturedBlogPost } from "./utils"
 import { BlogPostContent } from "./types"
 
 export function BlogGrid({

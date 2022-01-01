@@ -1,6 +1,8 @@
 import { Link } from "remix"
 
-export default function Logo({ name }: { name: string }): JSX.Element {
+import { name } from "../about"
+
+export default function Logo(): JSX.Element {
   return (
     <Link
       to="/"

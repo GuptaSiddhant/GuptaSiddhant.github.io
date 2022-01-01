@@ -1,12 +1,12 @@
-import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
-
-import Document from "./features/document"
-
-import fontStyles from "./styles/font.css"
-import tailwindStyles from "./styles/tailwind.css"
 import reachDialogStyles from "@reach/dialog/styles.css"
 import reachTooltipStyles from "@reach/tooltip/styles.css"
 import reachMenuStyles from "@reach/menu-button/styles.css"
+import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
+
+import { name } from "./features/about"
+import Document from "./features/document"
+import fontStyles from "./styles/font.css"
+import tailwindStyles from "./styles/tailwind.css"
 
 // https://remix.run/api/app#links
 export function links(): LinkDescriptor[] {
@@ -46,12 +46,14 @@ export function links(): LinkDescriptor[] {
 }
 
 export const meta: MetaFunction = () => {
-  const title = "Siddhant Gupta"
   return {
-    title,
+    title: name,
     description: "Webfolio of a developer/designer.",
-    "apple-mobile-web-app-title": title,
-    "application-name": title,
+    charset: "utf-8",
+    viewport: "width=device-width,initial-scale=1",
+    "theme-color": "#F9FAFB",
+    "apple-mobile-web-app-title": name,
+    "application-name": name,
     "msapplication-TileColor": "#603cba",
   }
 }
@@ -71,7 +73,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
 
   return (
-    <Document title="Error!">
+    <Document>
       <main className="container-mx">
         <h1>{"There was an error"}</h1>
         <p>{error.message}</p>
@@ -101,7 +103,7 @@ export function CatchBoundary() {
   const heading = `${caught.status}: ${caught.statusText}`
 
   return (
-    <Document title={heading}>
+    <Document>
       <main className="container-mx">
         <h1>{heading}</h1>
         <p>{message}</p>

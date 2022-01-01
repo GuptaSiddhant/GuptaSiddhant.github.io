@@ -1,6 +1,6 @@
 import Grid from "~/components/templates/Grid"
 import { ProjectCard } from "./ProjectCard"
-import { checkIfFeaturedProject } from "./helpers"
+import { checkIfFeaturedProject } from "./utils"
 import type { ProjectContent } from "./types"
 
 export function ProjectGrid({ projects }: { projects: ProjectContent[] }) {

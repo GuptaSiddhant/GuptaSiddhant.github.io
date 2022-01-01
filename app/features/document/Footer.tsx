@@ -1,11 +1,8 @@
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 import Button from "~/components/atoms/Button"
+import { name } from "../about"
 
-interface FooterProps {
-  name: string
-}
-
-export default function Footer({ name }: FooterProps): JSX.Element {
+export default function Footer(): JSX.Element {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }

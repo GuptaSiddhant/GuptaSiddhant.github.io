@@ -9,7 +9,7 @@ import {
 import { generateResponseForPages } from "~/service/response"
 import type { LoaderFunctionProps } from "~/types"
 
-import { getNextProject } from "./helpers"
+import { getNextProject } from "./utils"
 import type { ProjectContent, ProjectData } from "./types"
 
 const CONTENT_DIR = "projects"

@@ -1,4 +1,4 @@
-import { CommonContent, LoaderFunctionProps, PageContent } from "~/types"
+import { CommonContent, PageContent } from "~/types"
 
 export const __IS_DEV__ = process.env.NODE_ENV === "development"
 
@@ -32,9 +32,8 @@ export function getIdFromPath(path: string): string {
 }
 
 export function filterPageDraft(page: PageContent): boolean {
-  const isDev = process.env.NODE_ENV === "development"
   const isDraft = page.data.draft
-  return isDev || !isDraft
+  return __IS_DEV__ || !isDraft
 }
 
 export function createDebugger(prefix: string, silent?: boolean) {
