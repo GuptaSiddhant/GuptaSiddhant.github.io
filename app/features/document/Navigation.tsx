@@ -1,26 +1,14 @@
 import { Menu, MenuList, MenuButton, MenuLink } from "@reach/menu-button"
 import clsx from "clsx"
-import { NavLink, type NavLinkProps } from "remix"
+import { NavLink } from "remix"
 import MenuIcon from "remixicon-react/MenuLineIcon"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
 import ExternalLink from "~/components/atoms/ExternalLink"
 import useBreakpoints from "~/helpers/useBreakpoints"
+import { navLinks, socialLinks } from "./links"
 
-export interface NavigationProps {
-  navLinks: NavLinkProps[]
-  socialLinks: SocialLink[]
-}
-
-interface SocialLink {
-  href: string
-  children: JSX.Element
-}
-
-export default function Navigation({
-  navLinks,
-  socialLinks,
-}: NavigationProps): JSX.Element {
+export default function Navigation(): JSX.Element {
   const { isMobile } = useBreakpoints()
 
   if (isMobile) {
