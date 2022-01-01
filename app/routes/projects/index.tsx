@@ -1,13 +1,12 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
-import FilterForm from "~/components/organisms/FilterForm"
+import FilterForm, { useFilterForm } from "~/components/organisms/FilterForm"
 import Section from "~/components/templates/Section"
 import {
   getAllProjects,
-  filterProjectsByRequest,
+  ProjectContent,
   ProjectGrid,
 } from "~/features/projects"
-import { generateUniqueTags } from "~/helpers"
 import type { AwaitedReturn, LoaderFunctionProps } from "~/types"
 
 export const meta: MetaFunction = () => {
@@ -17,28 +16,27 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export async function loader({ request }: LoaderFunctionProps) {
-  const projects = await getAllProjects()
-  const tags = generateUniqueTags(projects)
-  const { searchQuery, selectedTags, filteredProjects } =
-    filterProjectsByRequest(projects, request)
-
-  return {
-    tags,
-    selectedTags,
-    searchQuery,
-    projects: filteredProjects,
-  }
+export async function loader({}: LoaderFunctionProps) {
+  return await getAllProjects()
 }
 
 export default function Projects(): JSX.Element {
-  const { projects, ...filterData } =
-    useLoaderData<AwaitedReturn<typeof loader>>()
+  const projects = useLoaderData<AwaitedReturn<typeof loader>>()
+  const { items, filterFormProps } = useFilterForm<ProjectContent>(
+    projects,
+    ({ id, data }, query) =>
+      [id, data.title, data.association].some((field) =>
+        field?.includes(query),
+      ),
+  )
 
   return (
     <Section id="filter" className="flex-col">
-      <FilterForm {...filterData} searchPlaceholder="Search the projects..." />
-      <ProjectGrid projects={projects} />
+      <FilterForm
+        {...filterFormProps}
+        searchPlaceholder="Search the projects..."
+      />
+      <ProjectGrid projects={items} />
     </Section>
   )
 }

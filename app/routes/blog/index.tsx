@@ -1,9 +1,8 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
-import FilterForm from "~/components/organisms/FilterForm"
+import FilterForm, { useFilterForm } from "~/components/organisms/FilterForm"
 import Section from "~/components/templates/Section"
-import { BlogGrid, getBlog, filterBlogByRequest } from "~/features/blog"
-import { generateUniqueTags } from "~/helpers"
+import { BlogGrid, type BlogPostContent, getBlog } from "~/features/blog"
 import { LoaderFunctionProps, AwaitedReturn } from "~/types"
 
 export const meta: MetaFunction = () => {
@@ -13,30 +12,22 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export async function loader({ request }: LoaderFunctionProps) {
-  const blog = await getBlog()
-  const tags = generateUniqueTags(blog)
-
-  const { selectedTags, searchQuery, filteredBlog } = filterBlogByRequest(
-    blog,
-    request,
-  )
-
-  return {
-    tags,
-    selectedTags,
-    searchQuery,
-    blog: filteredBlog,
-  }
+export async function loader({}: LoaderFunctionProps) {
+  return await getBlog()
 }
 
 export default function Blog(): JSX.Element {
-  const { blog, ...filterData } = useLoaderData<AwaitedReturn<typeof loader>>()
+  const blog = useLoaderData<AwaitedReturn<typeof loader>>()
+  const { items, filterFormProps } = useFilterForm<BlogPostContent>(
+    blog,
+    ({ id, data }, query) =>
+      [id, data.title, data.subtitle].some((field) => field?.includes(query)),
+  )
 
   return (
     <Section id="filter" className="flex-col">
-      <FilterForm {...filterData} searchPlaceholder="Search the blog..." />
-      <BlogGrid posts={blog} />
+      <FilterForm {...filterFormProps} searchPlaceholder="Search the blog..." />
+      <BlogGrid posts={items} />
     </Section>
   )
 }

@@ -1,7 +1,10 @@
 import clsx from "clsx"
+import { CSSGrid, measureItems, makeResponsive } from "react-stonecutter"
 import { Link } from "remix"
+
 import type { ContentCommonData, PageContent } from "~/types"
 
+const StoneGrid = makeResponsive(CSSGrid, { maxWidth: 1920 })
 export interface GridProps<T extends ContentCommonData> {
   className?: string
   items: PageContent<T>[]
@@ -36,7 +39,10 @@ export default function Grid<T extends ContentCommonData = ContentCommonData>({
           <li
             key={item.id}
             style={{ height: "500px" }}
-            className={isFeatured ? "col-span-full lg:col-span-2" : undefined}
+            className={clsx(
+              isFeatured ? "col-span-full lg:col-span-2" : undefined,
+              "animate-appear",
+            )}
           >
             <Link
               data-custom-color

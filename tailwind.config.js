@@ -20,6 +20,15 @@ module.exports = {
         "2xl": "1700px",
         "3xl": "2200px",
       },
+      keyframes: {
+        appear: {
+          "0%": { transform: "translateY(50px)", opacity: "0.5" },
+          "100%": { transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        appear: "appear 0.5s ease-out",
+      },
     },
   },
 

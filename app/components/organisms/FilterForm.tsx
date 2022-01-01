@@ -1,40 +1,43 @@
-import { type FormEvent } from "react"
-import { Form, useSubmit } from "remix"
+import { useMemo, useState, type FormEvent } from "react"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
 import Button from "~/components/atoms/Button"
 import Input from "~/components/atoms/Input"
 import TagList from "~/components/molecules/TagList"
+import { generateUniqueTags } from "~/helpers"
+import { CommonContent } from "~/types"
+
+export interface FilterFormProps {
+  isFormDisabled?: boolean
+  tags: string[]
+  searchPlaceholder?: string
+  selectedTags: string[]
+  searchQuery: string
+  isResetDisabled: boolean
+  handleFormChange: (e: FormEvent<HTMLFormElement>) => void
+  handleFormReset: () => void
+}
 
 export default function FilterForm({
+  isFormDisabled,
   tags,
   selectedTags,
   searchQuery,
   searchPlaceholder,
-}: {
-  tags: string[]
-  selectedTags: string[]
-  searchQuery?: string
-  searchPlaceholder?: string
-}) {
-  const submit = useSubmit()
-
-  function handleChange(event: FormEvent<HTMLFormElement>) {
-    const formData = new FormData(event.currentTarget)
-    submit(formData, { replace: true })
-  }
-
-  const isResetDisabled =
-    selectedTags.length === 0 && (!searchQuery || searchQuery?.length === 0)
+  isResetDisabled,
+  handleFormChange,
+  handleFormReset,
+}: FilterFormProps): JSX.Element | null {
+  if (isFormDisabled) return null
 
   return (
-    <Form
+    <form
       className="flex flex-row flex-wrap items-center gap-4"
-      onChange={handleChange}
+      onChange={handleFormChange}
     >
       <Input
         type="search"
-        name="q"
+        name="query"
         defaultValue={searchQuery}
         placeholder={searchPlaceholder}
         aria-label="Search"
@@ -44,29 +47,60 @@ export default function FilterForm({
         tags={tags}
         checkIsTagSelected={(tag) => selectedTags.includes(tag)}
       />
-      <ResetFormButton isDisabled={isResetDisabled} />
-    </Form>
+      {isResetDisabled ? null : (
+        <Button
+          onClick={handleFormReset}
+          type="reset"
+          className="flex items-center gap-1 text-red-700 dark:text-red-300"
+        >
+          <CloseIcon className="inline" /> Reset filters
+        </Button>
+      )}
+    </form>
   )
 }
 
-function ResetFormButton({
-  isDisabled,
-}: {
-  isDisabled?: boolean
-}): JSX.Element | null {
-  const submit = useSubmit()
+export function useFilterForm<T extends CommonContent>(
+  items: T[],
+  queryFilterPredicate: (item: T, query: string) => boolean,
+) {
+  const [searchQuery, setSearchQuery] = useState<string>("")
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
-  const handleClick = () => submit({}, { replace: true })
+  function handleFormChange(e: FormEvent<HTMLFormElement>): void {
+    const formData = new FormData(e.currentTarget)
+    const query: string = formData.get("query")?.toString() || ""
+    const tags: string[] = formData.getAll("tags").map((tag) => tag.toString())
+    setSearchQuery(query)
+    setSelectedTags(tags)
+  }
 
-  if (isDisabled) return null
+  function handleFormReset() {
+    setSearchQuery("")
+    setSelectedTags([])
+  }
 
-  return (
-    <Button
-      onClick={handleClick}
-      type="reset"
-      className="flex items-center gap-1 text-red-700 dark:text-red-300"
-    >
-      <CloseIcon className="inline" /> Reset filters
-    </Button>
+  const filterFormProps: FilterFormProps = {
+    isFormDisabled: items.length < 2,
+    tags: generateUniqueTags(items),
+    selectedTags,
+    searchQuery,
+    handleFormChange,
+    handleFormReset,
+    isResetDisabled:
+      selectedTags.length === 0 && (!searchQuery || searchQuery?.length === 0),
+  }
+
+  const filteredItems = useMemo(
+    () =>
+      items.filter(
+        (item) =>
+          (selectedTags.length === 0 ||
+            (item.data.tags || []).some((tag) => selectedTags.includes(tag))) &&
+          (searchQuery.length === 0 || queryFilterPredicate(item, searchQuery)),
+      ),
+    [items, searchQuery, selectedTags],
   )
+
+  return { items: filteredItems, filterFormProps }
 }
