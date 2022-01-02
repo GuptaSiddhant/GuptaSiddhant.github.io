@@ -3,5 +3,6 @@
  */
 
 // Components
-export * from "./FeaturedSection"
 export * from "./HeroSection"
+export * from "./FeaturedSection"
+export * from "./TestimonySection"

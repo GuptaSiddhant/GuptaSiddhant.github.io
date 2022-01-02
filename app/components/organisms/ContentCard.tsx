@@ -26,6 +26,7 @@ export default function ContentCard({
       as="article"
       className={clsx(
         "!p-0 justify-between flex-col",
+        "hover:scale-[1.025]",
         featured && "sm:flex-row",
         className,
       )}

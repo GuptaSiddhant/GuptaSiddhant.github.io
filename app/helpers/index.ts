@@ -32,7 +32,7 @@ export function getIdFromPath(path: string): string {
 }
 
 export function filterPageDraft(page: PageContent): boolean {
-  const isDraft = page.data.draft
+  const isDraft = page?.data?.draft
   return __IS_DEV__ || !isDraft
 }
 

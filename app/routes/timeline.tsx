@@ -15,7 +15,7 @@ import { sortByDate } from "~/helpers"
 
 export const meta: MetaFunction = ({}) => {
   return {
-    title: "About",
+    title: "Timeline",
     description: "Timeline of Siddhant Gupta!",
   }
 }

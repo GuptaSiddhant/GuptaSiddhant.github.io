@@ -1,7 +1,7 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
 import { getBlog, checkIfFeaturedBlogPost } from "~/features/blog"
-import { FeaturedSection, HeroSection } from "~/features/home"
+import { HeroSection, FeaturedSection, TestimonySection } from "~/features/home"
 import { getAllProjects, checkIfFeaturedProject } from "~/features/projects"
 import type { AwaitedReturn } from "~/types"
 
@@ -28,6 +28,7 @@ export default function Index() {
     <main>
       <HeroSection />
       <FeaturedSection projects={projects} blog={blog} />
+      <TestimonySection />
     </main>
   )
 }
