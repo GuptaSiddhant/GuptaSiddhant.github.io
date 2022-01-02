@@ -1,12 +1,11 @@
 import clsx from "clsx"
-import withRef from "~/helpers/withRef"
+import { type ForwardedRef, forwardRef } from "react"
 
 /** Text component */
-export default withRef(function Text({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
+export default forwardRef(function Text(
+  { children, className, ...props }: React.ComponentProps<"span">,
+  ref: ForwardedRef<HTMLSpanElement>,
+): JSX.Element {
   return (
     <span className={clsx(className)} {...props}>
       {children}

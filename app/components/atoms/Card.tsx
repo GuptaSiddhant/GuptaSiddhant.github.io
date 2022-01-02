@@ -1,19 +1,15 @@
 import clsx from "clsx"
-
-import withRef from "~/helpers/withRef"
+import { forwardRef, type ForwardedRef } from "react"
 
 export interface CardProps extends React.ComponentProps<"div"> {
   as?: keyof JSX.IntrinsicElements
 }
 
 /** Card component */
-function Card({
-  className,
-  children,
-  ref,
-  as,
-  ...props
-}: CardProps): JSX.Element | null {
+function Card(
+  { className, children, as, ...props }: CardProps,
+  ref: ForwardedRef<HTMLElement>,
+): JSX.Element | null {
   const Component: any = as || "div"
 
   return (
@@ -26,14 +22,14 @@ function Card({
         "h-full p-8 rounded-2xl",
         "flex",
         "transition-transform duration-300",
-        "hover:scale-[1.025]",
         "group",
         className,
       )}
+      ref={ref}
     >
       {children}
     </Component>
   )
 }
 
-export default withRef(Card)
+export default forwardRef(Card)

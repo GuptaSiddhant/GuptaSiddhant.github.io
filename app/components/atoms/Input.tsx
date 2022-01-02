@@ -1,14 +1,20 @@
 import clsx from "clsx"
-
-import withRef from "~/helpers/withRef"
+import { forwardRef, type ForwardedRef } from "react"
 
 export interface InputProps extends React.ComponentProps<"input"> {}
 
 /** Input component */
-function Input({ className, ...props }: InputProps): JSX.Element | null {
+function Input(
+  { className, ...props }: InputProps,
+  ref: ForwardedRef<HTMLInputElement>,
+): JSX.Element | null {
   return (
-    <input {...props} className={clsx("rounded", "dark:bg-depth", className)} />
+    <input
+      {...props}
+      className={clsx("rounded", "dark:bg-depth", className)}
+      ref={ref}
+    />
   )
 }
 
-export default withRef(Input)
+export default forwardRef(Input)

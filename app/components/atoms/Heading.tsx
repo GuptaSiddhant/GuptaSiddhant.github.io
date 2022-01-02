@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import withRef from "~/helpers/withRef"
+import { forwardRef, type ForwardedRef } from "react"
 
 type HTMLHeadingProps = React.ComponentProps<"h1">
 
@@ -11,12 +11,10 @@ export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 export type HeadingValue = 1 | 2 | 3 | 4 | 5 | 6
 
 /** Heading component (h1-h6) */
-function Heading({
-  as,
-  children,
-  className,
-  ...props
-}: HeadingProps): JSX.Element {
+function Heading(
+  { as, children, className, ...props }: HeadingProps,
+  ref: ForwardedRef<HTMLHeadingElement>,
+): JSX.Element {
   const Component = as || `div`
   const value =
     props.value || (Number.parseInt(as?.slice(1) || "1", 10) as HeadingValue)
@@ -28,13 +26,13 @@ function Heading({
   )
 
   return (
-    <Component {...props} className={headingClassName}>
+    <Component {...props} className={headingClassName} ref={ref}>
       {children}
     </Component>
   )
 }
 
-export default withRef(Heading)
+export default forwardRef(Heading)
 
 export function H1(props: HTMLHeadingProps) {
   return <Heading {...props} as="h1" />

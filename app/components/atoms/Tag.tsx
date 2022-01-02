@@ -1,9 +1,9 @@
 import { useLabel } from "@react-aria/label"
 import { useFocusRing } from "@react-aria/focus"
 import clsx from "clsx"
+import { forwardRef, type ForwardedRef } from "react"
 
 import { capitalize } from "~/helpers"
-import withRef from "~/helpers/withRef"
 
 export interface TagProps {
   className?: string
@@ -14,14 +14,10 @@ export interface TagProps {
   ref?: React.LegacyRef<HTMLInputElement>
 }
 
-function Tag({
-  children,
-  className,
-  isSelected,
-  isDisabled,
-  size = "md",
-  ref,
-}: TagProps) {
+function Tag(
+  { children, className, isSelected, isDisabled, size = "md" }: TagProps,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const { isFocusVisible, focusProps } = useFocusRing()
   const { labelProps, fieldProps } = useLabel({ "aria-label": children })
 
@@ -64,4 +60,4 @@ function Tag({
   )
 }
 
-export default withRef(Tag)
+export default forwardRef(Tag)
