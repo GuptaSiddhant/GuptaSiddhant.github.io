@@ -5,9 +5,9 @@ import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 import { socialLinks as aboutSocialLinks } from "~/helpers/about"
 
 export const navLinks = [
-  { to: "/timeline", children: "Timeline" },
+  // { to: "/timeline", children: "Timeline" },
   { to: "/projects", children: "Projects" },
-  { to: "/blog", children: "Blog" },
+  // { to: "/blog", children: "Blog" },
 ]
 
 export const socialLinks = [

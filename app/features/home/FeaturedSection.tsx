@@ -25,7 +25,7 @@ export function FeaturedSection(props: FeaturedGridProps): JSX.Element | null {
         <Heading value={2}>Featured work</Heading>
         <div className="flex gap-12 ">
           <Link to="projects">View projects</Link>
-          <Link to="blog">View blog</Link>
+          {/* <Link to="blog">View blog</Link> */}
         </div>
       </div>
 
@@ -55,9 +55,7 @@ function FeaturedGrid({
         post={{ ...item.data, tags: ["blog", ...(item.data.tags || [])] }}
       />
     ) : isProject(item) ? (
-      <ProjectCard
-        project={{ ...item.data, tags: ["project", ...(item.data.tags || [])] }}
-      />
+      <ProjectCard project={item.data} />
     ) : null
 
   return (

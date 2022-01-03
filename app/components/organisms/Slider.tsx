@@ -61,7 +61,7 @@ export default function Slider<T extends { id: string }>({
           {items.map((item, index) => (
             <RenderComponent
               key={item.id}
-              className="snap-center h-full min-w-[45%]"
+              className="snap-center h-full min-w-fit"
               index={index}
               {...item}
             />

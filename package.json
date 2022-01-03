@@ -13,7 +13,7 @@
     "deploy": "netlify deploy",
     "deploy:prod": "netlify deploy --prod",
     "postinstall": "remix setup node",
-    "clear": "rm -rf netlify/build; rm -rf public/build; rm -rf .cache/; rm -rf .netlify/; rm app/styles/tailwind.css; rm .cache.remix"
+    "clear": "rm -rf netlify/build; rm -rf public/build; rm -rf .cache/; rm -rf .netlify/; rm app/styles/tailwind.css;"
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",

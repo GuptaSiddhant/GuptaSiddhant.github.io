@@ -30,9 +30,9 @@ export function ProjectCard({
       >
         <div>
           <ContentCard.Title>{title}</ContentCard.Title>
-          <ContentCard.Subtitle>
+          {/* <ContentCard.Subtitle>
             @ {association?.replace("-", " ")}
-          </ContentCard.Subtitle>
+          </ContentCard.Subtitle> */}
         </div>
         <ContentCard.Icon url={icon} title={title} />
       </div>
