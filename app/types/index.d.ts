@@ -13,6 +13,7 @@ export interface PageContent<T extends ContentCommonData = ContentCommonData> {
   path: string
   data: T
   code: string
+  content: string
 }
 
 export interface ContentCommonData {
