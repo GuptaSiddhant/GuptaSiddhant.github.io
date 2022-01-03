@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import ExternalLinkIcon from "remixicon-react/ExternalLinkLineIcon"
+import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
 import Tooltip from "~/components/atoms/Tooltip"
 import type { BaseComponentProps } from "~/types"
@@ -9,16 +9,18 @@ export interface ExternalLinkProps extends BaseComponentProps {
   customBorder?: boolean
   customColor?: boolean
   tooltipLabel?: string
+  enableIcon?: boolean
 }
 
 /** ExternalLink component */
 export default function ExternalLink({
-  children = <ExternalLinkIcon aria-label="External link" />,
+  children = <ExternalLinkIcon />,
   className,
   href,
   customBorder,
   customColor,
   tooltipLabel,
+  enableIcon,
 }: ExternalLinkProps): JSX.Element | null {
   if (!href) return null
 
@@ -32,6 +34,7 @@ export default function ExternalLink({
       data-custom-color={customColor}
     >
       {children}
+      {enableIcon && <ExternalLinkIcon />}
     </a>
   )
 
@@ -40,4 +43,18 @@ export default function ExternalLink({
   }
 
   return linkElement
+}
+
+function ExternalLinkIcon(): JSX.Element {
+  return (
+    <LinkIcon
+      aria-label="External link"
+      style={{
+        display: "inline-block",
+        marginLeft: "0.2em",
+        verticalAlign: "middle",
+      }}
+      size="1em"
+    />
+  )
 }

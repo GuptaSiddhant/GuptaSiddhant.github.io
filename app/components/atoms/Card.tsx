@@ -20,9 +20,7 @@ function Card(
         "border-2 border-solid border-gray-300 dark:border-gray-700",
         "bg-hover hover:shadow-xl",
         "h-full p-8 rounded-2xl",
-        "flex",
-        "transition-transform duration-300",
-        "group",
+        "flex group",
         className,
       )}
       ref={ref}

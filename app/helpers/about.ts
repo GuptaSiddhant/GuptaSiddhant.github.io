@@ -75,7 +75,7 @@ export const testimonies: Testimony[] = [
   {
     id: "luxus-jarkko",
     title: "Jarkko Syrjälä",
-    subtitle: "Senior Developer at Luxus Worldwide",
+    subtitle: "Senior Developer, Luxus Worldwide",
     date: "2021-12-21",
     association: "luxus-worldwide",
     link: "https://linkedin.com/in/guptasiddhant9/details/recommendations",

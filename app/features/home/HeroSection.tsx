@@ -10,7 +10,7 @@ import Section from "~/components/templates/Section"
 export function HeroSection(): JSX.Element | null {
   return (
     <Section id="hero" className="items-center py-16">
-      <div className="w-full lg:w-2/3">
+      <div className="w-full xl:w-2/3">
         <Title />
         <Description />
         <TechStack />
