@@ -9,7 +9,7 @@ export async function readDirList(dirPath: string) {
   const extension = ".mdx"
   console.log(process.cwd())
   const dirList = fs
-    .readdirSync(join(process.cwd(), "..", dirPath), { withFileTypes: true })
+    .readdirSync(join(process.cwd(), dirPath), { withFileTypes: true })
     .map((file) => {
       if (file.isFile()) {
         if (file.name.endsWith(extension))
@@ -32,5 +32,5 @@ export async function readDirList(dirPath: string) {
 
 export async function readFile(filePath: string) {
   localDebug("Reading file:", filePath)
-  return fs.readFileSync(join(process.cwd(), "..", filePath), "utf8")
+  return fs.readFileSync(join(process.cwd(), filePath), "utf8")
 }

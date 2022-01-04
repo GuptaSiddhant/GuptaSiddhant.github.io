@@ -43,6 +43,7 @@
   "devDependencies": {
     "@remix-run/node": "1",
     "@remix-run/dev": "1",
+    "@remix-run/express": "1",
     "compression": "1.7.4",
     "express": "^4.17.1",
     "firebase-admin": "^10.0.1",
