@@ -1,7 +1,16 @@
 {
   "functions": {
     "predeploy": "npm run build",
-    "source": "functions"
+    "source": ".",
+    "ignore": [
+      "**/.*",
+      "**/app/**",
+      "**/node_modules/**",
+      "**/public/**",
+      "firebase.json",
+      "tailwind.*",
+      "remix.*"
+    ]
   },
   "hosting": {
     "public": "public",
