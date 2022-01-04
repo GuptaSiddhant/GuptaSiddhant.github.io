@@ -24,6 +24,7 @@ jobs:
         run: npm install
       - name: Install functions dependencies
         run: npm --prefix ./functions install ./functions
+      - run: npm --prefix ./functions install react react-dom
 
       - name: Deploy app
         run: firebase deploy --debug --non-interactive --token "${{ secrets.FIREBASE_TOKEN }}"
