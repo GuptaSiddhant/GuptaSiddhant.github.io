@@ -4,16 +4,16 @@
   "description": "Personal website of Siddhant Gupta, build with Remix.",
   "license": "",
   "scripts": {
-    "build": "npm run build:css; npm run build:remix",
-    "build:remix": "remix build",
-    "build:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --minify",
-    "dev": "concurrently \"npm run dev:remix\" \"npm run dev:css\"",
-    "dev:remix": "netlify dev",
+    "build": "remix build",
+    "build:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css",
+    "clear": "rimraf .cache/ .firebase/ build/ public/build/ *.log app/tailwind.css",
+    "deploy": "firebase deploy",
+    "dev": "concurrently \"npm run dev:css\" \"npm run dev:remix\" \"npm run start\"",
     "dev:css": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css --watch",
-    "deploy": "netlify deploy",
-    "deploy:prod": "netlify deploy --prod",
+    "dev:remix": "remix watch",
     "postinstall": "remix setup node",
-    "clear": "rm -rf netlify/build; rm -rf public/build; rm -rf .cache/; rm -rf .netlify/; rm app/styles/tailwind.css;"
+    "prebuild": "npm run build:css",
+    "start": "firebase emulators:start"
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",
@@ -37,7 +37,6 @@
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-stonecutter": "^0.3.10",
     "react-text-transition": "^1.3.0",
     "remix": "^1.1.0",
     "remixicon-react": "^1.0.0"
@@ -49,14 +48,13 @@
     "@tailwindcss/typography": "^0.5.0",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
-    "@types/react-stonecutter": "^0.3.1",
     "@types/tailwindcss": "^2.2.4",
     "@vercel/node": "^1.12.1",
     "concurrently": "^6.4.0",
     "eslint": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "netlify-plugin-image-optim": "^0.4.0",
     "prettier": "^2.5.0",
+    "rimraf": "^3.0.2",
     "tailwindcss": "^3.0.0",
     "typescript": "^4.5.0"
   },

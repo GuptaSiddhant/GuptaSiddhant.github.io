@@ -1,10 +1,9 @@
 import clsx from "clsx"
-import { CSSGrid, measureItems, makeResponsive } from "react-stonecutter"
+
 import { Link } from "remix"
 
 import type { ContentCommonData, PageContent } from "~/types"
 
-const StoneGrid = makeResponsive(CSSGrid, { maxWidth: 1920 })
 export interface GridProps<T extends ContentCommonData> {
   className?: string
   items: PageContent<T>[]
