@@ -41,6 +41,7 @@
     "remixicon-react": "^1.0.0"
   },
   "devDependencies": {
+    "@remix-run/node": "1",
     "@remix-run/dev": "1",
     "compression": "1.7.4",
     "express": "^4.17.1",
