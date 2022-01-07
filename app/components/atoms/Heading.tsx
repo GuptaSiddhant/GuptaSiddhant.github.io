@@ -32,7 +32,7 @@ function Heading(
   )
 }
 
-export default forwardRef(Heading)
+export default Heading
 
 export function H1(props: HTMLHeadingProps) {
   return <Heading {...props} as="h1" />

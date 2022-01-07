@@ -69,7 +69,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Prose>
-      <H1>{"Error with the project"}</H1>
+      <h1>{"Error with the project"}</h1>
       <Paragraph>{error.message}</Paragraph>
     </Prose>
   )

@@ -12,7 +12,6 @@ export let meta: MetaFunction = () => {
 }
 
 export async function loader() {
-  // const featuredBlog = (await getBlog()).filter(checkIfFeaturedBlogPost)
   const featuredProjects = (await getAllProjects()).filter(
     checkIfFeaturedProject,
   )

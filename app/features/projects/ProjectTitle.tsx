@@ -8,7 +8,7 @@ export function ProjectTitle(data: ProjectData): JSX.Element | null {
 
   return (
     <div className="mb-8">
-      <H1 className="!m-0">{title}</H1>
+      <h1 className="!m-0">{title}</h1>
       <Paragraph className="font-bold">{subtitle || description}</Paragraph>
     </div>
   )

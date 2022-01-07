@@ -6,7 +6,6 @@ import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
 import { fullName } from "./helpers/about"
 import Document from "./features/document"
 import fontStyles from "./styles/font.css"
-import tailwindStyles from "./styles/tailwind.css"
 
 // https://remix.run/api/app#links
 export function links(): LinkDescriptor[] {
@@ -22,8 +21,8 @@ export function links(): LinkDescriptor[] {
     { rel: "stylesheet", href: reachDialogStyles },
     { rel: "stylesheet", href: reachTooltipStyles },
     { rel: "stylesheet", href: reachMenuStyles },
-    // Tailwind
-    { rel: "stylesheet", href: tailwindStyles },
+    // Tailwind route
+    { rel: "stylesheet", href: "/tailwind.css" },
     {
       rel: "apple-touch-icon",
       sizes: "180x180",
