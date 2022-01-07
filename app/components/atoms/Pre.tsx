@@ -1,12 +1,12 @@
 import clsx from "clsx"
-import { forwardRef, type ForwardedRef } from "react"
 
 export interface PreProps extends React.ComponentProps<"pre"> {}
 
-export function Pre(
-  { children, className, ...props }: PreProps,
-  ref: ForwardedRef<HTMLPreElement>,
-): JSX.Element {
+export default function Pre({
+  children,
+  className,
+  ...props
+}: PreProps): JSX.Element {
   return (
     <pre
       className={clsx(
@@ -19,11 +19,8 @@ export function Pre(
         className,
       )}
       {...props}
-      ref={ref}
     >
       {children}
     </pre>
   )
 }
-
-export default forwardRef(Pre)

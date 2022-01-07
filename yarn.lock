@@ -600,7 +600,7 @@
     "@remix-run/node" "1.1.1"
     "@remix-run/server-runtime" "1.1.1"
 
-"@remix-run/node@1.1.1":
+"@remix-run/node@1.1.1", "@remix-run/node@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.1.1.tgz#c31bee7c75a2e42b04a9e06cd4a94b016737a842"
   integrity sha512-8WhpjiDqHb+RpsN95vygYrxyui/dWKi9ECJju+/xBuP8pODRKXU9hrCoxVC2FjFRhXUdErkCEDK/AZSDPAlqVw==
@@ -5397,7 +5397,7 @@ postcss-value-parser@^4.2.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.1.6:
+postcss@^8.1.6, postcss@^8.4.5:
   version "8.4.5"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.5.tgz#bae665764dfd4c6fcc24dc0fdf7e7aa00cc77f95"
   integrity sha512-jBDboWM8qpaqwkMwItqTQTiFikhs/67OYVvblFFTM7MrZjt6yMKd6r2kgXizEbTTljacm4NldIlZnhbjr84QYg==
@@ -5836,6 +5836,14 @@ remark-rehype@^9.0.0:
     "@types/mdast" "^3.0.0"
     mdast-util-to-hast "^11.0.0"
     unified "^10.0.0"
+
+remix-tailwind@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/remix-tailwind/-/remix-tailwind-0.2.1.tgz#c80e64d4d6182234181a2d59939d6fe21ef152fa"
+  integrity sha512-MqUQzOYiDGXpfJtWC5gbQW3mqM2ly4+Uljo0fvGG4NYZLCzh0OTKGxqwUj7R3lt7iN29Ff4TIo1a/N2adqfUnA==
+  dependencies:
+    "@remix-run/node" "^1.1.1"
+    "@types/tailwindcss" "^2.2.4"
 
 remix@^1.1.0:
   version "1.1.1"
