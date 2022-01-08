@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme */
+@layer utilities {
+  .text-primary {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+  .text-secondary {
+    @apply text-gray-800 dark:text-gray-200;
+  }
+  .text-tertiary {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+  .text-disabled {
+    @apply text-gray-500;
+  }
+  .text-link {
+    @apply text-blue-700 dark:text-blue-300;
+    @apply hover:text-blue-800 dark:hover:text-blue-200;
+    @apply active:text-blue-900 dark:active:text-blue-50;
+  }
+  .text-link-active {
+    @apply text-blue-900 dark:text-blue-50;
+  }
+  .bg-base {
+    @apply bg-gray-50 dark:bg-gray-900;
+  }
+  .bg-hover {
+    @apply bg-gray-100 dark:bg-gray-800 !important;
+  }
+  .bg-depth {
+    @apply bg-gray-200 dark:bg-black;
+  }
+  .bg-inverse {
+    @apply bg-black dark:bg-white;
+  }
+
+  .border-base {
+    @apply border-gray-500;
+  }
+  .border-depth {
+    @apply border-gray-200 dark:border-black;
+  }
+}
+
+/* Typography */
+@layer base {
+  a:not([data-custom-color]) {
+    @apply text-link;
+  }
+  a:not([data-custom-border]) {
+    @apply border-b-2 border-transparent;
+    @apply hover:border-current;
+  }
+
+  pre code {
+    @apply !p-0;
+    @apply !bg-transparent;
+    @apply !text-gray-100;
+  }
+}
+
+/* Layout */
+@layer utilities {
+  .container-mx {
+    @apply px-8 md:px-12 lg:px-16 xl:px-20;
+  }
+}
+
+@layer components {
+  [data-reach-dialog-overlay] {
+    @apply flex items-center justify-center z-40 overflow-hidden;
+  }
+  [data-reach-dialog-content] {
+    @apply w-full;
+    height: 90vh;
+  }
+  [data-reach-dialog-content] img {
+    @apply h-full w-full object-contain;
+  }
+  [data-reach-menu-popover] {
+    @apply z-40;
+  }
+  [data-reach-menu-list] {
+    @apply rounded-lg bg-hover shadow-xl text-link;
+  }
+  [data-reach-menu-item][data-selected] {
+    @apply bg-depth;
+  }
+}

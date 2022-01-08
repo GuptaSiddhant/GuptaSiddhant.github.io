@@ -4,11 +4,12 @@ import {
   type LoaderFunction,
   type MetaFunction,
 } from "remix"
+import { doc, getDoc } from "firebase/firestore"
+import { firestore } from "~/firebase"
 
 import Markdown from "~/components/templates/Markdown"
 import ShowcaseImage from "~/components/molecules/ShowcaseImage"
 import {
-  getProjectById,
   ProjectTitle,
   ProjectInfo,
   ProjectFooter,
@@ -39,17 +40,29 @@ export const loader: LoaderFunction = async ({ params }) => {
   const id = params.id
   if (!id) throw new Error("Project id is required.")
 
-  const { project, nextProject } = await getProjectById(id)
-
-  if (!filterPageDraft(project)) return redirect(`..`)
-
-  return { project, nextProject }
+  const docRef = doc(firestore, "projects", id)
+  const docSnap = await getDoc(docRef)
+  if (docSnap.exists()) {
+    const data = docSnap.data()
+    const project: ProjectContent = {
+      id,
+      data: data as ProjectData,
+      code: data.code,
+      path: id,
+      content: data.content,
+    }
+    if (!filterPageDraft(project)) return redirect(`..`)
+    return { project }
+  } else {
+    // doc.data() will be undefined in this case
+    throw new Error("Project (" + id + ") not found.")
+  }
 }
 
 export default function Project(): JSX.Element {
   const {
     project: { data, code },
-    nextProject,
+    // nextProject,
   } = useLoaderData<LoaderData>()
   const { title, gallery } = data
 
@@ -59,7 +72,7 @@ export default function Project(): JSX.Element {
       <ProjectInfo data={data} />
       <ShowcaseImage src={gallery?.[0]?.url} alt={title} />
       <Markdown code={code} />
-      <ProjectFooter project={nextProject} />
+      {/* <ProjectFooter project={nextProject} /> */}
     </Prose>
   )
 }

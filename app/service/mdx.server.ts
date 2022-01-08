@@ -36,7 +36,7 @@ export async function getMdxPage<T extends ContentCommonData>(
   const getFile = __IS_DEV__ ? readFile : downloadFile
   const page = await getFile(path)
   const source = replaceFilePathsInPage(page, path)
-  const { code, frontmatter } = await bundleMDX<T>({ source })
+  const { code, frontmatter, matter } = await bundleMDX<T>({ source })
 
-  return { id, path, data: frontmatter, code }
+  return { id, path, data: frontmatter, code, content: matter.content }
 }
