@@ -1,8 +1,10 @@
 import {
   ActionFunction,
+  Form,
   Link,
   redirect,
   useLoaderData,
+  useSubmit,
   type LoaderFunction,
   type MetaFunction,
 } from "remix"
@@ -10,19 +12,13 @@ import { doc, getDoc } from "firebase/firestore"
 import { firestore } from "~/firebase"
 
 import Markdown from "~/components/templates/Markdown"
-import ShowcaseImage from "~/components/molecules/ShowcaseImage"
-import {
-  ProjectTitle,
-  ProjectInfo,
-  ProjectFooter,
-  type ProjectContent,
-  type ProjectData,
-} from "~/features/projects"
+import { type ProjectContent, type ProjectData } from "~/features/projects"
 import Prose from "~/components/templates/Prose"
 import { filterPageDraft } from "~/helpers"
 import { H1 } from "~/components/atoms/Heading"
 import { Paragraph } from "~/components/atoms/Text"
 import { Fragment } from "react"
+import Section from "~/components/templates/Section"
 
 export const meta: MetaFunction = (props) => {
   const data: ProjectData = props.data.project.data
@@ -62,23 +58,29 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 }
 
+export const action: ActionFunction = async ({ request }) => {
+  console.log(request)
+  // return redirect(new URL(request.url).pathname)
+  return null
+}
+
 export default function Project(): JSX.Element {
   const {
-    project: { data, code, id },
+    project: { content },
     // nextProject,
   } = useLoaderData<LoaderData>()
-  const { title, gallery } = data
+  const submit = useSubmit()
 
   return (
-    <Fragment>
-      <Prose>
-        <ProjectTitle {...data} id={id} />
-        <ProjectInfo data={data} />
-        <ShowcaseImage src={gallery?.[0]?.url} alt={title} />
-        <Markdown code={code} />
-        {/* <ProjectFooter project={nextProject} /> */}
-      </Prose>
-    </Fragment>
+    <Section id="editor" className="flex flex-col">
+      <Form method="post" onChange={(e) => submit(e.currentTarget)}>
+        <textarea
+          name="edit"
+          className="w-full min-h-screen bg-depth text-primary whitespace-pre-line"
+          defaultValue={JSON.parse(content)}
+        />
+      </Form>
+    </Section>
   )
 }
 
