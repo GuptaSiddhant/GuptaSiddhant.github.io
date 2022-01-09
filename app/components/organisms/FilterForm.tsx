@@ -51,7 +51,7 @@ export default function FilterForm({
         <Button
           onClick={handleFormReset}
           type="reset"
-          className="flex items-center gap-1 text-red-700 dark:text-red-300"
+          className="flex items-center gap-1 text-red-300"
         >
           <CloseIcon className="inline" /> Reset filters
         </Button>

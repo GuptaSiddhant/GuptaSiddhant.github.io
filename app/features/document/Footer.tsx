@@ -16,7 +16,7 @@ export default function Footer(): JSX.Element {
         <small className="text-sm">&copy; {fullName}</small>
       </div>
       <Button
-        className="flex text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer items-center"
+        className="flex text-sm text-gray-500 hover:text-gray-300 cursor-pointer items-center"
         onClick={handleScrollToTop}
       >
         {"Scroll to top"} <UpIcon aria-label="Up" className="scale-90" />

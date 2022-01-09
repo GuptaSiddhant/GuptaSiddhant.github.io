@@ -32,14 +32,10 @@ function Tag(
       className={clsx(
         sizeClassName,
         "block",
-        "border-2 border-blue-300 dark:border-blue-700",
-        isSelected && "bg-blue-300 dark:bg-blue-700",
-        !isDisabled &&
-          clsx(
-            "hover:bg-blue-200 dark:hover:bg-blue-900",
-            "cursor-pointer select-none",
-          ),
-        isFocusVisible && "outline-none outline-blue-300 dark:outline-blue-700",
+        "border-2 border-blue-700",
+        isSelected && "bg-blue-700",
+        !isDisabled && clsx("hover:bg-blue-900", "cursor-pointer select-none"),
+        isFocusVisible && "outline-none outline-blue-700",
         className,
       )}
       {...labelProps}

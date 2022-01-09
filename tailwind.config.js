@@ -3,6 +3,7 @@ const colors = require("tailwindcss/colors")
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   content: ["./app/**/*.{ts,tsx}"],
+  darkMode: "class",
   theme: {
     fontFamily: {
       sans: ["Nunito", "sans-serif"],

@@ -1,30 +1,45 @@
-import { Link, LoaderFunction, useLoaderData } from "remix"
+import {
+  Link,
+  LoaderFunction,
+  MetaFunction,
+  Outlet,
+  useLoaderData,
+} from "remix"
 import { getHeadingClassName } from "~/components/atoms/Heading"
 import { getWorkItemById, WorkType } from "~/features/works"
-import Overdrive from "react-overdrive"
-import ShowcaseImage from "~/components/molecules/ShowcaseImage"
+import { compileMdx } from "~/service/mdx.server"
 
-export const loader: LoaderFunction = ({ params }) => {
+export const meta: MetaFunction = ({ data }) => ({
+  title: data?.work?.title || "Work",
+})
+
+export const loader: LoaderFunction = async ({ params }) => {
   const id = params.id
   if (!id) throw new Error("Project id is required.")
 
-  return getWorkItemById(id)
+  const work = await getWorkItemById(id)
+  const code = work.content
+    ? (await compileMdx(JSON.parse(work.content))).code
+    : undefined
+
+  return { work, code }
+}
+
+export interface WorkContext {
+  work: WorkType
+  code?: string
 }
 
 export default function WorkPage() {
-  const work = useLoaderData<WorkType>()
-  const { url, alt } = work.gallery?.[0] || {}
+  const { work, code } = useLoaderData<WorkContext>()
 
   return (
-    <main className="container mx-auto px-8">
+    <main className="container-mx">
       <Link to="..">
-        <p className={getHeadingClassName(6)}>Back</p>
+        <p className={getHeadingClassName(6)}>Back to all works</p>
       </Link>
       <h1 className={getHeadingClassName(1)}>{work.title}</h1>
-      <Overdrive id={work.id}>
-        <ShowcaseImage src={url} alt={alt} />
-      </Overdrive>
-      <pre className="whitespace-pre-wrap">{JSON.stringify(work, null, 2)}</pre>
+      <Outlet context={{ work, code }} />
     </main>
   )
 }

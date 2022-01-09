@@ -17,7 +17,7 @@ function Card(
       {...props}
       className={clsx(
         "relative overflow-hidden",
-        "border-2 border-solid border-gray-300 dark:border-gray-700",
+        "border-2 border-solid border-gray-700",
         "bg-hover hover:shadow-xl",
         "h-full p-8 rounded-2xl",
         "flex group",

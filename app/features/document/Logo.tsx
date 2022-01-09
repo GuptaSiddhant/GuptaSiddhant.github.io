@@ -9,7 +9,7 @@ export default function Logo(): JSX.Element {
       title={fullName}
       data-custom-color
       data-custom-border
-      className="font-bold text-2xl leading-normal text-black dark:text-white my-5 border-0 select-none"
+      className="font-bold text-2xl leading-normal text-white my-5 border-0 select-none"
     >
       {fullName}
     </Link>

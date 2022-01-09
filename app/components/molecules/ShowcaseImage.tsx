@@ -22,7 +22,7 @@ export default function ShowcaseImage({
       className={clsx(
         "rounded-xl -mx-8 my-8 bg-hover",
         "border-8 border-depth overflow-hidden",
-        "aspect-w-16 aspect-h-16 sm:aspect-h-12 md:sm:aspect-h-9",
+        "aspect-w-16 aspect-h-16 md:aspect-h-12",
         "bg-center bg-cover bg-no-repeat",
         "cursor-pointer",
         className,

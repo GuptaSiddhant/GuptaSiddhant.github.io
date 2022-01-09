@@ -4,6 +4,7 @@ import {
   getDoc,
   getDocs,
   query,
+  setDoc,
   type QueryDocumentSnapshot,
 } from "firebase/firestore"
 import { firestore } from "~/firebase"
@@ -30,6 +31,11 @@ export async function getWorkItemById(id: string) {
   }
 }
 
+export async function setWorkItemById(id: string, data: Partial<WorkType>) {
+  const docRef = doc(firestore, COLLECTION_NAME, id)
+  setDoc(docRef, data, { merge: true })
+}
+
 function firestoreDocToWorkItem(doc: QueryDocumentSnapshot): WorkType {
   const data = doc.data()
 
@@ -51,6 +57,7 @@ export interface WorkType {
   externalLink?: string
   github?: string
   links?: ProjectLink[]
+  content?: string
 
   title: string
   draft?: boolean

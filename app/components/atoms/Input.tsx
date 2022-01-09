@@ -11,7 +11,7 @@ function Input(
   return (
     <input
       {...props}
-      className={clsx("rounded", "dark:bg-depth", className)}
+      className={clsx("rounded", "bg-depth", className)}
       ref={ref}
     />
   )

@@ -98,7 +98,7 @@ function ContentCardTags({
       checkIsTagDisabled={() => true}
       size="sm"
       className={className}
-      tagClassName="bg-blue-100 dark:bg-blue-900"
+      tagClassName="bg-blue-900"
     />
   )
 }
@@ -143,7 +143,7 @@ function ContentCardImage({
     <div
       className={clsx(
         "flex-1 w-full bg-depth",
-        "shadow-sm dark:shadow-md",
+        "shadow-md",
         "overflow-hidden",
         className,
       )}

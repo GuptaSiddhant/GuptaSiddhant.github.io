@@ -10,7 +10,7 @@ export default function Pre({
   return (
     <pre
       className={clsx(
-        "bg-gray-900 dark:bg-black",
+        "bg-black",
         "text-secondary",
         "p-4 -mx-4 my-4",
         "rounded-xl",
