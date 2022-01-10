@@ -26,6 +26,7 @@
     "@remix-run/netlify": "1",
     "@remix-run/react": "1",
     "@remix-run/serve": "1",
+    "autoprefixer": "^10.4.2",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "firebase": "^9.6.2",
