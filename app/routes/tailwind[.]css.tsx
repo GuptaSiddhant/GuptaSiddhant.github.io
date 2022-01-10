@@ -108,7 +108,8 @@ const defaultInputCss = `
 const cache = new Map<string | symbol, string>()
 const defaultCacheKey = Symbol("remix-tailwind-default")
 
-function serveTailwindCss() {
+// https://github.com/itsMapleLeaf/remix-tailwind/blob/main/src/main.ts
+async function serveTailwindCss() {
   const cacheKey = defaultCacheKey
   const cachedResponse = cache.get(cacheKey)
   if (process.env.NODE_ENV === "production" && cachedResponse) {
