@@ -117,7 +117,7 @@ async function serveTailwindCss() {
   }
 
   const inputCss = defaultInputCss
-  const { css } = await postcss(tailwindcss).process(inputCss)
+  const { css } = await postcss(tailwindcss).process(inputCss, {from: undefined})
 
   if (process.env.NODE_ENV === "production") {
     cache.set(cacheKey, css)
