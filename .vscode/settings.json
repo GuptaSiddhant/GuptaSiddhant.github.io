@@ -2,7 +2,7 @@
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "cSpell.words": ["remixicon"],
+  "cSpell.words": ["remixicon", "tailwindcss"],
   "grammarly.dialect": "british",
 
   // JSON Schemas

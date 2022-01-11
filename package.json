@@ -9,6 +9,7 @@
     "deploy": "netlify deploy",
     "deploy:prod": "netlify deploy --prod",
     "postinstall": "remix setup node",
+    "prebuild": "tailwindcss -i ./app/styles/tailwind.css -o ./public/tailwind.css",
     "clear": "rm -rf netlify/functions/server/build; rm -rf public/build; rm -rf .cache/; rm -rf .netlify/; rm -rf"
   },
   "dependencies": {
