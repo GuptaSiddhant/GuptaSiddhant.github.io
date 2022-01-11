@@ -1,8 +1,5 @@
-/* eslint-disable unicorn/prefer-node-protocol */
 import type { LoaderFunction } from "remix"
 import { Response } from "@remix-run/node"
-import { readFile } from "fs/promises"
-import path from "path"
 import postcss from "postcss"
 import tailwindcss from "tailwindcss"
 
@@ -102,33 +99,37 @@ const defaultInputCss = `
     @apply bg-black;
   }
 }
-`
 
+`
 
 const cache = new Map<string | symbol, string>()
 const defaultCacheKey = Symbol("remix-tailwind-default")
 
 // https://github.com/itsMapleLeaf/remix-tailwind/blob/main/src/main.ts
-async function serveTailwindCss() {
+async function serveTailwindCss(inputCss: string = defaultInputCss) {
   const cacheKey = defaultCacheKey
   const cachedResponse = cache.get(cacheKey)
   if (process.env.NODE_ENV === "production" && cachedResponse) {
     return cssResponse(cachedResponse)
   }
 
-  const inputCss = defaultInputCss
-  const { css } = await postcss(tailwindcss).process(inputCss, {from: undefined})
+  const { css } = await postcss(tailwindcss).process(inputCss, {
+    from: undefined,
+  })
 
   if (process.env.NODE_ENV === "production") {
     cache.set(cacheKey, css)
   }
 
+  return cssResponse(css)
+}
+
+function cssResponse(css: string): Response {
   return new Response(css, {
     headers: { "content-type": "text/css" },
   })
 }
 
-export const loader: LoaderFunction = () =>
-  serveTailwindCss()
+export const loader: LoaderFunction = () => serveTailwindCss()
 
 export function CatchBoundary() {}
