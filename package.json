@@ -42,6 +42,7 @@
     "react-stonecutter": "^0.3.10",
     "react-text-transition": "^1.3.0",
     "remix": "^1.1.1",
+    "remix-query": "^0.1.1",
     "remix-tailwind": "^0.2.1",
     "remixicon-react": "^1.0.0"
   },

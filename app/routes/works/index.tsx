@@ -1,6 +1,6 @@
 import clsx from "clsx"
+import { json, MetaFunction, type LoaderFunction, useLoaderData } from "remix"
 
-import { json, MetaFunction, useLoaderData, type LoaderFunction } from "remix"
 import { getHeadingClassName } from "~/components/atoms/Heading"
 import { WorkType, getAllWorks } from "~/features/works"
 import WorkCard from "~/features/works/WorkCard"

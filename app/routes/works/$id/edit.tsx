@@ -4,22 +4,18 @@ import {
   Link,
   LoaderFunction,
   MetaFunction,
-  useLoaderData,
   useOutletContext,
   useSubmit,
-  useTransition,
 } from "remix"
-import { useEffect, useState } from "react"
+import { useLoaderQuery } from "remix-query"
 
 import Markdown from "~/components/templates/Markdown"
 import Prose from "~/components/templates/Prose"
-import { getHeadingClassName } from "~/components/atoms/Heading"
 import { Paragraph } from "~/components/atoms/Text"
 import Section from "~/components/templates/Section"
 import { WorkContext } from "../$id"
 import { setWorkItemById } from "~/features/works"
 import { compileMdx } from "~/service/mdx.server"
-import Tape from "~/components/atoms/Tape"
 
 export const meta: MetaFunction = ({ parentsData }) => ({
   title: parentsData?.work?.title || "Edit",
@@ -49,8 +45,10 @@ export const action: ActionFunction = async ({ request, params }) => {
 export default function WorkPageEdit(): JSX.Element {
   const submit = useSubmit()
   const { work, code } = useOutletContext<WorkContext>()
-  const localCode = useLoaderData<string | null>()
-  const { state } = useTransition()
+
+  // const { state } = useTransition()
+
+  const { data: localCode, loading } = useLoaderQuery<string | null>()
 
   return (
     <>
@@ -74,10 +72,10 @@ export default function WorkPageEdit(): JSX.Element {
         </p>
         <Form method="post" replace className="flex-1 relative">
           <button
-            disabled={state !== "idle"}
+            disabled={loading}
             className="absolute top-0 right-0 px-4 py-2 rounded bg-blue-800"
           >
-            {state !== "idle" ? "Submitting" : "Submit"}
+            {loading ? "Submitting" : "Submit"}
           </button>
           <textarea
             name="edit"

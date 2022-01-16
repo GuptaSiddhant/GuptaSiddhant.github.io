@@ -27,7 +27,7 @@ export function generateResponseForPages(
 
 export function getPagesWithoutContent(
   pages: PageContent[],
-): Array<Omit<PageContent, "code">> {
+): Array<Omit<PageContent, "code" | "content">> {
   return pages.map(({ id, path, data }) => ({
     id,
     path,

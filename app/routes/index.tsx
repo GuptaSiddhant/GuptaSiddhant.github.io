@@ -1,7 +1,7 @@
 import { useLoaderData, type MetaFunction } from "remix"
 
-import { HeroSection, FeaturedSection, TestimonySection } from "~/features/home"
-import { getAllProjects, checkIfFeaturedProject } from "~/features/projects"
+import { HeroSection, TestimonySection } from "~/features/home"
+// import { getAllProjects, checkIfFeaturedProject } from "~/features/projects"
 import type { AwaitedReturn } from "~/types"
 
 export let meta: MetaFunction = () => {
@@ -13,11 +13,11 @@ export let meta: MetaFunction = () => {
 
 export async function loader() {
   // const featuredBlog = (await getBlog()).filter(checkIfFeaturedBlogPost)
-  const featuredProjects = (await getAllProjects()).filter(
-    checkIfFeaturedProject,
-  )
+  // const featuredProjects = (await getAllProjects()).filter(
+  //   checkIfFeaturedProject,
+  // )
 
-  return { projects: featuredProjects, blog: [] }
+  return { projects: [], blog: [] }
 }
 
 export default function Index() {
@@ -26,7 +26,7 @@ export default function Index() {
   return (
     <main>
       <HeroSection />
-      <FeaturedSection projects={projects} blog={blog} />
+      {/* <FeaturedSection projects={projects} blog={blog} /> */}
       <TestimonySection />
     </main>
   )

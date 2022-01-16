@@ -1,46 +1,31 @@
 import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
+  getCollection,
+  getCollectionItem,
+  setCollectionItem,
   type QueryDocumentSnapshot,
-} from "firebase/firestore"
-import { firestore } from "~/firebase"
+} from "~/service/firestore"
 import { sortByDate } from "~/helpers"
 
-const COLLECTION_NAME = "projects"
+const collectionName = "projects"
 
 export async function getAllWorks() {
-  const queryRef = query(collection(firestore, COLLECTION_NAME))
-  const querySnapshot = await getDocs(queryRef)
-  const works = querySnapshot.docs.map(firestoreDocToWorkItem)
-  const sortedWorks = works.sort((a, b) => sortByDate(a.dateEnd, b.dateEnd))
-
-  return sortedWorks
+  const works = await getCollection(collectionName, transformDocToWorkItem)
+  return works.sort((a, b) => sortByDate(a.dateEnd, b.dateEnd))
 }
 
-export async function getWorkItemById(id: string) {
-  const docRef = doc(firestore, COLLECTION_NAME, id)
-  const docSnap = await getDoc(docRef)
-  if (docSnap.exists()) {
-    return firestoreDocToWorkItem(docSnap)
-  } else {
-    throw new Error("Project (" + id + ") not found.")
-  }
+export async function getWorkItemById(itemId: string) {
+  return getCollectionItem(collectionName, itemId, transformDocToWorkItem)
 }
 
-export async function setWorkItemById(id: string, data: Partial<WorkType>) {
-  const docRef = doc(firestore, COLLECTION_NAME, id)
-  setDoc(docRef, data, { merge: true })
+export async function setWorkItemById(itemId: string, data: Partial<WorkType>) {
+  setCollectionItem(collectionName, itemId, data)
 }
 
-function firestoreDocToWorkItem(doc: QueryDocumentSnapshot): WorkType {
-  const data = doc.data()
+function transformDocToWorkItem(docSnap: QueryDocumentSnapshot): WorkType {
+  const data = docSnap.data()
 
   return {
-    id: doc.id,
+    id: docSnap.id,
     ...data,
     code: undefined,
     dateStart: data.dateStart.toDate(),
