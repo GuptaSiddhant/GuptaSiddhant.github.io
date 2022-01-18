@@ -5,11 +5,12 @@
   "license": "",
   "scripts": {
     "build": "remix build",
-    "dev": "netlify dev",
+    "dev": "concurrently \"netlify dev\" \"yarn dev:css\"",
     "deploy": "netlify deploy",
     "deploy:prod": "netlify deploy --prod",
     "postinstall": "remix setup node",
-    "prebuild": "tailwindcss -i ./app/styles/tailwind.css -o ./public/tailwind.css",
+    "prebuild": "tailwindcss -i ./tailwind.css -o ./app/styles/tailwind.css",
+    "dev:css": "tailwindcss -w -i ./tailwind.css -o ./app/styles/tailwind.css",
     "clear": "rm -rf netlify/functions/server/build; rm -rf public/build; rm -rf .cache/; rm -rf .netlify/; rm -rf"
   },
   "dependencies": {

@@ -1,27 +1,40 @@
+import { __IS_DEV__ } from "~/helpers"
 import {
   getCollection,
   getCollectionItem,
   setCollectionItem,
+  orderBy,
+  where,
   type QueryDocumentSnapshot,
 } from "~/service/firestore"
-import { sortByDate } from "~/helpers"
 
 const collectionName = "projects"
 
-export async function getAllWorks() {
-  const works = await getCollection(collectionName, transformDocToWorkItem)
-  return works.sort((a, b) => sortByDate(a.dateEnd, b.dateEnd))
+export async function getAllProjects() {
+  const draftConstraints = __IS_DEV__
+    ? []
+    : [where("draft", "!=", true), orderBy("draft")]
+
+  return await getCollection(
+    collectionName,
+    transformDocToProject,
+    ...draftConstraints,
+    orderBy("dateStart", "desc"),
+  )
 }
 
-export async function getWorkItemById(itemId: string) {
-  return getCollectionItem(collectionName, itemId, transformDocToWorkItem)
+export async function getProjectById(itemId: string) {
+  return getCollectionItem(collectionName, itemId, transformDocToProject)
 }
 
-export async function setWorkItemById(itemId: string, data: Partial<WorkType>) {
-  setCollectionItem(collectionName, itemId, data)
+export async function setProjectById(
+  itemId: string,
+  data: Partial<ProjectType>,
+) {
+  return await setCollectionItem(collectionName, itemId, data)
 }
 
-function transformDocToWorkItem(docSnap: QueryDocumentSnapshot): WorkType {
+function transformDocToProject(docSnap: QueryDocumentSnapshot): ProjectType {
   const data = docSnap.data()
 
   return {
@@ -30,10 +43,10 @@ function transformDocToWorkItem(docSnap: QueryDocumentSnapshot): WorkType {
     code: undefined,
     dateStart: data.dateStart.toDate(),
     dateEnd: data.dateEnd?.toDate(),
-  } as unknown as WorkType
+  } as unknown as ProjectType
 }
 
-export interface WorkType {
+export interface ProjectType {
   id: string
   association?: string
   dateStart: string

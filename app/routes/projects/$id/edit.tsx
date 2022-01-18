@@ -13,8 +13,8 @@ import Markdown from "~/components/templates/Markdown"
 import Prose from "~/components/templates/Prose"
 import { Paragraph } from "~/components/atoms/Text"
 import Section from "~/components/templates/Section"
-import { WorkContext } from "../$id"
-import { setWorkItemById } from "~/features/works"
+import { ProjectContext } from "../$id"
+import { setProjectById } from "~/features/projects"
 import { compileMdx } from "~/service/mdx.server"
 
 export const meta: MetaFunction = ({ parentsData }) => ({
@@ -36,7 +36,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   if (editContent) {
     const content = JSON.stringify(editContent)
-    await setWorkItemById(id, { content })
+    await setProjectById(id, { content })
   }
 
   return null
@@ -44,7 +44,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function WorkPageEdit(): JSX.Element {
   const submit = useSubmit()
-  const { work, code } = useOutletContext<WorkContext>()
+  const { project, code } = useOutletContext<ProjectContext>()
 
   // const { state } = useTransition()
 
@@ -80,7 +80,7 @@ export default function WorkPageEdit(): JSX.Element {
           <textarea
             name="edit"
             className="w-full h-full min-h-screen bg-depth text-primary whitespace-pre-line text-base"
-            defaultValue={JSON.parse(work.content || "")}
+            defaultValue={JSON.parse(project.content || "")}
             onChange={(e) =>
               submit({ content: e.target.value }, { method: "get" })
             }

@@ -13,6 +13,8 @@ declare module "react-overdrive" {
     style?: React.CSSProperties
     // rest
     className?: string
+    ref?: React.Ref<any>
+    onClick?: () => void
   }
   export default function Overdrive(props: OverdriveProps): JSX.Element
 }

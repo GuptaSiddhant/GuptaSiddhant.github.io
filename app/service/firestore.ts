@@ -9,16 +9,27 @@ import {
   type DocumentData,
   type QueryDocumentSnapshot,
   type PartialWithFieldValue,
+  type QueryConstraint,
 } from "firebase/firestore"
 import { firestore } from "~/firebase"
+import { __IS_DEV__ } from "~/helpers"
 
-export type { DocumentData, QueryDocumentSnapshot }
+export {
+  where,
+  orderBy,
+  startAt,
+  startAfter,
+  limit,
+  type DocumentData,
+  type QueryDocumentSnapshot,
+} from "firebase/firestore"
 
 export async function getCollection<T = DocumentData>(
   collectionName: string,
   transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T,
+  ...constraints: QueryConstraint[]
 ): Promise<T[]> {
-  const queryRef = query(collection(firestore, collectionName))
+  const queryRef = query(collection(firestore, collectionName), ...constraints)
   const querySnapshot = await getDocs(queryRef)
 
   return querySnapshot.docs.map(transformDocumentSnapshot)
@@ -47,7 +58,7 @@ export async function setCollectionItem<
     return itemId
   }
 
-  console.warn("Creating new entry with auto-ID in collection:", collectionName)
+  console.log("Creating new entry with auto-ID in collection:", collectionName)
   const collectionRef = collection(firestore, collectionName)
   const docRef = await addDoc(collectionRef, data)
   console.log("Document written with ID: ", docRef.id)

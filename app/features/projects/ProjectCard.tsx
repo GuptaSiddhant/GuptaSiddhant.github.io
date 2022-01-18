@@ -1,19 +1,20 @@
 import { Link, LinkProps } from "remix"
-import { WorkType } from "./index"
+import { ProjectType } from "./index"
 import Overdrive from "react-overdrive"
 import TagList from "~/components/molecules/TagList"
 import clsx from "clsx"
 import Img from "~/components/atoms/Img"
 import Tape from "~/components/atoms/Tape"
 
-export default function WorkCard({
-  work,
-  linkTo = work.id,
+export default function ProjectCard({
+  project,
+  linkTo = project.id,
 }: {
-  work: WorkType
+  project: ProjectType
   linkTo?: LinkProps["to"]
 }) {
-  const { id, title, subtitle, description, gallery, tags, draft, icon } = work
+  const { id, title, subtitle, description, gallery, tags, draft, icon } =
+    project
   const { url: src, alt } = gallery?.[0] || {}
 
   const cardClassName = clsx(
@@ -38,7 +39,7 @@ export default function WorkCard({
 
   return (
     <Link
-      key={work.id}
+      key={project.id}
       to={linkTo}
       data-custom-border
       data-custom-color

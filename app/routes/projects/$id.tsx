@@ -6,7 +6,7 @@ import {
   useLoaderData,
 } from "remix"
 import { getHeadingClassName } from "~/components/atoms/Heading"
-import { getWorkItemById, WorkType } from "~/features/works"
+import { getProjectById, ProjectType } from "~/features/projects"
 import { compileMdx } from "~/service/mdx.server"
 
 export const meta: MetaFunction = ({ data }) => ({
@@ -17,29 +17,28 @@ export const loader: LoaderFunction = async ({ params }) => {
   const id = params.id
   if (!id) throw new Error("Project id is required.")
 
-  const work = await getWorkItemById(id)
-  const code = work.content
-    ? (await compileMdx(JSON.parse(work.content))).code
+  const project = await getProjectById(id)
+  const code = project.content
+    ? (await compileMdx(JSON.parse(project.content))).code
     : undefined
 
-  return { work, code }
+  return { project, code }
 }
 
-export interface WorkContext {
-  work: WorkType
+export interface ProjectContext {
+  project: ProjectType
   code?: string
 }
 
 export default function WorkPage() {
-  const { work, code } = useLoaderData<WorkContext>()
+  const { project, code } = useLoaderData<ProjectContext>()
 
   return (
     <main className="container-mx">
       <Link to="..">
-        <p className={getHeadingClassName(6)}>Back to all works</p>
+        <p className={getHeadingClassName(6)}>Back to all projects</p>
       </Link>
-      <h1 className={getHeadingClassName(1)}>{work.title}</h1>
-      <Outlet context={{ work, code }} />
+      <Outlet context={{ project, code }} />
     </main>
   )
 }

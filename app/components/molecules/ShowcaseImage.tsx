@@ -1,16 +1,20 @@
 import clsx from "clsx"
 import { useEffect, useRef } from "react"
+import Overdrive from "react-overdrive"
 
 import Img, { type ImgProps } from "~/components/atoms/Img"
 import { useModal, Modal } from "~/components/templates/Modal"
 
-export interface ShowcaseImageProps extends Omit<ImgProps, "ref"> {}
+export interface ShowcaseImageProps extends Omit<ImgProps, "ref"> {
+  id: string
+}
 
 /** ShowcaseImage component */
 export default function ShowcaseImage({
   className,
   src,
   alt,
+  id,
   ...props
 }: ShowcaseImageProps): JSX.Element | null {
   const { containerRef, imageRef } = useMouse()
@@ -20,9 +24,9 @@ export default function ShowcaseImage({
   return (
     <div
       className={clsx(
-        "rounded-xl -mx-8 my-8 bg-hover",
+        "rounded-xl -ml-8 my-8 bg-hover",
         "border-8 border-depth overflow-hidden",
-        "aspect-w-16 aspect-h-16 md:aspect-h-12",
+        "aspect-w-16 aspect-h-16 md:aspect-h-9",
         "bg-center bg-cover bg-no-repeat",
         "cursor-pointer",
         className,
@@ -30,13 +34,10 @@ export default function ShowcaseImage({
       ref={containerRef}
       onClick={openModal}
     >
-      <Img
-        {...props}
-        src={src}
-        alt={alt}
-        className="not-prose !m-0"
-        ref={imageRef}
-      />
+      <Overdrive id={id} className="h-full w-full">
+        <Img {...props} src={src} alt={alt} ref={imageRef} />
+      </Overdrive>
+
       <Modal {...modalProps} aria-label="Showcase">
         <Img {...props} src={src} alt={alt} className="!m-0" />
       </Modal>
