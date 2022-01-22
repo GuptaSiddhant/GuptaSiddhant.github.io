@@ -15,6 +15,7 @@ node_modules
 .output
 
 public/build
+public/tailwind.css
 api/build
 app/styles/tailwind.css
 
@@ -27,5 +28,3 @@ node_modules
 /.netlify
 
 .cache.remix
-
-public/tailwind.css

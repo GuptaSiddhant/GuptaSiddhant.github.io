@@ -23,8 +23,6 @@ export function links(): LinkDescriptor[] {
     { rel: "stylesheet", href: reachTooltipStyles },
     { rel: "stylesheet", href: reachMenuStyles },
     { rel: "stylesheet", href: tailwindStyles },
-    // Tailwind
-    { rel: "stylesheet", href: "/tailwind.css" },
     {
       rel: "apple-touch-icon",
       sizes: "180x180",
