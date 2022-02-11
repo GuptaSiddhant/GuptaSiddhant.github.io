@@ -1,20 +1,35 @@
 import clsx from "clsx"
+import { Link } from "remix"
 
-import Logo from "./Logo"
+import { fullName } from "~/features/about"
 import Navigation from "./Navigation"
 
 export default function Header(): JSX.Element {
   return (
     <header
       id="header"
-      className={clsx(
-        "!bg-opacity-75 bg-base backdrop-blur-md",
-        "flex flex-row justify-between items:center sm:items-baseline",
-        "container-mx top-0 z-30 sticky",
-      )}
+      className={clsx("mb-4 flex flex-row items-baseline justify-between px-4")}
     >
       <Logo />
       <Navigation />
     </header>
+  )
+}
+
+function Logo(): JSX.Element {
+  return (
+    <Link
+      to="/"
+      title={fullName}
+      data-custom-color
+      data-custom-border
+      className={clsx(
+        "select-none",
+        "text-xl font-black uppercase leading-normal tracking-widest",
+        "text-white",
+      )}
+    >
+      {fullName}
+    </Link>
   )
 }

@@ -1,6 +1,6 @@
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
-import Button from "~/components/atoms/Button"
-import { fullName } from "~/helpers/about"
+
+import { fullName } from "~/features/about"
 
 export default function Footer(): JSX.Element {
   const handleScrollToTop = () => {
@@ -10,17 +10,17 @@ export default function Footer(): JSX.Element {
   return (
     <footer
       id="footer"
-      className="container-mx flex justify-between items-center border-t border-opacity-20 mt-10 "
+      className="container-mx mt-10 flex items-center justify-between border-t border-opacity-20 "
     >
-      <div className="text-center my-4 text-gray-500">
+      <div className="my-4 text-center text-gray-500">
         <small className="text-sm">&copy; {fullName}</small>
       </div>
-      <Button
-        className="flex text-sm text-gray-500 hover:text-gray-300 cursor-pointer items-center"
+      <button
+        className="flex cursor-pointer items-center text-sm text-gray-500 hover:text-gray-300"
         onClick={handleScrollToTop}
       >
         {"Scroll to top"} <UpIcon aria-label="Up" className="scale-90" />
-      </Button>
+      </button>
     </footer>
   )
 }

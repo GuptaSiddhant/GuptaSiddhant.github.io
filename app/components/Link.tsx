@@ -1,48 +1,48 @@
 import clsx from "clsx"
+import { Link, type LinkProps } from "remix"
 import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
-import Tooltip from "~/components/atoms/Tooltip"
-import type { BaseComponentProps } from "~/types"
+import type { PropsWithChildren } from "~/components/types"
 
-export interface ExternalLinkProps extends BaseComponentProps {
+export { Link, type LinkProps }
+
+export interface ExternalLinkProps {
   href?: string
-  customBorder?: boolean
-  customColor?: boolean
   tooltipLabel?: string
   enableIcon?: boolean
 }
 
+export function InternalLink({ className, ...props }: LinkProps): JSX.Element {
+  return (
+    <Link
+      {...props}
+      className={clsx("text-blue-400 hover:underline", className)}
+    />
+  )
+}
+
 /** ExternalLink component */
-export default function ExternalLink({
+export function ExternalLink({
   children = <ExternalLinkIcon />,
   className,
   href,
-  customBorder,
-  customColor,
   tooltipLabel,
   enableIcon,
-}: ExternalLinkProps): JSX.Element | null {
+}: PropsWithChildren<ExternalLinkProps>): JSX.Element | null {
   if (!href) return null
 
-  const linkElement = (
+  return (
     <a
       href={href}
-      className={clsx(className)}
+      className={clsx("text-blue-400 hover:underline", className)}
       target="_blank"
       rel="noopener"
-      data-custom-border={customBorder}
-      data-custom-color={customColor}
+      title={tooltipLabel}
     >
       {children}
       {enableIcon && <ExternalLinkIcon />}
     </a>
   )
-
-  if (tooltipLabel) {
-    return <Tooltip label={tooltipLabel}>{linkElement}</Tooltip>
-  }
-
-  return linkElement
 }
 
 function ExternalLinkIcon(): JSX.Element {

@@ -1,9 +1,8 @@
-import reachDialogStyles from "@reach/dialog/styles.css"
-import reachTooltipStyles from "@reach/tooltip/styles.css"
-import reachMenuStyles from "@reach/menu-button/styles.css"
 import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
 
-import { fullName } from "./helpers/about"
+import { fullName } from "./features/about"
+import { Section64 } from "./components/layout"
+import { H1 } from "./components/typography"
 import Document from "./features/document"
 import fontStyles from "./styles/font.css"
 import tailwindStyles from "./styles/tailwind.css"
@@ -18,10 +17,6 @@ export function links(): LinkDescriptor[] {
       crossOrigin: "anonymous",
     },
     { rel: "stylesheet", href: fontStyles },
-    // reach-ui
-    { rel: "stylesheet", href: reachDialogStyles },
-    { rel: "stylesheet", href: reachTooltipStyles },
-    { rel: "stylesheet", href: reachMenuStyles },
     { rel: "stylesheet", href: tailwindStyles },
     {
       rel: "apple-touch-icon",
@@ -50,10 +45,10 @@ export const meta: MetaFunction = () => {
     description: "Webfolio of a developer/designer.",
     charset: "utf-8",
     viewport: "width=device-width,initial-scale=1",
-    "theme-color": "#F9FAFB",
+    "theme-color": "#000000",
     "apple-mobile-web-app-title": fullName,
     "application-name": fullName,
-    "msapplication-TileColor": "#603cba",
+    "msapplication-TileColor": "#000000",
   }
 }
 
@@ -73,10 +68,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Document>
-      <main className="container-mx">
-        <h1>{"There was an error"}</h1>
+      <Section64>
+        <H1>{"There was an error"}</H1>
         <p>{error.message}</p>
-      </main>
+      </Section64>
     </Document>
   )
 }
@@ -103,10 +98,10 @@ export function CatchBoundary() {
 
   return (
     <Document>
-      <main className="container-mx">
-        <h1>{heading}</h1>
+      <Section64>
+        <H1>{heading}</H1>
         <p>{message}</p>
-      </main>
+      </Section64>
     </Document>
   )
 }

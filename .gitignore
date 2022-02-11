@@ -10,10 +10,6 @@ editor/
 
 node_modules
 
-.cache
-.vercel
-.output
-
 public/build
 public/tailwind.css
 api/build
@@ -28,3 +24,12 @@ node_modules
 /.netlify
 
 .cache.remix
+
+# Vercel
+
+.cache
+.vercel
+.output
+
+public/build
+api/_build

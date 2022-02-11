@@ -1,6 +1,6 @@
 export const fullName = "Siddhant Gupta"
 
-export const title = "Frontend Developer"
+export const title = "Full-stack Developer"
 
 export const socialLinks = {
   linkedin: "https://linkedin.com/in/guptasiddhant9",
