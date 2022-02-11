@@ -1,8 +1,23 @@
+import clsx from "clsx"
+import { useEffect, useState } from "react"
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 
-import { fullName } from "~/features/about"
+import RoundedCorner from "./Rounded"
 
 export default function Footer(): JSX.Element {
+  const [scrollButtonVisible, setScrollButtonVisible] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset
+      setScrollButtonVisible(scrollTop > 100)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -10,17 +25,23 @@ export default function Footer(): JSX.Element {
   return (
     <footer
       id="footer"
-      className="container-mx mt-10 flex items-center justify-between border-t border-opacity-20 "
+      className={clsx(
+        "flex items-center justify-center",
+        "fixed bottom-0 left-0 right-0 z-10",
+        "h-6 bg-black",
+      )}
     >
-      <div className="my-4 text-center text-gray-500">
-        <small className="text-sm">&copy; {fullName}</small>
-      </div>
-      <button
-        className="flex cursor-pointer items-center text-sm text-gray-500 hover:text-gray-300"
-        onClick={handleScrollToTop}
-      >
-        {"Scroll to top"} <UpIcon aria-label="Up" className="scale-90" />
-      </button>
+      {scrollButtonVisible ? (
+        <button
+          className="flex cursor-pointer items-center text-sm text-gray-500 hover:text-gray-300"
+          onClick={handleScrollToTop}
+        >
+          <UpIcon aria-label="Scroll to top" />
+        </button>
+      ) : null}
+
+      <RoundedCorner position="bottom-left" />
+      <RoundedCorner position="bottom-right" />
     </footer>
   )
 }

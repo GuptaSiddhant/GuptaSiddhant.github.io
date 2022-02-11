@@ -2,8 +2,12 @@ import clsx from "clsx"
 import { Links, LiveReload, Meta, Scripts, ScrollRestoration } from "remix"
 
 import Header from "./Header"
+import Footer from "./Footer"
 
 export default function Document({ children }: { children: React.ReactNode }) {
+  const intlListFormatPolyfillScript =
+    "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"
+
   return (
     <html
       lang="en"
@@ -13,27 +17,27 @@ export default function Document({ children }: { children: React.ReactNode }) {
       <head>
         <Meta />
         <Links />
-        {/* <!-- Polyfill Intl.ListFormat, its dependencies & `en` locale data --> */}
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"></script>
+        <script src={intlListFormatPolyfillScript} />
       </head>
       <body
         className={clsx(
-          "flex min-h-screen w-screen flex-col overflow-hidden p-4 sm:p-6",
+          "flex min-h-screen w-screen flex-col",
           "bg-black text-gray-100",
         )}
       >
         <Header />
         <main
           className={clsx(
-            "max-h-screen-main flex-1 overflow-auto",
-            "rounded-2xl bg-gray-900 py-32 text-lg",
+            "mx-4 my-4 flex-1 pt-32 sm:mx-6",
+            " bg-gray-900 text-lg",
             "flex flex-col gap-10",
           )}
         >
           {children}
-          <ScrollRestoration />
         </main>
-        {/* <Footer /> */}
+        <Footer />
+
+        <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>

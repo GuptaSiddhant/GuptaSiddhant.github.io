@@ -3,15 +3,22 @@ import { Link } from "remix"
 
 import { fullName } from "~/features/about"
 import Navigation from "./Navigation"
+import RoundedCorner from "./Rounded"
 
 export default function Header(): JSX.Element {
   return (
     <header
       id="header"
-      className={clsx("mb-4 flex flex-row items-baseline justify-between px-4")}
+      className={clsx(
+        "flex flex-row items-baseline justify-between",
+        "bg-black py-4 px-10",
+        "fixed top-0 left-0 right-0 z-10",
+      )}
     >
       <Logo />
       <Navigation />
+      <RoundedCorner position="top-left" />
+      <RoundedCorner position="top-right" />
     </header>
   )
 }
