@@ -15,7 +15,6 @@ import {
 } from "firebase/storage"
 
 import { storageInstance } from "./firebase"
-import { logToFirebase } from "./analytics"
 
 function getRef(path: string): StorageReference {
   return ref(storageInstance, path)
@@ -79,12 +78,10 @@ export async function downloadFileWithPath(path: string): Promise<void> {
   link.click()
 }
 
-async function tryCatch<T>(
-  path: string,
-  callback: () => T | Promise<T>,
-): Promise<T> {
+function tryCatch<T>(path: string, callback: () => T): T
+function tryCatch<T>(path: string, callback: () => Promise<T>): Promise<T> {
   try {
-    return await callback()
+    return callback()
   } catch (error: any) {
     handleStorageErrors(error, path)
   }
@@ -120,5 +117,5 @@ function handleStorageErrors(error: any, path: string): never {
 }
 
 function logStorageEvent(eventParams: { path: string; message?: string }) {
-  logToFirebase("storage_event", { ...eventParams, type: "error" })
+  console.log("storage_event", { ...eventParams, type: "error" })
 }

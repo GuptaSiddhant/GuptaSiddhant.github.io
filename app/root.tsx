@@ -16,6 +16,10 @@ export function links(): LinkDescriptor[] {
       href: "https://fonts.gstatic.com/s/nunito/v20/XRXV3I6Li01BKofINeaBTMnFcQ.woff2",
       crossOrigin: "anonymous",
     },
+    {
+      rel: "preconnect",
+      href: "https://firebasestorage.googleapis.com",
+    },
     { rel: "stylesheet", href: fontStyles },
     { rel: "stylesheet", href: tailwindStyles },
     {

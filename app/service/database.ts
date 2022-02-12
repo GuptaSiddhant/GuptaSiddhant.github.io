@@ -13,19 +13,10 @@ import {
 } from "firebase/firestore"
 
 import { firestoreInstance } from "./firebase"
-import { logToFirebase } from "./analytics"
-
-function logFirestoreEvent(eventParams: {
-  collectionName: string
-  itemId?: string
-  type: "new" | "update" | "get" | "delete" | "get-all"
-}) {
-  logToFirebase("firestore_event", eventParams)
-}
 
 export async function getCollection<T = DocumentData>(
   collectionName: string,
-  transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T,
+  transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T | Promise<T>,
   ...constraints: QueryConstraint[]
 ): Promise<T[]> {
   const queryRef = query(
@@ -33,23 +24,28 @@ export async function getCollection<T = DocumentData>(
     ...constraints,
   )
   const querySnapshot = await getDocs(queryRef)
-  logFirestoreEvent({ collectionName, type: "get-all" })
 
-  return querySnapshot.docs.map(transformDocumentSnapshot)
+  let items: T[] = []
+  for (const docSnap of querySnapshot.docs) {
+    const item = await transformDocumentSnapshot(docSnap)
+    items.push(item)
+  }
+
+  return items
 }
 
 export async function getCollectionItem<T = DocumentData>(
   collectionName: string,
   itemId: string,
-  transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T,
+  transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T | Promise<T>,
 ): Promise<T> {
   const docRef = doc(firestoreInstance, collectionName, itemId)
   const docSnapshot = await getDoc(docRef)
-  logFirestoreEvent({ collectionName, type: "get", itemId })
+
   if (!docSnapshot.exists())
     throw new Error(`Entry "${collectionName}/${itemId}" not found.`)
 
-  return transformDocumentSnapshot(docSnapshot)
+  return await transformDocumentSnapshot(docSnapshot)
 }
 
 export async function setCollectionItem<
@@ -58,14 +54,12 @@ export async function setCollectionItem<
   if (itemId) {
     const docRef = doc(firestoreInstance, collectionName, itemId)
     await setDoc(docRef, data, { merge: true })
-    logFirestoreEvent({ collectionName, type: "update", itemId })
 
     return itemId
   }
 
   const collectionRef = collection(firestoreInstance, collectionName)
   const docRef = await addDoc(collectionRef, data)
-  logFirestoreEvent({ collectionName, type: "new", itemId: docRef.id })
 
   return docRef.id
 }

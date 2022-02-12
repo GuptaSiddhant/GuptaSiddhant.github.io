@@ -1,5 +1,11 @@
 import clsx from "clsx"
-import { type MetaFunction } from "remix"
+import {
+  json,
+  Link,
+  useLoaderData,
+  type LoaderFunction,
+  type MetaFunction,
+} from "remix"
 import QuoteStartIcon from "remixicon-react/DoubleQuotesLIcon"
 import QuoteEndIcon from "remixicon-react/DoubleQuotesRIcon"
 
@@ -8,12 +14,19 @@ import { ExternalLink, InternalLink } from "~/components/Link"
 import { H1, H2 } from "~/components/typography"
 import { proseWidth, Section, Section64 } from "~/components/layout"
 import { formatDate, formatList } from "~/helpers/format"
+import { getAllProjects, type ProjectType } from "~/features/projects"
 
-export let meta: MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return {
     title: fullName,
     description: "Home of Siddhant Gupta.",
   }
+}
+
+export const loader: LoaderFunction = async () => {
+  const projects = await getAllProjects(5)
+
+  return json(projects)
 }
 
 export default function Index() {
@@ -74,11 +87,13 @@ function HeroSection(): JSX.Element {
 }
 
 function ProjectsSection(): JSX.Element {
+  const projects = useLoaderData<ProjectType[]>()
+
   return (
     <Section id="projects">
       <div className={clsx("flex flex-col gap-4", proseWidth)}>
         <strong className="text-2xl font-extrabold uppercase tracking-widest text-gray-200">
-          Projects
+          <Link to="#projects">Projects</Link>
         </strong>
         <H2 className="text-5xl font-bold leading-tight">
           Stuff I've been tinkering with
@@ -86,17 +101,40 @@ function ProjectsSection(): JSX.Element {
         <InternalLink to="/projects">View all projects</InternalLink>
       </div>
 
-      <div className="flex w-auto gap-10 overflow-auto px-4 py-4 sm:px-10">
-        {Array(6)
-          .fill("")
-          .map((_, i) => (
-            <div
-              key={i}
-              className="h-[25rem] min-w-[20rem] rounded-lg bg-gray-800 shadow-xl"
-            ></div>
-          ))}
-      </div>
+      <ul className="flex w-full gap-4 overflow-auto px-4 py-4 sm:gap-10 sm:px-10">
+        {projects.map((project) => (
+          <li key={project.id}>
+            <ProjectCard {...project} />
+          </li>
+        ))}
+      </ul>
     </Section>
+  )
+}
+
+function ProjectCard({ title, gallery }: ProjectType): JSX.Element {
+  const cover = gallery?.[0].url
+
+  return (
+    <article
+      className={clsx(
+        "group relative",
+        "h-72 min-w-[12rem] overflow-hidden rounded-lg shadow-xl sm:h-[25rem] sm:min-w-[20rem]",
+        "bg-gray-800 bg-cover bg-center bg-no-repeat",
+      )}
+      style={{ backgroundImage: `url(${cover})` }}
+    >
+      <div
+        className={clsx(
+          "absolute bottom-0 left-0 right-0",
+          "bg-gradient-to-t from-gray-900 ",
+          "p-4 transition-[padding] duration-300 group-hover:pb-8",
+          "flex flex-col gap-0 group-hover:gap-2 group-focus:gap-2",
+        )}
+      >
+        <span className={"text-shadow text-2xl font-bold"}>{title}</span>
+      </div>
+    </article>
   )
 }
 
@@ -105,7 +143,7 @@ function TestimonialsSection(): JSX.Element {
     <Section id="testimonials">
       <div className={clsx("flex flex-col gap-4", proseWidth)}>
         <strong className="text-2xl font-extrabold uppercase tracking-widest text-gray-200">
-          Testimonials
+          <Link to="#testimonials">Testimonials</Link>
         </strong>
         <H2 className="text-5xl font-bold leading-tight">
           Good words by great people
@@ -118,7 +156,7 @@ function TestimonialsSection(): JSX.Element {
         </ExternalLink>
       </div>
 
-      <div
+      <ul
         className={clsx(
           "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
           "grid-flow-row-dense gap-10 px-4 py-4 sm:px-10",
@@ -126,10 +164,23 @@ function TestimonialsSection(): JSX.Element {
       >
         {testimonies
           .filter((t) => !t.draft)
-          .map((testimony) => (
-            <TestimonyCard key={testimony.id} {...testimony} />
-          ))}
-      </div>
+          .map((testimony) => {
+            const isMediumContent = testimony.content.length > 200
+            const isLongContent = testimony.content.length > 400
+
+            return (
+              <li
+                key={testimony.id}
+                className={clsx(
+                  isMediumContent && "sm:col-span-2",
+                  isLongContent && "sm:row-span-2",
+                )}
+              >
+                <TestimonyCard {...testimony} />
+              </li>
+            )
+          })}
+      </ul>
     </Section>
   )
 }
@@ -141,17 +192,11 @@ function TestimonyCard({
   subtitle,
   link,
 }: Testimony): JSX.Element {
-  const isMediumContent = content.length > 200
-  const isLongContent = content.length > 400
-
   return (
     <article
       className={clsx(
-        "relative rounded-lg bg-gray-800 p-4 shadow-xl",
-        "flex flex-col justify-center",
-        "text-sm",
-        isMediumContent && "sm:col-span-2",
-        isLongContent && "sm:row-span-2",
+        "relative h-full rounded-lg bg-gray-800 p-4 shadow-xl",
+        "flex flex-col justify-center text-sm",
       )}
     >
       <blockquote className="flex-1 whitespace-pre-line indent-4" cite={link}>
