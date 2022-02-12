@@ -117,7 +117,7 @@ export const testimonies: Testimony[] = [
     title: "Manish K",
     date: "2015-08-15",
     link: "https://linkedin.com/in/guptasiddhant9/details/recommendations",
-    draft: true,
+    draft: false,
     content:
       "I have worked with Siddhant and he is a great person. He has a great passion for Design and I personally liked his work. He is very dedicated and hard working.",
   },

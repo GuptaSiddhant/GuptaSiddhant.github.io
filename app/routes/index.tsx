@@ -1,5 +1,7 @@
 import clsx from "clsx"
 import { type MetaFunction } from "remix"
+import QuoteStartIcon from "remixicon-react/DoubleQuotesLIcon"
+import QuoteEndIcon from "remixicon-react/DoubleQuotesRIcon"
 
 import { fullName, title, testimonies, type Testimony } from "~/features/about"
 import { ExternalLink, InternalLink } from "~/components/Link"
@@ -85,12 +87,12 @@ function ProjectsSection(): JSX.Element {
       </div>
 
       <div className="flex w-auto gap-10 overflow-auto px-4 py-4 sm:px-10">
-        {Array(10)
+        {Array(6)
           .fill("")
           .map((_, i) => (
             <div
               key={i}
-              className="h-[440px] min-w-[360px] rounded-lg bg-gray-800"
+              className="h-[25rem] min-w-[20rem] rounded-lg bg-gray-800 shadow-xl"
             ></div>
           ))}
       </div>
@@ -123,7 +125,7 @@ function TestimonialsSection(): JSX.Element {
         )}
       >
         {testimonies
-          // .filter((t) => !t.draft)
+          .filter((t) => !t.draft)
           .map((testimony) => (
             <TestimonyCard key={testimony.id} {...testimony} />
           ))}
@@ -137,6 +139,7 @@ function TestimonyCard({
   title,
   date,
   subtitle,
+  link,
 }: Testimony): JSX.Element {
   const isMediumContent = content.length > 200
   const isLongContent = content.length > 400
@@ -144,24 +147,31 @@ function TestimonyCard({
   return (
     <article
       className={clsx(
-        "rounded-lg bg-gray-800 p-4",
+        "relative rounded-lg bg-gray-800 p-4 shadow-xl",
         "flex flex-col justify-center",
+        "text-sm",
         isMediumContent && "sm:col-span-2",
         isLongContent && "sm:row-span-2",
       )}
     >
-      <blockquote className="whitespace-pre-line indent-8 text-base">
+      <blockquote className="flex-1 whitespace-pre-line indent-4" cite={link}>
         {content}
       </blockquote>
-      <footer className="mt-4">
+      <footer className="mt-2 text-gray-200">
         <address>
           <strong>{title}</strong>
           {subtitle ? `, ${subtitle}` : ""}
         </address>
-        <time className="text-base text-gray-300" dateTime={date}>
+        <time className="text-xs text-gray-300" dateTime={date}>
           {formatDate(date)}
         </time>
       </footer>
+      <div className="absolute -left-2 -top-2 opacity-70" aria-hidden>
+        <QuoteStartIcon size="40px" />
+      </div>
+      <div className="absolute -right-2 -bottom-2 opacity-70" aria-hidden>
+        <QuoteEndIcon size="40px" />
+      </div>
     </article>
   )
 }
