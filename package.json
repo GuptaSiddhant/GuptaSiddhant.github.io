@@ -7,7 +7,7 @@
     "build": "remix build",
     "postinstall": "remix setup node",
     "prebuild": "tailwindcss -o ./app/styles/tailwind.css",
-    "dev": "concurrently \"remix dev\" \"yarn dev:css\"",
+    "dev": "concurrently \"remix dev\" \"npm:dev:css\"",
     "dev:css": "tailwindcss -w -o ./app/styles/tailwind.css",
     "clear": "rm -rf api/_build; rm -rf public/build; rm -rf .cache/"
   },

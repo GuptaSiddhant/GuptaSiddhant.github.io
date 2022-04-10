@@ -10,7 +10,7 @@ export default function Footer(): JSX.Element {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset
-      setScrollButtonVisible(scrollTop > 100)
+      setScrollButtonVisible(scrollTop > 300)
     }
 
     window.addEventListener("scroll", handleScroll)

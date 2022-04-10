@@ -17,7 +17,7 @@ const myGrayColors = {
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   content: ["./app/**/*.{ts,tsx}"],
-  darkMode: false,
+  darkMode: "class",
   theme: {
     fontFamily: {
       sans: ["Nunito", "sans-serif"],
@@ -31,7 +31,8 @@ module.exports = {
         current: "currentColor",
         blue: colors.sky,
         red: colors.rose,
-        gray: { ...colors.gray, ...myGrayColors },
+        gray: colors.neutral,
+        // gray: { ...colors.gray, ...myGrayColors },
       },
       screens: {
         "2xl": "1700px",
@@ -39,12 +40,12 @@ module.exports = {
       },
       keyframes: {
         appear: {
-          "0%": { transform: "translateY(50px)", opacity: "0.5" },
+          "0%": { transform: "translateY(50%)", opacity: "0" },
           "100%": { transform: "translateY(0)" },
         },
       },
       animation: {
-        appear: "appear 0.5s ease-out",
+        appear: "appear 0.5s linear",
       },
       maxHeight: {
         "screen-main": "calc(100vh - 100px)",

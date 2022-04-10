@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { Link, type LinkProps } from "remix"
 import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
-import type { PropsWithChildren } from "~/components/types"
+import type { PropsWithChildren } from "~/ui/types"
 
 export { Link, type LinkProps }
 

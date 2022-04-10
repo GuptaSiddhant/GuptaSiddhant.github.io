@@ -1,11 +1,12 @@
 import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
 
 import { fullName } from "./features/about"
-import { Section64 } from "./components/layout"
-import { H1 } from "./components/typography"
+import { SectionProse } from "./ui/layout"
+import { H1 } from "./ui/typography"
 import Document from "./features/document"
 import fontStyles from "./styles/font.css"
 import tailwindStyles from "./styles/tailwind.css"
+import { InternalLink } from "./ui/Link"
 
 // https://remix.run/api/app#links
 export function links(): LinkDescriptor[] {
@@ -72,10 +73,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Document>
-      <Section64>
+      <SectionProse>
         <H1>{"There was an error"}</H1>
         <p>{error.message}</p>
-      </Section64>
+      </SectionProse>
     </Document>
   )
 }
@@ -102,10 +103,11 @@ export function CatchBoundary() {
 
   return (
     <Document>
-      <Section64>
+      <SectionProse>
         <H1>{heading}</H1>
         <p>{message}</p>
-      </Section64>
+        <InternalLink to="..">Go back.</InternalLink>
+      </SectionProse>
     </Document>
   )
 }

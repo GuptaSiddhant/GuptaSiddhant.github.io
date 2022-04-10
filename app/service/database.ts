@@ -14,6 +14,7 @@ import {
 
 import { firestoreInstance } from "./firebase"
 
+/** Get firestore collection of docs and transform it to a list of required item. */
 export async function getCollection<T = DocumentData>(
   collectionName: string,
   transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T | Promise<T>,
@@ -34,6 +35,7 @@ export async function getCollection<T = DocumentData>(
   return items
 }
 
+/** Get a firestore doc and transform it to required item. */
 export async function getCollectionItem<T = DocumentData>(
   collectionName: string,
   itemId: string,
@@ -48,6 +50,7 @@ export async function getCollectionItem<T = DocumentData>(
   return await transformDocumentSnapshot(docSnapshot)
 }
 
+/** Create/update a firestore doc. */
 export async function setCollectionItem<
   T = PartialWithFieldValue<DocumentData>,
 >(collectionName: string, itemId: string, data: T): Promise<string> {

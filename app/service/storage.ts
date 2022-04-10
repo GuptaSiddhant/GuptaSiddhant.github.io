@@ -8,6 +8,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
   type FullMetadata,
+  type StorageError,
   type StorageReference,
   type UploadMetadata,
   type UploadResult,
@@ -67,7 +68,9 @@ export function uploadFileResumableWithPath(
   return uploadTask
 }
 
-// Browser only
+/**
+ * @client Not supported on server
+ */
 export async function downloadFileWithPath(path: string): Promise<void> {
   const blob = await getFileBlobWithPath(path)
   const metadata = await getFileMetadataWithPath(path)
@@ -78,6 +81,7 @@ export async function downloadFileWithPath(path: string): Promise<void> {
   link.click()
 }
 
+/** Try-catch block wrapper. */
 function tryCatch<T>(path: string, callback: () => T): T
 function tryCatch<T>(path: string, callback: () => Promise<T>): Promise<T> {
   try {
@@ -87,23 +91,26 @@ function tryCatch<T>(path: string, callback: () => Promise<T>): Promise<T> {
   }
 }
 
-function handleStorageErrors(error: any, path: string): never {
+function handleStorageErrors(error: StorageError, path: string): never {
   switch (error.code) {
     case "storage/object-not-found":
       logStorageEvent({ path, message: "File doesn't exist" })
       break
+
     case "storage/unauthorized":
       logStorageEvent({
         path,
         message: "User doesn't have permission to access the object",
       })
       break
+
     case "storage/canceled":
       logStorageEvent({
         path,
         message: "User canceled the upload",
       })
       break
+
     case "storage/unknown":
     default:
       logStorageEvent({

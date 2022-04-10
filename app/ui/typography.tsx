@@ -27,3 +27,18 @@ export function H3({ className, ...props }: PropsWithChildren) {
     />
   )
 }
+
+export function Caption({
+  className,
+  ...props
+}: PropsWithChildren): JSX.Element {
+  return (
+    <strong
+      {...props}
+      className={clsx(
+        "text-2xl font-black uppercase tracking-widest text-gray-200",
+        className,
+      )}
+    />
+  )
+}
