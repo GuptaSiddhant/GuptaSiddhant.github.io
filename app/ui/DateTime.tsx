@@ -1,12 +1,12 @@
 import { formatDate } from "~/helpers/format"
-import type { CommentProps } from "./types"
+import type { CommonProps } from "./types"
 
 export default function DateTime({
   date,
   ...props
 }: {
   date?: Date | string
-} & CommentProps): JSX.Element | null {
+} & CommonProps): JSX.Element | null {
   if (!date) return null
 
   return (

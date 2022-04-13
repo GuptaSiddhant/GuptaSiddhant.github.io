@@ -1,5 +1,11 @@
+import { type CSSProperties } from "react"
+
 export type PropsWithChildren<PropsType = {}> = React.PropsWithChildren<
-  PropsType & CommentProps
+  PropsType & CommonProps
 >
 
-export type CommentProps = { id?: string; className?: string }
+export type CommonProps = {
+  id?: string
+  className?: string
+  style?: CSSProperties
+}

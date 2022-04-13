@@ -1,74 +1,38 @@
-import { __IS_DEV__ } from "~/helpers"
-import {
-  getCollection,
-  getCollectionItem,
-  setCollectionItem,
-  orderBy,
-  limit,
-  where,
-  type QueryDocumentSnapshot,
-} from "~/service/database"
-import { getFileURLWithPath } from "~/service/storage"
+// import { __IS_DEV__ } from "~/helpers"
 
 import type { ProjectType } from "./types"
 
-const collectionName = "projects"
+export function filterProjectsWithQueryAndTags(
+  projects: ProjectType[],
+  query: string,
+  tags: string[],
+): ProjectType[] {
+  if (!query && !tags.length) return projects
 
-export async function getAllProjects(
-  limitBy: number = 10,
-): Promise<ProjectType[]> {
-  const draftConstraints = __IS_DEV__
-    ? []
-    : [where("draft", "!=", true), orderBy("draft")]
+  const lowercaseTags = tags.map((t) => t.toLowerCase())
 
-  return await getCollection(
-    collectionName,
-    transformDocToProject,
-    ...draftConstraints,
-    orderBy("dateStart", "desc"),
-    limit(limitBy),
-  )
-}
+  const filteredProjects = projects.filter((project) => {
+    if (query) {
+      const queryLower = query.toLowerCase()
+      const projectNameLower = project.title.toLowerCase()
+      // const projectDescriptionLower = project.description?.toLowerCase()
+      if (
+        !projectNameLower.includes(queryLower)
+        // && !projectDescriptionLower.includes(queryLower)
+      ) {
+        return false
+      }
+    }
 
-export async function getProjectById(itemId: string) {
-  return getCollectionItem(collectionName, itemId, transformDocToProject)
-}
+    if (lowercaseTags.length) {
+      const projectTags = (project.tags || []).map((t) => t.toLowerCase())
+      if (!lowercaseTags.every((tag) => !projectTags.includes(tag))) {
+        return false
+      }
+    }
 
-export async function setProjectById(
-  itemId: string,
-  data: Partial<ProjectType>,
-) {
-  return await setCollectionItem(collectionName, itemId, data)
-}
+    return true
+  })
 
-async function transformDocToProject(
-  docSnap: QueryDocumentSnapshot,
-): Promise<ProjectType> {
-  const data = docSnap.data()
-  const project = {
-    id: docSnap.id,
-    ...data,
-    code: undefined,
-    dateStart: data.dateStart.toDate(),
-    dateEnd: data.dateEnd?.toDate(),
-  } as unknown as ProjectType
-
-  const newIcon = project.icon ? await toImageUrl(project.icon) : undefined
-  const newGallery = await Promise.all(
-    (project.gallery || []).map(async (i) => ({
-      ...i,
-      url: await toImageUrl(i.url),
-    })),
-  )
-
-  return {
-    ...project,
-    icon: newIcon,
-    gallery: newGallery,
-  }
-}
-
-async function toImageUrl(path: string) {
-  if (path.startsWith("/") || path.startsWith("http")) return path
-  return await getFileURLWithPath(path)
+  return filteredProjects
 }

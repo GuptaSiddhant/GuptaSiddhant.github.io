@@ -27,7 +27,9 @@ export default function Document({ children }: { children: React.ReactNode }) {
       >
         <Header />
         <main
+          id="main"
           className={clsx(
+            "relative",
             "mx-4 my-4 flex-1 pt-32 sm:mx-6",
             " bg-gray-900 text-lg",
             "flex flex-col gap-10",

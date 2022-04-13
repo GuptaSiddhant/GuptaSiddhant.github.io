@@ -1,22 +1,11 @@
 import clsx from "clsx"
-import { useEffect, useState } from "react"
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 
+import useOffsetScroll from "~/helpers/useOffsetScroll"
 import RoundedCorner from "./Rounded"
 
 export default function Footer(): JSX.Element {
-  const [scrollButtonVisible, setScrollButtonVisible] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset
-      setScrollButtonVisible(scrollTop > 300)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  const scrollButtonVisible = useOffsetScroll(300)
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })

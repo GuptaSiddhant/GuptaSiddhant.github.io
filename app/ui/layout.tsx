@@ -7,11 +7,11 @@ export const proseWidth = clsx("md:min-w-[64ch] max-w-[64ch] mx-auto px-4")
 export function Section({
   children,
   className,
-  id,
+  ...props
 }: PropsWithChildren): JSX.Element {
   return (
     <section
-      id={id}
+      {...props}
       className={clsx("w-full py-24", "flex flex-col gap-12", className)}
     >
       {children}
@@ -22,10 +22,10 @@ export function Section({
 export function SectionProse({
   children,
   className,
-  id,
+  ...props
 }: PropsWithChildren): JSX.Element {
   return (
-    <Section id={id} className={clsx(proseWidth, className)}>
+    <Section {...props} className={clsx(proseWidth, className)}>
       {children}
     </Section>
   )

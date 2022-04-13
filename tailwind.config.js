@@ -31,8 +31,8 @@ module.exports = {
         current: "currentColor",
         blue: colors.sky,
         red: colors.rose,
-        gray: colors.neutral,
-        // gray: { ...colors.gray, ...myGrayColors },
+        // gray: colors.neutral,
+        gray: { ...colors.gray, ...myGrayColors },
       },
       screens: {
         "2xl": "1700px",
@@ -49,6 +49,15 @@ module.exports = {
       },
       maxHeight: {
         "screen-main": "calc(100vh - 100px)",
+      },
+      width: {
+        "full-m4": "calc(100% + 2rem)",
+      },
+      borderColor: {
+        highlight: "highlight",
+      },
+      fontFamily: {
+        inherit: "inherit",
       },
     },
   },

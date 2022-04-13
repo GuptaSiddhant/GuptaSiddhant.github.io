@@ -1,4 +1,10 @@
-import { Outlet, useCatch, type MetaFunction, type LinkDescriptor } from "remix"
+import {
+  Outlet,
+  useCatch,
+  type MetaFunction,
+  type LinkDescriptor,
+  useNavigate,
+} from "remix"
 
 import { fullName } from "./features/about"
 import { SectionProse } from "./ui/layout"
@@ -83,7 +89,8 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
 // https://remix.run/docs/en/v1/api/conventions#catchboundary
 export function CatchBoundary() {
-  let caught = useCatch()
+  const caught = useCatch()
+  const navigate = useNavigate()
 
   let message
   switch (caught.status) {
@@ -106,7 +113,7 @@ export function CatchBoundary() {
       <SectionProse>
         <H1>{heading}</H1>
         <p>{message}</p>
-        <InternalLink to="..">Go back.</InternalLink>
+        <a href="javascript:history.go(-1)">Go back.</a>
       </SectionProse>
     </Document>
   )

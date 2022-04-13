@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { type ComponentPropsWithoutRef } from "react"
 import { Link, type LinkProps } from "remix"
 import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
@@ -10,6 +11,19 @@ export interface ExternalLinkProps {
   href?: string
   tooltipLabel?: string
   enableIcon?: boolean
+}
+
+export function AnchorLink({
+  href,
+  ...props
+}: ComponentPropsWithoutRef<"a">): JSX.Element {
+  if (!href) return <></>
+
+  if (href.includes("://")) {
+    return <ExternalLink href={href} enableIcon {...props} />
+  }
+
+  return <InternalLink to={href} {...props} />
 }
 
 export function InternalLink({ className, ...props }: LinkProps): JSX.Element {

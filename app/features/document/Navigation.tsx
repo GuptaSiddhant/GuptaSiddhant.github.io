@@ -9,9 +9,9 @@ const navLinks: Array<{
   to: string
   children: React.ReactNode
 }> = [
-  { to: "/about", children: "About" },
+  // { to: "/about", children: "About" },
   { to: "/projects", children: "Projects" },
-  { to: "/blog", children: "Blog" },
+  // { to: "/blog", children: "Blog" },
 ]
 
 const socialLinks: Array<{
