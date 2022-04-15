@@ -1,5 +1,3 @@
-import { getMDXComponent } from "mdx-bundler/client"
-import { useMemo } from "react"
 import { json, useLoaderData, type LoaderFunction } from "remix"
 
 import {
@@ -9,9 +7,9 @@ import {
   type ProjectType,
 } from "~/features/projects"
 import { compileMdx } from "~/service/mdx.server"
-import { Section } from "~/ui/layout"
+import { InternalLink } from "~/ui/Link"
+
 import Markdown from "~/ui/Markdown"
-import { H1, H2, H3 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType
@@ -43,6 +41,15 @@ export default function ProjectPage(): JSX.Element {
       <img src={cover} alt={title} className="max-h-screen-main object-cover" />
 
       <Markdown code={code} />
+    </>
+  )
+}
+
+export function CatchBoundary() {
+  return (
+    <>
+      <h2>Could not find the project!</h2>
+      <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
     </>
   )
 }
