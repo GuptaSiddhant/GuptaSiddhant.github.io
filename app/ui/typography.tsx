@@ -6,7 +6,7 @@ import type { PropsWithChildren } from "./types"
 
 const commonHeadingClassName = clsx("font-bold leading-tight")
 
-export function H1({ className, ...props }: PropsWithChildren) {
+export function H1(props: PropsWithChildren<{ link?: boolean }>) {
   return <HeadingWrapper {...props} headingClassName="text-6xl" as="h1" />
 }
 
@@ -14,19 +14,19 @@ export function H2({ ...props }: PropsWithChildren<{ link?: boolean }>) {
   return <HeadingWrapper {...props} headingClassName="text-5xl" as="h2" />
 }
 
-export function H3({ className, ...props }: PropsWithChildren) {
+export function H3(props: PropsWithChildren<{ link?: boolean }>) {
   return <HeadingWrapper {...props} headingClassName="text-4xl" as="h3" />
 }
 
-export function H4({ className, ...props }: PropsWithChildren) {
+export function H4(props: PropsWithChildren<{ link?: boolean }>) {
   return <HeadingWrapper {...props} headingClassName="text-3xl" as="h4" />
 }
 
-export function H5({ className, ...props }: PropsWithChildren) {
+export function H5(props: PropsWithChildren<{ link?: boolean }>) {
   return <HeadingWrapper {...props} headingClassName="text-2xl" as="h5" />
 }
 
-export function H6({ className, ...props }: PropsWithChildren) {
+export function H6(props: PropsWithChildren<{ link?: boolean }>) {
   return <HeadingWrapper {...props} headingClassName="text-xl" as="h6" />
 }
 

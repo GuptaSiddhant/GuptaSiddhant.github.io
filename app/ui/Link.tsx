@@ -30,7 +30,10 @@ export function InternalLink({ className, ...props }: LinkProps): JSX.Element {
   return (
     <Link
       {...props}
-      className={clsx("text-blue-400 hover:underline", className)}
+      className={clsx(
+        "text-blue-400 no-underline hover:text-blue-300 hover:underline active:text-blue-400",
+        className,
+      )}
     />
   )
 }

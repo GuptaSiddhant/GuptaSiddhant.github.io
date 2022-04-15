@@ -7,7 +7,7 @@ import {
   type ProjectType,
 } from "~/features/projects"
 import { compileMdx } from "~/service/mdx.server"
-import { InternalLink } from "~/ui/Link"
+import { AnchorLink, InternalLink } from "~/ui/Link"
 
 import Markdown from "~/ui/Markdown"
 
@@ -36,7 +36,15 @@ export default function ProjectPage(): JSX.Element {
   return (
     <>
       <ProjectStickyHeader {...project} />
-      <ProjectHero {...project} />
+      <ProjectHero {...project}>
+        <a
+          href="#maincontent"
+          className="no-underline"
+          title="Jump to main content"
+        >
+          ↓
+        </a>
+      </ProjectHero>
 
       <img src={cover} alt={title} className="max-h-screen-main object-cover" />
 

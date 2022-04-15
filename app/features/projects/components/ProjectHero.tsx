@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { type ReactNode } from "react"
 
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
@@ -14,7 +15,8 @@ export default function ProjectHero({
   icon,
   description,
   tags = [],
-}: ProjectType): JSX.Element {
+  children,
+}: ProjectType & { children?: ReactNode }): JSX.Element {
   return (
     <SectionProse id="hero">
       <InternalLink to="/projects">{"← Projects"}</InternalLink>
@@ -39,6 +41,8 @@ export default function ProjectHero({
           <ProjectActions />
         </div>
       </div>
+
+      {children}
     </SectionProse>
   )
 }
