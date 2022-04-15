@@ -84,7 +84,7 @@ function ProjectsFilter(): JSX.Element {
       <Input
         type="search"
         name="q"
-        className="-mx-4 w-full-m4"
+        className="w-full md:-mx-4 md:w-full-m4"
         placeholder="Filter projects..."
         defaultValue={query}
       />

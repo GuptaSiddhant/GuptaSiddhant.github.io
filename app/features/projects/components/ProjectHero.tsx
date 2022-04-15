@@ -1,6 +1,7 @@
 import clsx from "clsx"
 
 import { SectionProse } from "~/ui/layout"
+import { InternalLink } from "~/ui/Link"
 import Tags from "~/ui/Tags"
 import { H1 } from "~/ui/typography"
 
@@ -16,7 +17,7 @@ export default function ProjectHero({
 }: ProjectType): JSX.Element {
   return (
     <SectionProse id="hero">
-      {/* <InternalLink to="/projects">{"← All projects"}</InternalLink> */}
+      <InternalLink to="/projects">{"← Projects"}</InternalLink>
       <div className={clsx("flex items-center justify-between")}>
         <div>
           <H1>{title}</H1>

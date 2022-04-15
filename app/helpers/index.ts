@@ -20,3 +20,10 @@ export function filterUniqueTagsByOccurrence(
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
+
+export function toKebabCase(str: string): string {
+  return str
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replaceAll(" ", "-")
+    .toLowerCase()
+}

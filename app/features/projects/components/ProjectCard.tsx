@@ -15,14 +15,11 @@ export default function ProjectCard({
   const showDescription = (featured || !dateEnd) && description
 
   return (
-    <Link
-      to={id}
-      className={clsx("group min-h-[400px]", calculateProjectGridSpan(project))}
-    >
+    <Link to={id} className={clsx("group ", calculateProjectGridSpan(project))}>
       <article
         className={clsx(
           "relative",
-          "h-full overflow-clip rounded-lg",
+          "h-full overflow-hidden rounded-lg",
           "bg-gray-800 bg-cover bg-center bg-no-repeat",
           className,
         )}
@@ -30,6 +27,7 @@ export default function ProjectCard({
       >
         <div
           className={clsx(
+            "rounded-lg",
             "h-0 w-full p-4 pl-8 group-hover:h-full group-focus:h-full",
             "group-hover:bg-gray-700/50 group-hover:backdrop-blur",
             "group-focus:bg-gray-700/50 group-focus:backdrop-blur",
@@ -68,5 +66,5 @@ function calculateProjectGridSpan({ dateEnd, featured }: ProjectType): string {
     classList.push("md:row-span-2")
   }
 
-  return classList.join(" ")
+  return classList.length ? classList.join(" ") : "aspect-square"
 }
