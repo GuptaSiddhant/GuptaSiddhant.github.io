@@ -12,7 +12,6 @@ import { H1 } from "./ui/typography"
 import Document from "./features/document"
 import fontStyles from "./styles/font.css"
 import tailwindStyles from "./styles/tailwind.css"
-import { InternalLink } from "./ui/Link"
 
 // https://remix.run/api/app#links
 export function links(): LinkDescriptor[] {

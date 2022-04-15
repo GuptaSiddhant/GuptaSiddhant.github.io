@@ -24,7 +24,7 @@ export function capitalize(str: string): string {
 export function toKebabCase(str: string): string {
   return str
     .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .replaceAll(" ", "-")
-    .replaceAll("/", "--")
+    .replace(new RegExp(" ", "g"), "-")
+    .replace(new RegExp("/", "g"), "--")
     .toLowerCase()
 }
