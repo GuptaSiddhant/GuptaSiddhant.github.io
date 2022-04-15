@@ -7,7 +7,7 @@ import {
   type ProjectType,
 } from "~/features/projects"
 import { compileMdx } from "~/service/mdx.server"
-import { AnchorLink, InternalLink } from "~/ui/Link"
+import { InternalLink } from "~/ui/Link"
 
 import Markdown from "~/ui/Markdown"
 
@@ -58,6 +58,16 @@ export function CatchBoundary() {
     <>
       <h2>Could not find the project!</h2>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
+    </>
+  )
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <>
+      <h2>Could not find the project!</h2>
+      <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
+      <pre>{JSON.stringify(error, null, 2)}</pre>
     </>
   )
 }
