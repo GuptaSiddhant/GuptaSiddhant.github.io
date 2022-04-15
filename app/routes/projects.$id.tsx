@@ -65,9 +65,10 @@ export function CatchBoundary() {
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <>
-      <h2>Could not find the project!</h2>
+      <h2>Error occurred!</h2>
+      <p>{error.message}</p>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
-      <pre>{JSON.stringify(error, null, 2)}</pre>
+      <pre>{JSON.stringify(error.stack, null, 2)}</pre>
     </>
   )
 }
