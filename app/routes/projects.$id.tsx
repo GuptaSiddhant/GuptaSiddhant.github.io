@@ -7,9 +7,11 @@ import {
   type ProjectType,
 } from "~/features/projects"
 import { compileMdx } from "~/service/mdx.server"
+import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
 import Markdown from "~/ui/Markdown"
+import { H2 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType
@@ -63,23 +65,23 @@ export default function ProjectPage(): JSX.Element {
 export function CatchBoundary() {
   const catchError = useCatch()
   return (
-    <>
-      <h2>Could not find the project!</h2>
+    <SectionProse>
+      <H2>Could not find the project!</H2>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
       <pre className="whitespace-pre-wrap">
         {JSON.stringify(catchError, null, 2)}
       </pre>
-    </>
+    </SectionProse>
   )
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <>
-      <h2>Error occurred!</h2>
+    <SectionProse>
+      <H2>Error occurred!</H2>
       <p>{error.message}</p>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
       <pre>{error.stack}</pre>
-    </>
+    </SectionProse>
   )
 }
