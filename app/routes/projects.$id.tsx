@@ -30,8 +30,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function ProjectPage(): JSX.Element {
   const { project, code } = useLoaderData<LoaderData>()
-  const { gallery, title } = project
-  const cover = gallery?.[0]?.url
+  const cover = project.gallery?.[0]?.url
 
   return (
     <>
@@ -46,9 +45,13 @@ export default function ProjectPage(): JSX.Element {
         </a>
       </ProjectHero>
 
-      <img src={cover} alt={title} className="max-h-screen-main object-cover" />
+      <img
+        src={cover}
+        alt={project.title}
+        className="max-h-screen-main object-cover"
+      />
 
-      {/* <Markdown code={code} /> */}
+      <Markdown code={code} />
     </>
   )
 }
