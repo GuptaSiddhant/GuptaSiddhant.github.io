@@ -1,4 +1,4 @@
-import { json, useLoaderData, type LoaderFunction } from "remix"
+import { json, useCatch, useLoaderData, type LoaderFunction } from "remix"
 
 import {
   getProjectById,
@@ -21,7 +21,10 @@ export const loader: LoaderFunction = async ({ params }) => {
   if (!id) throw new Error("Project id is required")
 
   const project = await getProjectById(id)
-  if (!project) throw new Error(`Project (${id}) not found`)
+  console.log("server", project)
+  if (!project) {
+    throw new Error(`Project (${id}) not found`)
+  }
 
   const { code } = await compileMdx(project.content || "")
 
@@ -30,8 +33,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function ProjectPage(): JSX.Element {
   const { project, code } = useLoaderData<LoaderData>()
-  console.log(project)
-  const cover = project.gallery?.[0]?.url
+  console.log("client", project)
+  const cover = project?.gallery?.[0]?.url
 
   return (
     <>
@@ -48,7 +51,7 @@ export default function ProjectPage(): JSX.Element {
 
       <img
         src={cover}
-        alt={project.title}
+        alt={project?.title}
         className="max-h-screen-main object-cover"
       />
 
@@ -58,10 +61,14 @@ export default function ProjectPage(): JSX.Element {
 }
 
 export function CatchBoundary() {
+  const catchError = useCatch()
   return (
     <>
       <h2>Could not find the project!</h2>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
+      <pre className="whitespace-pre-wrap">
+        {JSON.stringify(catchError, null, 2)}
+      </pre>
     </>
   )
 }
