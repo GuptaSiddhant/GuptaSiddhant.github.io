@@ -48,7 +48,7 @@ export default function ProjectPage(): JSX.Element {
 
       <img src={cover} alt={title} className="max-h-screen-main object-cover" />
 
-      <Markdown code={code} />
+      {/* <Markdown code={code} /> */}
     </>
   )
 }
@@ -68,7 +68,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <h2>Error occurred!</h2>
       <p>{error.message}</p>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
-      <pre>{JSON.stringify(error.stack, null, 2)}</pre>
+      <pre>{error.stack}</pre>
     </>
   )
 }
