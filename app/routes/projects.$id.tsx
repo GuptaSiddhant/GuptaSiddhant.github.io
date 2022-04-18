@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useCatch, useLoaderData } from "@remix-run/react";
+import { json, LoaderFunction } from "@remix-run/node"
+import { useCatch, useLoaderData } from "@remix-run/react"
 
 import {
   getProjectById,
@@ -58,7 +58,7 @@ export default function ProjectPage(): JSX.Element {
         className="max-h-screen-main object-cover"
       />
 
-      <Markdown code={code} />
+      {/* <Markdown code={code} /> */}
     </>
   )
 }
