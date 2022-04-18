@@ -7,7 +7,7 @@ import {
   ProjectStickyHeader,
   type ProjectType,
 } from "~/features/projects"
-import { compileMdx } from "~/service/mdx.server"
+// import { compileMdx } from "~/service/mdx.server"
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
@@ -24,18 +24,22 @@ export const loader: LoaderFunction = async ({ params }) => {
   if (!id) throw new Error("Project id is required")
 
   const project = await getProjectById(id)
-  console.log("server", project)
+
   if (!project) {
     throw new Error(`Project (${id}) not found`)
   }
 
-  const { code } = await compileMdx(project.content || "")
-
-  return json<LoaderData>({ project, code })
+  try {
+    // const { code } = await compileMdx(JSON.parse(project.content || ""))
+    return json<LoaderData>({ project, code: "" })
+  } catch (e) {
+    console.error(e)
+    throw new Error(`Project (${id}) could not be compiled. ` + e)
+  }
 }
 
 export default function ProjectPage(): JSX.Element {
-  const { project, code } = useLoaderData<LoaderData>()
+  const { project } = useLoaderData<LoaderData>()
   console.log("client", project)
   const cover = project?.gallery?.[0]?.url
 
