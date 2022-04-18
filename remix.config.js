@@ -7,5 +7,11 @@ module.exports = {
   publicPath: "/build/",
   serverBuildDirectory: "api/_build",
   ignoredRouteFiles: [".*"],
-  serverDependenciesToBundle: ["mdx-bundler"],
+  serverDependenciesToBundle: [
+    "mdx-bundler",
+    "@mdx-js/esbuild",
+    "remark-frontmatter",
+    "micromark-extension-frontmatter",
+    "@mdx-js/mdx",
+  ],
 }
