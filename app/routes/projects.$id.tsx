@@ -11,7 +11,7 @@ import { compileMdx } from "~/service/mdx.server"
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
-import Markdown from "~/ui/Markdown"
+// import Markdown from "~/ui/Markdown"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {
