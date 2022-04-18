@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { Children, type ComponentPropsWithoutRef } from "react"
-import { Link } from "remix"
+import { Link } from "@remix-run/react";
 import { toKebabCase } from "~/helpers"
 import type { PropsWithChildren } from "./types"
 

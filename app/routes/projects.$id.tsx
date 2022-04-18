@@ -1,4 +1,5 @@
-import { json, useCatch, useLoaderData, type LoaderFunction } from "remix"
+import { json, LoaderFunction } from "@remix-run/node";
+import { useCatch, useLoaderData } from "@remix-run/react";
 
 import {
   getProjectById,

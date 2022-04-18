@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { type ComponentPropsWithoutRef } from "react"
-import { Link, type LinkProps } from "remix"
+import { Link, LinkProps } from "@remix-run/react";
 import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
 import type { PropsWithChildren } from "~/ui/types"

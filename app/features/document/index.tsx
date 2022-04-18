@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { Links, LiveReload, Meta, Scripts, ScrollRestoration } from "remix"
+import { Links, LiveReload, Meta, Scripts, ScrollRestoration } from "@remix-run/react";
 
 import Header from "./Header"
 import Footer from "./Footer"

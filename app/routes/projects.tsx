@@ -1,10 +1,5 @@
-import {
-  Form,
-  json,
-  useLoaderData,
-  useSubmit,
-  type LoaderFunction,
-} from "remix"
+import { json, LoaderFunction } from "@remix-run/node";
+import { Form, useLoaderData, useSubmit } from "@remix-run/react";
 
 import {
   getAllProjects,

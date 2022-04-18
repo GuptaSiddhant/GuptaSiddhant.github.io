@@ -1,10 +1,5 @@
-import {
-  Outlet,
-  useCatch,
-  type MetaFunction,
-  type LinkDescriptor,
-  useNavigate,
-} from "remix"
+import { LinkDescriptor, MetaFunction } from "@remix-run/node";
+import { Outlet, useCatch, useNavigate } from "@remix-run/react";
 
 import { fullName } from "./features/about"
 import { SectionProse } from "./ui/layout"

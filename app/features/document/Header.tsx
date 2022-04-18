@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { Link } from "remix"
+import { Link } from "@remix-run/react";
 
 import { fullName } from "~/features/about"
 import Navigation from "./Navigation"
