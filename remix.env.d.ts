@@ -1,6 +1,9 @@
 /// <reference types="@remix-run/dev" />
 /// <reference types="@remix-run/node/globals" />
 
+import { type ReactNode } from "react"
+import * as ReactDOM from "react-dom"
+
 declare module "react-overdrive" {
   export interface OverdriveProps {
     id: string
@@ -33,4 +36,8 @@ declare namespace Intl {
     type?: "conjunction" | "disjunction" | "unit"
     style?: "long" | "short" | "narrow"
   }
+}
+
+declare module "react-dom" {
+  export function hydrateRoot(container: Node, children: ReactNode): any
 }

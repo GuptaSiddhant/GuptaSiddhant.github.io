@@ -40,7 +40,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function ProjectPage(): JSX.Element {
   const { project } = useLoaderData<LoaderData>()
-  console.log("client", project)
+
   const cover = project?.gallery?.[0]?.url
 
   return (
