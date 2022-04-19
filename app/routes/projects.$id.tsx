@@ -1,4 +1,4 @@
-import { json, LoaderFunction } from "@remix-run/node"
+import { json, LoaderFunction, MetaFunction } from "@remix-run/node"
 import { useCatch, useLoaderData } from "@remix-run/react"
 
 import {
@@ -35,6 +35,13 @@ export const loader: LoaderFunction = async ({ params }) => {
   } catch (e) {
     console.error(e)
     throw new Error(`Project (${id}) could not be compiled. ` + e)
+  }
+}
+
+export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
+  return {
+    title: data.project.title,
+    description: data.project.description || data.project.subtitle,
   }
 }
 

@@ -4,44 +4,10 @@ import { Outlet, useCatch } from "@remix-run/react"
 import { fullName } from "./features/about"
 import { SectionProse } from "./ui/layout"
 import { H1 } from "./ui/typography"
-import Document from "./features/document"
-import fontStyles from "./styles/font.css"
-import tailwindStyles from "./styles/tailwind.css"
+import Document, { linkDescriptors } from "./features/document"
 
-// https://remix.run/api/app#links
 export function links(): LinkDescriptor[] {
-  return [
-    {
-      rel: "preload",
-      as: "font",
-      href: "https://fonts.gstatic.com/s/nunito/v20/XRXV3I6Li01BKofINeaBTMnFcQ.woff2",
-      crossOrigin: "anonymous",
-    },
-    {
-      rel: "preconnect",
-      href: "https://firebasestorage.googleapis.com",
-    },
-    { rel: "stylesheet", href: fontStyles },
-    { rel: "stylesheet", href: tailwindStyles },
-    {
-      rel: "apple-touch-icon",
-      sizes: "180x180",
-      href: "/favicon/apple-touch-icon.png",
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "32x32",
-      href: "/favicon/favicon-32x32.png",
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "16x16",
-      href: "/favicon/favicon-16x16.png",
-    },
-    { rel: "manifest", href: "/site.webmanifest" },
-  ]
+  return linkDescriptors
 }
 
 export const meta: MetaFunction = () => {
@@ -50,15 +16,13 @@ export const meta: MetaFunction = () => {
     description: "Webfolio of a developer/designer.",
     charset: "utf-8",
     viewport: "width=device-width,initial-scale=1",
-    "theme-color": "#000000",
-    "apple-mobile-web-app-title": fullName,
     "application-name": fullName,
+    "apple-mobile-web-app-title": fullName,
+    "theme-color": "#000000",
     "msapplication-TileColor": "#000000",
   }
 }
 
-// https://remix.run/api/conventions#default-export
-// https://remix.run/api/conventions#route-filenames
 export default function App() {
   return (
     <Document>
@@ -67,7 +31,6 @@ export default function App() {
   )
 }
 
-// https://remix.run/docs/en/v1/api/conventions#errorboundary
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
 
@@ -81,7 +44,6 @@ export function ErrorBoundary({ error }: { error: Error }) {
   )
 }
 
-// https://remix.run/docs/en/v1/api/conventions#catchboundary
 export function CatchBoundary() {
   const caught = useCatch()
 

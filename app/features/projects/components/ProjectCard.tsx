@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react"
 import { ProjectType } from "../types"
 
 export default function ProjectCard({
@@ -15,7 +15,11 @@ export default function ProjectCard({
   const showDescription = (featured || !dateEnd) && description
 
   return (
-    <Link to={id} className={clsx("group ", calculateProjectGridSpan(project))}>
+    <Link
+      to={id}
+      prefetch="intent"
+      className={clsx("group ", calculateProjectGridSpan(project))}
+    >
       <article
         className={clsx(
           "relative",

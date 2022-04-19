@@ -10,10 +10,12 @@ import {
 import Header from "./Header"
 import Footer from "./Footer"
 
-export default function Document({ children }: { children: React.ReactNode }) {
-  const intlListFormatPolyfillScript =
-    "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"
+export * from "./links"
 
+const intlListFormatPolyfillScript =
+  "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"
+
+export default function Document({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
