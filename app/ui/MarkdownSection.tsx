@@ -1,14 +1,12 @@
 import clsx from "clsx"
-import { useRef, useState, useEffect, Fragment, memo } from "react"
-import MD, { compiler } from "markdown-to-jsx"
-
-import useOffsetScroll from "~/helpers/useOffsetScroll"
+import { Fragment, memo, useRef } from "react"
+import MDX from "markdown-to-jsx"
 
 import Img from "./Img"
 import { Section } from "./layout"
 import { AnchorLink } from "./Link"
 import Pre from "./Pre"
-import TOC from "./TOC"
+import TableOfContent from "./TableOfContent"
 import { H1, H2, H3, H4, H5, H6, Paragraph } from "./typography"
 
 export default function MarkdownSection({
@@ -19,13 +17,14 @@ export default function MarkdownSection({
   children: string
 }): JSX.Element | null {
   const sectionRef = useRef<HTMLElement>(null)
+
   if (!children) return null
 
   return (
     <Section
       id={id}
       className={clsx(
-        "relative rounded mx-auto w-max",
+        "relative rounded mx-auto md:w-max",
         "md:!grid lg:grid-cols-[auto_200px] xl:grid-cols-markdown",
         "sticky top-0",
       )}
@@ -39,20 +38,20 @@ export default function MarkdownSection({
       </main>
       <aside className={clsx("text-sm", "hidden lg:block")}>
         <nav className="sticky top-32">
-          <TOC sectionRef={sectionRef} />
+          <TableOfContent sectionRef={sectionRef} className="list-none ml-4" />
         </nav>
       </aside>
     </Section>
   )
 }
 
-const MarkdownMain = memo(function ({
+const MarkdownMain = memo(function MarkdownMain({
   children,
 }: {
   children: string
 }): JSX.Element {
   return (
-    <MD
+    <MDX
       children={children}
       options={{
         wrapper: Fragment,
@@ -63,10 +62,10 @@ const MarkdownMain = memo(function ({
           h4: (props) => <H4 {...props} link />,
           h5: (props) => <H5 {...props} link />,
           h6: (props) => <H6 {...props} link />,
-          a: AnchorLink,
           img: (props) => <Img {...props} link />,
           pre: Pre,
           p: Paragraph,
+          a: AnchorLink,
         },
       }}
     />

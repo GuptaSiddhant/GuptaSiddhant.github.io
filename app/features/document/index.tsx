@@ -31,6 +31,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
         className={clsx(
           "flex min-h-screen w-screen flex-col",
           "bg-black text-gray-100 ",
+          "overflow-hidden",
         )}
       >
         <Header />
@@ -41,6 +42,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
             "mx-4 my-4 pt-32 sm:mx-6",
             " bg-gray-900 text-lg",
             "flex flex-col gap-10",
+            "overflow-auto max-h-screen-main",
           )}
         >
           {children}

@@ -14,7 +14,7 @@ export default function StickyHeader({
   return (
     <header
       className={clsx(
-        "fixed left-0 right-0 bg-black py-2 px-10",
+        "fixed left-0 right-0  py-2 px-10",
         "overflow-hidden transition-all",
         offsetCrossed ? "visible top-14 z-50 h-auto" : "invisible top-10 h-0",
         "flex items-center",

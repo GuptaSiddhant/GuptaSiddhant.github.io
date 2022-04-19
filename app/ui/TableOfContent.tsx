@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback, type RefObject } from "react"
 import { AnchorLink } from "./Link"
-import { H6 } from "./typography"
 
-export default function TOC({
+export default function TableOfContent({
+  className,
   sectionRef,
 }: {
+  className?: string
   sectionRef: RefObject<HTMLElement>
 }): JSX.Element {
   const [tableOfContents, setTableOfContents] = useState<TOC[]>([])
@@ -20,7 +21,7 @@ export default function TOC({
 
   const renderTOC = useCallback(
     (toc: TOC[]) => (
-      <ol className="list-none ml-4">
+      <ol className={className}>
         {toc.map((item) => (
           <li key={item.id} className="my-2">
             <AnchorLink href={`#${item.id}`}>{item.text}</AnchorLink>

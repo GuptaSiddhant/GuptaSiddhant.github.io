@@ -1,7 +1,7 @@
 {
   "name": "guptasiddhant-com",
   "description": "Personal website of Siddhant Gupta, build with Remix.",
-  "license": "",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "build": "remix build",

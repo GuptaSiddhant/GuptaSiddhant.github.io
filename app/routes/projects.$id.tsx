@@ -11,7 +11,7 @@ import {
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
-import MarkdownSection from "~/ui/Markdown"
+import MarkdownSection from "~/ui/MarkdownSection"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {
