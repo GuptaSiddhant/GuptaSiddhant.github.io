@@ -1,5 +1,5 @@
-import { LinkDescriptor, MetaFunction } from "@remix-run/node";
-import { Outlet, useCatch, useNavigate } from "@remix-run/react";
+import type { LinkDescriptor, MetaFunction } from "@remix-run/node"
+import { Outlet, useCatch } from "@remix-run/react"
 
 import { fullName } from "./features/about"
 import { SectionProse } from "./ui/layout"
@@ -84,7 +84,6 @@ export function ErrorBoundary({ error }: { error: Error }) {
 // https://remix.run/docs/en/v1/api/conventions#catchboundary
 export function CatchBoundary() {
   const caught = useCatch()
-  const navigate = useNavigate()
 
   let message
   switch (caught.status) {

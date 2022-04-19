@@ -1,37 +1,15 @@
 *.xml
-
-\.idea
-
-db/node_modules/
-
-\.DS_Store
-
-editor/
+.DS_Store
 
 node_modules
-
-public/build
-public/tailwind.css
-api/build
-app/styles/tailwind.css
-
-.env
-
-node_modules
-/.cache
-/netlify/functions/server/build
-/public/build
-/.netlify
-
-.cache.remix
-
-# Vercel
 
 .cache
+.env
 .vercel
 .output
-api/
 
-public/build
-api/_build
-api/index.js
+/build/
+/public/build
+/api/
+
+app/styles/tailwind.css
