@@ -1,6 +1,5 @@
 import clsx from "clsx"
-import { getMDXComponent } from "mdx-bundler/client"
-import { useRef, useMemo, useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
 import useOffsetScroll from "~/helpers/useOffsetScroll"
 
 import Img from "./Img"
@@ -11,16 +10,16 @@ import TOC from "./TOC"
 import { H1, H2, H3, H4, H5, H6, Paragraph } from "./typography"
 
 export default function Markdown({
-  code,
+  children,
   id = "maincontent",
 }: {
   id?: string
-  code: string
+  children: string
 }): JSX.Element {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLElement>(null)
   const [sectionOffsetY, setSectionOffsetY] = useState(1000)
-  const MdxComponent = useMemo(() => getMDXComponent(code), [code])
+  // const MdxComponent = useMemo(() => getMDXComponent(code), [code])
   const x = useOffsetScroll(sectionOffsetY)
 
   useEffect(() => {
@@ -51,8 +50,8 @@ export default function Markdown({
       >
         <TOC sectionRef={contentRef} />
       </aside>
-      <main ref={contentRef}>
-        <MdxComponent
+      <main ref={contentRef} dangerouslySetInnerHTML={{ __html: children }}>
+        {/* <MdxComponent
           components={{
             h1: H1,
             h2: H2,
@@ -65,7 +64,7 @@ export default function Markdown({
             pre: Pre,
             p: Paragraph,
           }}
-        />
+        /> */}
       </main>
     </Section>
   )

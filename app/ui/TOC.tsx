@@ -64,7 +64,10 @@ function createTOC(allElementsWithIds: Element[]): TOC[] {
       tagName = (element.childNodes.item(0) as any)?.tagName?.toLowerCase()
     }
     const level =
-      tagName.startsWith("h") && tagName.length === 2 ? parseInt(tagName[1]) : 0
+      (tagName.startsWith("h") || tagName.startsWith("H")) &&
+      tagName.length === 2
+        ? parseInt(tagName[1])
+        : 0
 
     return {
       level,

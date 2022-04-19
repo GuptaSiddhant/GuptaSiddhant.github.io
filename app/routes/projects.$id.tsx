@@ -7,16 +7,17 @@ import {
   ProjectStickyHeader,
   type ProjectType,
 } from "~/features/projects"
-// import { compileMdx } from "~/service/mdx.server"
+
+import { compileMdx } from "~/service/mdx.server"
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
-// import Markdown from "~/ui/Markdown"
+import Markdown from "~/ui/Markdown"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType
-  // code: string
+  contentHTML: string
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -30,8 +31,9 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 
   try {
-    // const code = await compileMdx(JSON.parse(project.content || '""'))
-    return json<LoaderData>({ project })
+    const contentHTML = await compileMdx(JSON.parse(project.content || '""'))
+
+    return json<LoaderData>({ project, contentHTML })
   } catch (e) {
     console.error(e)
     throw new Error(`Project (${id}) could not be compiled. ` + e)
@@ -46,7 +48,7 @@ export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
 }
 
 export default function ProjectPage(): JSX.Element {
-  const { project } = useLoaderData<LoaderData>()
+  const { project, contentHTML } = useLoaderData<LoaderData>()
 
   const cover = project?.gallery?.[0]?.url
 
@@ -68,6 +70,8 @@ export default function ProjectPage(): JSX.Element {
         alt={project?.title}
         className="max-h-screen-main object-cover"
       />
+
+      <Markdown>{contentHTML}</Markdown>
     </>
   )
 }
