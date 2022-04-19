@@ -7,7 +7,7 @@ import {
   ProjectStickyHeader,
   type ProjectType,
 } from "~/features/projects"
-import { compileMdx } from "~/service/mdx.server"
+// import { compileMdx } from "~/service/mdx.server"
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
@@ -16,7 +16,7 @@ import { H2 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType
-  code: string
+  // code: string
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -30,8 +30,8 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 
   try {
-    const { code } = await compileMdx(JSON.parse(project.content || '""'))
-    return json<LoaderData>({ project, code })
+    // const code = await compileMdx(JSON.parse(project.content || '""'))
+    return json<LoaderData>({ project })
   } catch (e) {
     console.error(e)
     throw new Error(`Project (${id}) could not be compiled. ` + e)
@@ -61,8 +61,6 @@ export default function ProjectPage(): JSX.Element {
         alt={project?.title}
         className="max-h-screen-main object-cover"
       />
-
-      {/* <Markdown code={code} /> */}
     </>
   )
 }
