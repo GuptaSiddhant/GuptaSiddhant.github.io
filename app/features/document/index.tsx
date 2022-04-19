@@ -30,7 +30,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
       <body
         className={clsx(
           "flex min-h-screen w-screen flex-col",
-          "bg-black text-gray-100",
+          "bg-black text-gray-100 ",
         )}
       >
         <Header />

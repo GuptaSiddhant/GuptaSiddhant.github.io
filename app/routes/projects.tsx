@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { Form, useLoaderData, useSubmit } from "@remix-run/react";
+import { json, LoaderFunction } from "@remix-run/node"
+import { Form, useLoaderData, useSubmit } from "@remix-run/react"
 
 import {
   getAllProjects,
@@ -22,6 +22,7 @@ interface LoaderData {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const projects = await getAllProjects()
+
   const availableTags = projects
     .flatMap((project) => project.tags)
     .filter(Boolean)

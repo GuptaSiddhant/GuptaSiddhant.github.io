@@ -1,6 +1,6 @@
 import clsx from "clsx"
-import { useRef, useState, useEffect, Fragment } from "react"
-import MD from "markdown-to-jsx"
+import { useRef, useState, useEffect, Fragment, memo } from "react"
+import MD, { compiler } from "markdown-to-jsx"
 
 import useOffsetScroll from "~/helpers/useOffsetScroll"
 
@@ -11,66 +11,64 @@ import Pre from "./Pre"
 import TOC from "./TOC"
 import { H1, H2, H3, H4, H5, H6, Paragraph } from "./typography"
 
-export default function Markdown({
+export default function MarkdownSection({
   children,
   id = "maincontent",
 }: {
   id?: string
   children: string
-}): JSX.Element {
+}): JSX.Element | null {
   const sectionRef = useRef<HTMLElement>(null)
-  const contentRef = useRef<HTMLElement>(null)
-  const [sectionOffsetY, setSectionOffsetY] = useState(1000)
-  const isOffsetReached = useOffsetScroll(sectionOffsetY)
-
-  useEffect(() => {
-    if (sectionRef.current) {
-      const offset =
-        document.body.clientHeight - sectionRef.current.clientHeight
-      setSectionOffsetY(offset)
-    }
-  }, [sectionRef])
+  if (!children) return null
 
   return (
     <Section
       id={id}
-      elementRef={sectionRef}
       className={clsx(
-        "relative rounded",
-        "prose prose-invert",
-        "prose-blockquote:-ml-4",
-        "mx-auto !gap-0 px-4",
+        "relative rounded mx-auto w-max",
+        "md:!grid lg:grid-cols-[auto_200px] xl:grid-cols-markdown",
+        "sticky top-0",
       )}
     >
-      <aside
-        className={clsx(
-          "top-28 left-8 xl:fixed",
-          " xl:w-52",
-          isOffsetReached ? "xl:block" : "xl:hidden",
-        )}
+      <aside className="hidden xl:block" />
+      <main
+        ref={sectionRef}
+        className="prose prose-invert prose-blockquote:-ml-4 px-4"
       >
-        <TOC sectionRef={contentRef} />
-      </aside>
-      <main ref={contentRef}>
-        <MD
-          children={children}
-          options={{
-            wrapper: Fragment,
-            overrides: {
-              h1: H1,
-              h2: H2,
-              h3: H3,
-              h4: H4,
-              h5: H5,
-              h6: H6,
-              a: AnchorLink,
-              img: Img,
-              pre: Pre,
-              p: Paragraph,
-            },
-          }}
-        />
+        <MarkdownMain>{children}</MarkdownMain>
       </main>
+      <aside className={clsx("text-sm", "hidden lg:block")}>
+        <nav className="sticky top-32">
+          <TOC sectionRef={sectionRef} />
+        </nav>
+      </aside>
     </Section>
   )
 }
+
+const MarkdownMain = memo(function ({
+  children,
+}: {
+  children: string
+}): JSX.Element {
+  return (
+    <MD
+      children={children}
+      options={{
+        wrapper: Fragment,
+        overrides: {
+          h1: (props) => <H1 {...props} link />,
+          h2: (props) => <H2 {...props} link />,
+          h3: (props) => <H3 {...props} link />,
+          h4: (props) => <H4 {...props} link />,
+          h5: (props) => <H5 {...props} link />,
+          h6: (props) => <H6 {...props} link />,
+          a: AnchorLink,
+          img: (props) => <Img {...props} link />,
+          pre: Pre,
+          p: Paragraph,
+        },
+      }}
+    />
+  )
+})

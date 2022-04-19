@@ -8,7 +8,7 @@ import {
   where,
   type QueryDocumentSnapshot,
 } from "~/service/database"
-import { getFileURLWithPath } from "~/service/storage"
+import { convertImageLinksInText, toImageUrl } from "~/service/image"
 
 import type { ProjectType } from "./types"
 
@@ -62,15 +62,14 @@ async function transformDocToProject(
       url: await toImageUrl(i.url),
     })),
   )
+  const newContent = project.content
+    ? await convertImageLinksInText(project.content)
+    : undefined
 
   return {
     ...project,
     icon: newIcon,
     gallery: newGallery,
+    content: newContent,
   }
-}
-
-async function toImageUrl(path: string) {
-  if (path.startsWith("/") || path.startsWith("http")) return path
-  return getFileURLWithPath(path)
 }

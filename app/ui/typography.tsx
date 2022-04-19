@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { Children, type ComponentPropsWithoutRef } from "react"
-import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react"
 import { toKebabCase } from "~/helpers"
 import type { PropsWithChildren } from "./types"
 
@@ -49,12 +49,13 @@ export function Paragraph({
   children,
   ...props
 }: ComponentPropsWithoutRef<"p">): JSX.Element {
-  const exceptionTypeNames = ["Img"]
+  const exceptionTypeNames = ["img"]
 
   if (Children.count(children) === 1) {
     const onlyChild: any = Children.toArray(children)[0]
     const typeName = onlyChild?.type?.name
-    if (exceptionTypeNames.includes(typeName)) {
+
+    if (exceptionTypeNames.includes(String(typeName).toLowerCase())) {
       return <>{children}</>
     }
   }
@@ -67,7 +68,7 @@ function HeadingWrapper({
   children,
   className,
   as: Component = "h1",
-  link = true,
+  link = false,
   headingClassName,
   ...props
 }: ComponentPropsWithoutRef<"h1"> & {
@@ -83,18 +84,13 @@ function HeadingWrapper({
       className={clsx(headingClassName, commonHeadingClassName, className)}
     >
       {children}
+      {link ? (
+        <Link id={uid} to={`#${uid}`} className="invisible">
+          #
+        </Link>
+      ) : null}
     </Component>
   )
 
-  if (!link) return element
-
-  return (
-    <Link
-      id={uid}
-      to={"#" + uid}
-      className={clsx("group relative no-underline")}
-    >
-      {element}
-    </Link>
-  )
+  return element
 }

@@ -4,11 +4,7 @@ import { H6 } from "./typography"
 
 export default function TOC({
   sectionRef,
-  open = true,
-  className,
 }: {
-  className?: string
-  open?: boolean
   sectionRef: RefObject<HTMLElement>
 }): JSX.Element {
   const [tableOfContents, setTableOfContents] = useState<TOC[]>([])
@@ -24,9 +20,9 @@ export default function TOC({
 
   const renderTOC = useCallback(
     (toc: TOC[]) => (
-      <ol>
+      <ol className="list-none ml-4">
         {toc.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} className="my-2">
             <AnchorLink href={`#${item.id}`}>{item.text}</AnchorLink>
             {item.children.length > 0 ? renderTOC(item.children) : null}
           </li>
@@ -36,16 +32,7 @@ export default function TOC({
     [],
   )
 
-  return (
-    <details open={open} className={className}>
-      <summary className="xl:hidden">
-        <H6 className="inline-block" link={false}>
-          Table of Contents
-        </H6>
-      </summary>
-      {renderTOC(tableOfContents)}
-    </details>
-  )
+  return renderTOC(tableOfContents)
 }
 
 interface TOC {
@@ -58,10 +45,11 @@ interface TOC {
 function createTOC(allElementsWithIds: Element[]): TOC[] {
   const tocEntries: TOC[] = allElementsWithIds.map((element) => {
     const id = element.id
-    const text = element.textContent || ""
+    let text = element.textContent || ""
     let tagName = element.tagName
     if (tagName.toLowerCase() === "a") {
-      tagName = (element.childNodes.item(0) as any)?.tagName?.toLowerCase()
+      tagName = (element.parentNode as any)?.tagName?.toLowerCase()
+      text = (element.parentNode?.textContent || "").replace("#", "")
     }
     const level =
       (tagName.startsWith("h") || tagName.startsWith("H")) &&

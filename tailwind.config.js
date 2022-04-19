@@ -59,6 +59,9 @@ module.exports = {
       fontFamily: {
         inherit: "inherit",
       },
+      gridTemplateColumns: {
+        markdown: "200px auto 200px",
+      },
     },
   },
 

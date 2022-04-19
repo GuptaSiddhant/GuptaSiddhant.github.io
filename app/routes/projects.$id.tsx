@@ -11,7 +11,7 @@ import {
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
-import Markdown from "~/ui/Markdown"
+import MarkdownSection from "~/ui/Markdown"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {
@@ -64,10 +64,11 @@ export default function ProjectPage(): JSX.Element {
       <img
         src={cover}
         alt={project?.title}
-        className="max-h-screen-main object-cover z-10"
+        className="max-h-screen-main object-cover"
+        loading="eager"
       />
 
-      <Markdown>{JSON.parse(project.content || '""')}</Markdown>
+      <MarkdownSection>{JSON.parse(project.content || '""')}</MarkdownSection>
     </>
   )
 }

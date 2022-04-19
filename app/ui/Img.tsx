@@ -1,12 +1,27 @@
 import clsx from "clsx"
 import { type ComponentPropsWithoutRef } from "react"
 
-export default function Img(
-  props: ComponentPropsWithoutRef<"img">,
-): JSX.Element {
+export default function Img({
+  link,
+  ...props
+}: ComponentPropsWithoutRef<"img"> & { link?: boolean }): JSX.Element | null {
+  const imageElement = (
+    <img
+      {...props}
+      className={clsx(props.className, "!m-0 rounded", "min-h-[200px]")}
+      loading="lazy"
+    />
+  )
+
   return (
     <figure className="-mx-4 overflow-clip rounded">
-      <img {...props} className={clsx(props.className, "!m-0 rounded")} />
+      {link ? (
+        <a href={props.src} target="_blank">
+          {imageElement}
+        </a>
+      ) : (
+        imageElement
+      )}
       {props.title ? (
         <figcaption className="text-center">{props.title}</figcaption>
       ) : null}
