@@ -106,7 +106,13 @@ export function CatchBoundary() {
       <SectionProse>
         <H1>{heading}</H1>
         <p>{message}</p>
-        <a href="javascript:history.go(-1)">Go back.</a>
+
+        <a
+          href="#"
+          onClick={() => typeof window !== "undefined" && window.history.go(-1)}
+        >
+          Go back.
+        </a>
       </SectionProse>
     </Document>
   )
