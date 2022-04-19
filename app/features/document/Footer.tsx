@@ -16,7 +16,7 @@ export default function Footer(): JSX.Element {
       id="footer"
       className={clsx(
         "flex items-center justify-center",
-        "fixed bottom-0 left-0 right-0 z-10",
+        "fixed bottom-0 left-0 right-0 z-50",
         "h-6 bg-black",
       )}
     >

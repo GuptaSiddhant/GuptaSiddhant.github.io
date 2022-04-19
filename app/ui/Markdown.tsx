@@ -1,5 +1,7 @@
 import clsx from "clsx"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, Fragment } from "react"
+import MD from "markdown-to-jsx"
+
 import useOffsetScroll from "~/helpers/useOffsetScroll"
 
 import Img from "./Img"
@@ -19,13 +21,12 @@ export default function Markdown({
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLElement>(null)
   const [sectionOffsetY, setSectionOffsetY] = useState(1000)
-  // const MdxComponent = useMemo(() => getMDXComponent(code), [code])
-  const x = useOffsetScroll(sectionOffsetY)
+  const isOffsetReached = useOffsetScroll(sectionOffsetY)
 
   useEffect(() => {
     if (sectionRef.current) {
       const offset =
-        document.body.clientHeight - sectionRef.current.clientHeight - 200
+        document.body.clientHeight - sectionRef.current.clientHeight
       setSectionOffsetY(offset)
     }
   }, [sectionRef])
@@ -45,26 +46,30 @@ export default function Markdown({
         className={clsx(
           "top-28 left-8 xl:fixed",
           " xl:w-52",
-          x ? "xl:block" : "xl:hidden",
+          isOffsetReached ? "xl:block" : "xl:hidden",
         )}
       >
         <TOC sectionRef={contentRef} />
       </aside>
-      <main ref={contentRef} dangerouslySetInnerHTML={{ __html: children }}>
-        {/* <MdxComponent
-          components={{
-            h1: H1,
-            h2: H2,
-            h3: H3,
-            h4: H4,
-            h5: H5,
-            h6: H6,
-            a: AnchorLink,
-            img: Img,
-            pre: Pre,
-            p: Paragraph,
+      <main ref={contentRef}>
+        <MD
+          children={children}
+          options={{
+            wrapper: Fragment,
+            overrides: {
+              h1: H1,
+              h2: H2,
+              h3: H3,
+              h4: H4,
+              h5: H5,
+              h6: H6,
+              a: AnchorLink,
+              img: Img,
+              pre: Pre,
+              p: Paragraph,
+            },
           }}
-        /> */}
+        />
       </main>
     </Section>
   )

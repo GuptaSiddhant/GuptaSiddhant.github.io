@@ -17,7 +17,7 @@ export default function RoundedCorner({
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       className={clsx(
-        "absolute z-10 fill-black",
+        "absolute z-50 fill-black",
         position === "top-left"
           ? topLeft
           : position === "top-right"

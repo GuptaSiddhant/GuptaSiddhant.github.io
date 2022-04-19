@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react"
 
 import { fullName } from "~/features/about"
 import Navigation from "./Navigation"
@@ -12,7 +12,7 @@ export default function Header(): JSX.Element {
       className={clsx(
         "flex flex-row items-baseline justify-between",
         "bg-black py-4 px-10",
-        "fixed top-0 left-0 right-0 z-10",
+        "fixed top-0 left-0 right-0 z-50",
       )}
     >
       <Logo />

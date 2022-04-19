@@ -8,7 +8,6 @@ import {
   type ProjectType,
 } from "~/features/projects"
 
-import { compileMdx } from "~/service/mdx.server"
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
 
@@ -17,7 +16,6 @@ import { H2 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType
-  contentHTML: string
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -31,9 +29,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 
   try {
-    const contentHTML = await compileMdx(JSON.parse(project.content || '""'))
-
-    return json<LoaderData>({ project, contentHTML })
+    return json<LoaderData>({ project })
   } catch (e) {
     console.error(e)
     throw new Error(`Project (${id}) could not be compiled. ` + e)
@@ -48,7 +44,7 @@ export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
 }
 
 export default function ProjectPage(): JSX.Element {
-  const { project, contentHTML } = useLoaderData<LoaderData>()
+  const { project } = useLoaderData<LoaderData>()
 
   const cover = project?.gallery?.[0]?.url
 
@@ -68,10 +64,10 @@ export default function ProjectPage(): JSX.Element {
       <img
         src={cover}
         alt={project?.title}
-        className="max-h-screen-main object-cover"
+        className="max-h-screen-main object-cover z-10"
       />
 
-      <Markdown>{contentHTML}</Markdown>
+      <Markdown>{JSON.parse(project.content || '""')}</Markdown>
     </>
   )
 }
