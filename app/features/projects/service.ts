@@ -15,7 +15,7 @@ import type { ProjectType } from "./types"
 const COLLECTION_NAME = "projects"
 
 export async function getAllProjects(
-  limitBy: number = 10,
+  limitBy: number = 100,
 ): Promise<ProjectType[]> {
   const draftConstraints = __IS_DEV__
     ? []

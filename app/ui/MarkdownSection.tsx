@@ -29,8 +29,12 @@ export default function MarkdownSection({
       )}
     >
       <aside className={clsx("text-sm", "hidden lg:block")}>
-        <nav className="sticky top-16 overflow-auto">
-          <TableOfContent sectionRef={sectionRef} className="list-none" />
+        <nav className="sticky top-16 overflow-visible">
+          <TableOfContent
+            sectionRef={sectionRef}
+            className="list-none"
+            maxLevel={4}
+          />
         </nav>
       </aside>
 

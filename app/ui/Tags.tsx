@@ -16,6 +16,7 @@ function TagList({
   TagComponent = ({ tag }) => <Tag>{tag}</Tag>,
   prefixElement,
   suffixElement,
+  limitBy,
 }: {
   tags: string[]
   className?: string
@@ -23,7 +24,9 @@ function TagList({
   TagComponent?: (props: { tag: string }) => JSX.Element
   prefixElement?: JSX.Element
   suffixElement?: JSX.Element
+  limitBy?: number
 }): JSX.Element {
+  const limit = limitBy ?? tags.length
   return (
     <ul
       className={clsx(
@@ -32,7 +35,7 @@ function TagList({
       )}
     >
       {prefixElement ? <li key="suffix">{prefixElement}</li> : null}
-      {tags.slice(0, 9).map((tag) => (
+      {tags.slice(0, limit).map((tag) => (
         <li key={tag.toString()}>
           <TagComponent tag={capitalize(tag)} />
         </li>
@@ -96,10 +99,12 @@ function TagCheckbox({
         htmlFor={htmlId}
         className={clsx(
           tagCommonStyle,
-          "rounded-sm px-2 py-1",
+          "rounded-sm px-2 py-1 cursor-pointer",
           "bg-gray-800 peer-checked:bg-gray-600",
           "hover:bg-gray-700 peer-checked:hover:bg-gray-500",
           "peer-focus:ring-4",
+          "flex items-center gap-2",
+          "after:content-none peer-checked:after:content-['×'] after:text-sm after:text-red-300",
           className,
         )}
       >

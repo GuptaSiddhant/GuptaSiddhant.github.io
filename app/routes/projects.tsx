@@ -1,4 +1,4 @@
-import { json, LoaderFunction } from "@remix-run/node"
+import { json, type LoaderFunction } from "@remix-run/node"
 import { Form, useLoaderData, useSubmit } from "@remix-run/react"
 
 import {
@@ -97,7 +97,10 @@ function ProjectsFilter(): JSX.Element {
         )}
       />
       {selectedTags.length > 0 || query.length > 0 ? (
-        <Tags.Button type="reset" className="absolute top-1 -right-3">
+        <Tags.Button
+          type="reset"
+          className="absolute top-1 right-1 md:-right-3"
+        >
           Clear
         </Tags.Button>
       ) : undefined}

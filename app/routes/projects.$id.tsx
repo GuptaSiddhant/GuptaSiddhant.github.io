@@ -22,21 +22,19 @@ export const loader: LoaderFunction = async ({ params }) => {
   const id = params.id
   if (!id) throw new Error("Project id is required")
 
-  const project = await getProjectById(id)
-
-  if (!project) {
-    throw new Error(`Project (${id}) not found`)
-  }
-
   try {
+    const project = await getProjectById(id)
+    if (!project) throw new Error(`Project (${id}) not found.`)
+
     return json<LoaderData>({ project })
   } catch (e) {
-    console.error(e)
-    throw new Error(`Project (${id}) could not be compiled. ` + e)
+    throw new Error(`Failed to load project (${id}): ${e}`)
   }
 }
 
 export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
+  if (!data?.project) return {}
+
   return {
     title: data.project.title,
     description: data.project.description || data.project.subtitle,
@@ -45,7 +43,6 @@ export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
 
 export default function ProjectPage(): JSX.Element {
   const { project } = useLoaderData<LoaderData>()
-
   const cover = project?.gallery?.[0]?.url
 
   return (

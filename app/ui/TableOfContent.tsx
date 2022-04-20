@@ -41,17 +41,33 @@ export default function TableOfContent({
   const renderTOC = useCallback(
     (toc: TOC[]) => (
       <ol className={className}>
-        {toc.map((item) => (
-          <li
-            key={item.id}
-            className={clsx("my-2", item.level > highestLevel && "ml-4")}
-          >
+        {toc.map((item) => {
+          const itemContent = (
             <AnchorLink href={"#" + item.id}>{item.text}</AnchorLink>
-            {item.level < maxLevel && item.children.length > 0
-              ? renderTOC(item.children)
-              : null}
-          </li>
-        ))}
+          )
+
+          return (
+            <li
+              key={item.id}
+              className={clsx(
+                "my-2",
+                item.level > highestLevel && "ml-4",
+                item.level === highestLevel ? "font-bold" : "font-normal",
+              )}
+            >
+              {item.level <= maxLevel ? (
+                item.children.length === 0 ? (
+                  itemContent
+                ) : (
+                  <details key={item.id} open>
+                    <summary className="-indent-4">{itemContent}</summary>
+                    {renderTOC(item.children)}
+                  </details>
+                )
+              ) : null}
+            </li>
+          )
+        })}
       </ol>
     ),
     [className, maxLevel, highestLevel],
