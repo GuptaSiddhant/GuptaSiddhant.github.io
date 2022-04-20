@@ -14,14 +14,17 @@ export default function Footer(): JSX.Element {
   }, [mainContainerRef])
 
   return (
-    <footer
-      id="footer"
-      className={clsx("flex items-center justify-center bg-black h-4")}
-    >
+    <footer id="footer" className={clsx("relative h-4 z-40")}>
       {scrollButtonVisible ? (
         <button
-          className="flex cursor-pointer items-center text-sm text-gray-500 hover:text-gray-300"
+          className={clsx(
+            "absolute right-4 bottom-4",
+            "flex items-center p-2 m-0.5",
+            "cursor-pointer text-sm rounded rounded-br-xl",
+            "bg-black text-gray-500 hover:text-gray-300",
+          )}
           onClick={handleScrollToTop}
+          title="Scroll to top"
         >
           <UpIcon aria-label="Scroll to top" />
         </button>

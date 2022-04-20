@@ -9,7 +9,7 @@ export default function Header(): JSX.Element {
     <header
       id="header"
       className={clsx(
-        "flex flex-row items-baseline justify-between",
+        "grid grid-cols-[1fr_max-content] items-baseline",
         "py-2 px-8",
       )}
     >
@@ -30,6 +30,7 @@ function Logo(): JSX.Element {
         "select-none",
         "text-xl font-black uppercase leading-normal tracking-widest",
         "text-white",
+        "text-ellipsis overflow-hidden whitespace-nowrap",
       )}
     >
       {fullName}

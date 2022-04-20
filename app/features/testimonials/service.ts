@@ -1,9 +1,7 @@
-import { __IS_DEV__ } from "~/helpers"
 import {
   getCollection,
   orderBy,
   limit,
-  where,
   type QueryDocumentSnapshot,
 } from "~/service/database"
 import type { Testimony } from "./types"
@@ -13,14 +11,9 @@ const COLLECTION_NAME = "testimonies"
 export async function getAllTestimonies(
   limitBy: number = 10,
 ): Promise<Testimony[]> {
-  const draftConstraints = __IS_DEV__
-    ? []
-    : [where("draft", "!=", true), orderBy("draft")]
-
   return getCollection(
     COLLECTION_NAME,
     transformDocToTestimony,
-    ...draftConstraints,
     orderBy("date", "desc"),
     limit(limitBy),
   )

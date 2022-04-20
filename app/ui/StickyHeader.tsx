@@ -14,8 +14,8 @@ export default function StickyHeader({
   return (
     <header
       className={clsx(
-        "sticky top-0 px-4 py-1",
-        "flex items-center z-50",
+        "sticky top-0 px-4 py-2 z-50",
+        "grid grid-cols-[1fr_max-content] items-center",
         "transition-transform bg-black",
         offsetCrossed ? "translate-y-0" : "-translate-y-[100px]",
         className,
