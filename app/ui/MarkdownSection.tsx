@@ -25,22 +25,23 @@ export default function MarkdownSection({
       id={id}
       className={clsx(
         "relative rounded mx-auto md:w-max",
-        "md:!grid lg:grid-cols-[auto_200px] xl:grid-cols-markdown",
-        "sticky top-0",
+        "md:!grid lg:grid-cols-[200px_auto] xl:grid-cols-[200px_1fr_200px]",
       )}
     >
-      <aside className="hidden xl:block" />
+      <aside className={clsx("text-sm", "hidden lg:block")}>
+        <nav className="sticky top-16 overflow-auto">
+          <TableOfContent sectionRef={sectionRef} className="list-none" />
+        </nav>
+      </aside>
+
       <main
         ref={sectionRef}
         className="prose prose-invert prose-blockquote:-ml-4 px-4"
       >
         <MarkdownMain>{children}</MarkdownMain>
       </main>
-      <aside className={clsx("text-sm", "hidden lg:block")}>
-        <nav className="sticky top-32">
-          <TableOfContent sectionRef={sectionRef} className="list-none ml-4" />
-        </nav>
-      </aside>
+
+      <aside className="hidden xl:block" />
     </Section>
   )
 }

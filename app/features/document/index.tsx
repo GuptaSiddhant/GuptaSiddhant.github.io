@@ -9,6 +9,8 @@ import {
 
 import Header from "./Header"
 import Footer from "./Footer"
+import { useRef } from "react"
+import { MainContainerProvider } from "~/contexts/MainContainer"
 
 export * from "./links"
 
@@ -16,11 +18,13 @@ const intlListFormatPolyfillScript =
   "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"
 
 export default function Document({ children }: { children: React.ReactNode }) {
+  const mainContainerRef = useRef<HTMLElement>(null)
+
   return (
     <html
       lang="en"
       dir="ltr"
-      className="text-[14px] sm:text-[16px] lg:text-[18px]"
+      className="text-[14px] sm:text-[16px] lg:text-[18px] m-0 p-0"
     >
       <head>
         <Meta />
@@ -29,25 +33,29 @@ export default function Document({ children }: { children: React.ReactNode }) {
       </head>
       <body
         className={clsx(
-          "flex min-h-screen w-screen flex-col",
-          "bg-black text-gray-100 ",
-          "overflow-hidden",
+          "grid grid-rows-[max-content_1fr_max-content]",
+          "h-screen w-screen overflow-hidden m-0 p-0",
+          "bg-black text-gray-100",
         )}
       >
-        <Header />
-        <main
-          id="main"
-          className={clsx(
-            "relative flex-1",
-            "mx-4 my-4 pt-32 sm:mx-6",
-            " bg-gray-900 text-lg",
-            "flex flex-col gap-10",
-            "overflow-auto max-h-screen-main",
-          )}
-        >
-          {children}
-        </main>
-        <Footer />
+        <MainContainerProvider containerRef={mainContainerRef}>
+          <Header />
+
+          <main
+            id="main"
+            ref={mainContainerRef}
+            className={clsx(
+              "relative mx-4",
+              "bg-gray-900 text-lg",
+              "overflow-auto rounded-xl",
+              "flex flex-col gap-10",
+            )}
+          >
+            {children}
+          </main>
+
+          <Footer />
+        </MainContainerProvider>
 
         <ScrollRestoration />
         <Scripts />

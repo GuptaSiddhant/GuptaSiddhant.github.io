@@ -1,12 +1,21 @@
-import { useEffect, useState, useCallback, type RefObject } from "react"
+import clsx from "clsx"
+import {
+  useEffect,
+  useState,
+  useCallback,
+  type RefObject,
+  useMemo,
+} from "react"
 import { AnchorLink } from "./Link"
 
 export default function TableOfContent({
   className,
   sectionRef,
+  maxLevel = 3,
 }: {
   className?: string
   sectionRef: RefObject<HTMLElement>
+  maxLevel?: number
 }): JSX.Element {
   const [tableOfContents, setTableOfContents] = useState<TOC[]>([])
 
@@ -19,18 +28,33 @@ export default function TableOfContent({
     }
   }, [sectionRef])
 
+  const highestLevel = useMemo(
+    () =>
+      tableOfContents.reduce(
+        // Inverse due to the fact that the H1 is the highest level
+        (acc, curr) => Math.min(acc, curr.level),
+        6,
+      ),
+    [tableOfContents],
+  )
+
   const renderTOC = useCallback(
     (toc: TOC[]) => (
       <ol className={className}>
         {toc.map((item) => (
-          <li key={item.id} className="my-2">
-            <AnchorLink href={`#${item.id}`}>{item.text}</AnchorLink>
-            {item.children.length > 0 ? renderTOC(item.children) : null}
+          <li
+            key={item.id}
+            className={clsx("my-2", item.level > highestLevel && "ml-4")}
+          >
+            <AnchorLink href={"#" + item.id}>{item.text}</AnchorLink>
+            {item.level < maxLevel && item.children.length > 0
+              ? renderTOC(item.children)
+              : null}
           </li>
         ))}
       </ol>
     ),
-    [],
+    [className, maxLevel, highestLevel],
   )
 
   return renderTOC(tableOfContents)

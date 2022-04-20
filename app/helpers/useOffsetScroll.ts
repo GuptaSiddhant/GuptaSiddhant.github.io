@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react"
 
-export default function useOffsetScroll(offsetY: number): boolean {
+import { DEFAULT_SCROLL_OFFSET } from "~/constants"
+import useMainContainer from "~/contexts/MainContainer"
+
+export default function useOffsetScroll(
+  offsetY: number = DEFAULT_SCROLL_OFFSET,
+  container?: HTMLElement,
+): boolean {
   const [isOffsetScrolled, setIsOffsetScrolled] = useState(false)
+  const mainContainerRef = useMainContainer()
 
   useEffect(() => {
+    const element = container || mainContainerRef.current
+
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset
+      const scrollTop = element?.scrollTop || 0
       setIsOffsetScrolled(scrollTop > offsetY)
     }
 
     handleScroll()
 
-    window.addEventListener("scroll", handleScroll)
+    element?.addEventListener("scroll", handleScroll)
 
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [offsetY])
+    return () => element?.removeEventListener("scroll", handleScroll)
+  }, [offsetY, container, mainContainerRef])
 
   return isOffsetScrolled
 }

@@ -9,15 +9,15 @@ export default function StickyHeader({
   className?: string
   children: ReactNode
 }): JSX.Element {
-  const offsetCrossed = useOffsetScroll(500)
+  const offsetCrossed = useOffsetScroll()
 
   return (
     <header
       className={clsx(
-        "fixed left-0 right-0  py-2 px-10",
-        "overflow-hidden transition-all",
-        offsetCrossed ? "visible top-14 z-50 h-auto" : "invisible top-10 h-0",
-        "flex items-center",
+        "sticky top-0 px-4 py-1",
+        "flex items-center z-50",
+        "transition-transform bg-black",
+        offsetCrossed ? "translate-y-0" : "-translate-y-[100px]",
         className,
       )}
     >

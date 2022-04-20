@@ -3,7 +3,6 @@ import { Link } from "@remix-run/react"
 
 import { fullName } from "~/features/about"
 import Navigation from "./Navigation"
-import RoundedCorner from "./Rounded"
 
 export default function Header(): JSX.Element {
   return (
@@ -11,14 +10,11 @@ export default function Header(): JSX.Element {
       id="header"
       className={clsx(
         "flex flex-row items-baseline justify-between",
-        "bg-black py-4 px-10",
-        "fixed top-0 left-0 right-0 z-50",
+        "py-2 px-8",
       )}
     >
       <Logo />
       <Navigation />
-      <RoundedCorner position="top-left" />
-      <RoundedCorner position="top-right" />
     </header>
   )
 }

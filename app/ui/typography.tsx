@@ -4,30 +4,62 @@ import { Link } from "@remix-run/react"
 import { toKebabCase } from "~/helpers"
 import type { PropsWithChildren } from "./types"
 
-const commonHeadingClassName = clsx("font-bold leading-tight")
+const commonHeadingClassName = clsx("font-bold leading-tight !m-0")
 
 export function H1(props: PropsWithChildren<{ link?: boolean }>) {
-  return <HeadingWrapper {...props} headingClassName="text-6xl" as="h1" />
+  return (
+    <HeadingWrapper {...props} headingClassName={clsx("text-6xl")} as="h1" />
+  )
 }
 
 export function H2({ ...props }: PropsWithChildren<{ link?: boolean }>) {
-  return <HeadingWrapper {...props} headingClassName="text-5xl" as="h2" />
+  return (
+    <HeadingWrapper
+      {...props}
+      headingClassName={clsx("text-5xl pt-16 pb-12")}
+      as="h2"
+    />
+  )
 }
 
 export function H3(props: PropsWithChildren<{ link?: boolean }>) {
-  return <HeadingWrapper {...props} headingClassName="text-4xl" as="h3" />
+  return (
+    <HeadingWrapper
+      {...props}
+      headingClassName={clsx("text-4xl pt-12 pb-8")}
+      as="h3"
+    />
+  )
 }
 
 export function H4(props: PropsWithChildren<{ link?: boolean }>) {
-  return <HeadingWrapper {...props} headingClassName="text-3xl" as="h4" />
+  return (
+    <HeadingWrapper
+      {...props}
+      headingClassName={clsx("text-3xl pt-8 pb-4")}
+      as="h4"
+    />
+  )
 }
 
 export function H5(props: PropsWithChildren<{ link?: boolean }>) {
-  return <HeadingWrapper {...props} headingClassName="text-2xl" as="h5" />
+  return (
+    <HeadingWrapper
+      {...props}
+      headingClassName={clsx("text-2xl py-2")}
+      as="h5"
+    />
+  )
 }
 
 export function H6(props: PropsWithChildren<{ link?: boolean }>) {
-  return <HeadingWrapper {...props} headingClassName="text-xl" as="h6" />
+  return (
+    <HeadingWrapper
+      {...props}
+      headingClassName={clsx("text-xl py-1")}
+      as="h6"
+    />
+  )
 }
 
 export function Caption({
@@ -81,14 +113,11 @@ function HeadingWrapper({
   const element = (
     <Component
       {...props}
+      id={uid}
       className={clsx(headingClassName, commonHeadingClassName, className)}
     >
       {children}
-      {link ? (
-        <Link id={uid} to={`#${uid}`} className="invisible">
-          #
-        </Link>
-      ) : null}
+      {link ? <Link to={"#" + uid} className="invisible" children="" /> : null}
     </Component>
   )
 
