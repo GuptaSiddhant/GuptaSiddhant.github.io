@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { Link } from "@remix-run/react"
-import { ProjectType } from "../types"
+import type { ProjectType } from "../types"
 
 export default function ProjectCard({
   project,

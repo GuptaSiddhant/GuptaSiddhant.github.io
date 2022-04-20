@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react"
 
 import { proseWidth, Section } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
@@ -19,7 +19,7 @@ export default function ProjectsTeaserSection({
         <Caption>
           <Link to="#projects">Projects</Link>
         </Caption>
-        <H2>Stuff I've been tinkering with</H2>
+        <H2 className="!p-0">Stuff I've been tinkering with</H2>
         <InternalLink to="/projects">View all projects</InternalLink>
       </div>
 

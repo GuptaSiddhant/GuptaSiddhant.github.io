@@ -1,5 +1,3 @@
-// import { __IS_DEV__ } from "~/helpers"
-
 import type { ProjectType } from "./types"
 
 export function filterProjectsWithQueryAndTags(

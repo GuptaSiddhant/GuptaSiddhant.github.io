@@ -1,6 +1,6 @@
 import { Section } from "~/ui/layout"
 
-import { ProjectType } from "../types"
+import type { ProjectType } from "../types"
 import ProjectCard from "./ProjectCard"
 
 export default function ProjectsGrid({

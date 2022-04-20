@@ -6,7 +6,7 @@ import { InternalLink } from "~/ui/Link"
 import Tags from "~/ui/Tags"
 import { H1 } from "~/ui/typography"
 
-import { ProjectType } from "../types"
+import type { ProjectType } from "../types"
 import ProjectActions from "./ProjectActions"
 
 export default function ProjectHero({

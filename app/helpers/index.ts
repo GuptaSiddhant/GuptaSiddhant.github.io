@@ -28,3 +28,9 @@ export function toKebabCase(str: string): string {
     .replace(new RegExp("/", "g"), "--")
     .toLowerCase()
 }
+
+export function cleanupText(text?: string): string | undefined {
+  if (!text) return undefined
+
+  return text.replace(/â€”/g, ":")
+}

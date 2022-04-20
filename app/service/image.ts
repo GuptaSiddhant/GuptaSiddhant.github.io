@@ -21,9 +21,8 @@ export async function convertImageLinksInText(content: string) {
     })),
   )
 
-  imageUrls.forEach(({ url, link }) => {
-    content = content.replace(link, url)
-  })
-
-  return content
+  return imageUrls.reduce(
+    (acc, { link, url }) => acc.replace(link, url),
+    content,
+  )
 }

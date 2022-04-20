@@ -26,13 +26,7 @@ export async function getCollection<T = DocumentData>(
   )
   const querySnapshot = await getDocs(queryRef)
 
-  let items: T[] = []
-  for (const docSnap of querySnapshot.docs) {
-    const item = await transformDocumentSnapshot(docSnap)
-    items.push(item)
-  }
-
-  return items
+  return Promise.all(querySnapshot.docs.map(transformDocumentSnapshot))
 }
 
 /** Get a firestore doc and transform it to required item. */
@@ -47,7 +41,7 @@ export async function getCollectionItem<T = DocumentData>(
   if (!docSnapshot.exists())
     throw new Error(`Entry "${collectionName}/${itemId}" not found.`)
 
-  return await transformDocumentSnapshot(docSnapshot)
+  return transformDocumentSnapshot(docSnapshot)
 }
 
 /** Create/update a firestore doc. */
