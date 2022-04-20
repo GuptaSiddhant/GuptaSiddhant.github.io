@@ -64,7 +64,7 @@ export default function ProjectPage(): JSX.Element {
       <img
         src={cover}
         alt={project?.title}
-        className="max-h-screen-main object-cover"
+        className="max-h-screen-main object-cover aspect-video w-full"
         loading="eager"
       />
 

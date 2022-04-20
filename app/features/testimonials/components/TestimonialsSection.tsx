@@ -1,23 +1,25 @@
 import clsx from "clsx"
-import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react"
 
 import { proseWidth, Section } from "~/ui/layout"
 import { ExternalLink } from "~/ui/Link"
 import { Caption, H2 } from "~/ui/typography"
 
-import testimonies from "../testimonies"
+import type { Testimony } from "../types"
 import TestimonyCard from "./TestimonyCard"
 
-export default function TestimonialsSection(): JSX.Element {
+export default function TestimonialsSection({
+  testimonies,
+}: {
+  testimonies: Testimony[]
+}): JSX.Element {
   return (
     <Section id="testimonials">
       <div className={clsx("flex flex-col gap-4", proseWidth)}>
         <Caption>
           <Link to="#testimonials">Testimonials</Link>
         </Caption>
-        <H2 className="text-5xl font-bold leading-tight">
-          Good words by great people
-        </H2>
+        <H2 className="!p-0">Good words by great people</H2>
         <ExternalLink
           href="https://linkedin.com/in/guptasiddhant9/details/recommendations/"
           enableIcon

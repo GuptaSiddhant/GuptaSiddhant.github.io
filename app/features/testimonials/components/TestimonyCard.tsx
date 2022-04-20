@@ -4,7 +4,7 @@ import QuoteEndIcon from "remixicon-react/DoubleQuotesRIcon"
 
 import DateTime from "~/ui/DateTime"
 
-import { type Testimony } from "../testimonies"
+import { type Testimony } from "../types"
 
 export default function TestimonyCard({
   content,

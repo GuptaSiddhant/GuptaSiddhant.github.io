@@ -1,5 +1,5 @@
-import { json, LoaderFunction, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node"
+import { useLoaderData } from "@remix-run/react"
 
 import {
   fullName,
@@ -12,8 +12,12 @@ import {
   ProjectsTeaserSection,
   type ProjectType,
 } from "~/features/projects"
+import {
+  getAllTestimonies,
+  TestimonialsSection,
+  type Testimony,
+} from "~/features/testimonials"
 
-import { TestimonialsSection } from "~/features/testimonials"
 import { formatList } from "~/helpers/format"
 import ChangingText from "~/ui/ChangingText"
 import { SectionProse } from "~/ui/layout"
@@ -27,20 +31,26 @@ export const meta: MetaFunction = () => {
   }
 }
 
+interface LoaderData {
+  projects: ProjectType[]
+  testimonies: Testimony[]
+}
+
 export const loader: LoaderFunction = async () => {
   const projects = await getAllProjects(5)
+  const testimonies = await getAllTestimonies(5)
 
-  return json(projects)
+  return json<LoaderData>({ projects, testimonies })
 }
 
 export default function Index() {
-  const projects = useLoaderData<ProjectType[]>()
+  const { projects, testimonies } = useLoaderData<LoaderData>()
 
   return (
     <>
       <HeroSection />
       <ProjectsTeaserSection projects={projects} />
-      <TestimonialsSection />
+      <TestimonialsSection testimonies={testimonies} />
     </>
   )
 }
