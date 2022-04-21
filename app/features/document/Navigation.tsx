@@ -1,4 +1,3 @@
-import clsx from "clsx"
 import { NavLink } from "@remix-run/react"
 import GithubIcon from "remixicon-react/GithubFillIcon"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
@@ -39,11 +38,7 @@ export default function Navigation(): JSX.Element {
                 to={to}
                 prefetch="intent"
                 className={({ isActive }) =>
-                  clsx(
-                    isActive
-                      ? "font-semibold text-white underline underline-offset-4"
-                      : "hover:text-white",
-                  )
+                  isActive ? "font-semibold text-white" : "hover:text-white"
                 }
               >
                 {children}

@@ -11,5 +11,6 @@ node_modules
 /build/
 /public/build
 /api/
+/tmp/
 
 app/styles/tailwind.css

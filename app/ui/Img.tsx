@@ -7,6 +7,7 @@ export default function Img({
 }: ComponentPropsWithoutRef<"img"> & { link?: boolean }): JSX.Element | null {
   const imageElement = (
     <img
+      alt=""
       {...props}
       className={clsx(props.className, "!m-0 rounded", "min-h-[200px]")}
       loading="lazy"
@@ -16,7 +17,7 @@ export default function Img({
   return (
     <figure className="-mx-4 overflow-clip rounded">
       {link ? (
-        <a href={props.src} target="_blank">
+        <a href={props.src} target="_blank" rel="noreferrer">
           {imageElement}
         </a>
       ) : (
