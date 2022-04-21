@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { NavLink } from "@remix-run/react";
+import { NavLink } from "@remix-run/react"
 import GithubIcon from "remixicon-react/GithubFillIcon"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 
@@ -11,7 +11,7 @@ const navLinks: Array<{
 }> = [
   // { to: "/about", children: "About" },
   { to: "/projects", children: "Projects" },
-  // { to: "/blog", children: "Blog" },
+  { to: "/blog", children: "Blog" },
 ]
 
 const socialLinks: Array<{

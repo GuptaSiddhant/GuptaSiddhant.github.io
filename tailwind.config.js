@@ -35,6 +35,7 @@ module.exports = {
         gray: { ...colors.gray, ...myGrayColors },
       },
       screens: {
+        xs: "400px",
         "2xl": "1700px",
         "3xl": "2200px",
       },

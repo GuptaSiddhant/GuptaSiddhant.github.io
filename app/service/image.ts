@@ -2,10 +2,12 @@ import { getFileURLWithPath } from "./storage"
 
 const MarkdownImageRegex =
   /!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g
+// Simpler regex to extract image link from markdown
+const MarkdownImageRegex2 = /!\[[^\]]*\]\([^\)]*\)?\)/g
 
 export async function convertImageLinksInText(content: string) {
   const imageLinks =
-    content.match(MarkdownImageRegex)?.map(extractImageLinkFromMarkdown) || []
+    content.match(MarkdownImageRegex2)?.map(extractImageLinkFromMarkdown) || []
 
   const imageUrls = await Promise.all(
     imageLinks.map(async (link) => ({

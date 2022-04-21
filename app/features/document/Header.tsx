@@ -9,7 +9,7 @@ export default function Header(): JSX.Element {
     <header
       id="header"
       className={clsx(
-        "grid grid-cols-[1fr_max-content] items-baseline",
+        "grid grid-rows-2 xs:grid-rows-none xs:grid-cols-[1fr_max-content] items-baseline",
         "py-2 px-8",
       )}
     >
