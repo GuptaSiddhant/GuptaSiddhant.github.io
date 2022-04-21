@@ -17,9 +17,7 @@ const COLLECTION_NAME = "projects"
 export async function getAllProjects(
   limitBy: number = 100,
 ): Promise<ProjectType[]> {
-  const draftConstraints = __IS_DEV__
-    ? []
-    : [where("draft", "!=", true), orderBy("draft")]
+  const draftConstraints = __IS_DEV__ ? [] : [where("draft", "!=", true)]
 
   return getCollection(
     COLLECTION_NAME,

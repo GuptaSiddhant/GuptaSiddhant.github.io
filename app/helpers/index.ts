@@ -1,5 +1,13 @@
 export const __IS_DEV__ = process.env.NODE_ENV === "development"
 
+export function getUniqueTagsFromObjects<T extends { tags?: string[] }>(
+  objects: T[],
+): string[] {
+  const availableTags = objects.flatMap((item) => item.tags).filter(Boolean)
+
+  return filterUniqueTagsByOccurrence(availableTags)
+}
+
 export function filterUniqueTagsByOccurrence(
   tags: (string | undefined)[],
 ): string[] {

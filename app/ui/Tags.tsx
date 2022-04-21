@@ -105,6 +105,7 @@ function TagCheckbox({
           "peer-focus:ring-4",
           "flex items-center gap-2",
           "after:content-none peer-checked:after:content-['×'] after:text-sm after:text-red-300",
+          "peer-disabled:text-gray-500 peer-disabled:cursor-not-allowed peer-disabled:bg-gray-800",
           className,
         )}
       >

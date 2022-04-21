@@ -1,5 +1,5 @@
 import { json, type LoaderFunction } from "@remix-run/node"
-import { Form, useLoaderData, useSubmit } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 
 import {
   getAllProjects,
@@ -7,26 +7,18 @@ import {
   ProjectsGrid,
   type ProjectType,
 } from "~/features/projects"
-import { filterUniqueTagsByOccurrence } from "~/helpers"
-import Input from "~/ui/Input"
+import { getUniqueTagsFromObjects } from "~/helpers"
+import Filter, { type FilterProps } from "~/ui/Filter"
 import { SectionProse } from "~/ui/layout"
-import Tags from "~/ui/Tags"
 import { H1 } from "~/ui/typography"
 
-interface LoaderData {
+interface LoaderData extends FilterProps {
   projects: ProjectType[]
-  tags: string[]
-  selectedTags: string[]
-  query: string
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
   const projects = await getAllProjects()
-
-  const availableTags = projects
-    .flatMap((project) => project.tags)
-    .filter(Boolean)
-  const uniqueTags = filterUniqueTagsByOccurrence(availableTags)
+  const allTags = getUniqueTagsFromObjects(projects)
 
   const searchParams = new URL(request.url).searchParams
   const query = searchParams.get("q")?.trim() || ""
@@ -36,17 +28,22 @@ export const loader: LoaderFunction = async ({ request }) => {
     query,
     selectedTags,
   )
+  const availableTags = getUniqueTagsFromObjects(filteredProjects)
 
-  return json({
+  return json<LoaderData>({
     projects: filteredProjects,
-    tags: uniqueTags,
+
+    // filterProps
+    allTags,
+    availableTags,
     selectedTags,
     query,
+    placeholder: "Filter projects...",
   })
 }
 
 export default function Projects(): JSX.Element {
-  const { projects } = useLoaderData<LoaderData>()
+  const { projects, ...filterProps } = useLoaderData<LoaderData>()
 
   return (
     <>
@@ -59,51 +56,9 @@ export default function Projects(): JSX.Element {
             of each one of them.
           </p>
         </div>
-        <ProjectsFilter />
+        <Filter {...filterProps} />
       </SectionProse>
       <ProjectsGrid projects={projects} />
     </>
-  )
-}
-
-function ProjectsFilter(): JSX.Element {
-  const { tags, selectedTags, query } = useLoaderData<LoaderData>()
-  const submit = useSubmit()
-
-  return (
-    <Form
-      id="filter-form"
-      className="relative"
-      onChange={(e) => submit(e.currentTarget)}
-      onReset={() => submit({})}
-    >
-      <Input
-        type="search"
-        name="q"
-        className="w-full md:-mx-4 md:w-full-m4"
-        placeholder="Filter projects..."
-        defaultValue={query}
-      />
-      <Tags.List
-        tags={tags}
-        className=" justify-center"
-        TagComponent={({ tag }) => (
-          <Tags.Checkbox
-            label={tag}
-            value={tag.toLowerCase()}
-            name="tag"
-            defaultChecked={selectedTags.includes(tag.toLowerCase())}
-          />
-        )}
-      />
-      {selectedTags.length > 0 || query.length > 0 ? (
-        <Tags.Button
-          type="reset"
-          className="absolute top-1 right-1 md:-right-3"
-        >
-          Clear
-        </Tags.Button>
-      ) : undefined}
-    </Form>
   )
 }
