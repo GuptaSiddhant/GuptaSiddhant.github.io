@@ -59,6 +59,7 @@ async function transformDocToProjectLimited(docSnap: QueryDocumentSnapshot) {
     ...project,
     icon,
     gallery,
+    content: undefined,
   }
 }
 

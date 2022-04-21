@@ -3,6 +3,7 @@ import {
   orderBy,
   limit,
   type QueryDocumentSnapshot,
+  getCollectionItem,
 } from "~/service/database"
 import type { Testimony } from "./types"
 
@@ -17,6 +18,10 @@ export async function getAllTestimonies(
     orderBy("date", "desc"),
     limit(limitBy),
   )
+}
+
+export async function getTestimonyById(itemId: string): Promise<Testimony> {
+  return getCollectionItem(COLLECTION_NAME, itemId, transformDocToTestimony)
 }
 
 // Helpers

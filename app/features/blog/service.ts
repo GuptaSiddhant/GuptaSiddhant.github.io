@@ -59,6 +59,7 @@ async function transformDocToBlogPostLimited(docSnap: QueryDocumentSnapshot) {
     ...blogPost,
     icon,
     gallery,
+    content: undefined,
   }
 }
 

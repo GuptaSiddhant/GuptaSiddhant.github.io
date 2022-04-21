@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     query,
     selectedTags,
   )
-  const availableTags = getUniqueTagsFromObjects(blogPosts)
+  const availableTags = getUniqueTagsFromObjects(filteredBlogPosts)
 
   return json<LoaderData>({
     blogPosts: filteredBlogPosts,
