@@ -17,7 +17,7 @@ const COLLECTION_NAME = "blog"
 export async function getAllBlogPosts(
   limitBy: number = 100,
 ): Promise<BlogPostType[]> {
-  const draftConstraints = __IS_DEV__ ? [] : [where("draft", "!=", true)]
+  const draftConstraints = __IS_DEV__ ? [] : [where("draft", "!=", true), orderBy("draft")]
 
   return getCollection(
     COLLECTION_NAME,
