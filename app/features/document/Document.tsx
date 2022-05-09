@@ -7,9 +7,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react"
 
+import CommandPalette from "~/features/commandPalette"
 import Header from "./Header"
 import Footer from "./Footer"
-import CommandPalette from "../commandPalette"
 
 const intlListFormatPolyfillScript =
   "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"

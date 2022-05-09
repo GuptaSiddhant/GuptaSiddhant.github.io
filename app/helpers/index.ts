@@ -1,4 +1,5 @@
 export const __IS_DEV__ = process.env.NODE_ENV === "development"
+export const __IS_SERVER__ = typeof window === "undefined"
 
 export function getUniqueTagsFromObjects<T extends { tags?: string[] }>(
   objects: T[],

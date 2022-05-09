@@ -3,7 +3,6 @@ import type { ReactNode } from "react"
 export interface CommandPaletteState {
   open: boolean
   entries: CommandPaletteEntry[]
-  lastScrollPosition?: number
 }
 
 export interface CommandPaletteEntry {

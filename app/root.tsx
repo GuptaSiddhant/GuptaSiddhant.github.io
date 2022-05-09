@@ -1,10 +1,20 @@
-import type { LinkDescriptor, MetaFunction } from "@remix-run/node"
-import { Outlet, useCatch } from "@remix-run/react"
+import {
+  json,
+  type LinkDescriptor,
+  type LoaderFunction,
+  type MetaFunction,
+} from "@remix-run/node"
+import { Outlet, useCatch, useLoaderData } from "@remix-run/react"
 
 import { fullName } from "./features/about"
+import Document, { linkDescriptors } from "./features/document"
+import {
+  getAllFeatureFlags,
+  FeatureFlagsContext,
+  type FeatureFlags,
+} from "./features/featureFlags"
 import { SectionProse } from "./ui/layout"
 import { H1 } from "./ui/typography"
-import Document, { linkDescriptors } from "./features/document"
 
 export function links(): LinkDescriptor[] {
   return linkDescriptors
@@ -23,11 +33,25 @@ export const meta: MetaFunction = () => {
   }
 }
 
+export interface RootLoaderData {
+  featureFlags: FeatureFlags
+}
+
+export const loader: LoaderFunction = async () => {
+  const featureFlags = await getAllFeatureFlags()
+
+  return json<RootLoaderData>({ featureFlags })
+}
+
 export default function App() {
+  const { featureFlags } = useLoaderData<RootLoaderData>()
+
   return (
-    <Document>
-      <Outlet />
-    </Document>
+    <FeatureFlagsContext.Provider value={featureFlags}>
+      <Document>
+        <Outlet />
+      </Document>
+    </FeatureFlagsContext.Provider>
   )
 }
 

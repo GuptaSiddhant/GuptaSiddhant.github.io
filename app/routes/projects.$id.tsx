@@ -48,15 +48,7 @@ export default function ProjectPage(): JSX.Element {
   return (
     <>
       <ProjectStickyHeader {...project} />
-      <ProjectHero {...project}>
-        <a
-          href="#maincontent"
-          className="no-underline"
-          title="Jump to main content"
-        >
-          ↓
-        </a>
-      </ProjectHero>
+      <ProjectHero {...project} />
 
       <img
         src={cover}

@@ -3,14 +3,10 @@ import { useCatch, useLoaderData } from "@remix-run/react"
 
 import {
   getBlogPostById,
-  // BlogPostHero,
-  // BlogPostStickyHeader,
+  BlogPostHero,
+  BlogPostStickyHeader,
   type BlogPostType,
 } from "~/features/blog"
-import {
-  ProjectHero as BlogPostHero,
-  ProjectStickyHeader as BlogPostStickyHeader,
-} from "~/features/projects"
 
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"

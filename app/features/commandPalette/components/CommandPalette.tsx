@@ -13,10 +13,9 @@ import {
 import usePerformEntryAction from "../hooks/usePerformEntryAction"
 import useCommandKeys from "../hooks/useCommandKeys"
 import Button from "~/ui/Button"
-import useSafeLayoutEffect from "~/helpers/useSafeLayoutEffect"
 
 export default function CommandPalette() {
-  const { entries, open, lastScrollPosition } = useCommandPaletteState()
+  const { entries, open } = useCommandPaletteState()
   const inputRef = useRef<HTMLInputElement>(null)
   const [term, setTerm] = useState("")
   const dispatch = useCommandPaletteDispatch()
@@ -34,12 +33,6 @@ export default function CommandPalette() {
   useEffect(() => {
     if (open) setTerm("")
   }, [open])
-
-  // Scroll restoration for Safari
-  useSafeLayoutEffect(() => {
-    if (!open && lastScrollPosition)
-      window.scrollTo({ top: lastScrollPosition })
-  }, [open, lastScrollPosition])
 
   return (
     <Dialog

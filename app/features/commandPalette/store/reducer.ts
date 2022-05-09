@@ -7,11 +7,7 @@ export default function reducer(
   switch (action.type) {
     case "TOGGLE_OPEN": {
       const open = action.payload ?? !state.open
-      return {
-        ...state,
-        open,
-        lastScrollPosition: window.scrollY,
-      }
+      return { ...state, open }
     }
     case "ADD_ENTRY": {
       const entry = action.payload

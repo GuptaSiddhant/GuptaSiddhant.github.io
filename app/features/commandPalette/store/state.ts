@@ -20,5 +20,4 @@ export const defaultEntries: CommandPaletteEntry[] = [
 export const defaultState: CommandPaletteState = {
   entries: defaultEntries,
   open: false,
-  lastScrollPosition: undefined,
 }

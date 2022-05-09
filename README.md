@@ -11,6 +11,7 @@ Todo:
 - [x] Blog
 - [x] Firebase/Storage
 - [x] General API
+- [x] Feature-flags
 - [-] Command palette
 - [ ] Page loading indicator
 - [ ] Tags in firestore
@@ -22,3 +23,5 @@ Todo:
 - [ ] Editor
 - [ ] Light mode
 - [ ] Remote terminal
+- [ ] Color-coded code
+- [ ] Header-pagination
