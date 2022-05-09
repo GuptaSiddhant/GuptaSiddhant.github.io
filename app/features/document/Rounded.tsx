@@ -5,10 +5,10 @@ export default function RoundedCorner({
 }: {
   position?: `${"top" | "bottom"}-${"left" | "right"}`
 }) {
-  const topLeft = clsx("top-full left-4 sm:left-6 rotate-0")
-  const topRight = clsx("top-full right-4 sm:right-6 rotate-90")
-  const bottomLeft = clsx("bottom-full left-4 sm:left-6 -rotate-90")
-  const bottomRight = clsx("bottom-full right-4 sm:right-6 rotate-180")
+  const topLeft = clsx("top-full left-4 rotate-0")
+  const topRight = clsx("top-full right-4 rotate-90")
+  const bottomLeft = clsx("bottom-full left-4 -rotate-90")
+  const bottomRight = clsx("bottom-full right-4 rotate-180")
 
   return (
     <svg
@@ -17,7 +17,7 @@ export default function RoundedCorner({
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       className={clsx(
-        "absolute z-50 fill-black",
+        "absolute z-40 fill-black",
         position === "top-left"
           ? topLeft
           : position === "top-right"

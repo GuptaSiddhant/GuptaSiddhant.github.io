@@ -122,7 +122,7 @@ function HeadingWrapper({
         headingClassName,
         commonHeadingClassName,
         className,
-        link && "scroll-mt-16",
+        link && "scroll-mt-12",
       )}
     >
       {children}

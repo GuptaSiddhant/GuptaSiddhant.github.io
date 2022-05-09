@@ -1,7 +1,7 @@
 import { createContext, useReducer, type Dispatch } from "react"
 
 import type { CommandPaletteAction, CommandPaletteState } from "../types"
-import { defaultState } from "./defaults"
+import { defaultState } from "./state"
 import reducer from "./reducer"
 
 export const CommandPaletteStateContext =

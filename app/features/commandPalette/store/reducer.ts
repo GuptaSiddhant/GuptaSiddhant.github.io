@@ -6,8 +6,12 @@ export default function reducer(
 ): CommandPaletteState {
   switch (action.type) {
     case "TOGGLE_OPEN": {
-      const open = action.payload || !state.open
-      return { ...state, open }
+      const open = action.payload ?? !state.open
+      return {
+        ...state,
+        open,
+        lastScrollPosition: window.scrollY,
+      }
     }
     case "ADD_ENTRY": {
       const entry = action.payload

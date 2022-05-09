@@ -2,29 +2,36 @@ import clsx from "clsx"
 import { useCallback } from "react"
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 
-import { useMainContainer } from "~/features/document"
 import useOffsetScroll from "~/helpers/useOffsetScroll"
 import Button from "~/ui/Button"
+import RoundedCorner from "./Rounded"
 
 export default function Footer(): JSX.Element {
-  const scrollButtonVisible = useOffsetScroll()
-  const mainContainerRef = useMainContainer()
+  const { isOffsetScrolled: scrollButtonVisible } = useOffsetScroll()
 
   const handleScrollToTop = useCallback(() => {
-    mainContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" })
-  }, [mainContainerRef])
+    window?.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
 
   return (
-    <footer id="footer" className={clsx("relative h-4 z-40")}>
+    <footer
+      id="footer"
+      className={clsx("fixed bottom-0 right-0 left-0", "h-4 z-40 bg-black")}
+    >
       {scrollButtonVisible ? (
         <Button
-          className={clsx("absolute right-4 bottom-4 m-0.5", "rounded-br-xl")}
+          className={clsx(
+            "absolute right-4 bottom-full m-0.5",
+            "rounded-br-xl",
+          )}
           onClick={handleScrollToTop}
           title="Scroll to top"
         >
           <UpIcon aria-label="Scroll to top" />
         </Button>
       ) : null}
+      <RoundedCorner position="bottom-left" />
+      <RoundedCorner position="bottom-right" />
     </footer>
   )
 }
