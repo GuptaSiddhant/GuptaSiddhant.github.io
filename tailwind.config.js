@@ -46,7 +46,7 @@ module.exports = {
         },
       },
       animation: {
-        appear: "appear 0.5s linear",
+        appear: "appear 0.2s linear",
       },
       maxHeight: {
         "screen-main": "calc(100vh - 100px)",

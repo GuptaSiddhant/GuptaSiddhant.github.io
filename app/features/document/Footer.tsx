@@ -2,8 +2,9 @@ import clsx from "clsx"
 import { useCallback } from "react"
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 
-import useMainContainer from "~/contexts/MainContainer"
+import { useMainContainer } from "~/features/document"
 import useOffsetScroll from "~/helpers/useOffsetScroll"
+import Button from "~/ui/Button"
 
 export default function Footer(): JSX.Element {
   const scrollButtonVisible = useOffsetScroll()
@@ -16,18 +17,13 @@ export default function Footer(): JSX.Element {
   return (
     <footer id="footer" className={clsx("relative h-4 z-40")}>
       {scrollButtonVisible ? (
-        <button
-          className={clsx(
-            "absolute right-4 bottom-4",
-            "flex items-center p-2 m-0.5",
-            "cursor-pointer text-sm rounded rounded-br-xl",
-            "bg-black text-gray-500 hover:text-gray-300",
-          )}
+        <Button
+          className={clsx("absolute right-4 bottom-4 m-0.5", "rounded-br-xl")}
           onClick={handleScrollToTop}
           title="Scroll to top"
         >
           <UpIcon aria-label="Scroll to top" />
-        </button>
+        </Button>
       ) : null}
     </footer>
   )

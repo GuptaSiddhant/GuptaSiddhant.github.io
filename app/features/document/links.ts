@@ -1,5 +1,6 @@
 import type { LinkDescriptor } from "@remix-run/node"
 
+import globalStyles from "~/styles/index.css"
 import fontStyles from "~/styles/font.css"
 import tailwindStyles from "~/styles/tailwind.css"
 
@@ -15,8 +16,6 @@ export const linkDescriptors: LinkDescriptor[] = [
     rel: "preconnect",
     href: "https://firebasestorage.googleapis.com",
   },
-  { rel: "stylesheet", href: fontStyles },
-  { rel: "stylesheet", href: tailwindStyles },
   {
     rel: "apple-touch-icon",
     sizes: "180x180",
@@ -35,4 +34,7 @@ export const linkDescriptors: LinkDescriptor[] = [
     href: "/favicon/favicon-16x16.png",
   },
   { rel: "manifest", href: "/site.webmanifest" },
+  { rel: "stylesheet", href: globalStyles },
+  { rel: "stylesheet", href: fontStyles },
+  { rel: "stylesheet", href: tailwindStyles },
 ]

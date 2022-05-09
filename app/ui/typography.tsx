@@ -6,13 +6,17 @@ import type { PropsWithChildren } from "./types"
 
 const commonHeadingClassName = clsx("font-bold leading-tight !m-0")
 
-export function H1(props: PropsWithChildren<{ link?: boolean }>) {
+interface HeadingProps extends PropsWithChildren {
+  link?: boolean
+}
+
+export function H1(props: HeadingProps) {
   return (
     <HeadingWrapper {...props} headingClassName={clsx("text-6xl")} as="h1" />
   )
 }
 
-export function H2({ ...props }: PropsWithChildren<{ link?: boolean }>) {
+export function H2({ ...props }: HeadingProps) {
   return (
     <HeadingWrapper
       {...props}
@@ -22,7 +26,7 @@ export function H2({ ...props }: PropsWithChildren<{ link?: boolean }>) {
   )
 }
 
-export function H3(props: PropsWithChildren<{ link?: boolean }>) {
+export function H3(props: HeadingProps) {
   return (
     <HeadingWrapper
       {...props}
@@ -32,7 +36,7 @@ export function H3(props: PropsWithChildren<{ link?: boolean }>) {
   )
 }
 
-export function H4(props: PropsWithChildren<{ link?: boolean }>) {
+export function H4(props: HeadingProps) {
   return (
     <HeadingWrapper
       {...props}
@@ -42,7 +46,7 @@ export function H4(props: PropsWithChildren<{ link?: boolean }>) {
   )
 }
 
-export function H5(props: PropsWithChildren<{ link?: boolean }>) {
+export function H5(props: HeadingProps) {
   return (
     <HeadingWrapper
       {...props}
@@ -52,7 +56,7 @@ export function H5(props: PropsWithChildren<{ link?: boolean }>) {
   )
 }
 
-export function H6(props: PropsWithChildren<{ link?: boolean }>) {
+export function H6(props: HeadingProps) {
   return (
     <HeadingWrapper
       {...props}
@@ -114,7 +118,12 @@ function HeadingWrapper({
     <Component
       {...props}
       id={uid}
-      className={clsx(headingClassName, commonHeadingClassName, className)}
+      className={clsx(
+        headingClassName,
+        commonHeadingClassName,
+        className,
+        link && "scroll-mt-16",
+      )}
     >
       {children}
       {link ? <Link to={"#" + uid} className="invisible" children="" /> : null}

@@ -4,7 +4,7 @@ const MainContainerContext = createContext<RefObject<HTMLElement> | undefined>(
   undefined,
 )
 
-export default function useMainContainer() {
+export function useMainContainer() {
   const mainContainer = useContext(MainContainerContext)
   if (!mainContainer) {
     throw new Error("useMainContainer must be used within the #main container")

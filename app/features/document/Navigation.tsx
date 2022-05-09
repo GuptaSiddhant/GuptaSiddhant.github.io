@@ -1,8 +1,10 @@
 import { NavLink } from "@remix-run/react"
 import GithubIcon from "remixicon-react/GithubFillIcon"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
+import SearchIcon from "remixicon-react/Search2LineIcon"
 
 import { socialLinks as aboutSocialLinks } from "~/features/about"
+import { useCommandPaletteDispatch, openPalette } from "../commandPalette"
 
 const navLinks: Array<{
   to: string
@@ -28,6 +30,7 @@ const socialLinks: Array<{
 ]
 
 export default function Navigation(): JSX.Element {
+  const dispatch = useCommandPaletteDispatch()
   return (
     <nav aria-label="Main navigation">
       <ul className="flex items-center justify-end gap-6 text-lg text-gray-200">
@@ -53,6 +56,12 @@ export default function Navigation(): JSX.Element {
             </a>
           </li>
         ))}
+        <li key="search" title="Search [Cmd+K]">
+          <SearchIcon
+            className="hover:text-white cursor-pointer"
+            onClick={() => dispatch(openPalette())}
+          />
+        </li>
       </ul>
     </nav>
   )

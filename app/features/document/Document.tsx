@@ -9,10 +9,9 @@ import {
 
 import Header from "./Header"
 import Footer from "./Footer"
+import CommandPalette from "../commandPalette"
 import { useRef } from "react"
-import { MainContainerProvider } from "~/contexts/MainContainer"
-
-export * from "./links"
+import { MainContainerProvider } from "~/features/document/context"
 
 const intlListFormatPolyfillScript =
   "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"
@@ -39,22 +38,24 @@ export default function Document({ children }: { children: React.ReactNode }) {
         )}
       >
         <MainContainerProvider containerRef={mainContainerRef}>
-          <Header />
+          <CommandPalette>
+            <Header />
 
-          <main
-            id="main"
-            ref={mainContainerRef}
-            className={clsx(
-              "relative mx-4",
-              "bg-gray-900 text-lg",
-              "overflow-auto rounded-xl",
-              "flex flex-col gap-10",
-            )}
-          >
-            {children}
-          </main>
+            <main
+              id="main"
+              ref={mainContainerRef}
+              className={clsx(
+                "relative mx-4",
+                "bg-gray-900 text-lg",
+                "overflow-auto rounded-xl",
+                "flex flex-col gap-10",
+              )}
+            >
+              {children}
+            </main>
 
-          <Footer />
+            <Footer />
+          </CommandPalette>
         </MainContainerProvider>
 
         <ScrollRestoration />

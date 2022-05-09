@@ -11,6 +11,8 @@
     "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/"
   },
   "dependencies": {
+    "@reach/combobox": "^0.17.0",
+    "@reach/dialog": "^0.17.0",
     "@remix-run/node": "^1.4.0",
     "@remix-run/react": "^1.4.0",
     "@remix-run/vercel": "^1.4.0",

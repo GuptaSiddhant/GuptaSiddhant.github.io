@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 import { DEFAULT_SCROLL_OFFSET } from "~/constants"
-import useMainContainer from "~/contexts/MainContainer"
+import { useMainContainer } from "~/features/document"
 
 export default function useOffsetScroll(
   offsetY: number = DEFAULT_SCROLL_OFFSET,
