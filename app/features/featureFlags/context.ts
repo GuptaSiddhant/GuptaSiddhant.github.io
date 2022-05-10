@@ -12,7 +12,7 @@ export function useFeatureFlags(): FeatureFlags | undefined {
 
 export function useFeatureFlag(id: FeatureFlag, devId?: FeatureFlag): boolean {
   const flags = useFeatureFlags()
-  if (!flags) return true
+  if (!flags) return false
 
   const flagId = __IS_DEV__ && devId ? devId : id
   return flags[flagId]

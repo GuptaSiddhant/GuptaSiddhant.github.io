@@ -10,6 +10,7 @@ import {
 import CommandPalette from "~/features/commandPalette"
 import Header from "./Header"
 import Footer from "./Footer"
+import Progress from "./Progress"
 
 const intlListFormatPolyfillScript =
   "https://polyfill.io/v3/polyfill.min.js?features=Intl.ListFormat,Intl.ListFormat.~locale.en"
@@ -28,6 +29,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
       </head>
       <body className={clsx("m-0 p-0", "bg-black text-gray-100")}>
         <CommandPalette>
+          <Progress />
           <Header />
           <main
             id="main"

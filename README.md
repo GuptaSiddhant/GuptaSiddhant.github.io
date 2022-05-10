@@ -13,8 +13,8 @@ Todo:
 - [x] General API
 - [x] Feature-flags
 - [x] Breadcrumbs
+- [x] Page loading indicator
 - [-] Command palette
-- [ ] Page loading indicator
 - [ ] Tags in firestore
 - [ ] About (lifeline)
   - [ ] education
