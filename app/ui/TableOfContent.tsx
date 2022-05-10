@@ -84,27 +84,29 @@ interface TOC {
 }
 
 function createTOC(allElementsWithIds: Element[]): TOC[] {
-  const tocEntries: TOC[] = allElementsWithIds.map((element) => {
-    const id = element.id
-    let text = element.textContent || ""
-    let tagName = element.tagName
-    if (tagName.toLowerCase() === "a") {
-      tagName = (element.parentNode as any)?.tagName?.toLowerCase()
-      text = (element.parentNode?.textContent || "").replace("#", "")
-    }
-    const level =
-      (tagName.startsWith("h") || tagName.startsWith("H")) &&
-      tagName.length === 2
-        ? parseInt(tagName[1])
-        : 0
+  const tocEntries: TOC[] = allElementsWithIds
+    .map((element) => {
+      const id = element.id
+      let text = element.textContent || ""
+      let tagName = element.tagName
+      if (tagName.toLowerCase() === "a") {
+        tagName = (element.parentNode as any)?.tagName?.toLowerCase()
+        text = (element.parentNode?.textContent || "").replace("#", "")
+      }
+      const level =
+        (tagName.startsWith("h") || tagName.startsWith("H")) &&
+        tagName.length === 2
+          ? parseInt(tagName[1])
+          : 0
 
-    return {
-      level,
-      id,
-      text,
-      children: [],
-    }
-  })
+      return {
+        level,
+        id,
+        text,
+        children: [],
+      }
+    })
+    .filter((e) => e.id !== "toc")
 
   function reorderLevels(
     toc: TOC[],

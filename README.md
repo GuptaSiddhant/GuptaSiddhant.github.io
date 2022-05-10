@@ -12,11 +12,13 @@ Todo:
 - [x] Firebase/Storage
 - [x] General API
 - [x] Feature-flags
+- [x] Breadcrumbs
 - [-] Command palette
 - [ ] Page loading indicator
 - [ ] Tags in firestore
 - [ ] About (lifeline)
   - [ ] education
+    - Certifications (Agile)
   - [ ] career
   - [ ] link tags
 - [ ] Mobile menu-nav
@@ -24,4 +26,3 @@ Todo:
 - [ ] Light mode
 - [ ] Remote terminal
 - [ ] Color-coded code
-- [ ] Header-pagination

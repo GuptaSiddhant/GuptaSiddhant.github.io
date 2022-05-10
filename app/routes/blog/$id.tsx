@@ -8,10 +8,10 @@ import {
   type BlogPostType,
 } from "~/features/blog"
 
+import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
+import MarkdownSection from "~/ui/MarkdownSection"
 import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
-
-import MarkdownSection from "~/ui/MarkdownSection"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {
@@ -92,4 +92,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <pre>{error.stack}</pre>
     </SectionProse>
   )
+}
+
+export const handle = {
+  breadcrumb: (match: MatchedCrumbProps<LoaderData>): JSX.Element => (
+    <Crumb match={match}>{match.data.blogPost.title}</Crumb>
+  ),
 }

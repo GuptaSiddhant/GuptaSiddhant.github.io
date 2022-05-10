@@ -52,7 +52,7 @@ export default function useOffsetScroll(
       }
     }
 
-    handleScroll()
+    onScroll()
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [offsetY, dispatch])

@@ -17,8 +17,15 @@ export default function MarkdownSection({
   children: string
 }): JSX.Element | null {
   const sectionRef = useRef<HTMLElement>(null)
-
   if (!children) return null
+
+  const toc = (
+    <TableOfContent
+      sectionRef={sectionRef}
+      className="list-none"
+      maxLevel={4}
+    />
+  )
 
   return (
     <Section
@@ -29,19 +36,21 @@ export default function MarkdownSection({
       )}
     >
       <aside className={clsx("text-sm", "hidden lg:block")}>
-        <nav className="sticky top-16 overflow-visible">
-          <TableOfContent
-            sectionRef={sectionRef}
-            className="list-none"
-            maxLevel={4}
-          />
-        </nav>
+        <nav className="sticky top-16 overflow-visible">{toc}</nav>
       </aside>
 
       <main
         ref={sectionRef}
         className="prose prose-invert prose-blockquote:-ml-4 px-4"
       >
+        <details
+          id="toc"
+          className="lg:hidden border-b-[1px] pb-4 scroll-mt-16"
+          open
+        >
+          <summary className="font-bold text-lg">Table of contents</summary>
+          <nav>{toc}</nav>
+        </details>
         <MarkdownMain>{children}</MarkdownMain>
       </main>
 

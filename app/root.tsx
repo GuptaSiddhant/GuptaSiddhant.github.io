@@ -13,6 +13,7 @@ import {
   FeatureFlagsContext,
   type FeatureFlags,
 } from "./features/featureFlags"
+import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
 import { SectionProse } from "./ui/layout"
 import { H1 } from "./ui/typography"
 
@@ -101,4 +102,12 @@ export function CatchBoundary() {
       </SectionProse>
     </Document>
   )
+}
+
+export const handle = {
+  breadcrumb: (match: MatchedCrumbProps): JSX.Element => (
+    <Crumb match={match} className="font-bold">
+      GS
+    </Crumb>
+  ),
 }
