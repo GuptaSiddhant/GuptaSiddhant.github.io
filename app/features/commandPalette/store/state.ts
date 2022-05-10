@@ -9,6 +9,13 @@ export const defaultEntries: CommandPaletteEntry[] = [
     href: "/blog",
   },
   {
+    label: "Testimonials",
+    shortcut: ["t"],
+    keywords: "testimonials, testimony",
+    id: "testimonials",
+    href: "/#testimonials",
+  },
+  {
     label: "Projects",
     shortcut: ["p"],
     keywords: "project",

@@ -1,15 +1,11 @@
-import dialogStyles from "@reach/dialog/styles.css"
 import { type ReactNode } from "react"
 
 import { CommandPaletteProvider } from "./store/context"
 import Palette from "./components/CommandPalette"
-import { FeatureFlag, useFeatureFlag } from "../featureFlags"
+import useCommandPaletteFeatureFlag from "./hooks/useCommandPaletteFeatureFlag"
 
 export default function CommandPalette({ children }: { children: ReactNode }) {
-  const isCommandPaletteEnabled = useFeatureFlag(
-    FeatureFlag.CommandPalette,
-    FeatureFlag.CommandPaletteDev,
-  )
+  const isCommandPaletteEnabled = useCommandPaletteFeatureFlag()
 
   return (
     <CommandPaletteProvider>
@@ -20,4 +16,4 @@ export default function CommandPalette({ children }: { children: ReactNode }) {
 }
 
 export * from "./store"
-export { dialogStyles }
+export { useCommandPaletteFeatureFlag }
