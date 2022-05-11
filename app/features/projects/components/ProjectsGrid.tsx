@@ -1,5 +1,6 @@
 import { useSubmit } from "@remix-run/react"
-import { Section } from "~/ui/layout"
+
+import Section from "~/ui/Section"
 
 import type { ProjectType } from "../types"
 import ProjectCard from "./ProjectCard"

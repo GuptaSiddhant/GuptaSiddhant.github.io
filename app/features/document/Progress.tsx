@@ -3,8 +3,7 @@ import { useCallback, useEffect, useRef, type RefObject } from "react"
 import { CSS_VAR_HEADER_HEIGHT } from "~/constants"
 
 export default function Progress(): JSX.Element {
-  const elementRef = useRef<HTMLDivElement>(null)
-  useProgress(elementRef)
+  const elementRef = useProgress()
 
   return (
     <div
@@ -22,7 +21,8 @@ export default function Progress(): JSX.Element {
 /**
  * @see https://gist.github.com/edmundhung/023e85cc731466bb5f4b350590ab30ea
  */
-function useProgress(elementRef: RefObject<HTMLDivElement>): void {
+function useProgress(): RefObject<HTMLDivElement> {
+  const elementRef = useRef<HTMLDivElement>(null)
   const timeout = useRef<NodeJS.Timeout>()
   const { location } = useTransition()
 
@@ -60,4 +60,6 @@ function useProgress(elementRef: RefObject<HTMLDivElement>): void {
       }, 200)
     }
   }, [location, elementRef, updateWidth])
+
+  return elementRef
 }

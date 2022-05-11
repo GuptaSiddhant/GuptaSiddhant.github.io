@@ -20,7 +20,7 @@ import {
 
 import { formatList } from "~/helpers/format"
 import ChangingText from "~/ui/ChangingText"
-import { SectionProse } from "~/ui/layout"
+import Section from "~/ui/Section"
 import { ExternalLink, InternalLink } from "~/ui/Link"
 import { H1 } from "~/ui/typography"
 
@@ -60,7 +60,7 @@ function HeroSection(): JSX.Element {
     "https://www.accenture.com/fi-en/careers/jobdetails?id=R00008034_en&title=Senior+React+Developer"
 
   return (
-    <SectionProse id="hero">
+    <Section.Hero>
       <H1>
         Hi, I bring designs to life on your screen,
         <ChangingText texts={heroAdjectives} />.
@@ -92,6 +92,6 @@ function HeroSection(): JSX.Element {
         </code>
         <code className="block text-white">npx guptasiddhant</code>
       </pre>
-    </SectionProse>
+    </Section.Hero>
   )
 }

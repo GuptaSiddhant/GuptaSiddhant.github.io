@@ -1,8 +1,8 @@
 import clsx from "clsx"
 import { Link } from "@remix-run/react"
 
-import { proseWidth, Section } from "~/ui/layout"
 import { ExternalLink } from "~/ui/Link"
+import Section, { proseWidth } from "~/ui/Section"
 import { Caption, H2 } from "~/ui/typography"
 
 import type { Testimony } from "../types"

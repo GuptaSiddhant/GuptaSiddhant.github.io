@@ -4,9 +4,7 @@ import StickyHeader from "~/ui/StickyHeader"
 import { type ProjectType } from ".."
 import ProjectActions from "./ProjectActions"
 
-export default function ProjectStickyHeader({
-  title,
-}: ProjectType): JSX.Element {
+export default function ProjectStickyHeader(_: ProjectType): JSX.Element {
   return (
     <StickyHeader className={"justify-between"}>
       <Breadcrumbs />

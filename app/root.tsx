@@ -14,7 +14,7 @@ import {
   type FeatureFlags,
 } from "./features/featureFlags"
 import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
-import { SectionProse } from "./ui/layout"
+import Section from "~/ui/Section"
 import { H1 } from "./ui/typography"
 
 export function links(): LinkDescriptor[] {
@@ -61,10 +61,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
   return (
     <Document>
-      <SectionProse>
+      <Section.Prose>
         <H1>{"There was an error"}</H1>
         <p>{error.message}</p>
-      </SectionProse>
+      </Section.Prose>
     </Document>
   )
 }
@@ -90,7 +90,7 @@ export function CatchBoundary() {
 
   return (
     <Document>
-      <SectionProse>
+      <Section.Prose>
         <H1>{heading}</H1>
         <p>{message}</p>
         <button
@@ -99,7 +99,7 @@ export function CatchBoundary() {
         >
           Go back.
         </button>
-      </SectionProse>
+      </Section.Prose>
     </Document>
   )
 }

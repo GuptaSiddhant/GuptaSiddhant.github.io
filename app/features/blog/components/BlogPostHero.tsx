@@ -1,13 +1,11 @@
 import clsx from "clsx"
 import { type ReactNode } from "react"
 
-import { SectionProse } from "~/ui/layout"
-import { InternalLink } from "~/ui/Link"
+import Section from "~/ui/Section"
 import Tags from "~/ui/Tags"
 import { H1 } from "~/ui/typography"
 
 import type { BlogPostType } from "../types"
-// import ProjectActions from "./ProjectActions"
 
 export default function BlogPostHero({
   title,
@@ -18,8 +16,7 @@ export default function BlogPostHero({
   children,
 }: BlogPostType & { children?: ReactNode }): JSX.Element {
   return (
-    <SectionProse id="hero">
-      <InternalLink to="/blog">{"← Blog"}</InternalLink>
+    <Section.Hero>
       <div className={clsx("flex items-center justify-between")}>
         <div>
           <H1>{title}</H1>
@@ -38,11 +35,11 @@ export default function BlogPostHero({
         <p className="text-gray-100">{description}</p>
         <div className="flex items-center justify-between gap-4">
           <Tags.List tags={tags} className="justify-start" />
-          {/* <ProjectActions /> */}
+          {/* <BlogPostActions /> */}
         </div>
       </div>
 
       {children}
-    </SectionProse>
+    </Section.Hero>
   )
 }

@@ -1,6 +1,7 @@
 import { useSubmit } from "@remix-run/react"
 import clsx from "clsx"
-import { Section, SectionProse } from "~/ui/layout"
+
+import Section from "~/ui/Section"
 
 import type { BlogPostType } from "../types"
 import BlogPostCard from "./BlogPostCard"
@@ -32,12 +33,12 @@ export default function BlogList({
   }
 
   return (
-    <SectionProse className="!pt-10">
+    <Section.Prose className="!pt-10">
       <ul className={clsx("flex gap-8 flex-col")}>
         {blogPosts.map((post) => (
           <BlogPostCard key={post.id} blogPost={post} />
         ))}
       </ul>
-    </SectionProse>
+    </Section.Prose>
   )
 }

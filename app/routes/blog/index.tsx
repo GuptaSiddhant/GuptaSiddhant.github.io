@@ -10,7 +10,7 @@ import {
 
 import { getUniqueTagsFromObjects } from "~/helpers"
 import Filter, { type FilterProps } from "~/ui/Filter"
-import { SectionProse } from "~/ui/layout"
+import Section from "~/ui/Section"
 import { H1 } from "~/ui/typography"
 
 interface LoaderData extends FilterProps {
@@ -48,7 +48,7 @@ export default function Blog(): JSX.Element {
 
   return (
     <>
-      <SectionProse id="hero">
+      <Section.Hero>
         <div>
           <H1>Blog</H1>
           <p className="mt-4 text-gray-100">
@@ -56,7 +56,7 @@ export default function Blog(): JSX.Element {
           </p>
         </div>
         <Filter {...filterProps} />
-      </SectionProse>
+      </Section.Hero>
 
       <BlogList blogPosts={blogPosts} />
     </>

@@ -9,7 +9,7 @@ import {
 } from "~/features/projects"
 
 import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
-import { SectionProse } from "~/ui/layout"
+import Section from "~/ui/Section"
 import { InternalLink } from "~/ui/Link"
 import MarkdownSection from "~/ui/MarkdownSection"
 import { H2 } from "~/ui/typography"
@@ -65,24 +65,24 @@ export default function ProjectPage(): JSX.Element {
 export function CatchBoundary() {
   const catchError = useCatch()
   return (
-    <SectionProse>
+    <Section.Prose>
       <H2>Could not find the project!</H2>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
       <pre className="whitespace-pre-wrap">
         {JSON.stringify(catchError, null, 2)}
       </pre>
-    </SectionProse>
+    </Section.Prose>
   )
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <SectionProse>
+    <Section.Prose>
       <H2>Error occurred!</H2>
       <p>{error.message}</p>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
       <pre>{error.stack}</pre>
-    </SectionProse>
+    </Section.Prose>
   )
 }
 

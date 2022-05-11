@@ -1,11 +1,10 @@
 import clsx from "clsx"
-import { forwardRef, type ForwardedRef } from "react"
 
 import type { PropsWithChildren } from "./types"
 
 export const proseWidth = clsx("md:min-w-[64ch] max-w-[64ch] mx-auto px-4")
 
-export function Section({
+export default function Section({
   children,
   className,
   elementRef,
@@ -22,14 +21,19 @@ export function Section({
   )
 }
 
-export function SectionProse({
-  children,
+Section.Hero = SectionHero
+Section.Prose = SectionProse
+
+function SectionProse({ className, ...props }: PropsWithChildren): JSX.Element {
+  return <Section {...props} className={clsx(proseWidth, className)} />
+}
+
+function SectionHero({
   className,
+  id = "hero",
   ...props
 }: PropsWithChildren): JSX.Element {
   return (
-    <Section {...props} className={clsx(proseWidth, className)}>
-      {children}
-    </Section>
+    <SectionProse {...props} id={id} className={clsx(className, "mt-24")} />
   )
 }

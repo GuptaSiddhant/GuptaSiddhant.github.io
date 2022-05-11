@@ -3,9 +3,9 @@ import { Fragment, memo, useRef } from "react"
 import MDX from "markdown-to-jsx"
 
 import Img from "./Img"
-import { Section } from "./layout"
 import { AnchorLink } from "./Link"
 import Pre from "./Pre"
+import Section from "./Section"
 import TableOfContent from "./TableOfContent"
 import { H1, H2, H3, H4, H5, H6, Paragraph } from "./typography"
 

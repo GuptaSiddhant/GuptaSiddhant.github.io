@@ -10,8 +10,8 @@ import {
 
 import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
 import MarkdownSection from "~/ui/MarkdownSection"
-import { SectionProse } from "~/ui/layout"
 import { InternalLink } from "~/ui/Link"
+import Section from "~/ui/Section"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {
@@ -48,15 +48,7 @@ export default function BlogPostPage(): JSX.Element {
   return (
     <>
       <BlogPostStickyHeader {...blogPost} />
-      <BlogPostHero {...blogPost}>
-        <a
-          href="#maincontent"
-          className="no-underline"
-          title="Jump to main content"
-        >
-          ↓
-        </a>
-      </BlogPostHero>
+      <BlogPostHero {...blogPost} />
 
       <img
         src={cover}
@@ -73,24 +65,24 @@ export default function BlogPostPage(): JSX.Element {
 export function CatchBoundary() {
   const catchError = useCatch()
   return (
-    <SectionProse>
+    <Section.Prose>
       <H2>Could not find the blog post!</H2>
       <InternalLink to="/blog">{"Back to Blog"}</InternalLink>
       <pre className="whitespace-pre-wrap">
         {JSON.stringify(catchError, null, 2)}
       </pre>
-    </SectionProse>
+    </Section.Prose>
   )
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <SectionProse>
+    <Section.Prose>
       <H2>Error occurred!</H2>
       <p>{error.message}</p>
       <InternalLink to="/blog">{"Back to Blog"}</InternalLink>
       <pre>{error.stack}</pre>
-    </SectionProse>
+    </Section.Prose>
   )
 }
 
