@@ -1,5 +1,4 @@
-import { useSubmit } from "@remix-run/react"
-
+import FilterError from "~/ui/FilterError"
 import Section from "~/ui/Section"
 
 import type { ProjectType } from "../types"
@@ -10,26 +9,8 @@ export default function ProjectsGrid({
 }: {
   projects: ProjectType[]
 }): JSX.Element {
-  const submit = useSubmit()
-
-  if (projects.length === 0) {
-    return (
-      <Section>
-        <div className="text-center text-gray-500 text-2xl italic">
-          No projects found with the given filters.
-          <br />
-          Try changing or clearing them.
-          <br />
-          <button
-            onClick={() => submit({})}
-            className="text-sm m-4 px-2 py-1 text-gray-300 hover:text-gray-200 active:text-gray-400 border-[1px] border-current rounded"
-          >
-            Clear all the filters
-          </button>
-        </div>
-      </Section>
-    )
-  }
+  if (projects.length === 0)
+    return <FilterError>No projects found with the given filters.</FilterError>
 
   return (
     <Section id="projects" className="!p-10">

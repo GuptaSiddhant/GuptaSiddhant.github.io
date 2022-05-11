@@ -7,9 +7,9 @@ import {
   BlogPostStickyHeader,
   type BlogPostType,
 } from "~/features/blog"
+import MarkdownSection from "~/features/mdx"
 
 import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
-import MarkdownSection from "~/ui/MarkdownSection"
 import { InternalLink } from "~/ui/Link"
 import Section from "~/ui/Section"
 import { H2 } from "~/ui/typography"

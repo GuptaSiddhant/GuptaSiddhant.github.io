@@ -1,13 +1,10 @@
 import clsx from "clsx"
-import { Fragment, memo, useRef } from "react"
-import MDX from "markdown-to-jsx"
+import { useRef } from "react"
 
-import Img from "./Img"
-import { AnchorLink } from "./Link"
-import Pre from "./Pre"
-import Section from "./Section"
+import Section from "~/ui/Section"
+
+import MarkdownComponent from "./MarkdownComponent"
 import TableOfContent from "./TableOfContent"
-import { H1, H2, H3, H4, H5, H6, Paragraph } from "./typography"
 
 export default function MarkdownSection({
   children,
@@ -51,37 +48,10 @@ export default function MarkdownSection({
           <summary className="font-bold text-lg">Table of contents</summary>
           <nav>{toc}</nav>
         </details>
-        <MarkdownMain>{children}</MarkdownMain>
+        <MarkdownComponent>{children}</MarkdownComponent>
       </main>
 
       <aside className="hidden xl:block" />
     </Section>
   )
 }
-
-const MarkdownMain = memo(function MarkdownMain({
-  children,
-}: {
-  children: string
-}): JSX.Element {
-  return (
-    <MDX
-      children={children}
-      options={{
-        wrapper: Fragment,
-        overrides: {
-          h1: (props) => <H1 {...props} link />,
-          h2: (props) => <H2 {...props} link />,
-          h3: (props) => <H3 {...props} link />,
-          h4: (props) => <H4 {...props} link />,
-          h5: (props) => <H5 {...props} link />,
-          h6: (props) => <H6 {...props} link />,
-          img: (props) => <Img {...props} link />,
-          pre: Pre,
-          p: Paragraph,
-          a: AnchorLink,
-        },
-      }}
-    />
-  )
-})

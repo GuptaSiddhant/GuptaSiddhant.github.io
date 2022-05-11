@@ -7,11 +7,11 @@ import {
   ProjectStickyHeader,
   type ProjectType,
 } from "~/features/projects"
+import MarkdownSection from "~/features/mdx"
 
 import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
 import Section from "~/ui/Section"
 import { InternalLink } from "~/ui/Link"
-import MarkdownSection from "~/ui/MarkdownSection"
 import { H2 } from "~/ui/typography"
 
 interface LoaderData {

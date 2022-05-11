@@ -15,6 +15,8 @@ Todo:
 - [x] Breadcrumbs
 - [x] Page loading indicator
 - [-] Command palette
+- [-] Cross-sell
+- [ ] Blog-list at Home
 - [ ] Tags in firestore
 - [ ] About (lifeline)
   - [ ] education
