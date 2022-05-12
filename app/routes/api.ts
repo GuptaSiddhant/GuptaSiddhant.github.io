@@ -11,11 +11,11 @@ import {
 } from "~/features/projects"
 import { getAllTestimonies, getTestimonyById } from "~/features/testimonials"
 
-const ApiTypes = {
-  blog: "blog",
-  projects: "projects",
-  testimonies: "testimonies",
-} as const
+enum ApiTypes {
+  Blog = "blog",
+  Projects = "projects",
+  Testimonies = "testimonies",
+}
 
 /**
  * General purpose API endpoint for all GS data.
@@ -32,7 +32,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     searchParams.get("tags")?.split(",") || searchParams.getAll("tag") || []
 
   switch (type.toLowerCase()) {
-    case ApiTypes.testimonies: {
+    case ApiTypes.Testimonies: {
       if (id) {
         return getTestimonyById(id).catch(() =>
           error(`Testimony with id '${id}' not found.`),
@@ -41,7 +41,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       return getAllTestimonies()
     }
 
-    case ApiTypes.projects: {
+    case ApiTypes.Projects: {
       if (id) {
         return getProjectById(id).catch(() =>
           error(`Project with id '${id}' not found.`),
@@ -51,7 +51,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       return filterProjectsWithQueryAndTags(projects, query, selectedTags)
     }
 
-    case "blog": {
+    case ApiTypes.Blog: {
       if (id) {
         return getBlogPostById(id).catch(() =>
           error(`Blog post with id '${id}' not found.`),

@@ -1,21 +1,31 @@
-export interface ProjectType {
-  id: string
+export interface ProjectType extends ProjectTypeMinimal {
   association?: string
+
+  icon?: string
   dateStart: string
   dateEnd?: string
-  icon?: string
   externalLink?: string
   github?: string
   links?: ProjectLink[]
   content?: string
 
-  title: string
   draft?: boolean
   featured?: boolean
-  gallery?: { url: string; alt: string }[]
   tags?: string[]
   subtitle?: string
   description?: string
+  gallery?: ProjectImage[]
+}
+
+export interface ProjectTypeMinimal {
+  id: string
+  title: string
+  cover?: string
+}
+
+export interface ProjectImage {
+  url: string
+  alt: string
 }
 
 export interface ProjectLink {

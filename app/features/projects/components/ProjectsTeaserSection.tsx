@@ -5,13 +5,13 @@ import { InternalLink } from "~/ui/Link"
 import Section, { proseWidth } from "~/ui/Section"
 import { Caption, H2 } from "~/ui/typography"
 
-import type { ProjectType } from "../types"
+import type { ProjectTypeMinimal } from "../types"
 import ProjectTeaserCard from "./ProjectTeaserCard"
 
 export default function ProjectsTeaserSection({
   projects,
 }: {
-  projects: ProjectType[]
+  projects: ProjectTypeMinimal[]
 }): JSX.Element {
   return (
     <Section id="projects">

@@ -1,36 +1,50 @@
-import { Form, useSubmit } from "@remix-run/react"
+import { type useFetcher } from "@remix-run/react"
+import { type Fetcher } from "@remix-run/react/transition"
 import { useCallback } from "react"
 
 import Input from "./Input"
+import Section from "./Section"
 import Tags from "./Tags"
+import { type PropsWithChildren } from "./types"
 
-export interface FilterProps {
-  allTags: string[]
-  selectedTags: string[]
+export interface FilterDataType {
   availableTags: string[]
   query: string
-  placeholder?: string
+  selectedTags: string[]
 }
 
-export default function Filter({
-  allTags,
-  availableTags,
-  selectedTags,
-  query,
+type FetcherWithComponents<T> = ReturnType<typeof useFetcher> & Fetcher<T>
+
+export interface FilterProps<T = any> {
+  tags: string[]
+  fetcher: FetcherWithComponents<T>
+  placeholder?: string
+  action: string
+}
+
+export default function Filter<T extends FilterDataType>({
+  fetcher: { data, submit, Form },
+  tags,
+  action,
   placeholder = "Filter...",
-}: FilterProps): JSX.Element {
-  const submit = useSubmit()
+}: FilterProps<T>): JSX.Element {
+  const { availableTags = tags, query = "", selectedTags = [] } = data || {}
 
   const TagComponent = useCallback(
-    ({ tag }: { tag: string }) => (
-      <Tags.Checkbox
-        label={tag}
-        value={tag.toLowerCase()}
-        name="tag"
-        disabled={!availableTags.includes(tag.toLowerCase())}
-        defaultChecked={selectedTags.includes(tag.toLowerCase())}
-      />
-    ),
+    ({ tag }: { tag: string }) => {
+      const isAvailable = availableTags.includes(tag.toLowerCase())
+      const isSelected = selectedTags.includes(tag.toLowerCase())
+
+      return (
+        <Tags.Checkbox
+          label={tag}
+          value={tag.toLowerCase()}
+          name="tag"
+          disabled={!isAvailable && !isSelected}
+          defaultChecked={isSelected}
+        />
+      )
+    },
     [availableTags, selectedTags],
   )
 
@@ -38,6 +52,7 @@ export default function Filter({
     <Form
       id="filter-form"
       className="relative"
+      action={action}
       onChange={(e) => submit(e.currentTarget)}
       onReset={() => submit(null)}
     >
@@ -49,7 +64,7 @@ export default function Filter({
         defaultValue={query}
       />
       <Tags.List
-        tags={allTags}
+        tags={tags}
         className="justify-center"
         TagComponent={TagComponent}
       />
@@ -62,5 +77,30 @@ export default function Filter({
         </Tags.Button>
       ) : undefined}
     </Form>
+  )
+}
+
+Filter.Error = FilterError
+
+function FilterError({
+  children = "No items found with the given filters.",
+  handleClear,
+  ...props
+}: PropsWithChildren<{ handleClear: () => void }>): JSX.Element {
+  return (
+    <Section {...props}>
+      <div className="text-center text-gray-500 text-2xl italic">
+        {children}
+        <br />
+        Try changing or clearing them.
+        <br />
+        <button
+          onClick={handleClear}
+          className="text-sm m-4 px-2 py-1 text-gray-300 hover:text-gray-200 active:text-gray-400 border-[1px] border-current rounded"
+        >
+          Clear all the filters
+        </button>
+      </div>
+    </Section>
   )
 }

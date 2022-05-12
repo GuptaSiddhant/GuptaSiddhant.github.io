@@ -8,9 +8,9 @@ import {
   title,
 } from "~/features/about"
 import {
-  getAllProjects,
+  getAllProjectsMinimal,
   ProjectsTeaserSection,
-  type ProjectType,
+  type ProjectTypeMinimal,
 } from "~/features/projects"
 import {
   getAllTestimonies,
@@ -32,12 +32,12 @@ export const meta: MetaFunction = () => {
 }
 
 interface LoaderData {
-  projects: ProjectType[]
+  projects: ProjectTypeMinimal[]
   testimonies: Testimony[]
 }
 
 export const loader: LoaderFunction = async () => {
-  const projects = await getAllProjects(5)
+  const projects = await getAllProjectsMinimal(5)
   const testimonies = await getAllTestimonies(5)
 
   return json<LoaderData>({ projects, testimonies })

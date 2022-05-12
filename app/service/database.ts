@@ -6,12 +6,15 @@ import {
   getDocs,
   query,
   setDoc,
+  where,
+  orderBy,
   type DocumentData,
   type QueryDocumentSnapshot,
   type PartialWithFieldValue,
   type QueryConstraint,
 } from "firebase/firestore"
 
+import { __IS_DEV__ } from "~/helpers"
 import { firestoreInstance } from "./firebase"
 
 /** Get firestore collection of docs and transform it to a list of required item. */
@@ -63,11 +66,18 @@ export async function setCollectionItem<
 
 // Useful re-exports
 export {
-  where,
-  orderBy,
-  startAt,
-  startAfter,
+  endAt,
+  endBefore,
   limit,
+  orderBy,
+  startAfter,
+  startAt,
+  where,
   type DocumentData,
   type QueryDocumentSnapshot,
+  type QueryConstraint,
 } from "firebase/firestore"
+
+export const draftConstraints = __IS_DEV__
+  ? []
+  : [where("draft", "!=", true), orderBy("draft")]

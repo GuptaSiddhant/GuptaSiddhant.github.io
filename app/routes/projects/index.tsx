@@ -1,49 +1,35 @@
 import { json, type LoaderFunction } from "@remix-run/node"
-import { useLoaderData } from "@remix-run/react"
+import { useFetcher, useLoaderData } from "@remix-run/react"
 
 import {
   getAllProjects,
-  filterProjectsWithQueryAndTags,
-  ProjectsGrid,
+  ProjectCard,
   type ProjectType,
 } from "~/features/projects"
+
 import { getUniqueTagsFromObjects } from "~/helpers"
-import Filter, { type FilterProps } from "~/ui/Filter"
+import Filter from "~/ui/Filter"
 import Section from "~/ui/Section"
 import { H1 } from "~/ui/typography"
 
-interface LoaderData extends FilterProps {
+import { type ProjectsAPIResponse } from "./api"
+
+interface LoaderData {
   projects: ProjectType[]
+  tags: string[]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async () => {
   const projects = await getAllProjects()
-  const allTags = getUniqueTagsFromObjects(projects)
+  const tags = getUniqueTagsFromObjects(projects)
 
-  const searchParams = new URL(request.url).searchParams
-  const query = searchParams.get("q")?.trim() || ""
-  const selectedTags = searchParams.getAll("tag") ?? []
-  const filteredProjects = filterProjectsWithQueryAndTags(
-    projects,
-    query,
-    selectedTags,
-  )
-  const availableTags = getUniqueTagsFromObjects(filteredProjects)
-
-  return json<LoaderData>({
-    projects: filteredProjects,
-
-    // filterProps
-    allTags,
-    availableTags,
-    selectedTags,
-    query,
-    placeholder: "Filter projects...",
-  })
+  return json<LoaderData>({ projects, tags })
 }
 
 export default function Projects(): JSX.Element {
-  const { projects, ...filterProps } = useLoaderData<LoaderData>()
+  const { projects, tags } = useLoaderData<LoaderData>()
+  const projectsFilterFetcher = useFetcher<ProjectsAPIResponse>()
+  const filteredProjects = projectsFilterFetcher?.data?.projects ?? projects
 
   return (
     <>
@@ -56,9 +42,27 @@ export default function Projects(): JSX.Element {
             of each one of them.
           </p>
         </div>
-        <Filter {...filterProps} />
+        <Filter
+          action="api"
+          placeholder="Filter projects..."
+          fetcher={projectsFilterFetcher}
+          tags={tags}
+        />
       </Section.Hero>
-      <ProjectsGrid projects={projects} />
+
+      {filteredProjects.length > 0 ? (
+        <Section id="projects" className="!p-10">
+          <div className="grid grid-flow-row-dense auto-rows-fr grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 min-h-[400px]">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </Section>
+      ) : (
+        <Filter.Error handleClear={() => projectsFilterFetcher.submit(null)}>
+          No projects found with the given filters.
+        </Filter.Error>
+      )}
     </>
   )
 }

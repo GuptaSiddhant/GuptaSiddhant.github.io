@@ -1,15 +1,13 @@
 import clsx from "clsx"
 import { Link } from "@remix-run/react"
 
-import type { ProjectType } from "../types"
+import type { ProjectTypeMinimal } from "../types"
 
 export default function ProjectTeaserCard({
   id,
   title,
-  gallery,
-}: ProjectType): JSX.Element {
-  const cover = gallery?.[0].url
-
+  cover,
+}: ProjectTypeMinimal): JSX.Element {
   return (
     <Link to={"projects/" + id} className="group" prefetch="intent">
       <li

@@ -1,53 +1,12 @@
-import { cleanupText, __IS_DEV__ } from "~/helpers"
-import {
-  getCollection,
-  getCollectionItem,
-  setCollectionItem,
-  orderBy,
-  limit,
-  where,
-  type QueryDocumentSnapshot,
-} from "~/service/database"
+import { cleanupText } from "~/helpers"
+import { type QueryDocumentSnapshot } from "~/service/database"
 import { convertImageLinksInText, toImageUrl } from "~/service/image"
 
-import type { ProjectType } from "./types"
+import type { ProjectType, ProjectTypeMinimal } from "../types"
 
-const COLLECTION_NAME = "projects"
-
-export async function getAllProjects(
-  limitBy: number = 100,
-): Promise<ProjectType[]> {
-  const draftConstraints = __IS_DEV__ ? [] : [where("draft", "!=", true),orderBy("draft")]
-
-  return getCollection(
-    COLLECTION_NAME,
-    transformDocToProjectLimited,
-    ...draftConstraints,
-    orderBy("dateStart", "desc"),
-    limit(limitBy),
-  )
-}
-
-export async function getProjectById(
-  itemId: string,
-): Promise<ProjectType | undefined> {
-  return getCollectionItem(
-    COLLECTION_NAME,
-    itemId,
-    transformDocToProjectWithDetails,
-  )
-}
-
-export async function setProjectById(
-  itemId: string,
-  data: Partial<ProjectType>,
-) {
-  return setCollectionItem(COLLECTION_NAME, itemId, data)
-}
-
-// Helpers
-
-async function transformDocToProjectLimited(docSnap: QueryDocumentSnapshot) {
+export async function transformDocToProjectLimited(
+  docSnap: QueryDocumentSnapshot,
+): Promise<ProjectType> {
   const project = docSnapToProject(docSnap)
 
   const [icon, gallery] = await Promise.all([
@@ -63,7 +22,7 @@ async function transformDocToProjectLimited(docSnap: QueryDocumentSnapshot) {
   }
 }
 
-async function transformDocToProjectWithDetails(
+export async function transformDocToProjectWithDetails(
   docSnap: QueryDocumentSnapshot,
 ): Promise<ProjectType> {
   const project = docSnapToProject(docSnap)
@@ -79,6 +38,19 @@ async function transformDocToProjectWithDetails(
     icon,
     gallery,
     content: cleanupText(content),
+  }
+}
+
+export async function transformDocToProjectMinimal(
+  docSnap: QueryDocumentSnapshot,
+): Promise<ProjectTypeMinimal> {
+  const data = docSnap.data()
+  const coverUrl = data.gallery?.[0]?.url
+
+  return {
+    id: docSnap.id,
+    title: data.title,
+    cover: coverUrl ? await toImageUrl(coverUrl) : "",
   }
 }
 
