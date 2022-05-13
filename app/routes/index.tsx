@@ -13,6 +13,11 @@ import {
   type ProjectTeaserType,
 } from "~/features/projects"
 import {
+  getAllBlogPosts,
+  BlogTeaserSection,
+  type BlogPostType,
+} from "~/features/blog"
+import {
   getAllTestimonies,
   TestimonialsSection,
   type Testimony,
@@ -33,23 +38,26 @@ export const meta: MetaFunction = () => {
 
 interface LoaderData {
   projects: ProjectTeaserType[]
+  blogPosts: BlogPostType[]
   testimonies: Testimony[]
 }
 
 export const loader: LoaderFunction = async () => {
   const projects = await getProjectList(5)
+  const blogPosts = await getAllBlogPosts(3)
   const testimonies = await getAllTestimonies(5)
 
-  return json<LoaderData>({ projects, testimonies })
+  return json<LoaderData>({ projects, blogPosts, testimonies })
 }
 
 export default function Index() {
-  const { projects, testimonies } = useLoaderData<LoaderData>()
+  const { projects, blogPosts, testimonies } = useLoaderData<LoaderData>()
 
   return (
     <>
       <HeroSection />
       <ProjectsTeaserSection projects={projects} />
+      <BlogTeaserSection blogPosts={blogPosts} />
       <TestimonialsSection testimonies={testimonies} />
     </>
   )

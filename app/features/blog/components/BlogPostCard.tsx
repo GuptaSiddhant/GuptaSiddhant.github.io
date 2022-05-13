@@ -7,8 +7,10 @@ import type { BlogPostType } from "../types"
 
 export default function BlogPostCard({
   blogPost,
+  teaser,
 }: {
   blogPost: BlogPostType
+  teaser?: boolean
 }): JSX.Element {
   const { id, title, subtitle, description, date, gallery } = blogPost
   const cover = gallery?.[0].url
@@ -36,7 +38,7 @@ export default function BlogPostCard({
           ) : null}
         </aside>
 
-        <main className="p-4 flex-1">
+        <main className="p-4 flex-1 self-center">
           <div className="font-bold text-xl my-2">{title}</div>
           {subtitle ? (
             <div className="italic text-base text-gray-200">{subtitle}</div>
@@ -47,14 +49,16 @@ export default function BlogPostCard({
             </time>
           ) : null}
 
-          <div className="mt-4 text-base">
-            {description ? (
-              <span className="text-gray-300">{description} </span>
-            ) : null}
-            <span className="text-blue-400 whitespace-nowrap">
-              {"Read post >"}
-            </span>
-          </div>
+          {teaser ? null : (
+            <div className="mt-4 text-base">
+              {description ? (
+                <span className="text-gray-300">{description} </span>
+              ) : null}
+              <span className="text-blue-400 whitespace-nowrap">
+                {"Read post >"}
+              </span>
+            </div>
+          )}
         </main>
       </article>
     </Link>

@@ -25,7 +25,7 @@ export default function ProjectsTeaserSection({
         {children ?? (
           <>
             <Caption>
-              <Link to="#projects">Projects</Link>
+              <Link to={"#" + id}>Projects</Link>
             </Caption>
             <H2 className="!p-0">Stuff I've been tinkering with</H2>
             <InternalLink to="/projects">View all projects</InternalLink>

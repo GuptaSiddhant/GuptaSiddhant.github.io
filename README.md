@@ -17,7 +17,7 @@ Todo:
 - [x] Feature-flags
 - [x] Analytics (projects)
 - [-] Command palette
-- [ ] Blog-list at Home
+- [-] Blog-list at Home
 - [ ] Tags in firestore
 - [ ] About (lifeline)
   - [ ] education
