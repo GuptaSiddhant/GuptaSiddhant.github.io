@@ -11,11 +11,12 @@ Todo:
 - [x] Blog
 - [x] Firebase/Storage
 - [x] General API
-- [x] Feature-flags
 - [x] Breadcrumbs
 - [x] Page loading indicator
+- [x] Cross-sell
+- [x] Feature-flags
+- [x] Analytics (projects)
 - [-] Command palette
-- [-] Cross-sell
 - [ ] Blog-list at Home
 - [ ] Tags in firestore
 - [ ] About (lifeline)

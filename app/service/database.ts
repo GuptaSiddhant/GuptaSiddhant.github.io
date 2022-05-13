@@ -1,4 +1,5 @@
 import {
+  getFirestore,
   addDoc,
   collection,
   doc,
@@ -15,7 +16,9 @@ import {
 } from "firebase/firestore"
 
 import { __IS_DEV__ } from "~/helpers"
-import { firestoreInstance } from "./firebase"
+import firebaseApp from "./firebase"
+
+const firestore = getFirestore(firebaseApp)
 
 /** Get firestore collection of docs and transform it to a list of required item. */
 export async function getCollection<T = DocumentData>(
@@ -23,10 +26,7 @@ export async function getCollection<T = DocumentData>(
   transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T | Promise<T>,
   ...constraints: QueryConstraint[]
 ): Promise<T[]> {
-  const queryRef = query(
-    collection(firestoreInstance, collectionName),
-    ...constraints,
-  )
+  const queryRef = query(collection(firestore, collectionName), ...constraints)
   const querySnapshot = await getDocs(queryRef)
 
   return Promise.all(querySnapshot.docs.map(transformDocumentSnapshot))
@@ -38,7 +38,7 @@ export async function getCollectionItem<T = DocumentData>(
   itemId: string,
   transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T | Promise<T>,
 ): Promise<T> {
-  const docRef = doc(firestoreInstance, collectionName, itemId)
+  const docRef = doc(firestore, collectionName, itemId)
   const docSnapshot = await getDoc(docRef)
 
   if (!docSnapshot.exists())
@@ -52,13 +52,13 @@ export async function setCollectionItem<
   T = PartialWithFieldValue<DocumentData>,
 >(collectionName: string, itemId: string, data: T): Promise<string> {
   if (itemId) {
-    const docRef = doc(firestoreInstance, collectionName, itemId)
+    const docRef = doc(firestore, collectionName, itemId)
     await setDoc(docRef, data, { merge: true })
 
     return itemId
   }
 
-  const collectionRef = collection(firestoreInstance, collectionName)
+  const collectionRef = collection(firestore, collectionName)
   const docRef = await addDoc(collectionRef, data)
 
   return docRef.id

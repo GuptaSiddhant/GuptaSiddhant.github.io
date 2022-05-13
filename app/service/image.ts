@@ -1,7 +1,7 @@
 import { getFileURLWithPath } from "./storage"
 
-const MarkdownImageRegex =
-  /!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g
+// const MarkdownImageRegex =
+//   /!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/g
 // Simpler regex to extract image link from markdown
 const MarkdownImageRegex2 = /!\[[^\]]*\]\([^\)]*\)?\)/g
 

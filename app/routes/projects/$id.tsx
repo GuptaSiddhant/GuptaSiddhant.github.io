@@ -7,6 +7,7 @@ import {
   ProjectHero,
   ProjectStickyHeader,
   ProjectsTeaserSection,
+  useLogViewProjectEvent,
   type ProjectType,
   type ProjectTeaserType,
 } from "~/features/projects"
@@ -49,6 +50,8 @@ export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
 export default function ProjectPage(): JSX.Element {
   const { project, crossSellProjects } = useLoaderData<LoaderData>()
   const cover = project?.gallery?.[0]?.url
+
+  useLogViewProjectEvent(project)
 
   return (
     <>

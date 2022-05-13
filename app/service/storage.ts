@@ -1,4 +1,5 @@
 import {
+  getStorage,
   deleteObject,
   getBlob,
   getDownloadURL,
@@ -15,10 +16,12 @@ import {
   type UploadTask,
 } from "firebase/storage"
 
-import { storageInstance } from "./firebase"
+import firebaseApp from "./firebase"
+
+const storage = getStorage(firebaseApp)
 
 function getRef(path: string): StorageReference {
-  return ref(storageInstance, path)
+  return ref(storage, path)
 }
 
 export async function getFileURLWithPath(path: string): Promise<string> {
