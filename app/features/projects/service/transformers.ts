@@ -2,9 +2,9 @@ import { cleanupText } from "~/helpers"
 import { type QueryDocumentSnapshot } from "~/service/database"
 import { convertImageLinksInText, toImageUrl } from "~/service/image"
 
-import type { ProjectType, ProjectTypeMinimal } from "../types"
+import type { ProjectType, ProjectTeaserType } from "../types"
 
-export async function transformDocToProjectLimited(
+export async function transformDocToProject(
   docSnap: QueryDocumentSnapshot,
 ): Promise<ProjectType> {
   const project = docSnapToProject(docSnap)
@@ -18,11 +18,12 @@ export async function transformDocToProjectLimited(
     ...project,
     icon,
     gallery,
+    cover: gallery?.[0]?.url,
     content: undefined,
   }
 }
 
-export async function transformDocToProjectWithDetails(
+export async function transformDocToProjectWithContent(
   docSnap: QueryDocumentSnapshot,
 ): Promise<ProjectType> {
   const project = docSnapToProject(docSnap)
@@ -37,21 +38,20 @@ export async function transformDocToProjectWithDetails(
     ...project,
     icon,
     gallery,
+    cover: gallery?.[0]?.url,
     content: cleanupText(content),
   }
 }
 
-export async function transformDocToProjectMinimal(
-  docSnap: QueryDocumentSnapshot,
-): Promise<ProjectTypeMinimal> {
-  const data = docSnap.data()
-  const coverUrl = data.gallery?.[0]?.url
+export function transformProjectToProjectTeaser(
+  project: ProjectType,
+): ProjectTeaserType {
+  const dateStart =
+    typeof project.dateStart === "string"
+      ? project.dateStart
+      : (project.dateStart as any).toDate()
 
-  return {
-    id: docSnap.id,
-    title: data.title,
-    cover: coverUrl ? await toImageUrl(coverUrl) : "",
-  }
+  return { ...project, dateStart }
 }
 
 function docSnapToProject(docSnap: QueryDocumentSnapshot): ProjectType {

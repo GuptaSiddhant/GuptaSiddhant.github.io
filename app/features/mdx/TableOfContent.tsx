@@ -1,3 +1,4 @@
+import { useLocation } from "@remix-run/react"
 import { useEffect, useState, useMemo } from "react"
 
 import createTOC from "./createTOC"
@@ -10,15 +11,16 @@ export default function TableOfContent({
   maxLevel = 3,
 }: TableOfContentProps): JSX.Element {
   const [tableOfContents, setTableOfContents] = useState<TOC[]>([])
+  const { key } = useLocation()
 
   useEffect(() => {
     const section = sectionRef?.current
-    if (section) {
+    if (section && key) {
       const allElementsWithIds = [...section.querySelectorAll("[id]")]
       const toc = createTOC(allElementsWithIds)
       setTableOfContents(toc)
     }
-  }, [sectionRef])
+  }, [sectionRef, key])
 
   const highestLevel = useMemo(
     () =>

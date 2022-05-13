@@ -38,7 +38,7 @@ export default function useOffsetScroll(
         return dispatch({ scrollTop, isOffsetScrolled })
       }
 
-      const scrollDirection = scrollTop > lastScrollTop ? "down" : "up"
+      const scrollDirection = scrollTop >= lastScrollTop ? "down" : "up"
       dispatch({ scrollTop, isOffsetScrolled, scrollDirection })
 
       lastScrollTop = scrollTop > 0 ? scrollTop : 0

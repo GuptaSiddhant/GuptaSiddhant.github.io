@@ -5,22 +5,32 @@ import { InternalLink } from "~/ui/Link"
 import Section, { proseWidth } from "~/ui/Section"
 import { Caption, H2 } from "~/ui/typography"
 
-import type { ProjectTypeMinimal } from "../types"
+import type { ProjectTeaserType } from "../types"
 import ProjectTeaserCard from "./ProjectTeaserCard"
 
 export default function ProjectsTeaserSection({
+  id = "projects",
   projects,
+  children,
 }: {
-  projects: ProjectTypeMinimal[]
-}): JSX.Element {
+  id?: string
+  projects: ProjectTeaserType[]
+  children?: React.ReactNode
+}): JSX.Element | null {
+  if (projects.length === 0) return null
+
   return (
-    <Section id="projects">
+    <Section id={id}>
       <div className={clsx("flex flex-col gap-4", proseWidth)}>
-        <Caption>
-          <Link to="#projects">Projects</Link>
-        </Caption>
-        <H2 className="!p-0">Stuff I've been tinkering with</H2>
-        <InternalLink to="/projects">View all projects</InternalLink>
+        {children ?? (
+          <>
+            <Caption>
+              <Link to="#projects">Projects</Link>
+            </Caption>
+            <H2 className="!p-0">Stuff I've been tinkering with</H2>
+            <InternalLink to="/projects">View all projects</InternalLink>
+          </>
+        )}
       </div>
 
       <ul

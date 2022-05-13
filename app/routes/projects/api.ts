@@ -1,8 +1,9 @@
-import type { LoaderFunction } from "@remix-run/node"
+import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import {
   filterProjectsWithQueryAndTags,
   getAllProjects,
   getProjectById,
+  updateProjectList,
   type ProjectType,
 } from "~/features/projects"
 import { getUniqueTagsFromObjects } from "~/helpers"
@@ -39,6 +40,18 @@ export const loader: LoaderFunction = async ({ request }) => {
     availableTags,
     query,
     selectedTags,
+  }
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  const { searchParams } = new URL(request.url)
+  const type = searchParams.get("type")
+
+  switch (type) {
+    case "updateProjectList":
+      return updateProjectList()
+    default:
+      return error(`Unknown action type '${type}'`)
   }
 }
 

@@ -1,6 +1,7 @@
 import clsx from "clsx"
 import { type ReactNode } from "react"
 
+import { InternalLink } from "~/ui/Link"
 import Section from "~/ui/Section"
 import Tags from "~/ui/Tags"
 import { H1 } from "~/ui/typography"
@@ -17,6 +18,8 @@ export default function BlogPostHero({
 }: BlogPostType & { children?: ReactNode }): JSX.Element {
   return (
     <Section.Hero>
+      <InternalLink to="/blog">{"← Blog"}</InternalLink>
+
       <div className={clsx("flex items-center justify-between")}>
         <div>
           <H1>{title}</H1>

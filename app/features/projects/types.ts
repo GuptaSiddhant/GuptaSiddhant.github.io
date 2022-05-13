@@ -1,15 +1,13 @@
-export interface ProjectType extends ProjectTypeMinimal {
+export interface ProjectType extends ProjectTeaserType {
   association?: string
 
   icon?: string
-  dateStart: string
   dateEnd?: string
   externalLink?: string
   github?: string
   links?: ProjectLink[]
   content?: string
 
-  draft?: boolean
   featured?: boolean
   tags?: string[]
   subtitle?: string
@@ -17,10 +15,12 @@ export interface ProjectType extends ProjectTypeMinimal {
   gallery?: ProjectImage[]
 }
 
-export interface ProjectTypeMinimal {
+export interface ProjectTeaserType {
   id: string
   title: string
   cover?: string
+  dateStart: string
+  draft?: boolean
 }
 
 export interface ProjectImage {

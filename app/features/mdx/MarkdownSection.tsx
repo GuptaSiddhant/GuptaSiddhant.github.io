@@ -16,24 +16,23 @@ export default function MarkdownSection({
   const sectionRef = useRef<HTMLElement>(null)
   if (!children) return null
 
-  const toc = (
-    <TableOfContent
-      sectionRef={sectionRef}
-      className="list-none"
-      maxLevel={4}
-    />
-  )
-
   return (
     <Section
       id={id}
       className={clsx(
         "relative rounded mx-auto md:w-max",
         "md:!grid lg:grid-cols-[200px_auto] xl:grid-cols-[200px_1fr_200px]",
+        "border-b-2 border-gray-500",
       )}
     >
       <aside className={clsx("text-sm", "hidden lg:block")}>
-        <nav className="sticky top-16 overflow-visible">{toc}</nav>
+        <section className="sticky top-16 overflow-visible">
+          <TableOfContent
+            sectionRef={sectionRef}
+            className="list-none"
+            maxLevel={4}
+          />
+        </section>
       </aside>
 
       <main
@@ -46,7 +45,11 @@ export default function MarkdownSection({
           open
         >
           <summary className="font-bold text-lg">Table of contents</summary>
-          <nav>{toc}</nav>
+          <TableOfContent
+            sectionRef={sectionRef}
+            className="list-none"
+            maxLevel={4}
+          />
         </details>
         <MarkdownComponent>{children}</MarkdownComponent>
       </main>

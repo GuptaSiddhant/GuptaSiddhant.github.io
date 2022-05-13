@@ -4,6 +4,7 @@ import { useFetcher, useLoaderData } from "@remix-run/react"
 import {
   getAllProjects,
   ProjectCard,
+  updateProjectList,
   type ProjectType,
 } from "~/features/projects"
 

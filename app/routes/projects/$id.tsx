@@ -6,9 +6,9 @@ import {
   getCrossSellProjects,
   ProjectHero,
   ProjectStickyHeader,
-  ProjectsCrossSellSection,
+  ProjectsTeaserSection,
   type ProjectType,
-  type ProjectTypeMinimal,
+  type ProjectTeaserType,
 } from "~/features/projects"
 import MarkdownSection from "~/features/mdx"
 
@@ -19,7 +19,7 @@ import { H2 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType
-  crossSellProjects: ProjectTypeMinimal[]
+  crossSellProjects: ProjectTeaserType[]
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -53,6 +53,7 @@ export default function ProjectPage(): JSX.Element {
   return (
     <>
       <ProjectStickyHeader {...project} />
+
       <ProjectHero {...project} />
       <img
         src={cover}
@@ -61,7 +62,11 @@ export default function ProjectPage(): JSX.Element {
         loading="eager"
       />
       <MarkdownSection>{JSON.parse(project.content || '""')}</MarkdownSection>
-      <ProjectsCrossSellSection projects={crossSellProjects} />
+
+      <ProjectsTeaserSection projects={crossSellProjects}>
+        <H2 className="!p-0">There are some others...</H2>
+        <InternalLink to="/projects">View all projects</InternalLink>
+      </ProjectsTeaserSection>
     </>
   )
 }

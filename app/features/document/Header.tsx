@@ -26,7 +26,7 @@ export default function Header(): JSX.Element {
 
   return (
     <header
-      id="header"
+      data-header
       ref={headerRef}
       className={clsx(
         "fixed top-0 left-0 right-0 z-40 bg-black",
