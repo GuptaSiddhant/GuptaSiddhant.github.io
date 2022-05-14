@@ -4,9 +4,9 @@ import {
   filterBlogPostsWithQueryAndTags,
   getBlogPostById,
   type BlogPostType,
-} from "~/features/blog"
-import { getUniqueTagsFromObjects } from "~/helpers"
-import type { FilterDataType } from "~/ui/Filter"
+} from "f-blog"
+import { getUniqueTagsFromObjects } from "helpers"
+import type { FilterDataType } from "ui/Filter"
 
 /**
  * General purpose API endpoint for all GS data.

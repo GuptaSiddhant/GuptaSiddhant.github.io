@@ -1,6 +1,6 @@
-import type { CommandPaletteEntry, CommandPaletteState } from "../types"
+import type { SearchEntry, SearchState } from "../types"
 
-export const defaultEntries: CommandPaletteEntry[] = [
+export const defaultEntries: SearchEntry[] = [
   {
     label: "Blog",
     shortcut: ["b"],
@@ -24,7 +24,7 @@ export const defaultEntries: CommandPaletteEntry[] = [
   },
 ]
 
-export const defaultState: CommandPaletteState = {
+export const defaultState: SearchState = {
   entries: defaultEntries,
   open: false,
 }

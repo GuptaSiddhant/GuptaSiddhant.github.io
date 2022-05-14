@@ -2,7 +2,7 @@ import clsx from "clsx"
 import QuoteStartIcon from "remixicon-react/DoubleQuotesLIcon"
 import QuoteEndIcon from "remixicon-react/DoubleQuotesRIcon"
 
-import DateTime from "~/ui/DateTime"
+import DateTime from "ui/DateTime"
 
 import { type Testimony } from "../types"
 

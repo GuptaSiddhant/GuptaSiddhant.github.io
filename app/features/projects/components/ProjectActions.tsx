@@ -2,7 +2,7 @@ import ShareIcon from "remixicon-react/ShareForwardLineIcon"
 import StarLineIcon from "remixicon-react/StarLineIcon"
 import EditIcon from "remixicon-react/EditLineIcon"
 
-import { InternalLink } from "~/ui/Link"
+import { InternalLink } from "ui/Link"
 
 export default function ProjectActions() {
   return (

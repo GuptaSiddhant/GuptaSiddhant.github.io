@@ -1,6 +1,6 @@
-import { cleanupText } from "~/helpers"
-import { type QueryDocumentSnapshot } from "~/service/database"
-import { convertImageLinksInText, toImageUrl } from "~/service/image"
+import { cleanupText } from "helpers"
+import { type QueryDocumentSnapshot } from "service/database"
+import { convertImageLinksInText, toImageUrl } from "service/image"
 
 import type { ProjectType, ProjectTeaserType } from "../types"
 

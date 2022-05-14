@@ -1,4 +1,4 @@
-import { __IS_DEV__ } from "~/helpers"
+import { __IS_DEV__ } from "helpers"
 import {
   getCollection,
   getCollectionItem,
@@ -7,7 +7,7 @@ import {
   limit,
   draftConstraints,
   type QueryConstraint,
-} from "~/service/database"
+} from "service/database"
 
 import type { ProjectType, ProjectTeaserType } from "../types"
 import {
@@ -74,9 +74,7 @@ export async function setProjectById(
 }
 
 export async function updateProjectList() {
-  const data: Record<string, ProjectTeaserType> = (
-    await getAllProjects(100, [])
-  )
+  const data: Record<string, ProjectTeaserType> = (await getAllProjects(100))
     .map(({ id, title, cover, dateStart, draft }) => ({
       id,
       title,

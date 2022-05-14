@@ -5,7 +5,7 @@ import {
   type Item,
 } from "firebase/analytics"
 
-import { __IS_DEV__ } from "~/helpers"
+import { __IS_DEV__ } from "helpers"
 import firebaseApp from "./firebase"
 
 async function logCustomEvent(

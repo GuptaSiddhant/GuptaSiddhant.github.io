@@ -6,15 +6,15 @@ import {
 } from "@remix-run/node"
 import { Outlet, useCatch, useLoaderData } from "@remix-run/react"
 
-import { fullName } from "./features/about"
-import Document, { linkDescriptors } from "./features/document"
+import { fullName } from "f-about"
+import Document, { linkDescriptors } from "f-document"
 import {
   getAllFeatureFlags,
   FeatureFlagsContext,
   type FeatureFlags,
-} from "./features/featureFlags"
-import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
-import Section from "~/ui/Section"
+} from "f-featureFlags"
+import { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
+import Section from "ui/Section"
 import { H1 } from "./ui/typography"
 
 export function links(): LinkDescriptor[] {

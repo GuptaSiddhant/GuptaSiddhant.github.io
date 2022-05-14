@@ -3,13 +3,13 @@ import {
   getAllBlogPosts,
   filterBlogPostsWithQueryAndTags,
   getBlogPostById,
-} from "~/features/blog"
+} from "f-blog"
 import {
   filterProjectsWithQueryAndTags,
   getAllProjects,
   getProjectById,
-} from "~/features/projects"
-import { getAllTestimonies, getTestimonyById } from "~/features/testimonials"
+} from "f-projects"
+import { getAllTestimonies, getTestimonyById } from "f-testimonials"
 
 enum ApiTypes {
   Blog = "blog",

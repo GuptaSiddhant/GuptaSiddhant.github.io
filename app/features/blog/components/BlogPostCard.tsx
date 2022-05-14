@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react"
 import clsx from "clsx"
 
-import { formatDate } from "~/helpers/format"
+import { formatDate } from "helpers/format"
 
 import type { BlogPostType } from "../types"
 

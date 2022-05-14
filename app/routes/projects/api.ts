@@ -5,10 +5,10 @@ import {
   getProjectById,
   updateProjectList,
   type ProjectType,
-} from "~/features/projects"
-import { getUniqueTagsFromObjects } from "~/helpers"
+} from "f-projects"
+import { getUniqueTagsFromObjects } from "helpers"
 
-import { type FilterDataType } from "~/ui/Filter"
+import { type FilterDataType } from "ui/Filter"
 
 /** Projects API endpoint. */
 export const loader: LoaderFunction = async ({ request }) => {

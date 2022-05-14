@@ -1,10 +1,10 @@
 import { Fragment, memo } from "react"
 import MDX from "markdown-to-jsx"
 
-import Img from "~/ui/Img"
-import { AnchorLink } from "~/ui/Link"
-import Pre from "~/ui/Pre"
-import { H1, H2, H3, H4, H5, H6, Paragraph } from "~/ui/typography"
+import Img from "ui/Img"
+import { AnchorLink } from "ui/Link"
+import Pre from "ui/Pre"
+import { H1, H2, H3, H4, H5, H6, Paragraph } from "ui/typography"
 
 const MarkdownComponent = memo(function MarkdownMain({
   children,

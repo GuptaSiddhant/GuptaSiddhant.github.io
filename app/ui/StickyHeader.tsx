@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { type ReactNode } from "react"
 import { CSS_VAR_HEADER_HEIGHT } from "~/constants"
-import useOffsetScroll from "~/helpers/useOffsetScroll"
+import useOffsetScroll from "helpers/useOffsetScroll"
 
 export default function StickyHeader({
   children,

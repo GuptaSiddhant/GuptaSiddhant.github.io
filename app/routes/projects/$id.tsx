@@ -10,13 +10,13 @@ import {
   useLogViewProjectEvent,
   type ProjectType,
   type ProjectTeaserType,
-} from "~/features/projects"
-import MarkdownSection from "~/features/mdx"
+} from "f-projects"
+import MarkdownSection from "f-mdx"
 
-import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
-import Section from "~/ui/Section"
-import { InternalLink } from "~/ui/Link"
-import { H2 } from "~/ui/typography"
+import { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
+import Section from "ui/Section"
+import { InternalLink } from "ui/Link"
+import { H2 } from "ui/typography"
 
 interface LoaderData {
   project: ProjectType

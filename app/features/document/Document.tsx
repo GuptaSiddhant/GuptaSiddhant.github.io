@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react"
 
-import CommandPalette from "~/features/commandPalette"
+import Search from "f-search"
 import Header from "./Header"
 import Footer from "./Footer"
 import Progress from "./Progress"
@@ -28,7 +28,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
         <script src={intlListFormatPolyfillScript} />
       </head>
       <body className={clsx("m-0 p-0", "bg-black text-gray-100")}>
-        <CommandPalette>
+        <Search>
           <Progress />
           <Header />
           <main
@@ -42,7 +42,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
             {children}
           </main>
           <Footer />
-        </CommandPalette>
+        </Search>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}

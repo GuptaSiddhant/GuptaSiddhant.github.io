@@ -1,8 +1,8 @@
 import type { LinkDescriptor } from "@remix-run/node"
 
-import globalStyles from "~/styles/index.css"
-import fontStyles from "~/styles/font.css"
-import tailwindStyles from "~/styles/tailwind.css"
+import globalStyles from "styles/index.css"
+import fontStyles from "styles/font.css"
+import tailwindStyles from "styles/tailwind.css"
 
 // https://remix.run/api/app#links
 export const linkDescriptors: LinkDescriptor[] = [

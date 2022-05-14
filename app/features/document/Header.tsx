@@ -3,8 +3,8 @@ import clsx from "clsx"
 import { useRef } from "react"
 
 import { CSS_VAR_HEADER_HEIGHT } from "~/constants"
-import { fullName } from "~/features/about"
-import useEventListener from "~/helpers/useEventListener"
+import { fullName } from "f-about"
+import useEventListener from "helpers/useEventListener"
 import Navigation from "./Navigation"
 import RoundedCorner from "./Rounded"
 

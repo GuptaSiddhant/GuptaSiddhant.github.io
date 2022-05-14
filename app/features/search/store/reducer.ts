@@ -1,9 +1,9 @@
-import type { CommandPaletteState, CommandPaletteAction } from "../types"
+import type { SearchState, SearchAction } from "../types"
 
 export default function reducer(
-  state: CommandPaletteState,
-  action: CommandPaletteAction,
-): CommandPaletteState {
+  state: SearchState,
+  action: SearchAction,
+): SearchState {
   switch (action.type) {
     case "TOGGLE_OPEN": {
       const open = action.payload ?? !state.open

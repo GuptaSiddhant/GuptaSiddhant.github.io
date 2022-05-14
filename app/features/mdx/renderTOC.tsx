@@ -1,6 +1,6 @@
 import clsx from "clsx"
 
-import { AnchorLink } from "~/ui/Link"
+import { AnchorLink } from "ui/Link"
 
 import type { TOC } from "./types"
 

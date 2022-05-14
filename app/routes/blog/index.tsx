@@ -4,13 +4,14 @@ import { useFetcher, useLoaderData } from "@remix-run/react"
 import {
   getAllBlogPosts,
   BlogPostCard,
+  updateBlogList,
   type BlogPostType,
-} from "~/features/blog"
+} from "f-blog"
 
-import { getUniqueTagsFromObjects } from "~/helpers"
-import Filter from "~/ui/Filter"
-import Section from "~/ui/Section"
-import { H1 } from "~/ui/typography"
+import { getUniqueTagsFromObjects } from "helpers"
+import Filter from "ui/Filter"
+import Section from "ui/Section"
+import { H1 } from "ui/typography"
 
 import { type BlogPostsAPIResponse } from "./api"
 
@@ -19,9 +20,10 @@ interface LoaderData {
   tags: string[]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async () => {
   const blogPosts = await getAllBlogPosts()
   const tags = getUniqueTagsFromObjects(blogPosts)
+  await updateBlogList()
 
   return json<LoaderData>({ blogPosts, tags })
 }

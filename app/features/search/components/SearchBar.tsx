@@ -3,27 +3,24 @@ import clsx from "clsx"
 import { useEffect, useRef, useState } from "react"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
-import { InputWithRef } from "~/ui/Input"
+import { InputWithRef } from "ui/Input"
 
-import {
-  useCommandPaletteDispatch,
-  useCommandPaletteState,
-  closePalette,
-} from "../store"
+import { useSearchDispatch, useSearchState, closeSearchBar } from "../store"
 import usePerformEntryAction from "../hooks/usePerformEntryAction"
 import useCommandKeys from "../hooks/useCommandKeys"
-import Button from "~/ui/Button"
+import Button from "ui/Button"
 
-export default function CommandPalette() {
-  const { entries, open } = useCommandPaletteState()
+export default function SearchBar() {
+  const { entries, open } = useSearchState()
+  const dispatch = useSearchDispatch()
+
   const inputRef = useRef<HTMLInputElement>(null)
   const [term, setTerm] = useState("")
-  const dispatch = useCommandPaletteDispatch()
   const performEntryAction = usePerformEntryAction()
   useCommandKeys()
 
   function close() {
-    dispatch(closePalette())
+    dispatch(closeSearchBar())
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -39,7 +36,7 @@ export default function CommandPalette() {
       isOpen={open}
       onDismiss={close}
       initialFocusRef={inputRef}
-      aria-label="Command Palette"
+      aria-label="SearchBar"
       className={clsx(
         "animate-appear relative",
         "bg-gray-800 p-4 rounded-lg mt-[10vh] mx-4 md:mx-auto",

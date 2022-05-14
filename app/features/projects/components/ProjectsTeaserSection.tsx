@@ -1,9 +1,9 @@
 import clsx from "clsx"
 import { Link } from "@remix-run/react"
 
-import { InternalLink } from "~/ui/Link"
-import Section, { proseWidth } from "~/ui/Section"
-import { Caption, H2 } from "~/ui/typography"
+import { InternalLink } from "ui/Link"
+import Section, { proseWidth } from "ui/Section"
+import { Caption, H2 } from "ui/typography"
 
 import type { ProjectTeaserType } from "../types"
 import ProjectTeaserCard from "./ProjectTeaserCard"

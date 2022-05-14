@@ -1,21 +1,21 @@
 import { useNavigate } from "@remix-run/react"
 import { useCallback } from "react"
 
-import { closePalette, useCommandPaletteDispatch } from "../store"
-import type { CommandPaletteEntry } from "../types"
+import { closeSearchBar, useSearchDispatch } from "../store"
+import type { SearchEntry } from "../types"
 
 export default function usePerformEntryAction() {
-  const dispatch = useCommandPaletteDispatch()
+  const dispatch = useSearchDispatch()
   const navigate = useNavigate()
 
   return useCallback(
-    ({ perform, href }: CommandPaletteEntry) => {
+    ({ perform, href }: SearchEntry) => {
       perform?.()
       if (href) {
         if (!href.startsWith("http")) navigate(href)
         else window.open(href, "_blank")
       }
-      dispatch(closePalette())
+      dispatch(closeSearchBar())
     },
     [navigate, dispatch],
   )

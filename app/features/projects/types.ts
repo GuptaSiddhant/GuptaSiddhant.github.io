@@ -1,6 +1,5 @@
 export interface ProjectType extends ProjectTeaserType {
   association?: string
-
   icon?: string
   dateEnd?: string
   externalLink?: string
@@ -12,7 +11,7 @@ export interface ProjectType extends ProjectTeaserType {
   tags?: string[]
   subtitle?: string
   description?: string
-  gallery?: ProjectImage[]
+  gallery?: { url: string; alt: string }[]
 }
 
 export interface ProjectTeaserType {
@@ -22,12 +21,6 @@ export interface ProjectTeaserType {
   dateStart: string
   draft?: boolean
 }
-
-export interface ProjectImage {
-  url: string
-  alt: string
-}
-
 export interface ProjectLink {
   url: string
   title?: string

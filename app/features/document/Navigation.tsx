@@ -3,12 +3,12 @@ import GithubIcon from "remixicon-react/GithubFillIcon"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 import SearchIcon from "remixicon-react/Search2LineIcon"
 
-import { socialLinks as aboutSocialLinks } from "~/features/about"
+import { socialLinks as aboutSocialLinks } from "f-about"
 import {
-  useCommandPaletteDispatch,
-  openPalette,
-  useCommandPaletteFeatureFlag,
-} from "~/features/commandPalette"
+  useSearchDispatch,
+  openSearchBar,
+  useSearchFeatureFlag,
+} from "f-search"
 
 const navLinks: Array<{
   to: string
@@ -34,8 +34,8 @@ const socialLinks: Array<{
 ]
 
 export default function Navigation(): JSX.Element {
-  const dispatch = useCommandPaletteDispatch()
-  const isCommandPaletteEnabled = useCommandPaletteFeatureFlag()
+  const dispatch = useSearchDispatch()
+  const isSearchEnabled = useSearchFeatureFlag()
 
   return (
     <nav aria-label="Main navigation">
@@ -62,11 +62,11 @@ export default function Navigation(): JSX.Element {
             </a>
           </li>
         ))}
-        {isCommandPaletteEnabled ? (
+        {isSearchEnabled ? (
           <li key="search" title="Search [Cmd+K]">
             <SearchIcon
               className="hover:text-white cursor-pointer"
-              onClick={() => dispatch(openPalette())}
+              onClick={() => dispatch(openSearchBar())}
             />
           </li>
         ) : null}

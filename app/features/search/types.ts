@@ -1,11 +1,11 @@
 import type { ReactNode } from "react"
 
-export interface CommandPaletteState {
+export interface SearchState {
   open: boolean
-  entries: CommandPaletteEntry[]
+  entries: SearchEntry[]
 }
 
-export interface CommandPaletteEntry {
+export interface SearchEntry {
   id: string
   label: string
   icon?: ReactNode
@@ -13,23 +13,23 @@ export interface CommandPaletteEntry {
   keywords?: string
   href?: string
   perform?: () => void
-  entries?: CommandPaletteEntry[]
+  entries?: SearchEntry[]
 }
 
-export type CommandPaletteAction =
+export type SearchAction =
   | {
       type: "TOGGLE_OPEN"
       payload?: boolean
     }
   | {
       type: "ADD_ENTRY"
-      payload: CommandPaletteEntry
+      payload: SearchEntry
     }
   | {
       type: "REMOVE_ENTRY"
-      payload: CommandPaletteEntry["id"]
+      payload: SearchEntry["id"]
     }
   | {
       type: "UPDATE_ENTRY"
-      payload: Partial<CommandPaletteEntry>
+      payload: Partial<SearchEntry>
     }

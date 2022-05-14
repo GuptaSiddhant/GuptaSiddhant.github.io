@@ -6,13 +6,13 @@ import {
   BlogPostHero,
   BlogPostStickyHeader,
   type BlogPostType,
-} from "~/features/blog"
-import MarkdownSection from "~/features/mdx"
+} from "f-blog"
+import MarkdownSection from "f-mdx"
 
-import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
-import { InternalLink } from "~/ui/Link"
-import Section from "~/ui/Section"
-import { H2 } from "~/ui/typography"
+import { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
+import { InternalLink } from "ui/Link"
+import Section from "ui/Section"
+import { H2 } from "ui/typography"
 
 interface LoaderData {
   blogPost: BlogPostType
