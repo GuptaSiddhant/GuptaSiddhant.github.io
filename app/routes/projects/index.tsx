@@ -1,12 +1,11 @@
 import { json, type LoaderFunction } from "@remix-run/node"
 import { useFetcher, useLoaderData } from "@remix-run/react"
-import { useEffect } from "react"
 
 import {
-  getAllProjects,
+  getProjectList,
   ProjectCard,
   useLogViewMultipleProjectsEvent,
-  type ProjectType,
+  type ProjectTeaser,
 } from "f-projects"
 
 import { getUniqueTagsFromObjects } from "helpers"
@@ -17,12 +16,12 @@ import { H1 } from "ui/typography"
 import { type ProjectsAPIResponse } from "./api"
 
 interface LoaderData {
-  projects: ProjectType[]
+  projects: ProjectTeaser[]
   tags: string[]
 }
 
 export const loader: LoaderFunction = async () => {
-  const projects = await getAllProjects()
+  const projects = await getProjectList(100)
   const tags = getUniqueTagsFromObjects(projects)
 
   return json<LoaderData>({ projects, tags })

@@ -4,14 +4,14 @@ import {
   logViewItemEvent,
   type AnalyticsEventItem,
 } from "service/analytics"
-import type { ProjectTeaserType } from "./types"
+import type { ProjectTeaser } from "./types"
 
 const analyticsProjectList = {
   item_list_id: "projects",
   item_list_name: "Projects",
 }
 
-export function useLogViewMultipleProjectsEvent(projects: ProjectTeaserType[]) {
+export function useLogViewMultipleProjectsEvent(projects: ProjectTeaser[]) {
   return useEffect(() => {
     const items: AnalyticsEventItem[] = projects.map(({ id, title }) => ({
       ...analyticsProjectList,
@@ -23,7 +23,7 @@ export function useLogViewMultipleProjectsEvent(projects: ProjectTeaserType[]) {
   }, [projects])
 }
 
-export function useLogViewProjectEvent({ id, title }: ProjectTeaserType) {
+export function useLogViewProjectEvent({ id, title }: ProjectTeaser) {
   return useEffect(() => {
     logViewItemEvent({
       ...analyticsProjectList,

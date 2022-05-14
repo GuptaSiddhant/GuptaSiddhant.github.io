@@ -2,11 +2,11 @@ import clsx from "clsx"
 import { Link } from "@remix-run/react"
 
 import { InternalLink } from "ui/Link"
-import Section from "ui/Section"
+import Section, { proseWidth } from "ui/Section"
+import TeaserCard from "ui/TeaserCard"
 import { Caption, H2 } from "ui/typography"
 
-import type { BlogPostType } from "../types"
-import BlogPostCard from "./BlogPostCard"
+import type { BlogPostTeaser } from "../types"
 
 export default function BlogTeaserSection({
   id = "blog",
@@ -14,14 +14,14 @@ export default function BlogTeaserSection({
   children,
 }: {
   id?: string
-  blogPosts: BlogPostType[]
+  blogPosts: BlogPostTeaser[]
   children?: React.ReactNode
 }): JSX.Element | null {
   if (blogPosts.length === 0) return null
 
   return (
-    <Section.Prose id={id}>
-      <div className={clsx("flex flex-col gap-4")}>
+    <Section id={id}>
+      <div className={clsx("flex flex-col gap-4", proseWidth)}>
         {children ?? (
           <>
             <Caption>
@@ -33,11 +33,18 @@ export default function BlogTeaserSection({
         )}
       </div>
 
-      <ul className={clsx("flex flex-col gap-4 sm:gap-10", "w-full")}>
+      <ul
+        className={clsx(
+          "flex gap-4 sm:gap-10 ",
+          "w-full overflow-auto py-4 px-4 sm:px-10",
+          "snap-x snap-mandatory",
+          blogPosts.length <= 3 && proseWidth,
+        )}
+      >
         {blogPosts.map((post) => (
-          <BlogPostCard key={post.id} blogPost={post} teaser />
+          <TeaserCard key={post.id} {...post} linkBaseUrl="/blog/" />
         ))}
       </ul>
-    </Section.Prose>
+    </Section>
   )
 }

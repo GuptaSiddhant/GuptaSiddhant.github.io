@@ -1,17 +1,17 @@
 import clsx from "clsx"
 import { Link } from "@remix-run/react"
-import type { ProjectType } from "../types"
+import type { ProjectTeaser } from "../types"
 
 export default function ProjectCard({
   project,
   className,
 }: {
-  project: ProjectType
+  project: ProjectTeaser
   className?: string
 }): JSX.Element {
-  const { id, title, icon, gallery, subtitle, description, featured, dateEnd } =
+  const { id, title, icon, cover, subtitle, description, featured, dateEnd } =
     project
-  const cover = gallery?.[0].url
+
   const showDescription = (featured || !dateEnd) && description
 
   return (
@@ -59,7 +59,10 @@ export default function ProjectCard({
   )
 }
 
-function calculateProjectGridSpan({ dateEnd, featured }: ProjectType): string {
+function calculateProjectGridSpan({
+  dateEnd,
+  featured,
+}: ProjectTeaser): string {
   const classList: string[] = []
 
   if (!dateEnd) {

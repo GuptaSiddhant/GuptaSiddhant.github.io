@@ -2,19 +2,14 @@ import { cleanupText } from "helpers"
 import { type QueryDocumentSnapshot } from "service/database"
 import { convertImageLinksInText, toImageUrl } from "service/image"
 
-import type { BlogPostType, BlogPostTeaserType } from "../types"
+import type { BlogPostType, BlogPostTeaser } from "../types"
 
 export async function transformDocToBlogPost(docSnap: QueryDocumentSnapshot) {
   const blogPost = docSnapToBlogPost(docSnap)
-
-  const [icon, gallery] = await Promise.all([
-    convertBlogPostIconUrl(blogPost),
-    convertBlogPostGalleryUrls(blogPost),
-  ])
+  const gallery = await convertBlogPostGalleryUrls(blogPost)
 
   return {
     ...blogPost,
-    icon,
     gallery,
     cover: gallery?.[0]?.url,
     content: undefined,
@@ -26,30 +21,34 @@ export async function transformDocToBlogPostWithContent(
 ): Promise<BlogPostType> {
   const blogPost = docSnapToBlogPost(docSnap)
 
-  const [icon, gallery, content] = await Promise.all([
-    convertBlogPostIconUrl(blogPost),
+  const [gallery, content] = await Promise.all([
     convertBlogPostGalleryUrls(blogPost),
     convertBlogPostContentUrls(blogPost),
   ])
 
   return {
     ...blogPost,
-    icon,
     gallery,
     cover: gallery?.[0]?.url,
     content: cleanupText(content),
   }
 }
 
-export function transformProjectToBlogPostTeaser(
+export function transformBlogPostToBlogPostTeaser(
   blogPost: BlogPostType,
-): BlogPostTeaserType {
-  const date =
-    typeof blogPost.date === "string"
-      ? blogPost.date
-      : (blogPost.date as any).toDate()
-
-  return { ...blogPost, date }
+): BlogPostTeaser {
+  return {
+    id: blogPost.id,
+    title: blogPost.title,
+    date: blogPost.date,
+    cover: blogPost.cover ?? "",
+    draft: blogPost.draft ?? false,
+    association: blogPost.association ?? "",
+    description: blogPost.description ?? "",
+    featured: blogPost.featured ?? false,
+    subtitle: blogPost.subtitle ?? "",
+    tags: blogPost.tags ?? [],
+  }
 }
 
 function docSnapToBlogPost(docSnap: QueryDocumentSnapshot): BlogPostType {
@@ -60,12 +59,6 @@ function docSnapToBlogPost(docSnap: QueryDocumentSnapshot): BlogPostType {
     id: docSnap.id,
     date: data.date.toDate(),
   } as unknown as BlogPostType
-}
-
-async function convertBlogPostIconUrl(
-  blogPost: BlogPostType,
-): Promise<string | undefined> {
-  return blogPost.icon ? toImageUrl(blogPost.icon) : undefined
 }
 
 async function convertBlogPostGalleryUrls(

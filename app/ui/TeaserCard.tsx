@@ -1,15 +1,20 @@
 import clsx from "clsx"
 import { Link } from "@remix-run/react"
 
-import type { ProjectTeaserType } from "../types"
+import type { Teaser } from "types"
 
-export default function ProjectTeaserCard({
+export interface TeaserCardProps extends Teaser {
+  linkBaseUrl: string
+}
+
+export default function TeaserCard({
   id,
   title,
   cover,
-}: ProjectTeaserType): JSX.Element {
+  linkBaseUrl,
+}: TeaserCardProps): JSX.Element {
   return (
-    <Link to={"/projects/" + id} className="group" prefetch="intent">
+    <Link to={linkBaseUrl + id} className="group" prefetch="intent">
       <li
         className={clsx(
           "relative",

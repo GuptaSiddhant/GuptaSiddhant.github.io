@@ -1,23 +1,20 @@
-export interface BlogPostType extends BlogPostTeaserType {
-  association?: string
-  icon?: string
+import type { Teaser } from "types"
+
+export interface BlogPostType extends BlogPostTeaser {
   externalLink?: string
   links?: BlogPostLink[]
   content?: string
-
-  featured?: boolean
   gallery?: { url: string; alt: string }[]
+}
+
+export interface BlogPostTeaser extends Teaser {
+  association?: string
+  featured?: boolean
+  date: string
+  draft?: boolean
   tags?: string[]
   subtitle?: string
   description?: string
-}
-
-export interface BlogPostTeaserType {
-  id: string
-  title: string
-  cover?: string
-  date: string
-  draft?: boolean
 }
 
 export interface BlogPostLink {

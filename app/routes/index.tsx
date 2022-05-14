@@ -5,7 +5,7 @@ import { fullName, heroAdjectives, techStackList, title } from "f-about"
 import {
   getProjectList,
   ProjectsTeaserSection,
-  type ProjectTeaserType,
+  type ProjectTeaser,
 } from "f-projects"
 import { getAllBlogPosts, BlogTeaserSection, type BlogPostType } from "f-blog"
 import {
@@ -28,7 +28,7 @@ export const meta: MetaFunction = () => {
 }
 
 interface LoaderData {
-  projects: ProjectTeaserType[]
+  projects: ProjectTeaser[]
   blogPosts: BlogPostType[]
   testimonies: Testimony[]
 }

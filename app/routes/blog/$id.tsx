@@ -3,9 +3,12 @@ import { useCatch, useLoaderData } from "@remix-run/react"
 
 import {
   getBlogPostById,
+  getCrossSellBlogPosts,
   BlogPostHero,
   BlogPostStickyHeader,
+  BlogTeaserSection,
   type BlogPostType,
+  type BlogPostTeaser,
 } from "f-blog"
 import MarkdownSection from "f-mdx"
 
@@ -16,6 +19,7 @@ import { H2 } from "ui/typography"
 
 interface LoaderData {
   blogPost: BlogPostType
+  crossSellBlogPosts: BlogPostTeaser[]
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -25,8 +29,9 @@ export const loader: LoaderFunction = async ({ params }) => {
   try {
     const blogPost = await getBlogPostById(id)
     if (!blogPost) throw new Error(`BlogPost (${id}) not found.`)
+    const crossSellBlogPosts = await getCrossSellBlogPosts(blogPost)
 
-    return json<LoaderData>({ blogPost })
+    return json<LoaderData>({ blogPost, crossSellBlogPosts })
   } catch (e) {
     throw new Error(`Failed to load blogPost (${id}): ${e}`)
   }
@@ -42,7 +47,7 @@ export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
 }
 
 export default function BlogPostPage(): JSX.Element {
-  const { blogPost } = useLoaderData<LoaderData>()
+  const { blogPost, crossSellBlogPosts } = useLoaderData<LoaderData>()
   const cover = blogPost?.gallery?.[0]?.url
 
   return (
@@ -58,6 +63,11 @@ export default function BlogPostPage(): JSX.Element {
       />
 
       <MarkdownSection>{JSON.parse(blogPost.content || '""')}</MarkdownSection>
+
+      <BlogTeaserSection blogPosts={crossSellBlogPosts}>
+        <H2 className="!p-0">There are some others...</H2>
+        <InternalLink to="/blog">View all blog posts</InternalLink>
+      </BlogTeaserSection>
     </>
   )
 }

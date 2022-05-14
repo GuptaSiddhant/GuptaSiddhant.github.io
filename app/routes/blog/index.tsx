@@ -2,10 +2,10 @@ import { json, type LoaderFunction } from "@remix-run/node"
 import { useFetcher, useLoaderData } from "@remix-run/react"
 
 import {
-  getAllBlogPosts,
+  getBlogPostsList,
   BlogPostCard,
   updateBlogList,
-  type BlogPostType,
+  type BlogPostTeaser,
 } from "f-blog"
 
 import { getUniqueTagsFromObjects } from "helpers"
@@ -16,12 +16,12 @@ import { H1 } from "ui/typography"
 import { type BlogPostsAPIResponse } from "./api"
 
 interface LoaderData {
-  blogPosts: BlogPostType[]
+  blogPosts: BlogPostTeaser[]
   tags: string[]
 }
 
 export const loader: LoaderFunction = async () => {
-  const blogPosts = await getAllBlogPosts()
+  const blogPosts = await getBlogPostsList(100)
   const tags = getUniqueTagsFromObjects(blogPosts)
   await updateBlogList()
 

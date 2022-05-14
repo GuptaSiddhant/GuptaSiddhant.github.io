@@ -34,6 +34,6 @@ function SectionHero({
   ...props
 }: PropsWithChildren): JSX.Element {
   return (
-    <SectionProse {...props} id={id} className={clsx(className, "mt-24")} />
+    <SectionProse {...props} id={id} className={clsx(className, "mt-[10vh]")} />
   )
 }

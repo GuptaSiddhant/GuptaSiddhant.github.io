@@ -9,7 +9,7 @@ import {
   type QueryConstraint,
 } from "service/database"
 
-import type { ProjectType, ProjectTeaserType } from "../types"
+import type { ProjectType, ProjectTeaser } from "../types"
 import {
   transformDocToProject,
   transformDocToProjectWithContent,
@@ -35,11 +35,17 @@ export async function getAllProjects(
 
 export async function getProjectList(
   limitBy: number = 5,
-): Promise<ProjectTeaserType[]> {
+): Promise<ProjectTeaser[]> {
   return getCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, (docSnap) =>
     Object.values(docSnap.data())
-      .map(transformProjectToProjectTeaser)
       .filter((project) => __IS_DEV__ || project.draft !== true)
+      .map((project) => ({
+        ...project,
+        dateStart:
+          typeof project.dateStart === "string"
+            ? project.dateStart
+            : (project.dateStart as any).toDate(),
+      }))
       .sort((a, b) => (b.dateStart > a.dateStart ? 1 : -1))
       .slice(0, limitBy),
   )
@@ -57,7 +63,7 @@ export async function getProjectById(
 
 export async function getCrossSellProjects(
   project: ProjectType,
-): Promise<ProjectTeaserType[]> {
+): Promise<ProjectTeaser[]> {
   const projectList = await getProjectList(20)
 
   return projectList
@@ -74,14 +80,8 @@ export async function setProjectById(
 }
 
 export async function updateProjectList() {
-  const data: Record<string, ProjectTeaserType> = (await getAllProjects(100))
-    .map(({ id, title, cover, dateStart, draft }) => ({
-      id,
-      title,
-      cover,
-      dateStart,
-      draft,
-    }))
+  const data: Record<string, ProjectTeaser> = (await getAllProjects(100))
+    .map(transformProjectToProjectTeaser)
     .reduce((acc, project) => ({ ...acc, [project.id]: project }), {})
 
   return setCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, data)

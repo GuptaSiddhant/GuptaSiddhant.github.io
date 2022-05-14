@@ -1,26 +1,25 @@
-export interface ProjectType extends ProjectTeaserType {
-  association?: string
-  icon?: string
-  dateEnd?: string
+import type { Teaser } from "types"
+
+export interface ProjectType extends ProjectTeaser {
   externalLink?: string
   github?: string
   links?: ProjectLink[]
   content?: string
-
-  featured?: boolean
-  tags?: string[]
-  subtitle?: string
-  description?: string
   gallery?: { url: string; alt: string }[]
 }
 
-export interface ProjectTeaserType {
-  id: string
-  title: string
-  cover?: string
+export interface ProjectTeaser extends Teaser {
+  association?: string
+  dateEnd?: string
   dateStart: string
+  description?: string
+  featured?: boolean
+  icon?: string
+  tags?: string[]
+  subtitle?: string
   draft?: boolean
 }
+
 export interface ProjectLink {
   url: string
   title?: string

@@ -9,7 +9,7 @@ import {
   ProjectsTeaserSection,
   useLogViewProjectEvent,
   type ProjectType,
-  type ProjectTeaserType,
+  type ProjectTeaser,
 } from "f-projects"
 import MarkdownSection from "f-mdx"
 
@@ -20,7 +20,7 @@ import { H2 } from "ui/typography"
 
 interface LoaderData {
   project: ProjectType
-  crossSellProjects: ProjectTeaserType[]
+  crossSellProjects: ProjectTeaser[]
 }
 
 export const loader: LoaderFunction = async ({ params }) => {

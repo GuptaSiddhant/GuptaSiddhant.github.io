@@ -2,7 +2,7 @@ import { cleanupText } from "helpers"
 import { type QueryDocumentSnapshot } from "service/database"
 import { convertImageLinksInText, toImageUrl } from "service/image"
 
-import type { ProjectType, ProjectTeaserType } from "../types"
+import type { ProjectType, ProjectTeaser } from "../types"
 
 export async function transformDocToProject(
   docSnap: QueryDocumentSnapshot,
@@ -43,17 +43,6 @@ export async function transformDocToProjectWithContent(
   }
 }
 
-export function transformProjectToProjectTeaser(
-  project: ProjectType,
-): ProjectTeaserType {
-  const dateStart =
-    typeof project.dateStart === "string"
-      ? project.dateStart
-      : (project.dateStart as any).toDate()
-
-  return { ...project, dateStart }
-}
-
 function docSnapToProject(docSnap: QueryDocumentSnapshot): ProjectType {
   const data = docSnap.data()
 
@@ -87,4 +76,23 @@ async function convertProjectContentUrls(
   project: ProjectType,
 ): Promise<string | undefined> {
   return project.content ? convertImageLinksInText(project.content) : undefined
+}
+
+export function transformProjectToProjectTeaser(
+  project: ProjectType,
+): ProjectTeaser {
+  return {
+    id: project.id,
+    title: project.title,
+    cover: project.cover ?? "",
+    dateStart: project.dateStart,
+    dateEnd: project.dateEnd ?? "",
+    draft: project.draft ?? false,
+    description: project.description ?? "",
+    icon: project.icon ?? "",
+    subtitle: project.subtitle ?? "",
+    tags: project.tags ?? [],
+    featured: project.featured ?? false,
+    association: project.association ?? "",
+  }
 }

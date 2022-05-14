@@ -3,10 +3,10 @@ import { Link } from "@remix-run/react"
 
 import { InternalLink } from "ui/Link"
 import Section, { proseWidth } from "ui/Section"
+import TeaserCard from "ui/TeaserCard"
 import { Caption, H2 } from "ui/typography"
 
-import type { ProjectTeaserType } from "../types"
-import ProjectTeaserCard from "./ProjectTeaserCard"
+import type { ProjectTeaser } from "../types"
 
 export default function ProjectsTeaserSection({
   id = "projects",
@@ -14,7 +14,7 @@ export default function ProjectsTeaserSection({
   children,
 }: {
   id?: string
-  projects: ProjectTeaserType[]
+  projects: ProjectTeaser[]
   children?: React.ReactNode
 }): JSX.Element | null {
   if (projects.length === 0) return null
@@ -38,10 +38,11 @@ export default function ProjectsTeaserSection({
           "flex gap-4 sm:gap-10",
           "w-full overflow-auto py-4 px-4 sm:px-10",
           "snap-x snap-mandatory",
+          projects.length <= 3 && proseWidth,
         )}
       >
         {projects.map((project) => (
-          <ProjectTeaserCard key={project.id} {...project} />
+          <TeaserCard key={project.id} {...project} linkBaseUrl="/projects/" />
         ))}
       </ul>
     </Section>

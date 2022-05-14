@@ -3,17 +3,16 @@ import clsx from "clsx"
 
 import { formatDate } from "helpers/format"
 
-import type { BlogPostType } from "../types"
+import type { BlogPostTeaser } from "../types"
 
 export default function BlogPostCard({
   blogPost,
   teaser,
 }: {
-  blogPost: BlogPostType
+  blogPost: BlogPostTeaser
   teaser?: boolean
 }): JSX.Element {
-  const { id, title, subtitle, description, date, gallery } = blogPost
-  const cover = gallery?.[0].url
+  const { id, title, subtitle, description, date, cover } = blogPost
 
   return (
     <Link to={id} prefetch="intent" className="group ">
