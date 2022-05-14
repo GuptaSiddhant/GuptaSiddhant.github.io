@@ -10,6 +10,7 @@ import {
   getProjectById,
 } from "f-projects"
 import { getAllTestimonies, getTestimonyById } from "f-testimonials"
+import { errorResponse } from "helpers/api"
 
 enum ApiTypes {
   Blog = "blog",
@@ -24,7 +25,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const { searchParams } = new URL(request.url)
 
   const type = searchParams.get("type")
-  if (!type) return error("Parameter 'type' is required.", 400)
+  if (!type) return errorResponse("Parameter 'type' is required.", 400)
 
   const id = searchParams.get("id")
   const query = searchParams.get("q") || ""
@@ -35,7 +36,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     case ApiTypes.Testimonies: {
       if (id) {
         return getTestimonyById(id).catch(() =>
-          error(`Testimony with id '${id}' not found.`),
+          errorResponse(`Testimony with id '${id}' not found.`),
         )
       }
       return getAllTestimonies()
@@ -44,7 +45,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     case ApiTypes.Projects: {
       if (id) {
         return getProjectById(id).catch(() =>
-          error(`Project with id '${id}' not found.`),
+          errorResponse(`Project with id '${id}' not found.`),
         )
       }
       const projects = await getAllProjects()
@@ -54,7 +55,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     case ApiTypes.Blog: {
       if (id) {
         return getBlogPostById(id).catch(() =>
-          error(`Blog post with id '${id}' not found.`),
+          errorResponse(`Blog post with id '${id}' not found.`),
         )
       }
       const blogPosts = await getAllBlogPosts()
@@ -66,7 +67,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       const supportedTypesString = supportedTypes
         .map((type) => `'${type}'`)
         .join(", ")
-      return error(
+      return errorResponse(
         `Parameter 'type' must be one of: ${supportedTypesString}.`,
         400,
       )
@@ -75,9 +76,3 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export function CatchBoundary() {}
-
-function error(message: string, status: number = 404) {
-  return new Response(message, {
-    status,
-  })
-}

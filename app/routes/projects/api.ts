@@ -7,7 +7,7 @@ import {
   type ProjectType,
 } from "f-projects"
 import { getUniqueTagsFromObjects } from "helpers"
-
+import { errorResponse } from "helpers/api"
 import { type FilterDataType } from "ui/Filter"
 
 /** Projects API endpoint. */
@@ -21,7 +21,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (id) {
     return getProjectById(id).catch(() =>
-      error(`Project with id '${id}' not found.`),
+      errorResponse(`Project with id '${id}' not found.`),
     )
   }
 
@@ -51,17 +51,11 @@ export const action: ActionFunction = async ({ request }) => {
     case "updateProjectList":
       return updateProjectList()
     default:
-      return error(`Unknown action type '${type}'`)
+      return errorResponse(`Unknown action type '${type}'`)
   }
 }
 
 export function CatchBoundary() {}
-
-function error(message: string, status: number = 404) {
-  return new Response(message, {
-    status,
-  })
-}
 
 export interface ProjectsAPIResponse extends FilterDataType {
   projects: ProjectType[]

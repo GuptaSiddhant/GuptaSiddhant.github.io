@@ -6,6 +6,7 @@ import {
   type BlogPostType,
 } from "f-blog"
 import { getUniqueTagsFromObjects } from "helpers"
+import { errorResponse } from "helpers/api"
 import type { FilterDataType } from "ui/Filter"
 
 /**
@@ -21,7 +22,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (id) {
     return getBlogPostById(id).catch(() =>
-      error(`Blog post with id '${id}' not found.`),
+      errorResponse(`Blog post with id '${id}' not found.`),
     )
   }
 
@@ -44,12 +45,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export function CatchBoundary() {}
-
-function error(message: string, status: number = 404) {
-  return new Response(message, {
-    status,
-  })
-}
 
 export interface BlogPostsAPIResponse extends FilterDataType {
   blogPosts: BlogPostType[]
