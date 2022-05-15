@@ -21,7 +21,7 @@ export default function Header(): JSX.Element {
         `${headerHeight}px`,
       )
     },
-    true,
+    { immediate: true },
   )
 
   return (

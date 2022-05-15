@@ -37,6 +37,10 @@ export default function useCommandKeys() {
     [entries, performEntryAction],
   )
 
-  useEventListener("keydown", handleOpenClose)
-  useEventListener("keydown", handleEntriesActions)
+  useEventListener("keydown", (e: KeyboardEvent) => {
+    if (!e) return
+
+    handleOpenClose(e)
+    handleEntriesActions(e)
+  })
 }

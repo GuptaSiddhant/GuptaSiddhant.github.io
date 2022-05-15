@@ -1,34 +1,52 @@
+import { Link } from "@remix-run/react"
 import clsx from "clsx"
-
-import { AnchorLink } from "ui/Link"
 
 import type { TOC } from "./types"
 
 export default function renderTOC(
   toc: TOC[],
-  options: { highestLevel: number; maxLevel: number },
+  options: {
+    highestLevel: number
+    maxLevel: number
+    activeId: string
+  },
   className?: string,
 ) {
-  const { highestLevel, maxLevel } = options
+  const { highestLevel, maxLevel, activeId } = options
   return (
     <nav className={className}>
       {toc.map((item) => {
+        const isActive = activeId === item.id
         const itemContent = (
-          <AnchorLink href={"#" + item.id}>{item.text}</AnchorLink>
+          <Link
+            replace
+            to={"#" + item.id}
+            className={clsx(
+              isActive ? "font-bold text-white" : "text-gray-300",
+              "hover:text-gray-100",
+            )}
+          >
+            {item.text}
+          </Link>
         )
 
         return (
           <li
             key={item.id}
             className={clsx(
-              "my-2",
+              "relative my-2",
               item.level > highestLevel && "ml-4",
-              item.level === highestLevel ? "font-bold" : "font-normal",
             )}
           >
             {item.level <= maxLevel ? (
               item.children.length === 0 ? (
-                itemContent
+                <span
+                  className={clsx(
+                    "before:absolute before:content-['•'] before:-indent-4 text-gray-300",
+                  )}
+                >
+                  {itemContent}
+                </span>
               ) : (
                 <details key={item.id} open>
                   <summary className="-indent-4">{itemContent}</summary>

@@ -1,26 +1,41 @@
 import { useLocation } from "@remix-run/react"
 import { useEffect, useState, useMemo } from "react"
+import useEventListener from "helpers/useEventListener"
 
 import createTOC from "./createTOC"
 import renderTOC from "./renderTOC"
-import type { TableOfContentProps, TOC } from "./types"
+import type { TableOfContentProps } from "./types"
+import useOffsetScroll from "~/helpers/useOffsetScroll"
 
 export default function TableOfContent({
   className,
   sectionRef,
   maxLevel = 3,
 }: TableOfContentProps): JSX.Element {
-  const [tableOfContents, setTableOfContents] = useState<TOC[]>([])
-  const { key } = useLocation()
+  const [headings, setHeadings] = useState<Element[]>([])
+  const [activeId, setActiveId] = useState("")
+  const { pathname, hash } = useLocation()
+  const { scrollTop: offsetY } = useOffsetScroll(0)
 
   useEffect(() => {
     const section = sectionRef?.current
-    if (section && key) {
-      const allElementsWithIds = [...section.querySelectorAll("[id]")]
-      const toc = createTOC(allElementsWithIds)
-      setTableOfContents(toc)
+    if (section && pathname !== undefined) {
+      setHeadings([...section.querySelectorAll("[id]")])
     }
-  }, [sectionRef, key])
+  }, [sectionRef, pathname])
+
+  const tableOfContents = useMemo(() => createTOC(headings), [headings])
+
+  useEffect(() => {
+    setActiveId((hash || "").replace(/^#/, ""))
+  }, [hash])
+
+  useEffect(() => {
+    headings.forEach((heading) => {
+      const { top } = heading.getBoundingClientRect()
+      if (offsetY && top < 100) setActiveId(heading.id)
+    })
+  }, [headings, offsetY])
 
   const highestLevel = useMemo(
     () =>
@@ -32,5 +47,9 @@ export default function TableOfContent({
     [tableOfContents],
   )
 
-  return renderTOC(tableOfContents, { highestLevel, maxLevel }, className)
+  return renderTOC(
+    tableOfContents,
+    { highestLevel, maxLevel, activeId },
+    className,
+  )
 }

@@ -1,5 +1,6 @@
-import { useEffect, useReducer } from "react"
+import { useCallback, useEffect, useReducer } from "react"
 import { DEFAULT_SCROLL_OFFSET } from "~/constants"
+import useThrottle from "./useThrottle"
 
 interface OffsetScrollState {
   scrollTop: number
@@ -24,7 +25,7 @@ export default function useOffsetScroll(
     initialState,
   )
 
-  useEffect(() => {
+  const handler = useCallback(() => {
     const threshold = 0
     let lastScrollTop = window.pageYOffset
     let ticking = false
@@ -45,17 +46,19 @@ export default function useOffsetScroll(
       ticking = false
     }
 
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(handleScroll)
-        ticking = true
-      }
+    if (!ticking) {
+      window.requestAnimationFrame(handleScroll)
+      ticking = true
     }
+  }, [offsetY])
 
-    onScroll()
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [offsetY, dispatch])
+  const [throttledHandler] = useThrottle(handler, 250)
+
+  useEffect(() => {
+    throttledHandler()
+    window.addEventListener("scroll", throttledHandler)
+    return () => window.removeEventListener("scroll", throttledHandler)
+  }, [throttledHandler])
 
   return state
 }

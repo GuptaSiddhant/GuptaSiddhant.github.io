@@ -23,7 +23,7 @@ export default function useThrottle(
   }
 
   const throttledFunction = useCallback(
-    (...args) => {
+    (...args: any) => {
       if (!ready) {
         return
       }
