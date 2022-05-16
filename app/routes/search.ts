@@ -2,7 +2,7 @@ import { json, type LoaderFunction } from "@remix-run/node"
 
 import { getBlogPostsList, filterBlogPostsWithQueryAndTags } from "f-blog"
 import { getProjectList, filterProjectsWithQueryAndTags } from "f-projects"
-import { type SearchFetcherData, type SearchFetcherDataKey } from "f-search"
+import { type SearchFetcherData } from "f-search"
 import { errorResponse } from "helpers/api"
 import type { Teaser } from "types"
 
@@ -24,10 +24,12 @@ async function search(request: Request): Promise<Response> {
   if (!fields?.length)
     return errorResponse("At least one (1) 'field' parameter is required.", 400)
 
+  const limitBy = parseInt(searchParams.get("limit") ?? "5", 10)
+
   try {
     const [blogPosts, projects] = await Promise.all([
-      getBlogPostsList(),
-      getProjectList(),
+      getBlogPostsList(limitBy),
+      getProjectList(limitBy),
     ])
 
     const result: SearchFetcherData = {
@@ -55,6 +57,6 @@ function transformPredicate(item: Teaser, ...fields: Array<keyof Teaser>) {
 
   return fields.reduce(
     (acc, field) => ({ ...acc, [field]: item[field] }),
-    {} as Pick<Teaser, SearchFetcherDataKey>,
+    {} as Teaser,
   )
 }

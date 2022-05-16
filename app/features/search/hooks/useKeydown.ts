@@ -97,7 +97,6 @@ export default function useKeydown(
 
   useEventListener("keydown", (e: KeyboardEvent) => {
     if (!e) return
-    console.log(e.key, e.shiftKey)
 
     handleOpenClose(e)
     handleEntriesActions(e)

@@ -24,3 +24,7 @@ export function removeEntry(entry: SearchEntry | string): SearchAction {
     payload: typeof entry === "string" ? entry : entry.id,
   }
 }
+
+export function updateSearchTerm(value: string): SearchAction {
+  return { type: "UPDATE_SEARCH_TERM", payload: value }
+}

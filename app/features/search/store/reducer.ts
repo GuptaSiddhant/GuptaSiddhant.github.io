@@ -32,6 +32,10 @@ export default function reducer(
         ),
       }
     }
+    case "UPDATE_SEARCH_TERM": {
+      const searchTerm = action.payload
+      return { ...state, searchTerm }
+    }
     default:
       return state
   }

@@ -5,6 +5,7 @@ export interface Teaser {
   id: string
   title: string
   cover?: string
+  icon?: string
 }
 
 export type FetcherWithComponents<T> = ReturnType<typeof useFetcher> &

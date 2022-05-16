@@ -5,7 +5,7 @@ import Button from "ui/Button"
 import { InputWithRef } from "ui/Input"
 import type { FetcherWithComponents } from "types"
 
-import { useSearchDispatch, closeSearchBar } from "../store"
+import { useSearchDispatch, closeSearchBar, updateSearchTerm } from "../store"
 import type { SearchFetcherData } from "../types"
 
 export default function SearchBar({
@@ -23,13 +23,18 @@ export default function SearchBar({
       <input type="hidden" name="field" value="id" />
       <input type="hidden" name="field" value="title" />
       <input type="hidden" name="field" value="cover" />
+      <input type="hidden" name="field" value="icon" />
+      <input type="hidden" name="limit" value="10" />
       <InputWithRef
         ref={inputRef}
         name="q"
         key={String(open)}
         defaultValue={""}
         className="w-full bg-gray-900"
-        onChange={(e) => submit(e.target.form)}
+        onChange={(e) => {
+          dispatch(updateSearchTerm(e.target.value))
+          submit(e.target.form)
+        }}
       />
       <Button
         className={clsx("absolute right-3.5 sm:right-4 top-3.5 sm:top-4")}

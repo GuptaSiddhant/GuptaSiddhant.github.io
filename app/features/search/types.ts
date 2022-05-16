@@ -4,6 +4,7 @@ import type { Teaser } from "types"
 export interface SearchState {
   open: boolean
   entries: SearchEntry[]
+  searchTerm: string
 }
 
 export interface SearchEntry {
@@ -34,13 +35,9 @@ export type SearchAction =
       type: "UPDATE_ENTRY"
       payload: Partial<SearchEntry>
     }
+  | {
+      type: "UPDATE_SEARCH_TERM"
+      payload: string
+    }
 
-export interface SearchFetcherData {
-  blog: SearchFetcherDataValue
-  projects: SearchFetcherDataValue
-}
-
-export type SearchFetcherDataKey = "id" | "title" | "cover"
-export type SearchFetcherDataValue<
-  T extends keyof Teaser = SearchFetcherDataKey,
-> = Array<Pick<Teaser, T>>
+export type SearchFetcherData = Record<"blog" | "projects", Teaser[]>
