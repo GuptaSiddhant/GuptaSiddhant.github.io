@@ -2,12 +2,8 @@ import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
 import { fullName, heroAdjectives, techStackList, title } from "f-about"
-import {
-  getProjectList,
-  ProjectsTeaserSection,
-  type ProjectTeaser,
-} from "f-projects"
-import { getAllBlogPosts, BlogTeaserSection, type BlogPostType } from "f-blog"
+import { getProjectList, type ProjectTeaser } from "f-projects"
+import { getAllBlogPosts, type BlogPostTeaser } from "f-blog"
 import {
   getAllTestimonies,
   TestimonialsSection,
@@ -16,9 +12,10 @@ import {
 
 import { formatList } from "helpers/format"
 import ChangingText from "ui/ChangingText"
+import { Link, ExternalLink, InternalLink } from "ui/Link"
 import Section from "ui/Section"
-import { ExternalLink, InternalLink } from "ui/Link"
-import { H1 } from "ui/typography"
+import TeaserSection from "ui/TeaserSection"
+import { Caption, H1, H2 } from "ui/typography"
 
 export const meta: MetaFunction = () => {
   return {
@@ -29,7 +26,7 @@ export const meta: MetaFunction = () => {
 
 interface LoaderData {
   projects: ProjectTeaser[]
-  blogPosts: BlogPostType[]
+  blogPosts: BlogPostTeaser[]
   testimonies: Testimony[]
 }
 
@@ -47,8 +44,23 @@ export default function Index() {
   return (
     <>
       <HeroSection />
-      <ProjectsTeaserSection projects={projects} />
-      <BlogTeaserSection blogPosts={blogPosts} />
+
+      <TeaserSection items={projects} linkBaseUrl="/projects/" id="projects">
+        <Caption>
+          <Link to={"#projects"}>Projects</Link>
+        </Caption>
+        <H2 className="!p-0">Stuff I've been tinkering with</H2>
+        <InternalLink to="/projects">View all projects</InternalLink>
+      </TeaserSection>
+
+      <TeaserSection items={blogPosts} linkBaseUrl="/blog/" id="blog">
+        <Caption>
+          <Link to={"#blog"}>Recent posts</Link>
+        </Caption>
+        <H2 className="!p-0">Recent thoughts and ideas...</H2>
+        <InternalLink to="/blog">View all blog posts</InternalLink>
+      </TeaserSection>
+
       <TestimonialsSection testimonies={testimonies} />
     </>
   )

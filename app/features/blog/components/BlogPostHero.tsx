@@ -1,4 +1,3 @@
-import clsx from "clsx"
 import { type ReactNode } from "react"
 
 import { InternalLink } from "ui/Link"
@@ -11,7 +10,6 @@ import type { BlogPostType } from "../types"
 export default function BlogPostHero({
   title,
   subtitle,
-  icon,
   description,
   tags = [],
   children,
@@ -20,18 +18,9 @@ export default function BlogPostHero({
     <Section.Hero>
       <InternalLink to="/blog">{"← Blog"}</InternalLink>
 
-      <div className={clsx("flex items-center justify-between")}>
-        <div>
-          <H1>{title}</H1>
-          <strong className="text-2xl font-normal">{subtitle}</strong>
-        </div>
-        {icon ? (
-          <img
-            src={icon}
-            alt={title}
-            className="mb-2 h-12 rounded object-contain"
-          />
-        ) : null}
+      <div>
+        <H1>{title}</H1>
+        <strong className="text-2xl font-normal">{subtitle}</strong>
       </div>
 
       <div className="flex flex-col gap-4">

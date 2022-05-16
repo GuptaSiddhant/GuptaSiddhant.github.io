@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { type ComponentPropsWithoutRef } from "react"
-import { Link, LinkProps } from "@remix-run/react"
+import { Link, type LinkProps } from "@remix-run/react"
 import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
 import type { PropsWithChildren } from "ui/types"
@@ -26,7 +26,11 @@ export function AnchorLink({
   return <InternalLink to={href} {...props} />
 }
 
-export function InternalLink({ className, ...props }: LinkProps): JSX.Element {
+export function InternalLink({
+  className,
+  children,
+  ...props
+}: LinkProps): JSX.Element {
   return (
     <Link
       {...props}
@@ -34,7 +38,9 @@ export function InternalLink({ className, ...props }: LinkProps): JSX.Element {
         "text-blue-400 no-underline hover:text-blue-300 hover:underline active:text-blue-400",
         className,
       )}
-    />
+    >
+      {children}
+    </Link>
   )
 }
 
@@ -53,7 +59,7 @@ export function ExternalLink({
       href={href}
       className={clsx("text-blue-400 hover:underline", className)}
       target="_blank"
-      rel="noopener"
+      rel="noreferrer"
       title={tooltipLabel}
     >
       {children}

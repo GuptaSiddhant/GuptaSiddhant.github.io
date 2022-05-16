@@ -4,6 +4,5 @@ export * from "./service"
 export * from "./types"
 
 export { default as ProjectCard } from "./components/ProjectCard"
-export { default as ProjectsTeaserSection } from "./components/ProjectsTeaserSection"
 export { default as ProjectHero } from "./components/ProjectHero"
-export { default as ProjectStickyHeader } from "./components/ProjectStickyHeader"
+export { default as ProjectActions } from "./components/ProjectActions"

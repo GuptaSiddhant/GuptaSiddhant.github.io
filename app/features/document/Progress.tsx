@@ -53,6 +53,7 @@ function useProgress(): RefObject<HTMLDivElement> {
       if (timeout.current) clearTimeout(timeout.current)
 
       if (element.style.width === `0%`) return
+
       element.style.width = `100%`
       timeout.current = setTimeout(() => {
         if (element?.style.width !== "100%") return

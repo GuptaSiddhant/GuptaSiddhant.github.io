@@ -5,17 +5,18 @@ import {
   getProjectById,
   getCrossSellProjects,
   ProjectHero,
-  ProjectStickyHeader,
-  ProjectsTeaserSection,
+  ProjectActions,
   useLogViewProjectEvent,
   type ProjectType,
   type ProjectTeaser,
 } from "f-projects"
 import MarkdownSection from "f-mdx"
 
-import { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
-import Section from "ui/Section"
+import Breadcrumbs, { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
 import { InternalLink } from "ui/Link"
+import Section from "ui/Section"
+import StickyHeader from "ui/StickyHeader"
+import TeaserSection from "ui/TeaserSection"
 import { H2 } from "ui/typography"
 
 interface LoaderData {
@@ -55,7 +56,10 @@ export default function ProjectPage(): JSX.Element {
 
   return (
     <>
-      <ProjectStickyHeader {...project} />
+      <StickyHeader>
+        <Breadcrumbs />
+        <ProjectActions />
+      </StickyHeader>
 
       <ProjectHero {...project} />
       <img
@@ -66,10 +70,14 @@ export default function ProjectPage(): JSX.Element {
       />
       <MarkdownSection>{JSON.parse(project.content || '""')}</MarkdownSection>
 
-      <ProjectsTeaserSection projects={crossSellProjects}>
+      <TeaserSection
+        items={crossSellProjects}
+        linkBaseUrl="/projects/"
+        crossSell
+      >
         <H2 className="!p-0">There are some others...</H2>
         <InternalLink to="/projects">View all projects</InternalLink>
-      </ProjectsTeaserSection>
+      </TeaserSection>
     </>
   )
 }

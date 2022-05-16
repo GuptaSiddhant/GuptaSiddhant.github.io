@@ -5,16 +5,16 @@ import {
   getBlogPostById,
   getCrossSellBlogPosts,
   BlogPostHero,
-  BlogPostStickyHeader,
-  BlogTeaserSection,
   type BlogPostType,
   type BlogPostTeaser,
 } from "f-blog"
 import MarkdownSection from "f-mdx"
 
-import { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
+import Breadcrumbs, { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
 import { InternalLink } from "ui/Link"
 import Section from "ui/Section"
+import StickyHeader from "ui/StickyHeader"
+import TeaserSection from "ui/TeaserSection"
 import { H2 } from "ui/typography"
 
 interface LoaderData {
@@ -52,7 +52,10 @@ export default function BlogPostPage(): JSX.Element {
 
   return (
     <>
-      <BlogPostStickyHeader {...blogPost} />
+      <StickyHeader>
+        <Breadcrumbs />
+      </StickyHeader>
+
       <BlogPostHero {...blogPost} />
 
       <img
@@ -64,10 +67,10 @@ export default function BlogPostPage(): JSX.Element {
 
       <MarkdownSection>{JSON.parse(blogPost.content || '""')}</MarkdownSection>
 
-      <BlogTeaserSection blogPosts={crossSellBlogPosts}>
+      <TeaserSection items={crossSellBlogPosts} linkBaseUrl="/blog/">
         <H2 className="!p-0">There are some others...</H2>
         <InternalLink to="/blog">View all blog posts</InternalLink>
-      </BlogTeaserSection>
+      </TeaserSection>
     </>
   )
 }

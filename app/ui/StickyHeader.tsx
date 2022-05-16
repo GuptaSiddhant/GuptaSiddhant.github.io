@@ -17,7 +17,7 @@ export default function StickyHeader({
       className={clsx(
         className,
         "fixed top-0 left-0 right-0 px-8 py-2 z-50 bg-black",
-        "grid grid-cols-[1fr_max-content] items-center",
+        "grid grid-cols-[1fr_max-content] items-center justify-between",
         "transition-transform duration-500",
         isOffsetScrolled && scrollDirection === "down"
           ? "translate-y-0"
