@@ -37,6 +37,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
               "relative mx-4 rounded-xl",
               "bg-gray-900 text-lg",
               "flex flex-col gap-10",
+              "min-h-[90vh]",
             )}
           >
             {children}

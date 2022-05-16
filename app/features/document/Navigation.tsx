@@ -63,11 +63,13 @@ export default function Navigation(): JSX.Element {
           </li>
         ))}
         {isSearchEnabled ? (
-          <li key="search" title="Search [Cmd+K]">
-            <SearchIcon
-              className="hover:text-white cursor-pointer"
-              onClick={() => dispatch(openSearchBar())}
-            />
+          <li key="search" className="flex items-center">
+            <button title="Search [Cmd+K]">
+              <SearchIcon
+                className="hover:text-white cursor-pointer"
+                onClick={() => dispatch(openSearchBar())}
+              />
+            </button>
           </li>
         ) : null}
       </ul>

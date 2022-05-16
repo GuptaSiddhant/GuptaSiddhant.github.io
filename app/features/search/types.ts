@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import type { Teaser } from "types"
 
 export interface SearchState {
   open: boolean
@@ -33,3 +34,13 @@ export type SearchAction =
       type: "UPDATE_ENTRY"
       payload: Partial<SearchEntry>
     }
+
+export interface SearchFetcherData {
+  blog: SearchFetcherDataValue
+  projects: SearchFetcherDataValue
+}
+
+export type SearchFetcherDataKey = "id" | "title" | "cover"
+export type SearchFetcherDataValue<
+  T extends keyof Teaser = SearchFetcherDataKey,
+> = Array<Pick<Teaser, T>>

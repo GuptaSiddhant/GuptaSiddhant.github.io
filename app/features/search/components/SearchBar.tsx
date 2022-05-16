@@ -1,62 +1,44 @@
-import { Dialog } from "@reach/dialog"
 import clsx from "clsx"
-import { useEffect, useRef, useState } from "react"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 
-import { InputWithRef } from "ui/Input"
-
-import { useSearchDispatch, useSearchState, closeSearchBar } from "../store"
-import usePerformEntryAction from "../hooks/usePerformEntryAction"
-import useCommandKeys from "../hooks/useCommandKeys"
 import Button from "ui/Button"
+import { InputWithRef } from "ui/Input"
+import type { FetcherWithComponents } from "types"
 
-export default function SearchBar() {
-  const { entries, open } = useSearchState()
+import { useSearchDispatch, closeSearchBar } from "../store"
+import type { SearchFetcherData } from "../types"
+
+export default function SearchBar({
+  fetcher,
+  inputRef,
+}: {
+  fetcher: FetcherWithComponents<SearchFetcherData>
+  inputRef: React.RefObject<HTMLInputElement>
+}) {
+  const { Form, submit } = fetcher
   const dispatch = useSearchDispatch()
 
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [term, setTerm] = useState("")
-  const performEntryAction = usePerformEntryAction()
-  useCommandKeys()
-
-  function close() {
-    dispatch(closeSearchBar())
-  }
-
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setTerm(event.target.value)
-  }
-
-  useEffect(() => {
-    if (open) setTerm("")
-  }, [open])
-
   return (
-    <Dialog
-      isOpen={open}
-      onDismiss={close}
-      initialFocusRef={inputRef}
-      aria-label="SearchBar"
-      className={clsx(
-        "animate-appear relative",
-        "bg-gray-800 p-4 rounded-lg mt-[10vh] mx-4 md:mx-auto",
-        "flex gap-4 flex-col md:w-[50vw]",
-      )}
-    >
+    <Form method="get" action="/search">
+      <input type="hidden" name="field" value="id" />
+      <input type="hidden" name="field" value="title" />
+      <input type="hidden" name="field" value="cover" />
       <InputWithRef
         ref={inputRef}
+        name="q"
+        key={String(open)}
+        defaultValue={""}
         className="w-full bg-gray-900"
-        onChange={handleChange}
-        value={term}
+        onChange={(e) => submit(e.target.form)}
       />
       <Button
-        className={clsx("absolute right-4 top-4")}
+        className={clsx("absolute right-3.5 sm:right-4 top-3.5 sm:top-4")}
         title="Close palette"
-        onClick={close}
+        onClick={() => dispatch(closeSearchBar())}
       >
         <CloseIcon />
         <span className="sr-only">Close palette</span>
       </Button>
-    </Dialog>
+    </Form>
   )
 }

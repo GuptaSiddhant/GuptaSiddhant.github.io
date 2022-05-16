@@ -16,8 +16,11 @@ Todo:
 - [x] Cross-sell
 - [x] Feature-flags
 - [x] Analytics (projects)
-- [-] Command palette
-- [-] Blog-list at Home
+- [x] Blog-list at Home
+- [-] Command palette / Search
+- [ ] Share
+- [ ] Auth
+- [ ] Favourite
 - [ ] Tags in firestore
 - [ ] About (lifeline)
   - [ ] education

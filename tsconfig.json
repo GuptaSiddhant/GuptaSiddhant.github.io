@@ -11,7 +11,6 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
       "helpers": ["./app/helpers"],
       "helpers/*": ["./app/helpers/*"],
       "service/*": ["./app/service/*"],
@@ -26,7 +25,9 @@
       "f-mdx": ["./app/features/mdx"],
       "f-projects": ["./app/features/projects"],
       "f-search": ["./app/features/search"],
-      "f-testimonials": ["./app/features/testimonials"]
+      "f-testimonials": ["./app/features/testimonials"],
+      // Catch all
+      "~/*": ["./app/*"]
     },
 
     // Remix takes care of building everything in `remix build`.

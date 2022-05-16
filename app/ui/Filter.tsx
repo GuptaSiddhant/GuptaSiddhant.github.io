@@ -1,6 +1,6 @@
-import { type useFetcher } from "@remix-run/react"
-import { type Fetcher } from "@remix-run/react/transition"
 import { useCallback } from "react"
+
+import type { FetcherWithComponents } from "types"
 
 import Input from "./Input"
 import Section from "./Section"
@@ -12,8 +12,6 @@ export interface FilterDataType {
   query: string
   selectedTags: string[]
 }
-
-type FetcherWithComponents<T> = ReturnType<typeof useFetcher> & Fetcher<T>
 
 export interface FilterProps<T = any> {
   tags: string[]
