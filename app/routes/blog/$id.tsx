@@ -10,6 +10,7 @@ import {
 } from "f-blog"
 import MarkdownSection from "f-mdx"
 
+import { __IS_DEV__ } from "helpers"
 import Breadcrumbs, { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
 import { InternalLink } from "ui/Link"
 import Section from "ui/Section"
@@ -29,7 +30,8 @@ export const loader: LoaderFunction = async ({ params }) => {
   try {
     const blogPost = await getBlogPostById(id)
     if (!blogPost) throw new Error(`BlogPost (${id}) not found.`)
-    const crossSellBlogPosts = await getCrossSellBlogPosts(blogPost)
+
+    const crossSellBlogPosts = (await getCrossSellBlogPosts(blogPost)) || []
 
     return json<LoaderData>({ blogPost, crossSellBlogPosts })
   } catch (e) {
@@ -77,13 +79,16 @@ export default function BlogPostPage(): JSX.Element {
 
 export function CatchBoundary() {
   const catchError = useCatch()
+
   return (
     <Section.Prose>
       <H2>Could not find the blog post!</H2>
       <InternalLink to="/blog">{"Back to Blog"}</InternalLink>
-      <pre className="whitespace-pre-wrap">
-        {JSON.stringify(catchError, null, 2)}
-      </pre>
+      {__IS_DEV__ ? (
+        <pre className="whitespace-pre-wrap break-all text-sm text-red-400">
+          {JSON.stringify(catchError, null, 2)}
+        </pre>
+      ) : null}
     </Section.Prose>
   )
 }
@@ -94,7 +99,11 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <H2>Error occurred!</H2>
       <p>{error.message}</p>
       <InternalLink to="/blog">{"Back to Blog"}</InternalLink>
-      <pre>{error.stack}</pre>
+      {__IS_DEV__ ? (
+        <pre className="whitespace-pre-wrap break-all text-sm text-red-400">
+          {error.stack}
+        </pre>
+      ) : null}
     </Section.Prose>
   )
 }

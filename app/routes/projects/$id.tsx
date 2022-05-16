@@ -12,6 +12,7 @@ import {
 } from "f-projects"
 import MarkdownSection from "f-mdx"
 
+import { __IS_DEV__ } from "helpers"
 import Breadcrumbs, { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
 import { InternalLink } from "ui/Link"
 import Section from "ui/Section"
@@ -84,13 +85,16 @@ export default function ProjectPage(): JSX.Element {
 
 export function CatchBoundary() {
   const catchError = useCatch()
+
   return (
     <Section.Prose>
       <H2>Could not find the project!</H2>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
-      <pre className="whitespace-pre-wrap">
-        {JSON.stringify(catchError, null, 2)}
-      </pre>
+      {__IS_DEV__ ? (
+        <pre className="whitespace-pre-wrap break-all text-sm text-red-400">
+          {JSON.stringify(catchError, null, 2)}
+        </pre>
+      ) : null}
     </Section.Prose>
   )
 }
@@ -101,7 +105,11 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <H2>Error occurred!</H2>
       <p>{error.message}</p>
       <InternalLink to="/projects">{"Back to Projects"}</InternalLink>
-      <pre className="whitespace-pre-wrap">{error.stack}</pre>
+      {__IS_DEV__ ? (
+        <pre className="whitespace-pre-wrap break-all text-sm text-red-400">
+          {error.stack}
+        </pre>
+      ) : null}
     </Section.Prose>
   )
 }

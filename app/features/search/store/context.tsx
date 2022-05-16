@@ -6,7 +6,7 @@ import type { SearchAction, SearchState } from "../types"
 
 const initialState: SearchState = {
   entries: defaultEntries,
-  open: true,
+  open: false,
 }
 
 export const SearchStateContext = createContext<SearchState>(initialState)
