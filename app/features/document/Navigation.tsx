@@ -4,17 +4,13 @@ import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 import SearchIcon from "remixicon-react/Search2LineIcon"
 
 import { socialLinks as aboutSocialLinks } from "f-about"
-import {
-  useSearchDispatch,
-  openSearchBar,
-  useSearchFeatureFlag,
-} from "f-search"
+import { useSearchDispatch, openSearchBar } from "f-search"
 
 const navLinks: Array<{
   to: string
   children: React.ReactNode
 }> = [
-  // { to: "/about", children: "About" },
+  { to: "/about", children: "About" },
   { to: "/projects", children: "Projects" },
   { to: "/blog", children: "Blog" },
 ]
@@ -35,7 +31,6 @@ const socialLinks: Array<{
 
 export default function Navigation(): JSX.Element {
   const dispatch = useSearchDispatch()
-  const isSearchEnabled = useSearchFeatureFlag()
 
   return (
     <nav aria-label="Main navigation">
@@ -62,16 +57,15 @@ export default function Navigation(): JSX.Element {
             </a>
           </li>
         ))}
-        {isSearchEnabled ? (
-          <li key="search" className="flex items-center">
-            <button title="Search [Cmd+K]">
-              <SearchIcon
-                className="hover:text-white cursor-pointer"
-                onClick={() => dispatch(openSearchBar())}
-              />
-            </button>
-          </li>
-        ) : null}
+
+        <li key="search" className="flex items-center">
+          <button title="Search [Cmd+K]">
+            <SearchIcon
+              className="hover:text-white cursor-pointer"
+              onClick={() => dispatch(openSearchBar())}
+            />
+          </button>
+        </li>
       </ul>
     </nav>
   )

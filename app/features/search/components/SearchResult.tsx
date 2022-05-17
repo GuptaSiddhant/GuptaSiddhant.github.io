@@ -4,7 +4,7 @@ import { Fragment, useMemo } from "react"
 import type { FetcherWithComponents } from "types"
 
 import { useSearchState } from "../store"
-import type { SearchFetcherData } from "../types"
+import type { SearchFetcherData, SearchEntry } from "../types"
 import {
   SearchResultHeader,
   SearchResultItem,
@@ -40,14 +40,25 @@ export default function SearchResult({
         data && hasSearchData ? (
           <SearchResultsList {...data} />
         ) : (
-          <SearchResultsEmpty />
+          <>
+            <SearchResultsEmpty />
+            <EntriesList entries={entries} />
+          </>
         )
       ) : (
-        entries.map((entry) => (
-          <EntryResultItem key={entry.id} className="font-bold" entry={entry} />
-        ))
+        <EntriesList entries={entries} />
       )}
     </nav>
+  )
+}
+
+function EntriesList({ entries }: { entries: SearchEntry[] }) {
+  return (
+    <>
+      {entries.map((entry) => (
+        <EntryResultItem key={entry.id} className="font-bold" entry={entry} />
+      ))}
+    </>
   )
 }
 

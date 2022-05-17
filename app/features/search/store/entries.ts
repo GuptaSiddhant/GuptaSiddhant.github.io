@@ -4,14 +4,21 @@ export const defaultEntries: SearchEntry[] = [
   {
     label: "Home",
     shortcut: ["Shift", "h"],
-    keywords: "home, index",
+    keywords: "home,index",
     id: "home",
     href: "/",
   },
   {
+    label: "About",
+    shortcut: ["Shift", "a"],
+    keywords: "about,life",
+    id: "about",
+    href: "/about",
+  },
+  {
     label: "Blog",
     shortcut: ["Shift", "b"],
-    keywords: "writing words",
+    keywords: "writing,words",
     id: "blog",
     href: "/blog",
   },
@@ -25,7 +32,7 @@ export const defaultEntries: SearchEntry[] = [
   {
     label: "Testimonials",
     shortcut: ["Shift", "t"],
-    keywords: "testimonials, testimony",
+    keywords: "testimonials,testimony",
     id: "testimonials",
     href: "/#testimonials",
   },

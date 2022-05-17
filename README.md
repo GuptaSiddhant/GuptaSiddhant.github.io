@@ -17,7 +17,9 @@ Todo:
 - [x] Feature-flags
 - [x] Analytics (projects)
 - [x] Blog-list at Home
-- [-] Command palette / Search
+- [x] Command palette / Search
+  - [x] Search icon + loading icon
+- [ ] bug: Sticky header scroll up
 - [ ] Share
 - [ ] Auth
 - [ ] Favourite

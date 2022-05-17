@@ -1,5 +1,7 @@
 import clsx from "clsx"
 import CloseIcon from "remixicon-react/CloseCircleLineIcon"
+import SearchIcon from "remixicon-react/Search2LineIcon"
+import LoadingIcon from "remixicon-react/Loader4LineIcon"
 
 import Button from "ui/Button"
 import { InputWithRef } from "ui/Input"
@@ -15,11 +17,12 @@ export default function SearchBar({
   fetcher: FetcherWithComponents<SearchFetcherData>
   inputRef: React.RefObject<HTMLInputElement>
 }) {
-  const { Form, submit } = fetcher
   const dispatch = useSearchDispatch()
+  const { Form, submit, state } = fetcher
+  const isLoading = state !== "idle"
 
   return (
-    <Form method="get" action="/search">
+    <Form method="get" action="/search" className="relative">
       <input type="hidden" name="field" value="id" />
       <input type="hidden" name="field" value="title" />
       <input type="hidden" name="field" value="cover" />
@@ -30,14 +33,25 @@ export default function SearchBar({
         name="q"
         key={String(open)}
         defaultValue={""}
-        className="w-full bg-gray-900"
+        className="w-full bg-gray-900 px-10"
         onChange={(e) => {
           dispatch(updateSearchTerm(e.target.value))
           submit(e.target.form)
         }}
       />
+      <div
+        aria-hidden="true"
+        className={clsx("absolute top-0 left-0 p-2 text-gray-500")}
+        onClick={() => inputRef.current?.focus()}
+      >
+        {isLoading ? (
+          <LoadingIcon aria-label="Loading" className="animate-spin" />
+        ) : (
+          <SearchIcon aria-label="Search" />
+        )}
+      </div>
       <Button
-        className={clsx("absolute right-3.5 sm:right-4 top-3.5 sm:top-4")}
+        className={clsx("absolute right-0 top-0")}
         title="Close palette"
         onClick={() => dispatch(closeSearchBar())}
       >
