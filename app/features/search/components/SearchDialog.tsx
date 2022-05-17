@@ -4,6 +4,7 @@ import clsx from "clsx"
 import { useRef } from "react"
 
 import { CSS_VAR_VISUAL_VIEWPORT_HEIGHT } from "~/constants"
+import { useResizeVVHEffect } from "helpers/resizeVisualViewportHeight"
 
 import { useSearchDispatch, useSearchState, closeSearchBar } from "../store"
 import useKeydown from "../hooks/useKeydown"
@@ -20,6 +21,7 @@ export default function SearchDialog() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useKeydown(containerRef, inputRef)
+  useResizeVVHEffect(inputRef)
 
   return (
     <Dialog

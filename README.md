@@ -19,7 +19,8 @@ Todo:
 - [x] Blog-list at Home
 - [x] Command palette / Search
   - [x] Search icon + loading icon
-- [x] bug: Sticky header scroll up
+  - [x] Resize on iOS keyboard
+  - [x] Reset search on close
 - [ ] Share
 - [ ] Auth
 - [ ] Favourite
@@ -34,3 +35,8 @@ Todo:
 - [ ] Light mode
 - [ ] Remote terminal
 - [ ] Color-coded code
+- [ ] Tests
+
+Bugs
+
+- [x] Sticky header scroll up

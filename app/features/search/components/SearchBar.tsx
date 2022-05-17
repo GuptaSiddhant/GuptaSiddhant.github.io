@@ -3,14 +3,17 @@ import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 import SearchIcon from "remixicon-react/Search2LineIcon"
 import LoadingIcon from "remixicon-react/Loader4LineIcon"
 
-import { CSS_VAR_VISUAL_VIEWPORT_HEIGHT } from "~/constants"
 import Button from "ui/Button"
 import { InputWithRef } from "ui/Input"
 import type { FetcherWithComponents } from "types"
 
-import { useSearchDispatch, closeSearchBar, updateSearchTerm } from "../store"
+import {
+  useSearchDispatch,
+  closeSearchBar,
+  updateSearchTerm,
+  useSearchState,
+} from "../store"
 import type { SearchFetcherData } from "../types"
-import { __IS_SERVER__ } from "helpers"
 
 export default function SearchBar({
   fetcher,
@@ -19,6 +22,7 @@ export default function SearchBar({
   fetcher: FetcherWithComponents<SearchFetcherData>
   inputRef: React.RefObject<HTMLInputElement>
 }) {
+  const { searchTerm } = useSearchState()
   const dispatch = useSearchDispatch()
   const { Form, submit, state } = fetcher
   const isLoading = state !== "idle"
@@ -34,14 +38,12 @@ export default function SearchBar({
         ref={inputRef}
         name="q"
         key={String(open)}
-        defaultValue={""}
+        value={searchTerm}
         className="w-full bg-gray-900 px-10"
         onChange={(e) => {
           dispatch(updateSearchTerm(e.target.value))
           submit(e.target.form)
         }}
-        onFocus={handleInputFocus}
-        onBlur={handleInputFocus}
       />
       <div
         aria-hidden="true"
@@ -64,28 +66,4 @@ export default function SearchBar({
       </Button>
     </Form>
   )
-}
-
-function handleInputFocus(): void {
-  if (__IS_SERVER__) return
-  let interval: NodeJS.Timer
-  let previousHeight = 0
-
-  const changer = () => {
-    const newHeight = window.visualViewport.height
-
-    if (previousHeight === newHeight) {
-      clearInterval(interval)
-    } else {
-      previousHeight = newHeight
-      document.documentElement.style.setProperty(
-        CSS_VAR_VISUAL_VIEWPORT_HEIGHT,
-        `${newHeight}px`,
-      )
-    }
-  }
-
-  if (window.visualViewport) {
-    interval = setInterval(changer, 500)
-  }
 }

@@ -7,7 +7,7 @@ export default function reducer(
   switch (action.type) {
     case "TOGGLE_OPEN": {
       const open = action.payload ?? !state.open
-      return { ...state, open }
+      return { ...state, open, searchTerm: open ? state.searchTerm : "" }
     }
     case "ADD_ENTRY": {
       const entry = action.payload
