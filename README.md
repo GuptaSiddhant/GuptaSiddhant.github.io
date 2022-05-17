@@ -19,7 +19,7 @@ Todo:
 - [x] Blog-list at Home
 - [x] Command palette / Search
   - [x] Search icon + loading icon
-- [ ] bug: Sticky header scroll up
+- [x] bug: Sticky header scroll up
 - [ ] Share
 - [ ] Auth
 - [ ] Favourite

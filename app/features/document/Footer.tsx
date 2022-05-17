@@ -4,7 +4,7 @@ import UpIcon from "remixicon-react/ArrowUpLineIcon"
 
 import useOffsetScroll from "helpers/useOffsetScroll"
 import Button from "ui/Button"
-import RoundedCorner from "./Rounded"
+import RoundedCorner from "ui/RoundedCorner"
 
 export default function Footer(): JSX.Element {
   const { isOffsetScrolled: scrollButtonVisible } = useOffsetScroll()
@@ -30,8 +30,8 @@ export default function Footer(): JSX.Element {
           <UpIcon aria-label="Scroll to top" />
         </Button>
       ) : null}
-      <RoundedCorner position="bottom-left" />
-      <RoundedCorner position="bottom-right" />
+      <RoundedCorner bottom />
+      <RoundedCorner bottom right />
     </footer>
   )
 }

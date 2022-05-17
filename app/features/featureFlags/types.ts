@@ -1,6 +1,4 @@
-export enum FeatureFlag {
-  Search = "search",
-  // SearchDev = "search-dev",
-}
+export enum FeatureFlag {}
+// Search = "search",
 
 export interface FeatureFlags extends Record<FeatureFlag, boolean> {}

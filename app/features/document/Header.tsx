@@ -5,8 +5,9 @@ import { useRef } from "react"
 import { CSS_VAR_HEADER_HEIGHT } from "~/constants"
 import { fullName } from "f-about"
 import useEventListener from "helpers/useEventListener"
+import RoundedCorner from "ui/RoundedCorner"
+
 import Navigation from "./Navigation"
-import RoundedCorner from "./Rounded"
 
 export default function Header(): JSX.Element {
   const headerRef = useRef<HTMLElement>(null)
@@ -36,8 +37,8 @@ export default function Header(): JSX.Element {
     >
       <Logo />
       <Navigation />
-      <RoundedCorner position="top-left" />
-      <RoundedCorner position="top-right" />
+      <RoundedCorner />
+      <RoundedCorner right />
     </header>
   )
 }
