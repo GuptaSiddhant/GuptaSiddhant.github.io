@@ -15,7 +15,8 @@ import {
 } from "f-featureFlags"
 import { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
 import Section from "ui/Section"
-import { H1 } from "./ui/typography"
+import { H1 } from "ui/typography"
+import "service/appcheck"
 
 export function links(): LinkDescriptor[] {
   return linkDescriptors
