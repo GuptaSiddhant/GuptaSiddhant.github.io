@@ -26,7 +26,8 @@ export const meta: MetaFunction = () => {
     title: fullName,
     description: "Webfolio of a developer/designer.",
     charset: "utf-8",
-    viewport: "width=device-width,initial-scale=1",
+    viewport:
+      "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0",
     "application-name": fullName,
     "apple-mobile-web-app-title": fullName,
     "theme-color": "#000000",
