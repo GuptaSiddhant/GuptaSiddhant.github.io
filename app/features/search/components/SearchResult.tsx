@@ -1,87 +1,33 @@
 import clsx from "clsx"
-import { Fragment, useMemo } from "react"
-
-import type { FetcherWithComponents } from "types"
+import { Fragment } from "react"
 
 import { useSearchState } from "../store"
-import type { SearchFetcherData, SearchEntry } from "../types"
-import {
-  SearchResultHeader,
-  SearchResultItem,
-  EntryResultItem,
-} from "./SearchResultItem"
+import { SearchResultHeader, EntryResultItem } from "./SearchResultItem"
 
-export default function SearchResult({
-  fetcher,
-}: {
-  fetcher: FetcherWithComponents<SearchFetcherData>
-}) {
-  const { entries, searchTerm } = useSearchState()
-  const { data, state } = fetcher
-  const isLoading = state === "loading"
-
-  const hasSearchData = useMemo(() => {
-    if (isLoading) return true
-    if (!data) return false
-    for (const key in data) {
-      if (data[key as keyof SearchFetcherData].length) return true
-    }
-    return false
-  }, [data, isLoading])
+export default function SearchResult() {
+  const { results } = useSearchState()
+  console.log(results)
 
   return (
-    <nav
+    <output
       className={clsx(
         "overflow-scroll h-full w-full list-none",
         "flex flex-col relative",
       )}
     >
-      {searchTerm.length > 0 ? (
-        data && hasSearchData ? (
-          <SearchResultsList {...data} />
-        ) : (
-          <>
-            <SearchResultsEmpty />
-            <EntriesList entries={entries} />
-          </>
-        )
-      ) : (
-        <EntriesList entries={entries} />
-      )}
-    </nav>
-  )
-}
-
-function EntriesList({ entries }: { entries: SearchEntry[] }) {
-  return (
-    <>
-      {entries.map((entry) => (
-        <EntryResultItem key={entry.id} className="font-bold" entry={entry} />
-      ))}
-    </>
-  )
-}
-
-function SearchResultsList(data: SearchFetcherData): JSX.Element {
-  return (
-    <>
-      {Object.entries(data).map(([key, list]) =>
-        list.length > 0 ? (
-          <Fragment key={"header-" + key}>
-            <SearchResultHeader key={"header-" + key}>
-              {key.toUpperCase()}
+      {Object.entries(results).map(([id, category]) =>
+        category.entries.length > 0 ? (
+          <Fragment key={id}>
+            <SearchResultHeader key={"category-" + id}>
+              {category.title}
             </SearchResultHeader>
-            {list.map((item) => (
-              <SearchResultItem
-                key={key + "-" + item.id}
-                baseLink={`/${key}/`}
-                {...item}
-              />
+            {category.entries.map((entry) => (
+              <EntryResultItem key={id + "-" + entry.id} entry={entry} />
             ))}
           </Fragment>
         ) : null,
       )}
-    </>
+    </output>
   )
 }
 

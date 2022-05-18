@@ -18,7 +18,7 @@ export function SearchResultItem({
     <EntryResultItem
       entry={{
         id,
-        label: title,
+        title,
         href: `${baseLink}${id}`,
         icon:
           icon || cover ? (
@@ -42,7 +42,7 @@ export function SearchResultHeader({
       className={clsx(
         className,
         "border-b-[1px] border-gray-600 px-4 pt-1 bg-gray-800",
-        "sticky top-0 font-black mt-4 text-sm tracking-wider",
+        "sticky top-0 font-black mt-4 text-sm tracking-wider uppercase",
       )}
     >
       {children}
@@ -59,12 +59,11 @@ export function EntryResultItem({
   entry,
   className,
 }: ResultItemProps): JSX.Element | null {
-  const { label, shortcut, icon } = entry
-  const perform = usePerformEntryAction()
+  const { title, shortcut, icon, href, perform } = entry
 
   return (
     <li className="m-1 border-b-[0.5px] border-gray-700">
-      <button
+      <a
         data-result
         className={clsx(
           className,
@@ -73,14 +72,25 @@ export function EntryResultItem({
           "cursor-pointer",
           "flex justify-between items-center",
         )}
-        onClick={() => perform(entry)}
+        href={href}
+        onClick={perform}
       >
         <span>
-          {icon}
-          {label}
+          {icon ? (
+            typeof icon === "string" ? (
+              <img
+                src={icon}
+                alt={title}
+                className="aspect-square h-8 rounded-sm object-cover inline-block mr-4"
+              />
+            ) : (
+              icon
+            )
+          ) : null}
+          {title}
         </span>
         {shortcut ? <Hotkeys keys={shortcut} /> : null}
-      </button>
+      </a>
     </li>
   )
 }

@@ -4,6 +4,7 @@ import { type Fetcher } from "@remix-run/react/transition"
 export interface Teaser {
   id: string
   title: string
+  subtitle?: string
   cover?: string
   icon?: string
 }

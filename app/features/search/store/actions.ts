@@ -1,30 +1,47 @@
-import type { SearchAction, SearchEntry } from "../types"
+import { navigation } from "../entries"
+import type { SearchAction, SearchCategory } from "../types"
 
 export { useSearchDispatch } from "."
 
 export function closeSearchBar(): SearchAction {
-  return { type: "TOGGLE_OPEN", payload: false }
+  return { open: false, searchTerm: "" }
 }
 export function openSearchBar(): SearchAction {
-  return { type: "TOGGLE_OPEN", payload: true }
+  return { open: true }
 }
 export function toggleSearchBarOpen(): SearchAction {
-  return { type: "TOGGLE_OPEN" }
-}
-
-export function addEntry(entry: SearchEntry): SearchAction {
-  return { type: "ADD_ENTRY", payload: entry }
-}
-export function updateEntry(entry: Partial<SearchEntry>): SearchAction {
-  return { type: "UPDATE_ENTRY", payload: entry }
-}
-export function removeEntry(entry: SearchEntry | string): SearchAction {
-  return {
-    type: "REMOVE_ENTRY",
-    payload: typeof entry === "string" ? entry : entry.id,
+  return (state) => {
+    const open = !state.open
+    return {
+      open,
+      searchTerm: open ? "" : state.searchTerm,
+    }
   }
 }
 
-export function updateSearchTerm(value: string): SearchAction {
-  return { type: "UPDATE_SEARCH_TERM", payload: value }
+export function updateSearchTerm(searchTerm: string): SearchAction {
+  return (state) => ({
+    searchTerm,
+    results: {
+      ...state.results,
+      navigation: searchTerm
+        ? {
+            ...navigation,
+            entries: navigation.entries.filter((e) =>
+              [e.title.toLowerCase(), ...(e.keywords || [])].some((text) =>
+                text.includes(searchTerm.toLowerCase()),
+              ),
+            ),
+          }
+        : navigation,
+    },
+  })
+}
+
+export function updateEntries(
+  results: Record<string, SearchCategory>,
+): SearchAction {
+  return (state) => {
+    return { results: { ...state.results, ...results } }
+  }
 }

@@ -13,24 +13,15 @@ export function useResizeVVHEffect(ref: RefObject<HTMLElement>) {
 
 export function resizeVisualViewportHeight(): void {
   if (__IS_SERVER__) return
-  let interval: NodeJS.Timer
-  let previousHeight = 0
 
   const changer = () => {
-    const newHeight = window.visualViewport.height
-
-    if (previousHeight === newHeight) {
-      clearInterval(interval)
-    } else {
-      previousHeight = newHeight
-      document.documentElement.style.setProperty(
-        CSS_VAR_VISUAL_VIEWPORT_HEIGHT,
-        `${newHeight}px`,
-      )
-    }
+    document.documentElement.style.setProperty(
+      CSS_VAR_VISUAL_VIEWPORT_HEIGHT,
+      `${window.visualViewport.height}px`,
+    )
   }
 
   if (window.visualViewport) {
-    interval = setInterval(changer, 500)
+    setTimeout(changer, 1000)
   }
 }

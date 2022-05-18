@@ -14,7 +14,7 @@ export default function useKeydown(
   containerRef: RefObject<HTMLDivElement>,
   inputRef: RefObject<HTMLInputElement>,
 ) {
-  const { entries, open } = useSearchState()
+  const { results, open } = useSearchState()
   const dispatch = useSearchDispatch()
   const performEntryAction = usePerformEntryAction()
 
@@ -30,25 +30,27 @@ export default function useKeydown(
     const inputs = [...document.querySelectorAll("input")]
     if (inputs.some((input) => document.activeElement === input)) return
 
-    entries.forEach((entry) => {
-      if (!entry.shortcut) return
+    Object.entries(results)
+      .flatMap(([_, c]) => c.entries)
+      .forEach((entry) => {
+        if (!entry.shortcut) return
 
-      const shiftKey = entry.shortcut.includes("Shift")
-      const metaKey =
-        entry.shortcut.includes("Cmd") || entry.shortcut.includes("Win")
-      const ctrlKey = entry.shortcut.includes("Ctrl")
-      const actionKey = entry.shortcut.find((k) => k.length === 1)
+        const shiftKey = entry.shortcut.includes("Shift")
+        const metaKey =
+          entry.shortcut.includes("Cmd") || entry.shortcut.includes("Win")
+        const ctrlKey = entry.shortcut.includes("Ctrl")
+        const actionKey = entry.shortcut.find((k) => k.length === 1)
 
-      if (
-        e.key.toLowerCase() === actionKey &&
-        e.shiftKey === shiftKey &&
-        e.metaKey === metaKey &&
-        e.ctrlKey === ctrlKey
-      ) {
-        e.preventDefault()
-        performEntryAction(entry)
-      }
-    })
+        if (
+          e.key.toLowerCase() === actionKey &&
+          e.shiftKey === shiftKey &&
+          e.metaKey === metaKey &&
+          e.ctrlKey === ctrlKey
+        ) {
+          e.preventDefault()
+          performEntryAction(entry)
+        }
+      })
   })
 
   const handleKeyboardNavigation = useStableCallback((e: KeyboardEvent) => {

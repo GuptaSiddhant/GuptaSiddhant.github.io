@@ -1,11 +1,10 @@
 import { createContext, useReducer, type Dispatch } from "react"
 
-import { defaultEntries } from "./entries"
-import reducer from "./reducer"
+import { navigation } from "../entries"
 import type { SearchAction, SearchState } from "../types"
 
 const initialState: SearchState = {
-  entries: defaultEntries,
+  results: { navigation },
   open: false,
   searchTerm: "",
 }
@@ -15,7 +14,13 @@ export const SearchDispatchContext =
   createContext<Dispatch<SearchAction> | null>(null)
 
 export function SearchProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(
+    (state: SearchState, action: SearchAction) => ({
+      ...state,
+      ...(typeof action === "function" ? action(state) : action),
+    }),
+    initialState,
+  )
 
   return (
     <SearchStateContext.Provider value={state}>

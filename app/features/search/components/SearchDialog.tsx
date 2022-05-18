@@ -1,5 +1,4 @@
 import { Dialog } from "@reach/dialog"
-import { useFetcher } from "@remix-run/react"
 import clsx from "clsx"
 import { useRef } from "react"
 
@@ -8,7 +7,6 @@ import { useResizeVVHEffect } from "helpers/resizeVisualViewportHeight"
 
 import { useSearchDispatch, useSearchState, closeSearchBar } from "../store"
 import useKeydown from "../hooks/useKeydown"
-import type { SearchFetcherData } from "../types"
 import SearchBar from "./SearchBar"
 import SearchResult from "./SearchResult"
 
@@ -16,7 +14,6 @@ export default function SearchDialog() {
   const { open } = useSearchState()
   const dispatch = useSearchDispatch()
 
-  const searchFetcher = useFetcher<SearchFetcherData>()
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -41,8 +38,8 @@ export default function SearchDialog() {
         maxHeight: `calc(var(${CSS_VAR_VISUAL_VIEWPORT_HEIGHT}) * 0.9)`,
       }}
     >
-      <SearchBar fetcher={searchFetcher} inputRef={inputRef} />
-      <SearchResult fetcher={searchFetcher} />
+      <SearchBar inputRef={inputRef} />
+      <SearchResult />
     </Dialog>
   )
 }
