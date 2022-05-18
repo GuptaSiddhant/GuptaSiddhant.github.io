@@ -21,6 +21,8 @@ Todo:
   - [x] Search icon + loading icon
   - [x] Resize on iOS keyboard
   - [x] Reset search on close
+  - [ ] Categorise all links and other results
+  - [ ] lru-cache
 - [x] AppCheck
 - [ ] Share
 - [ ] Auth
@@ -37,7 +39,6 @@ Todo:
 - [ ] Remote terminal
 - [ ] Color-coded code
 - [ ] Tests
-- [ ] lru-cache
 
 Bugs
 
