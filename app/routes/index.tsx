@@ -1,21 +1,26 @@
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
-import { fullName, heroAdjectives, techStackList, title } from "f-about"
-import { getProjectList, type ProjectTeaser } from "f-projects"
-import { getBlogPostsList, type BlogPostTeaser } from "f-blog"
+import {
+  fullName,
+  heroAdjectives,
+  techStackList,
+  title,
+} from "~/features/about"
+import { getProjectList, type ProjectTeaser } from "~/features/projects"
+import { getBlogPostsList, type BlogPostTeaser } from "~/features/blog"
 import {
   getAllTestimonies,
   TestimonialsSection,
   type Testimony,
-} from "f-testimonials"
+} from "~/features/testimonials"
 
-import { formatList } from "helpers/format"
-import ChangingText from "ui/ChangingText"
-import { Link, ExternalLink, InternalLink } from "ui/Link"
-import Section from "ui/Section"
-import TeaserSection from "ui/TeaserSection"
-import { Caption, H1, H2 } from "ui/typography"
+import { formatList } from "~/helpers/format"
+import ChangingText from "~/ui/ChangingText"
+import { Link, ExternalLink, InternalLink } from "~/ui/Link"
+import Section from "~/ui/Section"
+import TeaserSection from "~/ui/TeaserSection"
+import { Caption, H1, H2 } from "~/ui/typography"
 
 export const meta: MetaFunction = () => {
   return {

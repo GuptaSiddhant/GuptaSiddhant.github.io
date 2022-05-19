@@ -3,7 +3,7 @@ import {
   logViewItemListEvent,
   logViewItemEvent,
   type AnalyticsEventItem,
-} from "service/analytics"
+} from "~/service/analytics"
 import type { ProjectTeaser } from "./types"
 
 const analyticsProjectList = {

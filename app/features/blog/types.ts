@@ -1,4 +1,4 @@
-import type { Teaser } from "types"
+import type { Teaser } from "~/types"
 
 export interface BlogPostType extends BlogPostTeaser {
   externalLink?: string

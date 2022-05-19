@@ -15,7 +15,7 @@ import {
   type QueryConstraint,
 } from "firebase/firestore"
 
-import { __IS_DEV__ } from "helpers"
+import { __IS_DEV__ } from "~/helpers"
 import firebaseApp from "./firebase"
 
 const firestore = getFirestore(firebaseApp)

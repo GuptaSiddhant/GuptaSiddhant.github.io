@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { type ComponentPropsWithoutRef } from "react"
-import { capitalize } from "helpers"
+import { capitalize } from "~/helpers"
 import { type PropsWithChildren } from "./types"
 
 export default {

@@ -23,7 +23,6 @@ Todo:
   - [x] Reset search on close
   - [x] Categorise all links and other results
   - [ ] lru-cache
-- [x] AppCheck
 - [ ] Share
 - [ ] Auth
 - [ ] Favourite

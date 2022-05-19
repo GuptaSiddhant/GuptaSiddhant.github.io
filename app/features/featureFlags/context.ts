@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react"
-import { __IS_DEV__ } from "helpers"
+import { __IS_DEV__ } from "~/helpers"
 import { type FeatureFlag, type FeatureFlags } from "./types"
 
 export const FeatureFlagsContext = createContext<FeatureFlags | undefined>(

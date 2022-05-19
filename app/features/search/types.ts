@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { Teaser } from "types"
+import type { Teaser } from "~/types"
 
 export interface SearchState {
   open: boolean

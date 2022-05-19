@@ -6,12 +6,12 @@ import {
   ProjectCard,
   useLogViewMultipleProjectsEvent,
   type ProjectTeaser,
-} from "f-projects"
+} from "~/features/projects"
 
-import { getUniqueTagsFromObjects } from "helpers"
-import Filter from "ui/Filter"
-import Section from "ui/Section"
-import { H1 } from "ui/typography"
+import { getUniqueTagsFromObjects } from "~/helpers"
+import Filter from "~/ui/Filter"
+import Section from "~/ui/Section"
+import { H1 } from "~/ui/typography"
 
 import { type ProjectsAPIResponse } from "./api"
 

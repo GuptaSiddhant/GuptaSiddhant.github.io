@@ -4,8 +4,8 @@ import CloseIcon from "remixicon-react/CloseCircleLineIcon"
 import SearchIcon from "remixicon-react/Search2LineIcon"
 import LoadingIcon from "remixicon-react/Loader4LineIcon"
 
-import Button from "ui/Button"
-import { InputWithRef } from "ui/Input"
+import Button from "~/ui/Button"
+import { InputWithRef } from "~/ui/Input"
 
 import {
   useSearchDispatch,

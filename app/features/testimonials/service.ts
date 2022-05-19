@@ -4,7 +4,7 @@ import {
   limit,
   type QueryDocumentSnapshot,
   getCollectionItem,
-} from "service/database"
+} from "~/service/database"
 import type { Testimony } from "./types"
 
 const COLLECTION_NAME = "testimonies"

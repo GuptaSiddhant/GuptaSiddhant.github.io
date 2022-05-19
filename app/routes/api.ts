@@ -3,14 +3,14 @@ import {
   getBlogPostsList,
   filterBlogPostsWithQueryAndTags,
   getBlogPostById,
-} from "f-blog"
+} from "~/features/blog"
 import {
   filterProjectsWithQueryAndTags,
   getProjectList,
   getProjectById,
-} from "f-projects"
-import { getAllTestimonies, getTestimonyById } from "f-testimonials"
-import { errorResponse } from "helpers/api"
+} from "~/features/projects"
+import { getAllTestimonies, getTestimonyById } from "~/features/testimonials"
+import { errorResponse } from "~/helpers/api"
 
 enum ApiTypes {
   Blog = "blog",

@@ -1,4 +1,4 @@
-import { __IS_DEV__ } from "helpers"
+import { __IS_DEV__ } from "~/helpers"
 import {
   getCollection,
   getCollectionItem,
@@ -6,7 +6,7 @@ import {
   orderBy,
   limit,
   draftConstraints,
-} from "service/database"
+} from "~/service/database"
 
 import {
   transformDocToBlogPost,

@@ -1,4 +1,4 @@
-import { __IS_DEV__ } from "helpers"
+import { __IS_DEV__ } from "~/helpers"
 import {
   getCollection,
   getCollectionItem,
@@ -7,7 +7,7 @@ import {
   limit,
   draftConstraints,
   type QueryConstraint,
-} from "service/database"
+} from "~/service/database"
 
 import type { ProjectType, ProjectTeaser } from "../types"
 import {

@@ -1,6 +1,5 @@
 import { useLocation } from "@remix-run/react"
 import { useEffect, useState, useMemo } from "react"
-import useEventListener from "helpers/useEventListener"
 
 import createTOC from "./createTOC"
 import renderTOC from "./renderTOC"

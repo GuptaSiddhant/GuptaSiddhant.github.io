@@ -2,9 +2,9 @@ import clsx from "clsx"
 import { useCallback } from "react"
 import UpIcon from "remixicon-react/ArrowUpLineIcon"
 
-import useOffsetScroll from "helpers/useOffsetScroll"
-import Button from "ui/Button"
-import RoundedCorner from "ui/RoundedCorner"
+import useOffsetScroll from "~/helpers/useOffsetScroll"
+import Button from "~/ui/Button"
+import RoundedCorner from "~/ui/RoundedCorner"
 
 export default function Footer(): JSX.Element {
   const { isOffsetScrolled: scrollButtonVisible } = useOffsetScroll()

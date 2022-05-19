@@ -1,5 +1,5 @@
-import Section from "ui/Section"
-import { H1 } from "ui/typography"
+import Section from "~/ui/Section"
+import { H1 } from "~/ui/typography"
 
 export default function Error404(): JSX.Element {
   return (

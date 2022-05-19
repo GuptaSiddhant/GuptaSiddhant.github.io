@@ -9,16 +9,16 @@ import {
   useLogViewProjectEvent,
   type ProjectType,
   type ProjectTeaser,
-} from "f-projects"
-import MarkdownSection from "f-mdx"
+} from "~/features/projects"
+import MarkdownSection from "~/features/mdx"
 
-import { __IS_DEV__ } from "helpers"
-import Breadcrumbs, { Crumb, type MatchedCrumbProps } from "ui/Breadcrumbs"
-import { InternalLink } from "ui/Link"
-import Section from "ui/Section"
-import StickyHeader from "ui/StickyHeader"
-import TeaserSection from "ui/TeaserSection"
-import { H2 } from "ui/typography"
+import { __IS_DEV__ } from "~/helpers"
+import Breadcrumbs, { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
+import { InternalLink } from "~/ui/Link"
+import Section from "~/ui/Section"
+import StickyHeader from "~/ui/StickyHeader"
+import TeaserSection from "~/ui/TeaserSection"
+import { H2 } from "~/ui/typography"
 
 interface LoaderData {
   project: ProjectType

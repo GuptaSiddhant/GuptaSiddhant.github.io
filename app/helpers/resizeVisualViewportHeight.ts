@@ -1,4 +1,4 @@
-import { __IS_SERVER__ } from "helpers"
+import { __IS_SERVER__ } from "~/helpers"
 import { useEffect, type RefObject } from "react"
 import { CSS_VAR_VISUAL_VIEWPORT_HEIGHT } from "~/constants"
 

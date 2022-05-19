@@ -6,12 +6,12 @@ import {
   BlogPostCard,
   updateBlogList,
   type BlogPostTeaser,
-} from "f-blog"
+} from "~/features/blog"
 
-import { getUniqueTagsFromObjects } from "helpers"
-import Filter from "ui/Filter"
-import Section from "ui/Section"
-import { H1 } from "ui/typography"
+import { getUniqueTagsFromObjects } from "~/helpers"
+import Filter from "~/ui/Filter"
+import Section from "~/ui/Section"
+import { H1 } from "~/ui/typography"
 
 import { type BlogPostsAPIResponse } from "./api"
 

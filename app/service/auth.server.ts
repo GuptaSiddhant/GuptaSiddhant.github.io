@@ -1,6 +1,6 @@
 import { createCookieSessionStorage } from "@remix-run/node"
 
-import { __IS_DEV__ } from "helpers"
+import { __IS_DEV__ } from "~/helpers"
 
 export const sessionStorage = createCookieSessionStorage({
   cookie: {

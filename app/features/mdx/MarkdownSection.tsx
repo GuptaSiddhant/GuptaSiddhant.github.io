@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { useRef } from "react"
 
-import Section from "ui/Section"
+import Section from "~/ui/Section"
 
 import MarkdownComponent from "./MarkdownComponent"
 import TableOfContent from "./TableOfContent"

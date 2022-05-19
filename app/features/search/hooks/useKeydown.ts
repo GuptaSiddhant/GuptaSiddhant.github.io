@@ -1,6 +1,6 @@
 import { type RefObject } from "react"
-import useEventListener from "helpers/useEventListener"
-import useStableCallback from "helpers/useStableCallback"
+import useEventListener from "~/helpers/useEventListener"
+import useStableCallback from "~/helpers/useStableCallback"
 
 import {
   closeSearchBar,

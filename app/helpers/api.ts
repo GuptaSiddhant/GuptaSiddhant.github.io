@@ -1,4 +1,4 @@
-import { getErrorMessage } from "helpers/catch-error"
+import { getErrorMessage } from "~/helpers/catch-error"
 
 export function apiTypeCallback(
   request: Request,

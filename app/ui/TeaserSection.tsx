@@ -1,8 +1,8 @@
 import clsx from "clsx"
 
-import { Link } from "ui/Link"
-import Section, { proseWidth } from "ui/Section"
-import type { Teaser } from "types"
+import { Link } from "~/ui/Link"
+import Section, { proseWidth } from "~/ui/Section"
+import type { Teaser } from "~/types"
 
 export interface TeaserSectionProps {
   id?: string

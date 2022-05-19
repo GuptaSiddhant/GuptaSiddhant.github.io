@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react"
 
-import Search from "f-search"
+import Search from "~/features/search"
 import Header from "./Header"
 import Footer from "./Footer"
 import Progress from "./Progress"

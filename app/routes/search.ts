@@ -1,10 +1,16 @@
 import { json, type LoaderFunction } from "@remix-run/node"
 
-import { getBlogPostsList, filterBlogPostsWithQueryAndTags } from "f-blog"
-import { getProjectList, filterProjectsWithQueryAndTags } from "f-projects"
-import { type SearchFetcherData } from "f-search"
-import { errorResponse } from "helpers/api"
-import type { Teaser } from "types"
+import {
+  getBlogPostsList,
+  filterBlogPostsWithQueryAndTags,
+} from "~/features/blog"
+import {
+  getProjectList,
+  filterProjectsWithQueryAndTags,
+} from "~/features/projects"
+import { type SearchFetcherData } from "~/features/search"
+import { errorResponse } from "~/helpers/api"
+import type { Teaser } from "~/types"
 
 export const loader: LoaderFunction = async ({ request }) => search(request)
 

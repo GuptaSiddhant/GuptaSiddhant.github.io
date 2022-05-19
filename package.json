@@ -10,6 +10,10 @@
     "dev:css": "tailwindcss -w -o ./app/styles/tailwind.css",
     "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/"
   },
+  "workspaces": [
+    "packages/*",
+    "app/*"
+  ],
   "dependencies": {
     "@reach/combobox": "^0.17.0",
     "@reach/dialog": "^0.17.0",

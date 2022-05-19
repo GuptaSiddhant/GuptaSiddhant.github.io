@@ -1,9 +1,9 @@
 import { type ReactNode } from "react"
 
-import { InternalLink } from "ui/Link"
-import Section from "ui/Section"
-import Tags from "ui/Tags"
-import { H1 } from "ui/typography"
+import { InternalLink } from "~/ui/Link"
+import Section from "~/ui/Section"
+import Tags from "~/ui/Tags"
+import { H1 } from "~/ui/typography"
 
 import type { BlogPostType } from "../types"
 

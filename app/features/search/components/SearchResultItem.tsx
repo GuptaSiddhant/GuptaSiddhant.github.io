@@ -1,8 +1,8 @@
 import clsx from "clsx"
 
-import type { Teaser } from "types"
-import Hotkeys from "ui/Hotkeys"
-import type { PropsWithChildren } from "ui/types"
+import type { Teaser } from "~/types"
+import Hotkeys from "~/ui/Hotkeys"
+import type { PropsWithChildren } from "~/ui/types"
 
 import usePerformEntryAction from "../hooks/usePerformEntryAction"
 import type { SearchEntry } from "../types"

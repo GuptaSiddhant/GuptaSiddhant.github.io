@@ -1,4 +1,4 @@
-import { isQueryMatch, isTagsAndMatch } from "helpers/filter"
+import { isQueryMatch, isTagsAndMatch } from "~/helpers/filter"
 import type { ProjectType } from "./types"
 
 export function filterProjectsWithQueryAndTags(

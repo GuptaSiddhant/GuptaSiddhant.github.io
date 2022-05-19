@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node"
 
-import { updateProjectList } from "f-projects"
-import { apiTypeCallback } from "helpers/api"
+import { updateProjectList } from "~/features/projects"
+import { apiTypeCallback } from "~/helpers/api"
 
 /** Projects API endpoint. */
 export const loader: LoaderFunction = async ({ request }) => {

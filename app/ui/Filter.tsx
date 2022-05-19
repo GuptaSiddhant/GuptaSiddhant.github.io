@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 
-import type { FetcherWithComponents } from "types"
+import type { FetcherWithComponents } from "~/types"
 
 import Input from "./Input"
 import Section from "./Section"

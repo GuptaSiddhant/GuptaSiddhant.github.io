@@ -1,4 +1,4 @@
-import { getCollectionItem } from "service/database"
+import { getCollectionItem } from "~/service/database"
 import { type FeatureFlags } from "./types"
 
 export async function getAllFeatureFlags(): Promise<FeatureFlags> {

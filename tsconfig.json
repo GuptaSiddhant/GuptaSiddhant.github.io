@@ -11,22 +11,6 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "helpers": ["./app/helpers"],
-      "helpers/*": ["./app/helpers/*"],
-      "service/*": ["./app/service/*"],
-      "styles/*": ["./app/styles/*"],
-      "types": ["./app/types"],
-      "ui/*": ["./app/ui/*"],
-      // Features
-      "f-about": ["./app/features/about"],
-      "f-blog": ["./app/features/blog"],
-      "f-document": ["./app/features/document"],
-      "f-featureFlags": ["./app/features/featureFlags"],
-      "f-mdx": ["./app/features/mdx"],
-      "f-projects": ["./app/features/projects"],
-      "f-search": ["./app/features/search"],
-      "f-testimonials": ["./app/features/testimonials"],
-      // Catch all
       "~/*": ["./app/*"]
     },
 
