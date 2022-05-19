@@ -3,7 +3,7 @@ import { useLoaderData } from "@remix-run/react"
 
 import { fullName, heroAdjectives, techStackList, title } from "f-about"
 import { getProjectList, type ProjectTeaser } from "f-projects"
-import { getAllBlogPosts, type BlogPostTeaser } from "f-blog"
+import { getBlogPostsList, type BlogPostTeaser } from "f-blog"
 import {
   getAllTestimonies,
   TestimonialsSection,
@@ -32,7 +32,7 @@ interface LoaderData {
 
 export const loader: LoaderFunction = async () => {
   const projects = await getProjectList(5)
-  const blogPosts = await getAllBlogPosts(3)
+  const blogPosts = await getBlogPostsList(3)
   const testimonies = await getAllTestimonies(5)
 
   return json<LoaderData>({ projects, blogPosts, testimonies })

@@ -23,7 +23,7 @@ const MarkdownComponent = memo(function MarkdownMain({
           h4: (props) => <H4 {...props} link />,
           h5: (props) => <H5 {...props} link />,
           h6: (props) => <H6 {...props} link />,
-          img: (props) => <Img {...props} link />,
+          img: (props) => <Img {...props} link loading="lazy" />,
           pre: Pre,
           p: Paragraph,
           a: AnchorLink,

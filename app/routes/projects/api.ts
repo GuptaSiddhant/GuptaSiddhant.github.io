@@ -1,7 +1,7 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import {
   filterProjectsWithQueryAndTags,
-  getAllProjects,
+  getProjectList,
   getProjectById,
   updateProjectList,
   type ProjectType,
@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     )
   }
 
-  const projects = await getAllProjects()
+  const projects = await getProjectList()
   const allTags = getUniqueTagsFromObjects(projects)
   const filteredProjects = filterProjectsWithQueryAndTags(
     projects,

@@ -19,23 +19,10 @@ import {
 const INFO_COLLECTION_NAME = "info"
 const COLLECTION_NAME = "projects"
 
-export async function getAllProjects(
-  limitBy: number = 100,
-  constraints: QueryConstraint[] = [],
-): Promise<ProjectType[]> {
-  return getCollection(
-    COLLECTION_NAME,
-    transformDocToProject,
-    ...draftConstraints,
-    ...constraints,
-    orderBy("dateStart", "desc"),
-    limit(limitBy),
-  )
-}
-
 export async function getProjectList(
   limitBy: number = 5,
 ): Promise<ProjectTeaser[]> {
+  console.log("fetching...")
   return getCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, (docSnap) =>
     Object.values(docSnap.data())
       .filter((project) => __IS_DEV__ || project.draft !== true)
@@ -85,4 +72,18 @@ export async function updateProjectList() {
     .reduce((acc, project) => ({ ...acc, [project.id]: project }), {})
 
   return setCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, data)
+}
+
+async function getAllProjects(
+  limitBy: number = 100,
+  constraints: QueryConstraint[] = [],
+): Promise<ProjectType[]> {
+  return getCollection(
+    COLLECTION_NAME,
+    transformDocToProject,
+    ...draftConstraints,
+    ...constraints,
+    orderBy("dateStart", "desc"),
+    limit(limitBy),
+  )
 }

@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node"
 import {
-  getAllBlogPosts,
+  getBlogPostsList,
   filterBlogPostsWithQueryAndTags,
   getBlogPostById,
   type BlogPostType,
@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     )
   }
 
-  const blogPosts = await getAllBlogPosts()
+  const blogPosts = await getBlogPostsList()
   const allTags = getUniqueTagsFromObjects(blogPosts)
   const filteredBlogPosts = filterBlogPostsWithQueryAndTags(
     blogPosts,

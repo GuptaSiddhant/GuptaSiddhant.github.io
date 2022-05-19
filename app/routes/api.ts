@@ -1,12 +1,12 @@
 import type { LoaderFunction } from "@remix-run/node"
 import {
-  getAllBlogPosts,
+  getBlogPostsList,
   filterBlogPostsWithQueryAndTags,
   getBlogPostById,
 } from "f-blog"
 import {
   filterProjectsWithQueryAndTags,
-  getAllProjects,
+  getProjectList,
   getProjectById,
 } from "f-projects"
 import { getAllTestimonies, getTestimonyById } from "f-testimonials"
@@ -48,7 +48,7 @@ export const loader: LoaderFunction = async ({ request }) => {
           errorResponse(`Project with id '${id}' not found.`),
         )
       }
-      const projects = await getAllProjects()
+      const projects = await getProjectList()
       return filterProjectsWithQueryAndTags(projects, query, selectedTags)
     }
 
@@ -58,7 +58,7 @@ export const loader: LoaderFunction = async ({ request }) => {
           errorResponse(`Blog post with id '${id}' not found.`),
         )
       }
-      const blogPosts = await getAllBlogPosts()
+      const blogPosts = await getBlogPostsList()
       return filterBlogPostsWithQueryAndTags(blogPosts, query, selectedTags)
     }
 

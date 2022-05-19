@@ -19,18 +19,6 @@ import type { BlogPostType, BlogPostTeaser } from "../types"
 const INFO_COLLECTION_NAME = "info"
 const COLLECTION_NAME = "blog"
 
-export async function getAllBlogPosts(
-  limitBy: number = 100,
-): Promise<BlogPostType[]> {
-  return getCollection(
-    COLLECTION_NAME,
-    transformDocToBlogPost,
-    ...draftConstraints,
-    orderBy("date", "desc"),
-    limit(limitBy),
-  )
-}
-
 export async function getBlogPostsList(
   limitBy: number = 5,
 ): Promise<BlogPostTeaser[]> {
@@ -83,4 +71,14 @@ export async function updateBlogList() {
     .reduce((acc, post) => ({ ...acc, [post.id]: post }), {})
 
   return setCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, data)
+}
+
+async function getAllBlogPosts(limitBy: number = 100): Promise<BlogPostType[]> {
+  return getCollection(
+    COLLECTION_NAME,
+    transformDocToBlogPost,
+    ...draftConstraints,
+    orderBy("date", "desc"),
+    limit(limitBy),
+  )
 }

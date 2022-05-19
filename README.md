@@ -21,7 +21,7 @@ Todo:
   - [x] Search icon + loading icon
   - [x] Resize on iOS keyboard
   - [x] Reset search on close
-  - [ ] Categorise all links and other results
+  - [x] Categorise all links and other results
   - [ ] lru-cache
 - [x] AppCheck
 - [ ] Share
