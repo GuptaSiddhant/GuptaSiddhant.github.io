@@ -1,4 +1,8 @@
-import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node"
+import {
+  json,
+  type LoaderFunction,
+  type MetaFunction,
+} from "@remix-run/server-runtime"
 import { useCatch, useLoaderData } from "@remix-run/react"
 
 import {

@@ -3,7 +3,7 @@ import {
   type LinkDescriptor,
   type LoaderFunction,
   type MetaFunction,
-} from "@remix-run/node"
+} from "@remix-run/server-runtime"
 import { Outlet, useCatch, useLoaderData } from "@remix-run/react"
 
 import { fullName } from "~/features/about"

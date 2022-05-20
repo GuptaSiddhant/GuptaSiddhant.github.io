@@ -1,4 +1,4 @@
-import { json, type LoaderFunction } from "@remix-run/node"
+import { json, type LoaderFunction } from "@remix-run/server-runtime"
 import { useFetcher, useLoaderData } from "@remix-run/react"
 
 import {

@@ -1,4 +1,4 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node"
+import type { ActionFunction, LoaderFunction } from "@remix-run/server-runtime"
 import {
   filterProjectsWithQueryAndTags,
   getProjectList,

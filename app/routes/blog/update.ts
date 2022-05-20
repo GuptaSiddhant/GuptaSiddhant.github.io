@@ -1,4 +1,4 @@
-import type { LoaderFunction } from "@remix-run/node"
+import type { LoaderFunction } from "@remix-run/server-runtime"
 
 import { updateBlogList } from "~/features/blog"
 import { apiTypeCallback } from "~/helpers/api"

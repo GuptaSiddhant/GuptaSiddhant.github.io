@@ -1,4 +1,4 @@
-import { createCookieSessionStorage } from "@remix-run/node"
+import { createCookieSessionStorage } from "@remix-run/server-runtime"
 
 import { __IS_DEV__ } from "~/helpers"
 

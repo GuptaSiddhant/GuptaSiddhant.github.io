@@ -10,16 +10,13 @@
     "dev:css": "tailwindcss -w -o ./app/styles/tailwind.css",
     "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/"
   },
-  "workspaces": [
-    "packages/*",
-    "app/*"
-  ],
   "dependencies": {
     "@reach/combobox": "^0.17.0",
     "@reach/dialog": "^0.17.0",
-    "@remix-run/node": "^1.4.0",
-    "@remix-run/react": "^1.4.0",
-    "@remix-run/vercel": "^1.4.0",
+    "@remix-run/node": "^1.5.0",
+    "@remix-run/react": "^1.5.0",
+    "@remix-run/server-runtime": "^1.5.0",
+    "@remix-run/vercel": "^1.5.0",
     "@vercel/node": "^1.8.3",
     "clsx": "^1.1.1",
     "firebase": "^9.6.2",
@@ -32,9 +29,9 @@
     "remixicon-react": "^1.0.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.4.0",
-    "@remix-run/eslint-config": "^1.4.0",
-    "@remix-run/serve": "^1.4.0",
+    "@remix-run/dev": "^1.5.0",
+    "@remix-run/eslint-config": "^1.5.0",
+    "@remix-run/serve": "^1.5.0",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.0",
     "@types/marked": "^4.0.3",

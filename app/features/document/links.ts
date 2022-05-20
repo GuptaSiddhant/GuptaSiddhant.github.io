@@ -1,4 +1,4 @@
-import type { LinkDescriptor } from "@remix-run/node"
+import type { LinkDescriptor } from "@remix-run/server-runtime"
 
 import globalStyles from "~/styles/index.css"
 import fontStyles from "~/styles/font.css"

@@ -38,6 +38,7 @@ Todo:
 - [ ] Remote terminal
 - [ ] Color-coded code
 - [ ] Tests
+- [ ] Meta data
 
 Bugs
 
