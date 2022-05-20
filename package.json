@@ -8,8 +8,13 @@
     "prebuild": "tailwindcss -o ./app/styles/tailwind.css",
     "dev": "concurrently \"remix dev\" \"npm:dev:css\"",
     "dev:css": "tailwindcss -w -o ./app/styles/tailwind.css",
-    "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/"
+    "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/",
+    "emulator": "firebase emulators:start",
+    "functions:build": "cd functions; yarn build"
   },
+  "workspaces": [
+    "functions"
+  ],
   "dependencies": {
     "@reach/combobox": "^0.17.0",
     "@reach/dialog": "^0.17.0",
