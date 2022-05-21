@@ -13,9 +13,11 @@
     "functions:build": "cd functions; yarn build"
   },
   "workspaces": [
-    "functions"
+    "functions",
+    "features/*"
   ],
   "dependencies": {
+    "@feature/about": "*",
     "@reach/combobox": "^0.17.0",
     "@reach/dialog": "^0.17.0",
     "@remix-run/node": "^1.5.0",

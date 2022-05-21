@@ -1,4 +1,4 @@
-const collections = ["projects", "blog", "info", "testimonies"]
+const collections = ["projects", "blog", "testimonies"]
 
 const app = require("firebase/app").initializeApp({
   apiKey: "AIzaSyDtuA2g8c2Wy3HW-XxSjeMtaeV4EfmpNUk",

@@ -3,7 +3,7 @@ import GithubIcon from "remixicon-react/GithubFillIcon"
 import LinkedinIcon from "remixicon-react/LinkedinBoxFillIcon"
 import SearchIcon from "remixicon-react/Search2LineIcon"
 
-import { socialLinks as aboutSocialLinks } from "~/features/about"
+import { socialLinks as aboutSocialLinks } from "@feature/about"
 import { useSearchDispatch, openSearchBar } from "~/features/search"
 
 const navLinks: Array<{

@@ -1,5 +1,3 @@
-// eslint-disable-next-line
-
 module.exports = {
   root: true,
   env: {
