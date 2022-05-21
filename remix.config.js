@@ -12,5 +12,10 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "api/index.js",
   // publicPath: "/build/",
-  serverDependenciesToBundle: [/^rehype.*/, /^remark.*/, /^unified.*/],
+  serverDependenciesToBundle: [
+    /^rehype.*/,
+    /^remark.*/,
+    /^unified.*/,
+    /^@feature\/*/,
+  ],
 }

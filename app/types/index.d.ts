@@ -1,5 +1,6 @@
 import { type useFetcher } from "@remix-run/react"
 import { type Fetcher } from "@remix-run/react/transition"
+import type LRUCache from "lru-cache"
 
 export interface Teaser {
   id: string
@@ -11,3 +12,7 @@ export interface Teaser {
 
 export type FetcherWithComponents<T> = ReturnType<typeof useFetcher> &
   Fetcher<T>
+
+declare global {
+  var projectListCache: LRUCache<string, Teaser[]>
+}
