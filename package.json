@@ -56,7 +56,7 @@
   },
   "sideEffects": false,
   "engines": {
-    "node": ">=16"
+    "node": ">=14"
   },
   "prettier": {
     "trailingComma": "all",
