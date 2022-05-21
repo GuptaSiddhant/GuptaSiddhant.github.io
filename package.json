@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "remix build",
-    "prebuild": "tailwindcss -o ./app/styles/tailwind.css",
+    "prebuild": "tailwindcss --minify -o ./app/styles/tailwind.css",
     "dev": "concurrently \"remix dev\" \"npm:dev:css\"",
     "dev:css": "tailwindcss -w -o ./app/styles/tailwind.css",
     "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/",
