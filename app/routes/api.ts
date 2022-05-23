@@ -9,7 +9,7 @@ import {
   getProjectList,
   getProjectById,
 } from "~/features/projects"
-import { getAllTestimonies, getTestimonyById } from "~/features/testimonials"
+import { getAllTestimonies, getTestimonyById } from "~/features/about"
 import { errorResponse } from "~/helpers/api"
 
 enum ApiTypes {

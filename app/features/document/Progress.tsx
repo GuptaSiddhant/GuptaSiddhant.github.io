@@ -1,6 +1,6 @@
 import { useTransition } from "@remix-run/react"
 import { useCallback, useEffect, useRef, type RefObject } from "react"
-import { CSS_VAR_HEADER_HEIGHT } from "~/constants"
+import { CSS_VAR_HEADER_HEIGHT } from "~/helpers/constants"
 
 export default function Progress(): JSX.Element {
   const elementRef = useProgress()

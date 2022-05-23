@@ -2,7 +2,7 @@ import { Dialog } from "@reach/dialog"
 import clsx from "clsx"
 import { useRef } from "react"
 
-import { CSS_VAR_VISUAL_VIEWPORT_HEIGHT } from "~/constants"
+import { CSS_VAR_VISUAL_VIEWPORT_HEIGHT } from "~/helpers/constants"
 import { useResizeVVHEffect } from "~/helpers/resizeVisualViewportHeight"
 
 import { useSearchDispatch, useSearchState, closeSearchBar } from "../store"

@@ -17,7 +17,7 @@ import {
   getAllTestimonies,
   TestimonialsSection,
   type Testimony,
-} from "~/features/testimonials"
+} from "~/features/about"
 
 import { formatList } from "~/helpers/format"
 import ChangingText from "~/ui/ChangingText"

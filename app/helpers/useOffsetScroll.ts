@@ -1,6 +1,6 @@
 import { __IS_SERVER__ } from "~/helpers"
 import { useEffect, useReducer, useRef } from "react"
-import { DEFAULT_SCROLL_OFFSET } from "~/constants"
+import { DEFAULT_SCROLL_OFFSET } from "~/helpers/constants"
 import useThrottle from "./useThrottle"
 
 interface OffsetScrollState {

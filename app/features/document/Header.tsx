@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react"
 import clsx from "clsx"
 import { useRef } from "react"
 
-import { CSS_VAR_HEADER_HEIGHT } from "~/constants"
+import { CSS_VAR_HEADER_HEIGHT } from "~/helpers/constants"
 import { fullName } from "~/features/about"
 import useEventListener from "~/helpers/useEventListener"
 import RoundedCorner from "~/ui/RoundedCorner"
