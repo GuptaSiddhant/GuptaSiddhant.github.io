@@ -5,7 +5,12 @@ import {
 } from "@remix-run/server-runtime"
 import { useLoaderData } from "@remix-run/react"
 
-import { fullName, heroAdjectives, techStackList, title } from "@feature/about"
+import {
+  fullName,
+  heroAdjectives,
+  techStackList,
+  title,
+} from "~/features/about"
 import { getProjectList, type ProjectTeaser } from "~/features/projects"
 import { getBlogPostsList, type BlogPostTeaser } from "~/features/blog"
 import {

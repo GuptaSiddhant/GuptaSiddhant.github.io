@@ -6,7 +6,7 @@ import {
 } from "@remix-run/server-runtime"
 import { Outlet, useCatch, useLoaderData } from "@remix-run/react"
 
-import { fullName } from "@feature/about"
+import { fullName } from "~/features/about"
 import Document, { linkDescriptors } from "~/features/document"
 import {
   getAllFeatureFlags,

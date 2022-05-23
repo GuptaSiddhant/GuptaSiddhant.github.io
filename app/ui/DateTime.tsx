@@ -1,5 +1,5 @@
 import { formatDate } from "~/helpers/format"
-import type { CommonProps } from "./types"
+import type { CommonProps } from "~/types"
 
 export default function DateTime({
   date,

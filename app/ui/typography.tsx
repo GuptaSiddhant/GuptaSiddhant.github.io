@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { Children, type ComponentPropsWithoutRef } from "react"
 import { Link } from "@remix-run/react"
 import { toKebabCase } from "~/helpers"
-import type { PropsWithChildren } from "./types"
+import type { PropsWithChildren } from "~/types"
 
 const commonHeadingClassName = clsx("font-bold leading-tight !m-0")
 

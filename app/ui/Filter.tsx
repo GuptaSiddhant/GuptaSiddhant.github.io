@@ -5,7 +5,7 @@ import type { FetcherWithComponents } from "~/types"
 import Input from "./Input"
 import Section from "./Section"
 import Tags from "./Tags"
-import { type PropsWithChildren } from "./types"
+import { type PropsWithChildren } from "~/types"
 
 export interface FilterDataType {
   availableTags: string[]

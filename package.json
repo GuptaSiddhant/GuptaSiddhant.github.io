@@ -13,8 +13,8 @@
     "functions:build": "cd functions; yarn build"
   },
   "workspaces": [
-    "functions",
-    "features/*"
+    "features/*",
+    "functions"
   ],
   "dependencies": {
     "@feature/about": "*",
