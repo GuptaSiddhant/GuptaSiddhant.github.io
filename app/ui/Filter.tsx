@@ -87,14 +87,14 @@ function FilterError({
 }: PropsWithChildren<{ handleClear: () => void }>): JSX.Element {
   return (
     <Section {...props}>
-      <div className="text-center text-gray-500 text-2xl italic">
+      <div className="text-center text-disabled text-2xl italic">
         {children}
         <br />
         Try changing or clearing them.
         <br />
         <button
           onClick={handleClear}
-          className="text-sm m-4 px-2 py-1 text-gray-300 hover:text-gray-200 active:text-gray-400 border-[1px] border-current rounded"
+          className="text-sm m-4 px-2 py-1 text-tertiary hover:text-secondary active:text-quaternary border-[1px] border-current rounded"
         >
           Clear all the filters
         </button>

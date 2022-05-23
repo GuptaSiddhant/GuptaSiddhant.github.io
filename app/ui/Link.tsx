@@ -35,7 +35,7 @@ export function InternalLink({
     <Link
       {...props}
       className={clsx(
-        "text-blue-400 no-underline hover:text-blue-300 hover:underline active:text-blue-400",
+        "text-link no-underline hover:text-link-hover hover:underline active:text-link",
         className,
       )}
     >
@@ -57,7 +57,7 @@ export function ExternalLink({
   return (
     <a
       href={href}
-      className={clsx("text-blue-400 hover:underline", className)}
+      className={clsx("text-link hover:underline", className)}
       target="_blank"
       rel="noreferrer"
       title={tooltipLabel}

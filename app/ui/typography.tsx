@@ -74,7 +74,7 @@ export function Caption({
     <strong
       {...props}
       className={clsx(
-        "text-2xl font-black uppercase tracking-widest text-gray-200",
+        "text-2xl font-black uppercase tracking-widest text-secondary",
         className,
       )}
     />

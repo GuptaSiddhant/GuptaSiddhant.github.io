@@ -33,7 +33,7 @@ export default function SearchResult() {
 
 function SearchResultsEmpty(): JSX.Element {
   return (
-    <output className="flex flex-col gap-4 items-center justify-center h-full text-gray-500 text-lg">
+    <output className="flex flex-col gap-4 items-center justify-center h-full text-disabled text-lg">
       <p>No results found for your search.</p>
       <p>Try a different search term.</p>
     </output>

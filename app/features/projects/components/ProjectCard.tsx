@@ -24,7 +24,7 @@ export default function ProjectCard({
         className={clsx(
           "relative",
           "h-full overflow-hidden rounded-lg",
-          "bg-gray-800 bg-cover bg-center bg-no-repeat",
+          "bg-secondary bg-cover bg-center bg-no-repeat",
           className,
         )}
         style={{ backgroundImage: `url(${cover})` }}
@@ -33,8 +33,8 @@ export default function ProjectCard({
           className={clsx(
             "rounded-lg",
             "h-0 w-full p-4 pl-8 group-hover:h-full group-focus:h-full",
-            "group-hover:bg-gray-700/50 group-hover:backdrop-blur",
-            "group-focus:bg-gray-700/50 group-focus:backdrop-blur",
+            "group-hover:bg-tertiary/50 group-hover:backdrop-blur",
+            "group-focus:bg-tertiary/50 group-focus:backdrop-blur",
             "invisible transition-all group-hover:visible group-focus:visible",
             "flex flex-col items-start justify-center gap-2",
           )}

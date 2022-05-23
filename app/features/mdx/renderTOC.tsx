@@ -22,8 +22,8 @@ export default function renderTOC(
             replace
             to={"#" + item.id}
             className={clsx(
-              isActive ? "font-bold text-white" : "text-gray-300",
-              "hover:text-gray-100",
+              isActive ? "font-bold text-primary" : "text-tertiary",
+              "hover:text-default",
             )}
           >
             {item.text}
@@ -42,7 +42,7 @@ export default function renderTOC(
               item.children.length === 0 ? (
                 <span
                   className={clsx(
-                    "before:absolute before:content-['•'] before:-indent-4 text-gray-300",
+                    "before:absolute before:content-['•'] before:-indent-4 text-tertiary",
                   )}
                 >
                   {itemContent}

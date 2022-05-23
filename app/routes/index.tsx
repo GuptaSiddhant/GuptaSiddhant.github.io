@@ -102,15 +102,15 @@ function HeroSection(): JSX.Element {
       </div>
 
       {/* Terminal resume */}
-      <pre className="-mx-4 whitespace-pre-line rounded-lg bg-black p-4 text-base">
-        <code className="mb-1 block select-none text-sm text-gray-500">
+      <pre className="-mx-4 whitespace-pre-line rounded-lg bg-default p-4 text-base">
+        <code className="mb-1 block select-none text-sm text-disabled">
           [shell]
         </code>
-        <code className="block select-none text-sm text-gray-300">
+        <code className="block select-none text-sm text-tertiary">
           # An interactive resume for your terminal, made with React and ink.
           Run:
         </code>
-        <code className="block text-white">npx guptasiddhant</code>
+        <code className="block text-primary">npx guptasiddhant</code>
       </pre>
     </Section.Hero>
   )

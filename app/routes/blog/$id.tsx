@@ -89,7 +89,7 @@ export function CatchBoundary() {
       <H2>Could not find the blog post!</H2>
       <InternalLink to="/blog">{"Back to Blog"}</InternalLink>
       {__IS_DEV__ ? (
-        <pre className="whitespace-pre-wrap break-all text-sm text-red-400">
+        <pre className="whitespace-pre-wrap break-all text-sm text-error">
           {JSON.stringify(catchError, null, 2)}
         </pre>
       ) : null}
@@ -104,7 +104,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <p>{error.message}</p>
       <InternalLink to="/blog">{"Back to Blog"}</InternalLink>
       {__IS_DEV__ ? (
-        <pre className="whitespace-pre-wrap break-all text-sm text-red-400">
+        <pre className="whitespace-pre-wrap break-all text-sm text-error">
           {error.stack}
         </pre>
       ) : null}

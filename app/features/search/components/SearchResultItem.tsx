@@ -41,7 +41,7 @@ export function SearchResultHeader({
     <li
       className={clsx(
         className,
-        "border-b-[1px] border-gray-600 px-4 pt-1 bg-gray-800",
+        "border-b-[1px] border-gray-600 px-4 pt-1 bg-secondary",
         "sticky top-0 font-black mt-4 text-sm tracking-wider uppercase",
       )}
     >
@@ -68,7 +68,7 @@ export function EntryResultItem({
         className={clsx(
           className,
           "rounded px-3 py-2 h-full w-full",
-          "hover:bg-gray-700 focus:bg-gray-700",
+          "hover:bg-tertiary focus:bg-tertiary",
           "cursor-pointer",
           "flex justify-between items-center",
         )}

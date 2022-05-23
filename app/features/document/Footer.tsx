@@ -16,7 +16,7 @@ export default function Footer(): JSX.Element {
   return (
     <footer
       data-footer
-      className={clsx("fixed bottom-0 right-0 left-0", "h-4 z-40 bg-black")}
+      className={clsx("fixed bottom-0 right-0 left-0", "h-4 z-40 bg-default")}
     >
       {scrollButtonVisible ? (
         <Button

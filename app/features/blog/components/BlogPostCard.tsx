@@ -19,7 +19,7 @@ export default function BlogPostCard({
       <article
         className={clsx(
           "relative md:-mx-4 rounded-lg",
-          "bg-black group-hover:bg-gray-800 group-focus:bg-gray-800",
+          "bg-default group-hover:bg-secondary group-focus:bg-secondary",
           "grid overflow-clip grid-cols-1 grid-rows-[150px_auto] md:grid-cols-[250px_1fr] md:grid-rows-none",
         )}
       >
@@ -40,10 +40,10 @@ export default function BlogPostCard({
         <main className="p-4 flex-1 self-center">
           <div className="font-bold text-xl my-2">{title}</div>
           {subtitle ? (
-            <div className="italic text-base text-gray-200">{subtitle}</div>
+            <div className="italic text-base text-secondary">{subtitle}</div>
           ) : null}
           {date ? (
-            <time dateTime={date} className="text-sm text-gray-300">
+            <time dateTime={date} className="text-sm text-tertiary">
               {formatDate(date)}
             </time>
           ) : null}
@@ -51,9 +51,9 @@ export default function BlogPostCard({
           {teaser ? null : (
             <div className="mt-4 text-base">
               {description ? (
-                <span className="text-gray-300">{description} </span>
+                <span className="text-tertiary">{description} </span>
               ) : null}
-              <span className="text-blue-400 whitespace-nowrap">
+              <span className="text-link whitespace-nowrap">
                 {"Read post >"}
               </span>
             </div>

@@ -38,7 +38,7 @@ export default function Blog(): JSX.Element {
       <Section.Hero>
         <div>
           <H1>Blog</H1>
-          <p className="mt-4 text-gray-100">
+          <p className="mt-4 text-default">
             Thoughts on somethings. Sometimes everything.
           </p>
         </div>

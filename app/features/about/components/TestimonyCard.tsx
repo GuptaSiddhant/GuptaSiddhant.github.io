@@ -17,14 +17,14 @@ export default function TestimonyCard({
     <article
       className={clsx(
         "group relative",
-        "h-full rounded-lg bg-gray-800 p-4 shadow-xl",
+        "h-full rounded-lg bg-secondary p-4 shadow-xl",
         "flex flex-col justify-center",
       )}
     >
       <blockquote className="flex-1 whitespace-pre-line indent-4" cite={link}>
         {content}
       </blockquote>
-      <footer className="mt-2 text-sm text-gray-400 ">
+      <footer className="mt-2 text-sm text-quaternary ">
         <address>
           <strong>{title}</strong>
           {subtitle ? `, ${subtitle}` : ""}

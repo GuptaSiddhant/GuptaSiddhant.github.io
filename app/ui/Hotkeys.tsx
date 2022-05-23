@@ -22,7 +22,7 @@ function Kbd(props: ComponentPropsWithoutRef<"kbd">): JSX.Element {
     <kbd
       {...props}
       className={clsx(
-        " text-gray-300 bg-gray-800",
+        " text-tertiary bg-secondary",
         "border-[1px] border-gray-500 shadow rounded-sm",
         "inline-block font-normal text-sm font-monospace",
         "whitespace-nowrap px-1 py-0.5 ml-1",

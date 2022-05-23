@@ -12,7 +12,7 @@ export default function Progress(): JSX.Element {
     >
       <div
         ref={elementRef}
-        className="transition-[width] ease-out bg-blue-400"
+        className="transition-[width] ease-out bg-progress"
       />
     </div>
   )

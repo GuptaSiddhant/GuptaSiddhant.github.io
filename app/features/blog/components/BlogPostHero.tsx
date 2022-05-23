@@ -24,7 +24,7 @@ export default function BlogPostHero({
       </div>
 
       <div className="flex flex-col gap-4">
-        <p className="text-gray-100">{description}</p>
+        <p className="text-default">{description}</p>
         <div className="flex items-center justify-between gap-4">
           <Tags.List tags={tags} className="justify-start" />
           {/* <BlogPostActions /> */}

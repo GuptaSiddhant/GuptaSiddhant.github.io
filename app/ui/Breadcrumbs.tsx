@@ -39,7 +39,7 @@ export function Crumb({
 
   if (active)
     return (
-      <span className={clsx(commonClassNames, "font-bold text-white")}>
+      <span className={clsx(commonClassNames, "font-bold text-primary")}>
         {children}
       </span>
     )
@@ -49,7 +49,7 @@ export function Crumb({
       to={to ?? match.pathname}
       className={clsx(
         commonClassNames,
-        "text-gray-200 hover:text-white",
+        "text-secondary hover:text-primary",
         "text-base xs:text-lg",
       )}
     >

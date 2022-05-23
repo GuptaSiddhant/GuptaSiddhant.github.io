@@ -34,7 +34,7 @@ export default function Navigation(): JSX.Element {
 
   return (
     <nav aria-label="Main navigation">
-      <ul className="flex items-center justify-end gap-6 text-lg text-gray-200">
+      <ul className="flex items-center justify-end gap-6 text-lg text-secondary">
         {navLinks.map(({ to, children }) => {
           return (
             <li key={to.toString()} className="select-none">
@@ -42,7 +42,7 @@ export default function Navigation(): JSX.Element {
                 to={to}
                 prefetch="intent"
                 className={({ isActive }) =>
-                  isActive ? "font-semibold text-white" : "hover:text-white"
+                  isActive ? "font-semibold text-primary" : "hover:text-primary"
                 }
               >
                 {children}
@@ -52,7 +52,7 @@ export default function Navigation(): JSX.Element {
         })}
         {socialLinks.map(({ href, children }) => (
           <li key={href}>
-            <a href={href} className="hover:text-white">
+            <a href={href} className="hover:text-primary">
               {children}
             </a>
           </li>
@@ -61,7 +61,7 @@ export default function Navigation(): JSX.Element {
         <li key="search" className="flex items-center">
           <button title="Search [Cmd+K]">
             <SearchIcon
-              className="hover:text-white cursor-pointer"
+              className="hover:text-primary cursor-pointer"
               onClick={() => dispatch(openSearchBar())}
             />
           </button>

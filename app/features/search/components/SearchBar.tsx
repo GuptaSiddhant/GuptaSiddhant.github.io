@@ -56,7 +56,7 @@ export default function SearchBar({
       <div
         aria-hidden="true"
         role="presentation"
-        className={clsx("absolute top-0 left-0 p-2 text-gray-500")}
+        className={clsx("absolute top-0 left-0 p-2 text-disabled")}
         onClick={() => inputRef.current?.focus()}
       >
         {isLoading ? (
@@ -71,7 +71,7 @@ export default function SearchBar({
         name="q"
         key={String(open)}
         value={searchTerm}
-        className="w-full bg-gray-900 px-10"
+        className="w-full bg-primary px-10"
         onChange={(e) => {
           dispatch(updateSearchTerm(e.target.value))
           submit(e.target.form)

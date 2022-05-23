@@ -39,7 +39,7 @@ export default function Projects(): JSX.Element {
       <Section.Hero>
         <div>
           <H1>Projects</H1>
-          <p className="mt-4 text-gray-100">
+          <p className="mt-4 text-default">
             I have been busy over the years, trying different things. Some are
             big, some are small and some are unfinished. Nonetheless, I am proud
             of each one of them.

@@ -19,7 +19,7 @@ export default function Button({
       className={clsx(
         "flex items-center p-2",
         "cursor-pointer text-sm rounded",
-        "bg-black text-gray-500 hover:text-gray-300",
+        "bg-default text-disabled hover:text-tertiary",
         className,
       )}
     />

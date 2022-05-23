@@ -27,7 +27,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
         <Links />
         <script src={intlListFormatPolyfillScript} />
       </head>
-      <body className={clsx("m-0 p-0", "bg-black text-gray-100")}>
+      <body className={clsx("m-0 p-0", "bg-default text-default")}>
         <Search>
           <Progress />
           <Header />
@@ -35,7 +35,7 @@ export default function Document({ children }: { children: React.ReactNode }) {
             id="main"
             className={clsx(
               "relative mx-4 rounded-xl",
-              "bg-gray-900 text-lg",
+              "bg-primary text-lg",
               "flex flex-col gap-10",
               "min-h-[90vh]",
             )}

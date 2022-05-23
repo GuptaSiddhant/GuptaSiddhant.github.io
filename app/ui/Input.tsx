@@ -18,7 +18,7 @@ export default function Input({
       ref={inputRef}
       className={clsx(
         "rounded px-4 py-2",
-        "bg-gray-800",
+        "bg-secondary",
         "font-base",
         className,
       )}

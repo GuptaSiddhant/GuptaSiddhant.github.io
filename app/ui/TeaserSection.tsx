@@ -77,7 +77,7 @@ function TeaserCard({
         className={clsx(
           className,
           "relative overflow-hidden rounded-lg shadow-xl",
-          "bg-gray-800 bg-cover bg-center bg-no-repeat",
+          "bg-secondary bg-cover bg-center bg-no-repeat",
           "aspect-[3/4] h-72",
           small ? "" : "sm:h-96",
         )}

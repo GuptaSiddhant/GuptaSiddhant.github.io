@@ -30,7 +30,7 @@ export default function Header(): JSX.Element {
       data-header
       ref={headerRef}
       className={clsx(
-        "fixed top-0 left-0 right-0 z-40 bg-black",
+        "fixed top-0 left-0 right-0 z-40 bg-default",
         "grid grid-rows-2 sm:grid-rows-none sm:grid-cols-[1fr_max-content] items-baseline",
         "py-2 px-8",
       )}
@@ -53,7 +53,7 @@ function Logo(): JSX.Element {
       className={clsx(
         "select-none",
         "text-xl font-black uppercase leading-normal tracking-widest",
-        "text-white",
+        "text-primary",
         "text-ellipsis overflow-hidden whitespace-nowrap",
       )}
     >
