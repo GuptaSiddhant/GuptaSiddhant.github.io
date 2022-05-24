@@ -6,7 +6,6 @@ import { SearchResultHeader, EntryResultItem } from "./SearchResultItem"
 
 export default function SearchResult() {
   const { results } = useSearchState()
-  console.log(results)
 
   return (
     <output
