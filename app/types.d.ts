@@ -5,6 +5,7 @@ import type { CSSProperties } from "react"
 
 declare global {
   var projectListCache: LRUCache<string, Teaser[]>
+  var cache: LRUCache<string, any>
 }
 
 export interface Teaser {
