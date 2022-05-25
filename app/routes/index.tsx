@@ -1,15 +1,11 @@
-import {
-  json,
-  type LoaderFunction,
-  type MetaFunction,
-} from "@remix-run/server-runtime"
+import { json, type LoaderFunction } from "@remix-run/server-runtime"
 import { useLoaderData } from "@remix-run/react"
 
 import {
-  fullName,
+  type About,
   heroAdjectives,
   techStackList,
-  title,
+  getAbout,
 } from "~/features/about"
 import { getProjectList, type ProjectTeaser } from "~/features/projects"
 import { getBlogPostsList, type BlogPostTeaser } from "~/features/blog"
@@ -26,25 +22,20 @@ import Section from "~/ui/Section"
 import TeaserSection from "~/ui/TeaserSection"
 import { Caption, H1, H2 } from "~/ui/typography"
 
-export const meta: MetaFunction = () => {
-  return {
-    title: fullName,
-    description: "Home of Siddhant Gupta.",
-  }
-}
-
 interface LoaderData {
+  about: About
   projects: ProjectTeaser[]
   blogPosts: BlogPostTeaser[]
   testimonies: Testimony[]
 }
 
 export const loader: LoaderFunction = async () => {
+  const about = await getAbout()
   const projects = await getProjectList(5)
   const blogPosts = await getBlogPostsList(3)
   const testimonies = await getAllTestimonies(5)
 
-  return json<LoaderData>({ projects, blogPosts, testimonies })
+  return json<LoaderData>({ about, projects, blogPosts, testimonies })
 }
 
 export default function Index() {
@@ -76,8 +67,8 @@ export default function Index() {
 }
 
 function HeroSection(): JSX.Element {
-  const jobLink =
-    "https://www.accenture.com/fi-en/careers/jobdetails?id=R00008034_en&title=Senior+React+Developer"
+  const { about } = useLoaderData<LoaderData>()
+  const { title, npx, currentCompany } = about
 
   return (
     <Section.Hero>
@@ -90,28 +81,40 @@ function HeroSection(): JSX.Element {
           I am a <strong>{title}</strong> with a drive for creating beautiful
           web and mobile apps with {formatList(techStackList)}.
         </p>
-        <p>
-          Currently applying my skills at <strong>Accenture Interactive</strong>{" "}
-          <span title="Finland">🇫🇮</span> (
-          <ExternalLink href={jobLink} enableIcon>
-            we are hiring
-          </ExternalLink>
-          ).
-        </p>
+        {currentCompany.name ? (
+          <p>
+            Currently applying my skills at{" "}
+            <ExternalLink href={currentCompany.link}>
+              <strong>{currentCompany.name}</strong>
+            </ExternalLink>
+            {currentCompany.hiringLink ? (
+              <>
+                {" ("}
+                <ExternalLink href={currentCompany.hiringLink} enableIcon>
+                  we are hiring
+                </ExternalLink>
+                {")"}
+              </>
+            ) : null}
+            .
+          </p>
+        ) : null}
         <InternalLink to="/about">Read more about me.</InternalLink>
       </div>
 
       {/* Terminal resume */}
-      <pre className="-mx-4 whitespace-pre-line rounded-lg bg-default p-4 text-base">
-        <code className="mb-1 block select-none text-sm text-disabled">
-          [shell]
-        </code>
-        <code className="block select-none text-sm text-tertiary">
-          # An interactive resume for your terminal, made with React and ink.
-          Run:
-        </code>
-        <code className="block text-primary">npx guptasiddhant</code>
-      </pre>
+      {npx ? (
+        <pre className="-mx-4 whitespace-pre-line rounded-lg bg-default p-4 text-base">
+          <code className="mb-1 block select-none text-sm text-disabled">
+            [shell]
+          </code>
+          <code className="block select-none text-sm text-tertiary">
+            # An interactive resume for your terminal, made with React and ink.
+            Run:
+          </code>
+          <code className="block text-primary">{npx}</code>
+        </pre>
+      ) : null}
     </Section.Hero>
   )
 }

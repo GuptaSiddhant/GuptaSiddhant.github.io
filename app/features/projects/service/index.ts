@@ -1,16 +1,14 @@
-import LRUCache from "lru-cache"
-
 import { __IS_DEV__ } from "~/helpers"
 import {
   getCollection,
   getCollectionItem,
   setCollectionItem,
+  updateInfoList,
   orderBy,
   limit,
-  draftConstraints,
   type QueryConstraint,
+  FirestoreCollection,
 } from "~/service/database"
-import type { Teaser } from "~/types"
 
 import type { ProjectType, ProjectTeaser } from "../types"
 import {
@@ -19,53 +17,34 @@ import {
   transformProjectToProjectTeaser,
 } from "./transformers"
 
-const INFO_COLLECTION_NAME = "info"
-const COLLECTION_NAME = "projects"
-
-let projectListCache =
-  global.projectListCache ||
-  (global.projectListCache = new LRUCache<string, Teaser[]>({
-    max: 100,
-    ttl: 1000 * 60 * 60 * 24, // 1 day
-    fetchMethod,
-  }))
-
-function fetchMethod(key: string) {
-  switch (key) {
-    case "list": {
-      console.log("fetching new projects list...")
-      return getCollectionItem(
-        INFO_COLLECTION_NAME,
-        COLLECTION_NAME,
-        (docSnap) =>
-          Object.values(docSnap.data())
-            .filter((project) => __IS_DEV__ || project.draft !== true)
-            .map((project) => ({
-              ...project,
-              dateStart:
-                typeof project.dateStart === "string"
-                  ? project.dateStart
-                  : (project.dateStart as any).toDate(),
-            }))
-            .sort((a, b) => (b.dateStart > a.dateStart ? 1 : -1)),
-      )
-    }
-  }
-}
+const collectionName = FirestoreCollection.Projects
 
 export async function getProjectList(
   limitBy: number = 5,
 ): Promise<ProjectTeaser[]> {
-  return (
-    ((await projectListCache.fetch("list")) || []) as ProjectTeaser[]
-  ).slice(0, limitBy)
+  return getCollectionItem(
+    FirestoreCollection.Info,
+    collectionName,
+    (docSnap) =>
+      Object.values(docSnap.data())
+        .filter((project) => __IS_DEV__ || project.draft !== true)
+        .map((project) => ({
+          ...project,
+          dateStart:
+            typeof project.dateStart === "string"
+              ? project.dateStart
+              : (project.dateStart as any).toDate(),
+        }))
+        .sort((a, b) => (b.dateStart > a.dateStart ? 1 : -1))
+        .slice(0, limitBy),
+  )
 }
 
 export async function getProjectById(
   itemId: string,
 ): Promise<ProjectType | undefined> {
   return getCollectionItem(
-    COLLECTION_NAME,
+    collectionName,
     itemId,
     transformDocToProjectWithContent,
   )
@@ -86,15 +65,13 @@ export async function setProjectById(
   itemId: string,
   data: Partial<ProjectType>,
 ) {
-  return setCollectionItem(COLLECTION_NAME, itemId, data)
+  return setCollectionItem(collectionName, itemId, data)
 }
 
 export async function updateProjectList() {
-  const data: Record<string, ProjectTeaser> = (await getAllProjects(100))
-    .map(transformProjectToProjectTeaser)
-    .reduce((acc, project) => ({ ...acc, [project.id]: project }), {})
+  const data = (await getAllProjects(100)).map(transformProjectToProjectTeaser)
 
-  return setCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, data)
+  return updateInfoList(collectionName, data)
 }
 
 async function getAllProjects(
@@ -102,9 +79,8 @@ async function getAllProjects(
   constraints: QueryConstraint[] = [],
 ): Promise<ProjectType[]> {
   return getCollection(
-    COLLECTION_NAME,
+    collectionName,
     transformDocToProject,
-    ...draftConstraints,
     ...constraints,
     orderBy("dateStart", "desc"),
     limit(limitBy),

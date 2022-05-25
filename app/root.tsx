@@ -6,7 +6,7 @@ import {
 } from "@remix-run/server-runtime"
 import { Outlet, useCatch, useLoaderData } from "@remix-run/react"
 
-import { fullName } from "~/features/about"
+import { getAbout, type About } from "~/features/about"
 import Document, { linkDescriptors } from "~/features/document"
 import {
   getAllFeatureFlags,
@@ -21,15 +21,16 @@ export function links(): LinkDescriptor[] {
   return linkDescriptors
 }
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ data }: { data: RootLoaderData }) => {
+  const { name } = data.about
+
   return {
-    title: fullName,
+    title: name,
     description: "Webfolio of a developer/designer.",
     charset: "utf-8",
-    viewport:
-      "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0",
-    "application-name": fullName,
-    "apple-mobile-web-app-title": fullName,
+    viewport: "width=device-width,initial-scale=1.0,maximum-scale=1.0",
+    "application-name": name,
+    "apple-mobile-web-app-title": name,
     "theme-color": "#000000",
     "msapplication-TileColor": "#000000",
   }
@@ -37,12 +38,14 @@ export const meta: MetaFunction = () => {
 
 export interface RootLoaderData {
   featureFlags: FeatureFlags
+  about: About
 }
 
 export const loader: LoaderFunction = async () => {
+  const about = await getAbout()
   const featureFlags = await getAllFeatureFlags()
 
-  return json<RootLoaderData>({ featureFlags })
+  return json<RootLoaderData>({ about, featureFlags })
 }
 
 export default function App() {
@@ -106,9 +109,9 @@ export function CatchBoundary() {
 }
 
 export const handle = {
-  breadcrumb: (match: MatchedCrumbProps): JSX.Element => (
+  breadcrumb: (match: MatchedCrumbProps<RootLoaderData>): JSX.Element => (
     <Crumb match={match} className="font-bold">
-      GS
+      {match.data.about.shortName || "GS"}
     </Crumb>
   ),
 }

@@ -34,3 +34,9 @@ declare namespace Intl {
     style?: "long" | "short" | "narrow"
   }
 }
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    CACHE_TTL: string
+  }
+}

@@ -3,9 +3,10 @@ import {
   getCollection,
   getCollectionItem,
   setCollectionItem,
+  updateInfoList,
   orderBy,
   limit,
-  draftConstraints,
+  FirestoreCollection,
 } from "~/service/database"
 
 import {
@@ -16,24 +17,26 @@ import {
 
 import type { BlogPostType, BlogPostTeaser } from "../types"
 
-const INFO_COLLECTION_NAME = "info"
-const COLLECTION_NAME = "blog"
+const collectionName = FirestoreCollection.Blog
 
 export async function getBlogPostsList(
   limitBy: number = 5,
 ): Promise<BlogPostTeaser[]> {
-  return getCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, (docSnap) =>
-    Object.values(docSnap.data())
-      .map((post) => ({
-        ...post,
-        date:
-          typeof post.date === "string"
-            ? post.date
-            : (post.date as any).toDate(),
-      }))
-      .filter((project) => __IS_DEV__ || project.draft !== true)
-      .sort((a, b) => (b.date > a.date ? 1 : -1))
-      .slice(0, limitBy),
+  return getCollectionItem(
+    FirestoreCollection.Info,
+    collectionName,
+    (docSnap) =>
+      Object.values(docSnap.data())
+        .map((post) => ({
+          ...post,
+          date:
+            typeof post.date === "string"
+              ? post.date
+              : (post.date as any).toDate(),
+        }))
+        .filter((project) => __IS_DEV__ || project.draft !== true)
+        .sort((a, b) => (b.date > a.date ? 1 : -1))
+        .slice(0, limitBy),
   )
 }
 
@@ -41,7 +44,7 @@ export async function getBlogPostById(
   itemId: string,
 ): Promise<BlogPostType | undefined> {
   return getCollectionItem(
-    COLLECTION_NAME,
+    collectionName,
     itemId,
     transformDocToBlogPostWithContent,
   )
@@ -62,22 +65,21 @@ export async function setBlogPostById(
   itemId: string,
   data: Partial<BlogPostType>,
 ) {
-  return setCollectionItem(COLLECTION_NAME, itemId, data)
+  return setCollectionItem(collectionName, itemId, data)
 }
 
 export async function updateBlogList() {
-  const data: Record<string, BlogPostTeaser> = (await getAllBlogPosts(100))
-    .map(transformBlogPostToBlogPostTeaser)
-    .reduce((acc, post) => ({ ...acc, [post.id]: post }), {})
+  const data = (await getAllBlogPosts(100)).map(
+    transformBlogPostToBlogPostTeaser,
+  )
 
-  return setCollectionItem(INFO_COLLECTION_NAME, COLLECTION_NAME, data)
+  return updateInfoList(collectionName, data)
 }
 
 async function getAllBlogPosts(limitBy: number = 100): Promise<BlogPostType[]> {
   return getCollection(
-    COLLECTION_NAME,
+    collectionName,
     transformDocToBlogPost,
-    ...draftConstraints,
     orderBy("date", "desc"),
     limit(limitBy),
   )

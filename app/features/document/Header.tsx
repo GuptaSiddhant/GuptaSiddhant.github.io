@@ -1,13 +1,14 @@
-import { Link } from "@remix-run/react"
+import { Link, useLoaderData } from "@remix-run/react"
 import clsx from "clsx"
 import { useRef } from "react"
 
 import { CSS_VAR_HEADER_HEIGHT } from "~/helpers/constants"
-import { fullName } from "~/features/about"
+
 import useEventListener from "~/helpers/useEventListener"
 import RoundedCorner from "~/ui/RoundedCorner"
 
 import Navigation from "./Navigation"
+import type { RootLoaderData } from "~/root"
 
 export default function Header(): JSX.Element {
   const headerRef = useRef<HTMLElement>(null)
@@ -44,10 +45,14 @@ export default function Header(): JSX.Element {
 }
 
 function Logo(): JSX.Element {
+  const {
+    about: { name },
+  } = useLoaderData<RootLoaderData>()
+
   return (
     <Link
       to="/"
-      title={fullName}
+      title={name}
       data-custom-color
       data-custom-border
       className={clsx(
@@ -57,7 +62,7 @@ function Logo(): JSX.Element {
         "text-ellipsis overflow-hidden whitespace-nowrap",
       )}
     >
-      {fullName}
+      {name}
     </Link>
   )
 }

@@ -1,27 +1,26 @@
 import {
   getCollection,
   orderBy,
-  limit,
   type QueryDocumentSnapshot,
   getCollectionItem,
+  FirestoreCollection,
 } from "~/service/database"
-import type { Testimony } from "./types"
+import type { Testimony } from "../types"
 
-const COLLECTION_NAME = "testimonies"
+const collectionName = FirestoreCollection.Testimonies
 
 export async function getAllTestimonies(
   limitBy: number = 10,
 ): Promise<Testimony[]> {
   return getCollection(
-    COLLECTION_NAME,
+    collectionName,
     transformDocToTestimony,
     orderBy("date", "desc"),
-    limit(limitBy),
-  )
+  ).then((list) => list.slice(0, limitBy))
 }
 
 export async function getTestimonyById(itemId: string): Promise<Testimony> {
-  return getCollectionItem(COLLECTION_NAME, itemId, transformDocToTestimony)
+  return getCollectionItem(collectionName, itemId, transformDocToTestimony)
 }
 
 // Helpers
