@@ -5,7 +5,7 @@ import {
   type Item,
 } from "firebase/analytics"
 
-import { __IS_DEV__ } from "~/helpers"
+// import { __IS_DEV__ } from "~/helpers"
 import firebaseApp from "./firebase"
 
 async function logCustomEvent(
@@ -15,7 +15,7 @@ async function logCustomEvent(
   const supported = await isSupported()
   if (!supported) return
 
-  __IS_DEV__ && console.log(eventName, eventParams)
+  // __IS_DEV__ && console.log(eventName, eventParams)
   return logEvent(getAnalytics(firebaseApp), eventName, eventParams)
 }
 

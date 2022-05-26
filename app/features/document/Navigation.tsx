@@ -42,7 +42,7 @@ export default function Navigation(): JSX.Element {
                 to={to}
                 prefetch="intent"
                 className={({ isActive }) =>
-                  isActive ? "font-semibold text-primary" : "hover:text-primary"
+                  isActive ? "font-bold text-primary" : "hover:text-primary"
                 }
               >
                 {children}

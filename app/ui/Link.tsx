@@ -3,7 +3,7 @@ import { type ComponentPropsWithoutRef } from "react"
 import { Link, type LinkProps } from "@remix-run/react"
 import LinkIcon from "remixicon-react/ExternalLinkLineIcon"
 
-import type { PropsWithChildren } from "~/ui/types"
+import type { PropsWithChildren } from "~/types"
 
 export { Link, type LinkProps }
 

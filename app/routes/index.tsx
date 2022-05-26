@@ -101,7 +101,9 @@ function HeroSection(): JSX.Element {
             .
           </p>
         ) : null}
-        <InternalLink to="/about">Read more about me.</InternalLink>
+        <InternalLink to="/about" prefetch="intent">
+          Read more about me.
+        </InternalLink>
       </div>
 
       <TerminalResume code={npx} />

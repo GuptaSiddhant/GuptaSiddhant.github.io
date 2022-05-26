@@ -9,7 +9,10 @@ export default function Pre({
   return (
     <pre
       {...props}
-      className={clsx("-mx-4 overflow-clip rounded", className)}
+      className={clsx(
+        "-mx-4 overflow-clip rounded-md whitespace-pre-wrap p-4 bg-default text-base",
+        className,
+      )}
     />
   )
 }

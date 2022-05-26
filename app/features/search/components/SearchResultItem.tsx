@@ -1,10 +1,8 @@
 import clsx from "clsx"
 
-import type { Teaser } from "~/types"
+import type { Teaser, PropsWithChildren } from "~/types"
 import Hotkeys from "~/ui/Hotkeys"
-import type { PropsWithChildren } from "~/ui/types"
 
-import usePerformEntryAction from "../hooks/usePerformEntryAction"
 import type { SearchEntry } from "../types"
 
 export function SearchResultItem({

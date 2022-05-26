@@ -1,5 +1,9 @@
 import { Outlet, useLoaderData } from "@remix-run/react"
-import { json, type LoaderFunction } from "@remix-run/server-runtime"
+import {
+  json,
+  type MetaFunction,
+  type LoaderFunction,
+} from "@remix-run/server-runtime"
 
 import {
   getAllCareer,
@@ -7,8 +11,10 @@ import {
   type Career,
   type Education,
 } from "~/features/about"
+import { createMetaTitle } from "~/features/document"
 
 import { Crumb, type MatchedCrumbProps } from "~/ui/Breadcrumbs"
+import Pre from "~/ui/Pre"
 import Section from "~/ui/Section"
 import { H1 } from "~/ui/typography"
 
@@ -24,9 +30,12 @@ export const loader: LoaderFunction = async () => {
   return json<LoaderData>({ careerList, educationList })
 }
 
+export const meta: MetaFunction = () => ({
+  title: createMetaTitle("About"),
+})
+
 export default function About(): JSX.Element {
   const { careerList, educationList } = useLoaderData<LoaderData>()
-  console.dir({ careerList, educationList })
 
   return (
     <>
@@ -41,12 +50,10 @@ export default function About(): JSX.Element {
 
       <Outlet />
 
-      <pre className="whitespace-pre-wrap">
-        {JSON.stringify(careerList, null, 2)}
-      </pre>
-      <pre className="whitespace-pre-wrap">
-        {JSON.stringify(educationList, null, 2)}
-      </pre>
+      <Section.Prose>
+        <Pre>{JSON.stringify(careerList, null, 2)}</Pre>
+        <Pre>{JSON.stringify(educationList, null, 2)}</Pre>
+      </Section.Prose>
     </>
   )
 }

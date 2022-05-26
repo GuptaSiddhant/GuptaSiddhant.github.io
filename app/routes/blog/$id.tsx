@@ -21,6 +21,7 @@ import Section from "~/ui/Section"
 import StickyHeader from "~/ui/StickyHeader"
 import TeaserSection from "~/ui/TeaserSection"
 import { H2 } from "~/ui/typography"
+import { createMetaTitle } from "~/features/document"
 
 interface LoaderData {
   blogPost: BlogPostType
@@ -47,7 +48,7 @@ export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
   if (!data?.blogPost) return {}
 
   return {
-    title: data.blogPost.title,
+    title: createMetaTitle(data.blogPost.title),
     description: data.blogPost.description || data.blogPost.subtitle,
   }
 }

@@ -1,4 +1,8 @@
-import { json, type LoaderFunction } from "@remix-run/server-runtime"
+import {
+  json,
+  type MetaFunction,
+  type LoaderFunction,
+} from "@remix-run/server-runtime"
 import { useFetcher, useLoaderData } from "@remix-run/react"
 
 import {
@@ -14,6 +18,7 @@ import Section from "~/ui/Section"
 import { H1 } from "~/ui/typography"
 
 import { type ProjectsAPIResponse } from "./api"
+import { createMetaTitle } from "~/features/document"
 
 interface LoaderData {
   projects: ProjectTeaser[]
@@ -26,6 +31,10 @@ export const loader: LoaderFunction = async () => {
 
   return json<LoaderData>({ projects, tags })
 }
+
+export const meta: MetaFunction = () => ({
+  title: createMetaTitle("Projects"),
+})
 
 export default function Projects(): JSX.Element {
   const { projects, tags } = useLoaderData<LoaderData>()
