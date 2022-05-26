@@ -4,4 +4,4 @@ export { default as TestimonialsSection } from "../about/components/Testimonials
 export { default as TestimonyCard } from "../about/components/TestimonyCard"
 
 export * from "./service"
-export type { About, Testimony } from "./types"
+export * from "./types"

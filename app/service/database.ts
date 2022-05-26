@@ -19,12 +19,16 @@ export enum FirestoreCollection {
   Blog = "blog",
   Info = "info",
   Testimonies = "testimonies",
+  Education = "education",
+  Career = "career",
 }
 
 /** Get firestore collection of docs and transform it to a list of required item. */
 export async function getCollection<T = DocumentData>(
   collectionName: FirestoreCollection,
-  transformDocumentSnapshot: (doc: QueryDocumentSnapshot) => T | Promise<T>,
+  transformDocumentSnapshot: (
+    doc: QueryDocumentSnapshot,
+  ) => T | Promise<T> = defaultTransformer,
   ...constraints: QueryConstraint[]
 ): Promise<T[]> {
   // const queryRef = query(collection(firestore, collectionName), ...constraints)
@@ -97,3 +101,7 @@ export {
   type QueryDocumentSnapshot,
   type QueryConstraint,
 } from "firebase/firestore"
+
+function defaultTransformer<T>(doc: QueryDocumentSnapshot) {
+  return doc.data() as T
+}

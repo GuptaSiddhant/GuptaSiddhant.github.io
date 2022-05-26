@@ -29,3 +29,23 @@ export type CommonProps<TRef extends HTMLElement = HTMLElement> = {
   style?: CSSProperties
   elementRef?: React.Ref<TRef>
 }
+
+export type Gallery = { url: string; alt: string }[]
+
+export interface LinkObject<T = BaseLinkType> {
+  url: string
+  title?: string
+  type?: T
+}
+
+export type BaseLinkType =
+  | "homepage"
+  | "other"
+  | "github"
+  | "linkedin"
+  | "twitter"
+  | "demo"
+  | "blog"
+  | "npm"
+  | "prototype"
+  | "design"

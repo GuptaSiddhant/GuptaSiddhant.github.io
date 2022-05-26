@@ -6,7 +6,8 @@
   "scripts": {
     "build": "remix build",
     "prebuild": "tailwindcss --minify -o ./app/styles/tailwind.css",
-    "dev": "concurrently \"remix dev\" \"npm:dev:css\"",
+    "dev": "concurrently \"npm:dev:remix\" \"npm:dev:css\"",
+    "dev:remix": "remix dev",
     "dev:css": "tailwindcss -w -o ./app/styles/tailwind.css",
     "clear": "rm -rf api; rm -rf public/build; rm -rf .cache/",
     "emulator": "firebase emulators:start",

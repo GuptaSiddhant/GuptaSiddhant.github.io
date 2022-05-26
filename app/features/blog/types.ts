@@ -1,10 +1,10 @@
-import type { Teaser } from "~/types"
+import type { Teaser, LinkObject, Gallery } from "~/types"
 
 export interface BlogPostType extends BlogPostTeaser {
   externalLink?: string
-  links?: BlogPostLink[]
+  links?: LinkObject[]
   content?: string
-  gallery?: { url: string; alt: string }[]
+  gallery?: Gallery
 }
 
 export interface BlogPostTeaser extends Teaser {
@@ -16,18 +16,3 @@ export interface BlogPostTeaser extends Teaser {
   subtitle?: string
   description?: string
 }
-
-export interface BlogPostLink {
-  url: string
-  title?: string
-  type?: BlogPostLinkType
-}
-
-export type BlogPostLinkType =
-  | "github"
-  | "demo"
-  | "blog"
-  | "homepage"
-  | "npm"
-  | "prototype"
-  | "design"

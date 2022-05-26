@@ -4,7 +4,6 @@ import { useFetcher, useLoaderData } from "@remix-run/react"
 import {
   getBlogPostsList,
   BlogPostCard,
-  updateBlogList,
   type BlogPostTeaser,
 } from "~/features/blog"
 
@@ -23,7 +22,6 @@ interface LoaderData {
 export const loader: LoaderFunction = async () => {
   const blogPosts = await getBlogPostsList(100)
   const tags = getUniqueTagsFromObjects(blogPosts)
-  await updateBlogList()
 
   return json<LoaderData>({ blogPosts, tags })
 }

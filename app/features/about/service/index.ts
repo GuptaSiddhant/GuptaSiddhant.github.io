@@ -1,5 +1,9 @@
-import { FirestoreCollection, getCollectionItem } from "~/service/database"
-import type { About } from "../types"
+import {
+  FirestoreCollection,
+  getCollectionItem,
+  getCollection,
+} from "~/service/database"
+import type { About, Career, Education } from "../types"
 
 export { getAllTestimonies, getTestimonyById } from "./testimonies"
 
@@ -11,4 +15,12 @@ export async function getAbout(): Promise<About> {
 
     return { ...data, name: data.name || "Siddhant Gupta" } as About
   })
+}
+
+export async function getAllEducation() {
+  return getCollection<Education>(FirestoreCollection.Education)
+}
+
+export async function getAllCareer() {
+  return getCollection<Career>(FirestoreCollection.Career)
 }

@@ -21,6 +21,8 @@ import { Link, ExternalLink, InternalLink } from "~/ui/Link"
 import Section from "~/ui/Section"
 import TeaserSection from "~/ui/TeaserSection"
 import { Caption, H1, H2 } from "~/ui/typography"
+import { useCallback, useEffect, useState } from "react"
+import clsx from "clsx"
 
 interface LoaderData {
   about: About
@@ -31,9 +33,9 @@ interface LoaderData {
 
 export const loader: LoaderFunction = async () => {
   const about = await getAbout()
-  const projects = await getProjectList(5)
-  const blogPosts = await getBlogPostsList(3)
-  const testimonies = await getAllTestimonies(5)
+  const projects = await getProjectList(6)
+  const blogPosts = await getBlogPostsList(6)
+  const testimonies = await getAllTestimonies(6)
 
   return json<LoaderData>({ about, projects, blogPosts, testimonies })
 }
@@ -102,19 +104,56 @@ function HeroSection(): JSX.Element {
         <InternalLink to="/about">Read more about me.</InternalLink>
       </div>
 
-      {/* Terminal resume */}
-      {npx ? (
-        <pre className="-mx-4 whitespace-pre-line rounded-lg bg-default p-4 text-base">
-          <code className="mb-1 block select-none text-sm text-disabled">
-            [shell]
-          </code>
-          <code className="block select-none text-sm text-tertiary">
-            # An interactive resume for your terminal, made with React and ink.
-            Run:
-          </code>
-          <code className="block text-primary">{npx}</code>
-        </pre>
-      ) : null}
+      <TerminalResume code={npx} />
     </Section.Hero>
   )
+}
+
+function TerminalResume({ code }: { code?: string }): JSX.Element | null {
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (copied) {
+      const timeout = setTimeout(() => setCopied(false), 3000)
+      return () => clearTimeout(timeout)
+    }
+  }, [copied])
+
+  const handleCopy = useCallback(
+    (data: string) =>
+      window.navigator.clipboard.writeText(data).then(() => setCopied(true)),
+    [setCopied],
+  )
+
+  return code ? (
+    <pre
+      className="-mx-4 whitespace-pre-line rounded-lg bg-default p-4 text-base cursor-pointer"
+      title="Click to copy"
+      onClick={() => handleCopy(code)}
+    >
+      {/* <code className="mb-1 block select-none text-sm text-disabled">
+        [shell]
+      </code> */}
+      <code className="block select-none text-sm text-disabled">
+        # An interactive resume for your terminal, made with React and ink. Run:
+      </code>
+      <code
+        className={clsx(
+          "text-primary",
+          "before:content-['$'] before:select-none before:text-disabled before:mr-2",
+          "grid grid-cols-[max-content_1fr_max-content]",
+        )}
+      >
+        <span>{code}</span>
+        <span
+          className={clsx(
+            "select-none text-sm text-disabled",
+            !copied && "border-[1px] border-gray-500 rounded-sm px-1",
+          )}
+        >
+          {copied ? "Copied ✅" : "Copy"}
+        </span>
+      </code>
+    </pre>
+  ) : null
 }

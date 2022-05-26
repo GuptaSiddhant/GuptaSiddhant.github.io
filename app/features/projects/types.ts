@@ -1,11 +1,11 @@
-import type { Teaser } from "~/types"
+import type { Teaser, LinkObject, Gallery } from "~/types"
 
 export interface ProjectType extends ProjectTeaser {
   externalLink?: string
   github?: string
-  links?: ProjectLink[]
+  links?: LinkObject[]
   content?: string
-  gallery?: { url: string; alt: string }[]
+  gallery?: Gallery
 }
 
 export interface ProjectTeaser extends Teaser {
@@ -19,18 +19,3 @@ export interface ProjectTeaser extends Teaser {
   subtitle?: string
   draft?: boolean
 }
-
-export interface ProjectLink {
-  url: string
-  title?: string
-  type?: ProjectLinkType
-}
-
-export type ProjectLinkType =
-  | "github"
-  | "demo"
-  | "blog"
-  | "homepage"
-  | "npm"
-  | "prototype"
-  | "design"
