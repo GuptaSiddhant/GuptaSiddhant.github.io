@@ -11,6 +11,7 @@ import {
   type DocumentSnapshot,
 } from "firebase/firestore"
 
+import { __IS_DEV__ } from "~/helpers"
 import cache, { createKey, CacheType } from "./cache"
 import { firestore } from "./firebase"
 
@@ -36,7 +37,11 @@ export async function getCollection<T = DocumentData>(
     createKey(CacheType.FirestoreCollection, collectionName),
   )
 
-  return Promise.all((querySnapshot?.docs || []).map(transformDocumentSnapshot))
+  return (
+    await Promise.all(
+      (querySnapshot?.docs || []).map(transformDocumentSnapshot),
+    )
+  ).filter((item: any) => __IS_DEV__ || !item.draft)
 }
 
 /** Get a firestore doc and transform it to required item. */
@@ -49,7 +54,7 @@ export async function getCollectionItem<T = DocumentData>(
     createKey(CacheType.FirestoreDocument, `${collectionName}/${itemId}`),
   )
 
-  if (!docSnapshot?.exists())
+  if (!docSnapshot?.exists() || (!__IS_DEV__ && !docSnapshot.data().draft))
     throw new Error(`Entry "${collectionName}/${itemId}" not found.`)
 
   return transformDocumentSnapshot(docSnapshot)

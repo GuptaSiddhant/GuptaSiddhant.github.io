@@ -34,24 +34,22 @@ export default function TestimonialsSection({
           "grid-flow-row-dense gap-10 px-4 py-4 sm:px-10",
         )}
       >
-        {testimonies
-          .filter((t) => !t.draft)
-          .map((testimony) => {
-            const isMediumContent = testimony.content.length > 200
-            const isLongContent = testimony.content.length > 400
+        {testimonies.map((testimony) => {
+          const isMediumContent = testimony.content.length > 200
+          const isLongContent = testimony.content.length > 400
 
-            return (
-              <li
-                key={testimony.id}
-                className={clsx(
-                  isMediumContent && "sm:col-span-2",
-                  isLongContent && "sm:row-span-2",
-                )}
-              >
-                <TestimonyCard {...testimony} />
-              </li>
-            )
-          })}
+          return (
+            <li
+              key={testimony.id}
+              className={clsx(
+                isMediumContent && "sm:col-span-2",
+                isLongContent && "sm:row-span-2",
+              )}
+            >
+              <TestimonyCard {...testimony} />
+            </li>
+          )
+        })}
       </ul>
     </Section>
   )

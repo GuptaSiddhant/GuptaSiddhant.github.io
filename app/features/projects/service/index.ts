@@ -27,7 +27,7 @@ export async function getProjectList(
     collectionName,
     (docSnap) =>
       Object.values(docSnap.data())
-        .filter((project) => __IS_DEV__ || project.draft !== true)
+        .filter((project) => __IS_DEV__ || !project.draft)
         .map((project) => ({
           ...project,
           dateStart:

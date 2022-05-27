@@ -1,15 +1,6 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore"
 import LRUCache from "lru-cache"
 
-import { __IS_DEV__ } from "~/helpers"
 import { firestore } from "./firebase"
 
 export enum CacheType {
@@ -22,9 +13,6 @@ const cacheTtlInMs =
   Number.parseInt(process.env?.CACHE_TTL || "0", 10) || _1_DAY_IN_MS_
 
 const keySeparator = "---"
-const draftConstraints = __IS_DEV__
-  ? []
-  : [where("draft", "!=", true), orderBy("draft")]
 
 async function fetchMethod(key: string): Promise<any> {
   console.log("[Fetching]", key)
@@ -32,9 +20,7 @@ async function fetchMethod(key: string): Promise<any> {
 
   switch (type) {
     case CacheType.FirestoreCollection: {
-      return await getDocs(
-        query(collection(firestore, path), ...draftConstraints),
-      )
+      return await getDocs(query(collection(firestore, path)))
     }
     case CacheType.FirestoreDocument: {
       return await getDoc(doc(firestore, path))

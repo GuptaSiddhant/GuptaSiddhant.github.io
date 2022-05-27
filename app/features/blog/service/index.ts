@@ -34,7 +34,7 @@ export async function getBlogPostsList(
               ? post.date
               : (post.date as any).toDate(),
         }))
-        .filter((project) => __IS_DEV__ || project.draft !== true)
+        .filter((project) => __IS_DEV__ || !project.draft)
         .sort((a, b) => (b.date > a.date ? 1 : -1))
         .slice(0, limitBy),
   )
