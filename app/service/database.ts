@@ -54,7 +54,7 @@ export async function getCollectionItem<T = DocumentData>(
     createKey(CacheType.FirestoreDocument, `${collectionName}/${itemId}`),
   )
 
-  if (!docSnapshot?.exists() || (!__IS_DEV__ && !docSnapshot.data().draft))
+  if (!docSnapshot?.exists())
     throw new Error(`Entry "${collectionName}/${itemId}" not found.`)
 
   return transformDocumentSnapshot(docSnapshot)
